@@ -1,4 +1,4 @@
-<%@page import=" static poly.util.CmmUtil.nvl"%>
+<%@page import="static poly.util.CmmUtil.nvl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -17,7 +17,7 @@ ul{
 list-style-type: none;
 }
 body{
- text-align: center; 
+text-align: center;
 }
 </style>
 <head>

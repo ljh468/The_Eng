@@ -30,7 +30,7 @@
 			이메일 :
 			<input type="email" name="email" required><br>
 			나이:
-			<select id="age" name="age" >
+			<select name="age">
 			<option value="10">10대</option>
 			<option value="20" selected>20대</option>
 			<option value="30">30대</option>
@@ -39,14 +39,15 @@
 			<option value="60">60대</option>
 			</select><br>
 			성별 : 
-			<input id="male" type="radio" name="gender" value="m">
+			<input id="male" type="radio" name="gender" value="m" checked>
 			<label for="man">male</label>
 			<input id="female" type="radio" name="gender" value="w">
 			<label for="woman">female</label><br>
-			관심사 :
-			<input type="checkbox" name="interest" value="1"/>비즈니스
-			<input type="checkbox" name="interest" value="2"/>학술/논문
-			<input type="checkbox" name="interest" value="3"/>토익
+			
+			Interest : 
+			<input type="checkbox" name="interest" id="interest1" value="toeic"><label for="interest1">토익</label>
+			<input type="checkbox" name="interest" id="interest2" value="academic"><label for="interest2">학술/논문</label>
+			<input type="checkbox" name="interest" id="interest3" value="business"><label for="interest3">비즈니스</label>
 			
 			<br>
 			<button id="btn" type="submit" class="alert-success">Sign Up</button>
@@ -80,7 +81,7 @@ $("#userId").keyup(function() {
 	}); // ajax 끝
 });
 
-$('.pw').focusout(function() {
+$('.pw').keyup(function() {
 	var pwd1 = $("#password_1").val();
 	var pwd2 = $("#password_2").val();
 

@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import poly.dto.TheDTO;
-import poly.service.ITheService;
+import poly.dto.UserDTO;
+import poly.service.IUserService;
 
 @Controller
 public class MainController {
 
 	private Logger log = Logger.getLogger(this.getClass());
 
-	@Resource(name = "TheService")
-	ITheService theService;
+	@Resource(name = "UserService")
+	IUserService userService;
 
 	@RequestMapping(value = "index")
 	public String Index() {
@@ -48,12 +48,12 @@ public class MainController {
 		log.info("id :" + id);
 		log.info("pwd :" + pwd);
 
-		TheDTO tDTO = new TheDTO();
+		UserDTO tDTO = new UserDTO();
 
 		tDTO.setUser_id(id);
 		tDTO.setUser_pwd(pwd);
 
-		tDTO = theService.getUserInfo(tDTO);
+		tDTO = userService.getUserInfo(tDTO);
 		log.info("uDTO null? : " + (tDTO == null));
 
 		String msg = "";
@@ -137,33 +137,38 @@ public class MainController {
 		String user_id = request.getParameter("id");
 		String user_pwd = request.getParameter("pwd");
 		String user_email = request.getParameter("email");
-		String user_age = request.getParameter("age");
 		String user_gender = request.getParameter("gender");
+		String user_age = request.getParameter("age");
 		String[] user_interest = request.getParameterValues("interest");
+		
 		
 		log.info("request.getParameter 종료");
 		
 		log.info("user_id : " + user_id);
 		log.info("user_pwd : " + user_pwd);
 		log.info("user_name : " + user_email);
-		log.info("user_age : " + user_age);
 		log.info("user_gender : " + user_gender);
-		log.info("user_interest : " + user_interest);
 		
-
-		TheDTO tDTO = new TheDTO();
+		// 매우중요!! - 콤마로 조인
+		String interests = String.join(",", user_interest);
+		log.info("interest : " + interests);
+		
+		
+		
+		UserDTO tDTO = new UserDTO();
 		log.info("tDTO.set 시작");
 		tDTO.setUser_id(user_id);
 		tDTO.setUser_pwd(user_pwd);
 		tDTO.setUser_email(user_email);
-		tDTO.setUser_age(user_age);
 		tDTO.setUser_gender(user_gender);
-		tDTO.setUser_interest(user_interest);
+		tDTO.setUser_age(user_age);
+		tDTO.setUser_interest(interests);
 		
 		log.info("tDTO.set 종료");
+		log.info("tDTO" + tDTO);
 
 		log.info("TheService.TheSignUp 시작");
-		int res = theService.UserSignUp(tDTO);
+		int res = userService.UserSignUp(tDTO);
 		log.info("TheService.TheSignUp 종료");
 		log.info("res : " + res);
 
@@ -192,14 +197,13 @@ public class MainController {
         log.info("idCheck 시작");
         
         String userId = request.getParameter("userId");
-        log.info("id : "+userId);
+        
         log.info("TheService.idCheck 시작");
-        TheDTO idCheck = theService.idCheck(userId);
+        UserDTO idCheck = userService.idCheck(userId);
         log.info("TheService.idCheck 종료");
         
         int result=0;
         
-        log.info("idCheck" +idCheck);
         log.info("if 시작");
         if(idCheck!=null) result=1;
         
