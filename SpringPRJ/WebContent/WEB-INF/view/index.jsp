@@ -6,9 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	table, th, td{
-		border : 1px solid black;
-	}
+	body{
+	
+		}
+	
 </style>
 <script type="text/javascript">
 	function innerHTMLTest() {
@@ -26,12 +27,13 @@
 		<%@ include file="/WEB-INF/view/The/Top.jsp" %>
 		
 	</div>
-	
+	Today Highlight English
+	<hr>
 	<div id="rand_val">Let's generate random Value</div>
 	<button onclick="innerHTMLTest()">Generate</button>
-	
+	<br> <hr>
 	<!-- top end -->
 	
-Today Highlight English
+
 </body>
 </html>

@@ -24,7 +24,6 @@ public class TheService implements ITheService{
 		return theMapper.UserSignUp(tDTO);
 	}
 
-
 	@Override
 	public TheDTO idCheck(String userId) {
 		return theMapper.idCheck(userId);

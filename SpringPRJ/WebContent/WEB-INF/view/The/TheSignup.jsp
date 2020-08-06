@@ -30,21 +30,26 @@
 			이메일 :
 			<input type="email" name="email" required><br>
 			나이:
-			<select>
-			<option>10대</option>
-			<option>20대</option>
-			<option>30대</option>
-			<option>40대</option>
-			<option>50대</option>
-			<option>60대</option>
-			</select>
+			<select id="age" name="age" >
+			<option value="10">10대</option>
+			<option value="20" selected>20대</option>
+			<option value="30">30대</option>
+			<option value="40">40대</option>
+			<option value="50">50대</option>
+			<option value="60">60대</option>
+			</select><br>
 			성별 : 
 			<input id="male" type="radio" name="gender" value="m">
 			<label for="man">male</label>
 			<input id="female" type="radio" name="gender" value="w">
-			<label for="woman">female</label>
-
-			<button id="btn" type="submit" class="alert-success">가입하기</button>
+			<label for="woman">female</label><br>
+			관심사 :
+			<input type="checkbox" name="interest" value="1"/>비즈니스
+			<input type="checkbox" name="interest" value="2"/>학술/논문
+			<input type="checkbox" name="interest" value="3"/>토익
+			
+			<br>
+			<button id="btn" type="submit" class="alert-success">Sign Up</button>
 		</form>
 	</div>
 </body>

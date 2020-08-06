@@ -135,24 +135,31 @@ public class MainController {
 		log.info("request.getParameter 시작");
 		
 		String user_id = request.getParameter("id");
-		log.info(this.getClass().getName() + "userId : "+ user_id);
 		String user_pwd = request.getParameter("pwd");
 		String user_email = request.getParameter("email");
+		String user_age = request.getParameter("age");
 		String user_gender = request.getParameter("gender");
+		String[] user_interest = request.getParameterValues("interest");
 		
 		log.info("request.getParameter 종료");
 		
 		log.info("user_id : " + user_id);
 		log.info("user_pwd : " + user_pwd);
 		log.info("user_name : " + user_email);
+		log.info("user_age : " + user_age);
 		log.info("user_gender : " + user_gender);
+		log.info("user_interest : " + user_interest);
+		
 
 		TheDTO tDTO = new TheDTO();
 		log.info("tDTO.set 시작");
 		tDTO.setUser_id(user_id);
 		tDTO.setUser_pwd(user_pwd);
 		tDTO.setUser_email(user_email);
+		tDTO.setUser_age(user_age);
 		tDTO.setUser_gender(user_gender);
+		tDTO.setUser_interest(user_interest);
+		
 		log.info("tDTO.set 종료");
 
 		log.info("TheService.TheSignUp 시작");
@@ -185,13 +192,14 @@ public class MainController {
         log.info("idCheck 시작");
         
         String userId = request.getParameter("userId");
-        
+        log.info("id : "+userId);
         log.info("TheService.idCheck 시작");
         TheDTO idCheck = theService.idCheck(userId);
         log.info("TheService.idCheck 종료");
         
         int result=0;
         
+        log.info("idCheck" +idCheck);
         log.info("if 시작");
         if(idCheck!=null) result=1;
         

@@ -17,7 +17,7 @@ ul{
 list-style-type: none;
 }
 body{
-float:right;
+ text-align: center; 
 }
 </style>
 <head>

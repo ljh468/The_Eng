@@ -7,7 +7,7 @@ public class TheDTO {
 	private String user_email; // 이메일
 	private String user_age; // 나이
 	private String user_gender; // 성별
-	private String user_interest; // 관심사
+	private String[] user_interest; // 관심사
 	
 	public String getUser_no() {
 		return user_no;
@@ -45,10 +45,10 @@ public class TheDTO {
 	public void setUser_gender(String user_gender) {
 		this.user_gender = user_gender;
 	}
-	public String getUser_interest() {
+	public String[] getUser_interest() {
 		return user_interest;
 	}
-	public void setUser_interest(String user_interest) {
+	public void setUser_interest(String[] user_interest) {
 		this.user_interest = user_interest;
 	}
 
