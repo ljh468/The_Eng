@@ -202,16 +202,16 @@ public class MainController {
         UserDTO idCheck = userService.idCheck(userId);
         log.info("TheService.idCheck 종료");
         
-        int result=0;
+        int res = 0;
         
         log.info("if 시작");
-        if(idCheck!=null) result=1;
+        if(idCheck!=null) res=1;
         
-        log.info("result : " + result);
+        log.info("result : " + res);
         log.info("if 종료");
         
         log.info("idCheck 종료");
-        return result;
+        return res;
     }
 
 	@ResponseBody

@@ -52,6 +52,7 @@
 	</div>
 </body>
 <script>
+
 	//ID 중복확인
 	var doCheck = 'N'
 	$("#userId").keyup(function() {
