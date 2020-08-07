@@ -213,4 +213,27 @@ public class MainController {
         log.info("idCheck 종료");
         return result;
     }
+
+	@ResponseBody
+	@RequestMapping(value="/The/emailCheck", method = RequestMethod.POST)
+	public int emailCheck(HttpServletRequest request) throws Exception{
+		log.info("emailCheck 시작");
+		
+		String userEmail = request.getParameter("userEmail");
+		log.info("TheService.emailCheck 시작");
+        UserDTO emailCheck = userService.emailCheck(userEmail);
+        log.info("TheService.emailCheck 종료");
+        
+        int res = 0;
+        
+        log.info("if 시작");
+        if(emailCheck!=null) res=1;
+        
+        log.info("result : " + res);
+        log.info("if 종료");
+        
+        log.info("emailCheck 종료");
+        return res;
+	}
+	
 }

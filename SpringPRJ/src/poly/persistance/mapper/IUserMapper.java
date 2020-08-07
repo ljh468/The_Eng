@@ -12,4 +12,6 @@ public interface IUserMapper {
 
 	UserDTO idCheck(String userId);
 
+	UserDTO emailCheck(String userEmail);
+
 }

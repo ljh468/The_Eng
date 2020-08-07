@@ -29,5 +29,11 @@ public class UserService implements IUserService{
 	public UserDTO idCheck(String userId) {
 		return userMapper.idCheck(userId);
 	}
+
+	@Override
+	public UserDTO emailCheck(String userEmail) {
+		// TODO Auto-generated method stub
+		return userMapper.emailCheck(userEmail);
+	}
 	
 }

@@ -9,5 +9,7 @@ public interface IUserService {
 	int UserSignUp(UserDTO tDTO);
 
 	UserDTO idCheck(String userId);
+
+	UserDTO emailCheck(String userEmail);
 	
 }

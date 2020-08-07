@@ -47,4 +47,12 @@
 		USER_ID = #{user_id}
 	</select>
 	
+	<select id="emailCheck" resultType="UserDTO" parameterType="UserDTO" >
+	SELECT
+		USER_EMAIL
+	FROM
+		USERINFO
+	WHERE
+		USER_EMAIL = #{user_email}
+	</select>
 </mapper>
