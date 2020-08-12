@@ -26,18 +26,28 @@ public class MainController {
 	IUserService userService;
 
 	@RequestMapping(value = "index")
-	public String Index() {
-
+	public String Index(HttpSession session,ModelMap model) {
+		String user_id = (String)session.getAttribute("user_id");
+		if(user_id == null) {
+			return "/The/TheLogin";
+		}
+		
+		model.addAttribute("user_id", user_id);
 		return "/index";
 	}
 
-	@RequestMapping(name = "The/TheLogin")
+	@RequestMapping(value = "The/TheLogin")
 	public String TheLogin() {
 		log.info("TheLogin 시작");
 		log.info("TheLogin 종료");
 		return "/The/TheLogin";
 	}
-
+	
+	@RequestMapping(value = "template")
+	public String template() {
+		return "/template";
+	}
+	
 	@RequestMapping(value = "The/TheLoginProc")
 	public String TheLoginProc(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 

@@ -41,15 +41,6 @@ text-align: center;
 						<a href="/The/TheLogout.do">
 							로그아웃							
 						</a>
-						<a href="#">
-							오늘의 뉴스							
-						</a>
-						<a href="#">
-							오늘의 문장							
-						</a>
-						<a href="#">
-							복습하기							
-						</a>
 					<%} %>
 				</li>
 			</ul>

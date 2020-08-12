@@ -13,6 +13,9 @@
 	<input type="text" id="text" />
 	<button id="btns">hello</button>
 	Test!!!!!
+	
+	<p id="main">
+	</p>
 </body>
 <script>
 	var doCheck = 'N'
@@ -24,7 +27,7 @@
 			type : 'get',
 			success : function(res) {
 				if (res) {
-					document.getElementById("btns").innerHTML = "<h1>안녕!</h1>";
+					document.getElementById("main").innerHTML = "<h1>안녕!</h1>";
 				}
 			}
 		});
