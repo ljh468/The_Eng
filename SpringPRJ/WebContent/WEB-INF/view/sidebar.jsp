@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -24,8 +25,8 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav" >
-          <li id="main" >
-            <a href="#">
+          <li>
+            <a href="#"  >
               <i class="nc-icon nc-air-baloon"></i>
               <p>메인</p>
             </a>
@@ -75,13 +76,17 @@
         </ul>
       </div>
     </div>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+    <!-- 선택 메뉴창을 클릭했을때 active클래스 추가 삭제-->
     <script>
-		
+    $(function(){
+     var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+     sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
+      sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
+      $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+     })
+    })
+   </script>
 
-		
-		
-    $("#main").click( function() {
-        $(this).addClass("active");
-      } );
-		
-	</script>

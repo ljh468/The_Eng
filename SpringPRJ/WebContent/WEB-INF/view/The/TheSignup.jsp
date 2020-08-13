@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>TheSignup</title>
@@ -12,8 +11,7 @@
 <body>
 	<div>
 		가입하기
-		<form action="/The/TheSignUpProc.do" method="get"
-			onsubmit="return check()">
+		<form action="/The/TheSignUpProc.do" method="get" onsubmit="return check()">
 
 			아이디 : <input type="text" id="userId" name="id" placeholder="id"
 				required><br> <span class="msg">사용하실 아이디를 입력하세요</span><br>
