@@ -2,32 +2,67 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
-<meta charset="UTF-8">
+
 <title>TheSignup</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/vendor/animate/animate.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="/resources/css/util.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+<!--===============================================================================================-->
+<style>
+img {
+display: block; margin: 0px auto;  
+}
+form{
+display: block; margin: 0px auto; 
+}
+.limiter2{
+text-align: center;
+}
+
+</style>
 </head>
 <body>
-	<div>
-		가입하기
-		<form action="/The/TheSignUpProc.do" method="get" onsubmit="return check()">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-20 p-b-50">
+					<form class="login100-form validate-form" action="/The/TheSignUpProc.do" method="get" onsubmit="return check()">
 
-			아이디 : <input type="text" id="userId" name="id" placeholder="id"
+				<input class="wrap-input100" type="text" id="userId" name="id" placeholder="id"
 				required><br> <span class="msg">사용하실 아이디를 입력하세요</span><br>
 
-			비밀번호 : <input type="password" name="pwd" required id="password_1"
-				class="pw" placeholder="8~15자 영문,숫자,특수문자"><br> 비밀번호 확인
-			: <input type="password" required id="password_2" class="pw"
-				placeholder="비밀번호 확인"> <span class="alert-success"
+				<input type="password" name="pwd" id="password_1"
+				class="pw wrap-input100" placeholder="8~15자 영문,숫자,특수문자" required><br>
+				 
+				<input type="password" id="password_2" class="pw wrap-input100"
+				placeholder="비밀번호 확인" required> <span class="alert-success"
 				style="display: none;">비밀번호가 일치합니다.</span> <span id="alert-danger"
 				style="display: none; color: #d92742; font-weight: bold;">비밀번호가
 				일치하지 않습니다.</span> <br> <br> 
-			이메일 : <input type="email"
-				id="userEmail" name="email" placeholder="email" required> <span
-				class="msg2">사용하실 이메일을 입력하세요</span> <br> 
+				<input type="email" class="wrap-input100" id="userEmail" name="email" placeholder="email" required> <br>
+				<span class="msg2">사용하실 이메일을 입력하세요</span> <br> 
 				
-			나이: <select name="age">
+			나이: <select  class="wrap-input100" name="age">
 				<option value="10">10대</option>
 				<option value="20" selected>20대</option>
 				<option value="30">30대</option>
@@ -35,20 +70,40 @@
 				<option value="50">50대</option>
 				<option value="60">60대</option>
 			</select><br> 성별 : <input id="male" type="radio" name="gender" value="m"
-				checked> <label for="man">male</label> <input id="female"
-				type="radio" name="gender" value="w"> <label for="woman">female</label><br>
+				checked> <label for="male">male</label> <input id="female"
+				type="radio" name="gender" value="w"> <label for="female">female</label><br>
 
-			Interest : <input type="checkbox" name="interest" id="interest1"
-				value="toeic"><label for="interest1">토익</label> <input
-				type="checkbox" name="interest" id="interest2" value="academic"><label
-				for="interest2">학술/논문</label> <input type="checkbox" name="interest"
+			Interest : <input type="checkbox" class="wrap-input100" name="interest" id="interest1"
+				value="toeic"><label for="interest1">토익</label> 
+				<input type="checkbox" name="interest" id="interest2" value="academic">
+				<label for="interest2">학술/논문</label> <input type="checkbox" name="interest"
 				id="interest3" value="business"><label for="interest3">비즈니스</label>
 
 			<br>
 			<button id="btn" type="submit" class="alert-success">Sign Up</button>
 		</form>
+
+			</div>
+		</div>
 	</div>
-</body>
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
 	//ID 중복확인
@@ -135,4 +190,5 @@
 		}
 	}
 </script>
+</body>
 </html>
