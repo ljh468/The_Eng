@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
+<link rel="icon" type="image/png" href="/resources/images/icons/favicon.ico" >
+<!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -46,46 +48,59 @@ text-align: center;
 		<div class="container-login100">
 			
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-20 p-b-50">
-					<form class="login100-form validate-form" action="/The/TheSignUpProc.do" method="get" onsubmit="return check()">
+				<form class="login100-form validate-form" action="/The/TheSignUpProc.do" method="get" onsubmit="return check()">
+				<span class="login100-form-title p-b-33 p-t-20"> Account Sign up </span>
+				<div class="wrap-input100 validate-input">
+				<input class="input100" type="text" id="userId" name="id" placeholder="ID" style="height: 60px;"required>
+				<span class="focus-input100-1"></span>
+				<span class="focus-input100-2"></span>
+				</div>
+				<span class="msg">사용하실 아이디를 입력하세요</span><br>
 
-				<input class="wrap-input100" type="text" id="userId" name="id" placeholder="id"
-				required><br> <span class="msg">사용하실 아이디를 입력하세요</span><br>
-
-				<input type="password" name="pwd" id="password_1"
-				class="pw wrap-input100" placeholder="8~15자 영문,숫자,특수문자" required><br>
-				 
-				<input type="password" id="password_2" class="pw wrap-input100"
-				placeholder="비밀번호 확인" required> <span class="alert-success"
-				style="display: none;">비밀번호가 일치합니다.</span> <span id="alert-danger"
-				style="display: none; color: #d92742; font-weight: bold;">비밀번호가
-				일치하지 않습니다.</span> <br> <br> 
+				<input type="password" name="pwd" id="password_1" class="pw wrap-input100 m-b-5" placeholder="8~15자 영문,숫자,특수문자" required>
+				<br>
+				<input type="password" id="password_2" class="pw wrap-input100 m-b-5" placeholder="비밀번호 확인" required>
+				<span id="alert-success" style="display: none; color: #00f;">비밀번호가 일치합니다.</span>
+				<span id="alert-danger" style="display: none; color:#f00; ">비밀번호가 일치하지 않습니다.</span>
+				<br>
 				<input type="email" class="wrap-input100" id="userEmail" name="email" placeholder="email" required> <br>
-				<span class="msg2">사용하실 이메일을 입력하세요</span> <br> 
-				
-			나이: <select  class="wrap-input100" name="age">
+				<span class="msg2">사용하실 이메일을 입력하세요</span>
+				<br> 
+				<div style="border:1px">Age</div>
+				<select  class="wrap-input100 m-b-5" name="age" style=" height: 27px;">
 				<option value="10">10대</option>
 				<option value="20" selected>20대</option>
 				<option value="30">30대</option>
 				<option value="40">40대</option>
 				<option value="50">50대</option>
 				<option value="60">60대</option>
-			</select><br> 성별 : <input id="male" type="radio" name="gender" value="m"
-				checked> <label for="male">male</label> <input id="female"
-				type="radio" name="gender" value="w"> <label for="female">female</label><br>
-
-			Interest : <input type="checkbox" class="wrap-input100" name="interest" id="interest1"
-				value="toeic"><label for="interest1">토익</label> 
+				</select><br> 
+				
+				<div>Gender</div>
+				<div class="wrap-input100 m-b-5" style="height: 30px;">
+				<input id="male" type="radio" name="gender" value="m" checked>
+				<label for="male">male</label>
+				<input id="female" type="radio" name="gender" value="w">
+				<label for="female">female</label><br>
+				</div>
+				
+				<div>Interest</div>
+				<div class="wrap-input100 p-b-90">
+				<input type="checkbox" name="interest" id="interest1" value="toeic">
+				<label for="interest1">토익</label><br> 
 				<input type="checkbox" name="interest" id="interest2" value="academic">
-				<label for="interest2">학술/논문</label> <input type="checkbox" name="interest"
-				id="interest3" value="business"><label for="interest3">비즈니스</label>
-
+				<label for="interest2">학술/논문</label><br>
+				<input type="checkbox" name="interest" id="interest3" value="business">
+				<label for="interest3">비즈니스</label><br>
+				</div>
 			<br>
-			<button id="btn" type="submit" class="alert-success">Sign Up</button>
+			<button id="btn" type="submit" class="alert-success login100-form-btn" style="height: 40px;">Sign Up</button>
 		</form>
 
 			</div>
 		</div>
 	</div>
+	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -147,10 +162,10 @@ text-align: center;
 			null;
 		} else if (pwd1 != "" || pwd2 != "") {
 			if (pwd1 == pwd2) {
-				$(".alert-success").css('display', 'inline-block');
+				$("#alert-success").css('display', 'inline-block');
 				$("#alert-danger").css('display', 'none');
 			} else {
-				$(".alert-success").css('display', 'none');
+				$("#alert-success").css('display', 'none');
 				$("#alert-danger").css('display', 'inline-block');
 			}
 		}
