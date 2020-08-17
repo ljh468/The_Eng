@@ -79,7 +79,7 @@ text-align: center;
 				<div>Gender</div>
 				<div class="wrap-input100 m-b-5" style="height: 30px;">
 				<input id="male" type="radio" name="gender" value="m" checked>
-				<label for="male">male</label>
+				<label for="male">male</label>&nbsp;&nbsp;&nbsp;
 				<input id="female" type="radio" name="gender" value="w">
 				<label for="female">female</label><br>
 				</div>

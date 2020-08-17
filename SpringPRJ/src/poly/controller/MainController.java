@@ -98,7 +98,7 @@ public class MainController {
 
 		msg = "로그아웃 성공";
 
-		url = "/index.do";
+		url = "/The/TheLogin.do";
 		session.invalidate();
 
 		model.addAttribute("msg", msg);

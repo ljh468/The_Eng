@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%
 
-	String user_id  = (String)request.getAttribute("user_id");
+	String user_id  = (String)session.getAttribute("user_id");
 
 %>
 <div class="sidebar" data-color="white" data-active-color="danger">
