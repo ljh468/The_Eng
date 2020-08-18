@@ -56,16 +56,29 @@ text-align: center;
 				<span class="focus-input100-2"></span>
 				</div>
 				<span class="msg">사용하실 아이디를 입력하세요</span><br>
-
-				<input type="password" name="pwd" id="password_1" class="pw wrap-input100 m-b-5" placeholder="8~15자 영문,숫자,특수문자" required>
+				
+				<div class="wrap-input100 validate-input">
+				<input type="password" name="pwd" id="password_1" class="pw input100 m-b-5" placeholder="8~15자 영문,숫자,특수문자" style="height: 60px;" required>
+				<span class="focus-input100-1"></span>
+				<span class="focus-input100-2"></span>
 				<br>
-				<input type="password" id="password_2" class="pw wrap-input100 m-b-5" placeholder="비밀번호 확인" required>
+				</div>
+				<div class="wrap-input100 validate-input">
+				<input type="password" id="password_2" class="pw input100 m-b-5" placeholder="비밀번호 확인" style="height: 60px;" required>
+				<span class="focus-input100-1"></span>
+				<span class="focus-input100-2"></span>
+				<br>
+				</div>
 				<span id="alert-success" style="display: none; color: #00f;">비밀번호가 일치합니다.</span>
 				<span id="alert-danger" style="display: none; color:#f00; ">비밀번호가 일치하지 않습니다.</span>
 				<br>
-				<input type="email" class="wrap-input100" id="userEmail" name="email" placeholder="email" required> <br>
+				<div class="wrap-input100 validate-input">
+				<input class="input100" type="email" id="userEmail" name="email" placeholder="email" style="height: 60px;" required>
+				<span class="focus-input100-1"></span>
+				<span class="focus-input100-2"></span>
 				<span class="msg2">사용하실 이메일을 입력하세요</span>
-				<br> 
+				</div>
+				<br>
 				<div style="border:1px">Age</div>
 				<select  class="wrap-input100 m-b-5" name="age" style=" height: 27px;">
 				<option value="10">10대</option>
@@ -134,7 +147,7 @@ text-align: center;
 			data : query,
 			success : function(data) {
 				if (data == 1) {
-					$(".msg").text("이미 사용하고 있는 아이디입니다.");
+					$(".msg").text("사용하고 있는 아이디입니다.");
 					$(".msg").attr("style", "color:#f00");
 					doCheck = 'N'
 				} else {
@@ -185,7 +198,7 @@ text-align: center;
 			success : function(data) {
 			
 				if (data == 1) {
-					$(".msg2").text("이미 사용하고 있는 이메일입니다.");
+					$(".msg2").text("사용하고 있는 이메일입니다.");
 					$(".msg2").attr("style", "color:#f00");
 					doCheck = 'N'
 				} else {
@@ -200,7 +213,7 @@ text-align: center;
 
 	function check() {
 		if (doCheck == 'N') {
-			alert("사용중인 이메일입니다.")
+			alert("입력을 다시 확인해주세요.")
 			return false;
 		}
 	}

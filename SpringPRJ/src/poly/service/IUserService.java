@@ -11,5 +11,9 @@ public interface IUserService {
 	UserDTO idCheck(String userId);
 
 	UserDTO emailCheck(String userEmail);
+
+	UserDTO authNumCheck(UserDTO uDTO);
+
+	int insertAuthNum(UserDTO uDTO);
 	
 }

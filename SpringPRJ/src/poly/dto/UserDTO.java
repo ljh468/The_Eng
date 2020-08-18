@@ -8,6 +8,7 @@ public class UserDTO {
 	private String user_age; // 나이
 	private String user_gender; // 성별
 	private String user_interest; // 관심사
+	private String user_authNum; // 이메일 인증코드
 
 	
 	public String getUser_no() {
@@ -51,6 +52,12 @@ public class UserDTO {
 	}
 	public void setUser_interest(String user_interest) {
 		this.user_interest = user_interest; 
+	}
+	public String getUser_authNum() {
+		return user_authNum;
+	}
+	public void setUser_authNum(String user_authNum) {
+		this.user_authNum = user_authNum;
 	}
 	
 

@@ -55,4 +55,23 @@
 	WHERE
 		USER_EMAIL = #{user_email}
 	</select>
+	
+	<update parameterType="UserDTO" id="insertAuthNum">
+	UPDATE 
+	USERINFO
+	SET
+	USER_AUTHNUM = #{user_authNum}
+	WHERE
+	USER_EMAIL=#{user_email}
+	</update>
+
+	<select parameterType="UserDTO" resultType="UserDTO" id="authNumCheck">
+	SELECT
+	USER_AUTHNUM
+	FROM
+	USERINFO
+	WHERE
+	USER_AUTHNUM = #{user_authNum}
+	</select>
+	
 </mapper>

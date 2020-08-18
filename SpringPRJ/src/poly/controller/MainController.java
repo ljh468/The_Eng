@@ -2,8 +2,20 @@ package poly.controller;
 
 import static poly.util.CmmUtil.nvl;
 
+import java.io.IOException;
+import java.util.Properties;
+import java.util.Random;
+
 import javax.annotation.Resource;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -15,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.UserDTO;
+import poly.service.IMailService;
 import poly.service.IUserService;
+import poly.service.impl.UserService;
 
 @Controller
 public class MainController {
@@ -24,6 +38,9 @@ public class MainController {
 
 	@Resource(name = "UserService")
 	IUserService userService;
+	
+	@Resource(name = "MailService")
+	IMailService MailService;
 
 	@RequestMapping(value = "index")
 	public String Index(HttpSession session,ModelMap model) {
@@ -48,6 +65,7 @@ public class MainController {
 		return "/template";
 	}
 	
+	// 로그인 proc
 	@RequestMapping(value = "The/TheLoginProc")
 	public String TheLoginProc(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
@@ -87,7 +105,7 @@ public class MainController {
 
 		return "/redirect";
 	}
-
+	// 로그아웃
 	@RequestMapping(value = "The/TheLogout")
 	public String TheLogout(HttpSession session, Model model) throws Exception {
 
@@ -105,7 +123,7 @@ public class MainController {
 		model.addAttribute("url", url);
 
 		log.info("/The/TheLogout 종료");
-
+		
 		return "/redirect";
 	}
 	
@@ -136,9 +154,10 @@ public class MainController {
 
 		return "/The/TheSignup";
 	}
-
+	
+	// 회원가입proc
 	@RequestMapping(value = "The/TheSignUpProc", method = RequestMethod.GET)
-	public String TheSignUpProc(HttpServletRequest request, ModelMap model) {
+	public String TheSignUpProc(HttpServletRequest request, ModelMap model,HttpSession session) {
 
 		log.info("/The/TheSignUpProc 시작");
 		
@@ -163,7 +182,7 @@ public class MainController {
 		String interests = String.join(",", user_interest);
 		log.info("interest : " + interests);
 		
-		
+		session.setAttribute("user_email", user_email);
 		
 		UserDTO tDTO = new UserDTO();
 		log.info("tDTO.set 시작");
@@ -183,7 +202,7 @@ public class MainController {
 		log.info("res : " + res);
 
 		String msg;
-		String url = "/The/TheLogin.do";
+		String url = "/The/TheEmailCertify.do";
 
 		if (res > 0) {
 			msg = "회원가입에 성공했습니다.";
@@ -200,7 +219,8 @@ public class MainController {
 
 		return "/redirect";
 	}
-
+	
+	// 아이디 중복확인
 	@ResponseBody
     @RequestMapping(value="/The/idCheck", method = RequestMethod.POST)
     public int idCheck(HttpServletRequest request) throws Exception {
@@ -223,7 +243,8 @@ public class MainController {
         log.info("idCheck 종료");
         return res;
     }
-
+	
+	// 이메일 중복확인
 	@ResponseBody
 	@RequestMapping(value="/The/emailCheck", method = RequestMethod.POST)
 	public int emailCheck(HttpServletRequest request) throws Exception{
@@ -245,5 +266,110 @@ public class MainController {
         log.info("emailCheck 종료");
         return res;
 	}
-	
+	public String RandomNum() {
+    	StringBuffer buffer = new StringBuffer();
+    	for(int i = 0; i < 6; i++) {
+    		int n = (int)(Math.random() * 10);
+    		buffer.append(n);
+    		
+    	}
+    	return buffer.toString();
+    }
+ 	
+ 	@RequestMapping(value = "/The/TheEmailCertify")
+	public String EmailCertify(HttpSession session) {
+
+		log.info("/The/TheEmailCertify 시작");	
+		
+		log.info("/The/TheEmailCertify 종료");
+
+		return "/The/TheEmailCertify";
+	}
+ 
+ 	// 이메일 인증
+ 	@ResponseBody
+	@RequestMapping(value="/The/TheEmailCertifyProc", method = RequestMethod.POST)
+	public int TheEmailCertify(HttpServletRequest request, HttpSession session) throws Exception{
+		log.info("/The/TheEmailCertify 시작");
+        
+    	int result = 0;
+    	String email = request.getParameter("email");
+    	log.info("email : " + email);
+    	String authNum = "";
+    	
+    	authNum = RandomNum();
+    	log.info("authNum : " + authNum);
+    	 	    	
+		
+    	UserDTO uDTO = new UserDTO();
+		uDTO.setUser_email(email);
+		uDTO.setUser_authNum(authNum);
+		log.info("setUser_authNum : " + uDTO.getUser_authNum());
+		log.info("setUser_email : " + uDTO.getUser_email());
+		
+		int res = MailService.doSendMail(uDTO);
+		
+		if (res == 1) {
+			log.info(this.getClass().getName() + "mail.sendMail success");
+			result = 1;
+		} else {
+			log.info(this.getClass().getName() + "mail.sendMail fail");
+			result = 0;
+		}
+		log.info("setUser_email : " + uDTO.getUser_email());
+		
+		log.info("insertAuthNum 시작");
+		int res2 = userService.insertAuthNum(uDTO);
+		log.info("insertAuthNum 종료");
+		log.info("res2 : " + res2);
+		
+		if(res2 == 1) {
+			log.info("update success");
+		} else {
+			log.info("update fail");
+		}
+		
+		session.invalidate();
+        log.info("/The/TheEmailCertify 종료");
+        return result;
+	}
+ 	
+ 	@ResponseBody
+    @RequestMapping(value = "/The/authNumCheck", method = RequestMethod.POST)
+    public int authNumCheck(HttpServletRequest request) throws Exception {
+    	log.info("/myOrder/authNumCheck 시작");
+    	
+    	int result = 0;
+    	log.info("request.getParameter 시작");
+    	String auth = request.getParameter("auth");
+    	log.info("auth : " + auth);
+    	log.info("request.getParameter 종료");
+    	
+    	UserDTO uDTO = new UserDTO();
+
+		uDTO.setUser_authNum(auth);
+
+		
+    	log.info("userService.authNumCheck 시작");
+		UserDTO authNumCheck = userService.authNumCheck(uDTO);
+		log.info("userService.authNumCheck 종료");
+		log.info("authNumCheck null ? " + (authNumCheck == null));
+		
+		log.info("if 시작");
+		if (authNumCheck != null) {
+			log.info(this.getClass().getName() + "authNumCheck success");
+			result = 1;
+		} else {
+			log.info(this.getClass().getName() + "authNumCheck fail");
+			result = 0;
+		}
+		log.info("if 종료");
+		
+    	log.info("/The/authNumCheck 종료");
+    	return result;
+    }
+ 	
+ 
+
+ 	
 }

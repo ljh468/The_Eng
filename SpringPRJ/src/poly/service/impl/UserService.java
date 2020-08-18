@@ -32,8 +32,19 @@ public class UserService implements IUserService{
 
 	@Override
 	public UserDTO emailCheck(String userEmail) {
-		// TODO Auto-generated method stub
 		return userMapper.emailCheck(userEmail);
+	}
+
+	@Override
+	public int insertAuthNum(UserDTO uDTO) {
+
+		return userMapper.insertAuthNum(uDTO);
+	}
+
+	@Override
+	public UserDTO authNumCheck(UserDTO uDTO) {
+
+		return userMapper.authNumCheck(uDTO);
 	}
 	
 }

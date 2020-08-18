@@ -14,4 +14,8 @@ public interface IUserMapper {
 
 	UserDTO emailCheck(String userEmail);
 
+	int insertAuthNum(UserDTO uDTO);
+
+	UserDTO authNumCheck(UserDTO uDTO);
+
 }
