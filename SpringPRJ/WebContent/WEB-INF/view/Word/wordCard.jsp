@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
-	
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +12,7 @@ Coded by www.creative-tim.com
 <link rel="icon" type="image/png"
 	href="/resources/assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Today Highlight English</title>
+<title>Word Book</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
 	name='viewport' />
@@ -46,10 +32,10 @@ Coded by www.creative-tim.com
 </head>
 
 <body class="">
-	<div class="wrapper ">
+	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
-			<!-- navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent -->
+			<!-- Navbar -->
 			<nav
 				class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
 				<div class="container-fluid">
@@ -61,87 +47,75 @@ Coded by www.creative-tim.com
 									class="navbar-toggler-bar bar3"></span>
 							</button>
 						</div>
-						<a class="navbar-brand" href="javascript:;">Today Highlight
-							English</a>
+						<a class="navbar-brand" href="javascript:;">Word Book</a>
 					</div>
-					<div class="navbar-collapse justify-content-end collapse" id="navigation" style="">
-            
-            
-          </div>
-          </div>
-          </nav>
-          
+				</div>
+			</nav>
 			<!-- End Navbar -->
+
 			<div class="content">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center">The New York Times</h4>
-					</div>
-					<hr>
-					<div class="card-body">
-						<h5 class="card-text">여기에 뉴스제목</h5>
-						<div class="card-text">여기에 뉴스 내용을 넣는다.</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
-					</div>
-					<hr>
-					<div class="card-body">
+				<a href="/Word/wordOption.do">
+					<div class="card">
 						<div class="row">
-							<div class="col-6 col-lg-6 pr-2 pb-3">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
-
+							<div class="col-4 mt-2 mb-2" style="border-right: solid red;">
+								<p class="text-center">
+									<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
+								<p>
 							</div>
-							<div class="col-6 pl-2 pb-3">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-6 pr-2">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
-							</div>
-							<div class="col-6 pl-2">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
+							<div class="col-8">
+								<h3 class="mt-4 text-center">
+									ALL Word
+									</h1>
+									<h6 class="mb-4 text-center">
+										관심 분야 단어 및 학습 단어
+										</h4>
 							</div>
 						</div>
 					</div>
-				</div>
-
+				</a> <br>
+				<br>
+				<br> <a href="/Word/wordOption.do">
+					<div class="card">
+						<div class="row">
+							<div class="col-4 mt-2 mb-2" style="border-right: solid red;">
+								<p class="text-center">
+									<i class="nc-icon nc-simple-remove mt-3"
+										style="font-size: 80px;"></i>
+								<p>
+							</div>
+							<div class="col-8">
+								<h3 class="mt-4 text-center">
+									Wrong Word
+									</h1>
+									<h6 class="mb-4 text-center">
+										틀렸던 단어
+										</h4>
+							</div>
+						</div>
+					</div>
+				</a> <br>
+				<br>
+				<br> <a href="/Word/wordOption.do">
+					<div class="card">
+						<div class="row">
+							<div class="col-4 mt-3 mb-2" style="border-right: solid red;">
+								<p class="text-center">
+									<i class="nc-icon nc-bookmark-2 mt-3" style="font-size: 80px;"></i>
+								<p>
+							</div>
+							<div class="col-8">
+								<h3 class="mt-4 text-center">
+									Favorites
+									</h1>
+									<h6 class="mb-4 text-center">
+										즐겨찾기
+										</h4>
+							</div>
+						</div>
+					</div>
+				</a>
 			</div>
+
 			<footer class="footer footer-black  footer-white ">
 				<div class="container-fluid">
 					<div class="row">
@@ -166,31 +140,6 @@ Coded by www.creative-tim.com
 			</footer>
 		</div>
 	</div>
-	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -224,10 +173,11 @@ Coded by www.creative-tim.com
 
 			}
 
-		});
-		
-		
+		})
+
+
 	</script>
+
 </body>
 
 </html>

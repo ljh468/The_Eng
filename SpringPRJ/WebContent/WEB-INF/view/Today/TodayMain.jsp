@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -49,7 +47,7 @@ Coded by www.creative-tim.com
 	<div class="wrapper ">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
-			<!-- navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent -->
+			<!-- Navbar -->
 			<nav
 				class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
 				<div class="container-fluid">
@@ -64,13 +62,51 @@ Coded by www.creative-tim.com
 						<a class="navbar-brand" href="javascript:;">Today Highlight
 							English</a>
 					</div>
-					<div class="navbar-collapse justify-content-end collapse" id="navigation" style="">
-            
-            
-          </div>
-          </div>
-          </nav>
-          
+					<div class="collapse navbar-collapse justify-content-end"
+						id="navigation">
+						<form>
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control"
+									placeholder="Search...">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<i class="nc-icon nc-zoom-split"></i>
+									</div>
+								</div>
+							</div>
+						</form>
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link btn-magnify"
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
+									
+										<span class="d-lg-none d-md-block">Stats</span>
+									
+							</a></li>
+							<li class="nav-item btn-rotate dropdown"><a
+								class="nav-link dropdown-toggle" href="http://example.com"
+								id="navbarDropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> <i
+									class="nc-icon nc-bell-55"></i>
+									
+										<span class="d-lg-none d-md-block">Some Actions</span>
+									
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="#">Action</a> <a
+										class="dropdown-item" href="#">Another action</a> <a
+										class="dropdown-item" href="#">Something else here</a>
+								</div></li>
+							<li class="nav-item"><a class="nav-link btn-rotate"
+								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
+
+										<span class="d-lg-none d-md-block">Account</span>
+									
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 			<!-- End Navbar -->
 			<div class="content">
 				<div class="card">
@@ -79,10 +115,13 @@ Coded by www.creative-tim.com
 					</div>
 					<hr>
 					<div class="card-body">
-						<h5 class="card-text">여기에 뉴스제목</h5>
-						<div class="card-text">여기에 뉴스 내용을 넣는다.</div>
+						<h5 class="card-text" style="font-size:18px; color:orange;">Pros and Cons of 5G Technology</h5>
+						<div class="card-text">Self-driving cars, smart cities, fully connected homes, 
+						This is the future and it will 2 be powered by 5G.</div>
 					</div>
 				</div>
+				
+				
 				<div class="card">
 					<div class="card-header">
 						<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
@@ -93,11 +132,10 @@ Coded by www.creative-tim.com
 							<div class="col-6 col-lg-6 pr-2 pb-3">
 								<div class="row">
 									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/HeraldLogo.jpg"></button>
 									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
+									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>Are we witnessing the arrival of a "new" Neymar?
+									We are used to seeing the Brazil forward do impressice things...
 
 								</div>
 
@@ -105,10 +143,10 @@ Coded by www.creative-tim.com
 							<div class="col-6 pl-2 pb-3">
 								<div class="row">
 									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/TheKorea.jpg" ></button>
+									</div> 
+									<div style="color:orange">KAI to supply 2 more Charmsuri<br>impresses with...</div>Are we witnessing the arrival of a "new" Neymar?
+									We are used to seeing the Brazil forward do impressice things...
 									</div>
 
 								</div>
@@ -118,10 +156,12 @@ Coded by www.creative-tim.com
 							<div class="col-6 pr-2">
 								<div class="row">
 									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/graph.jpg"></button>
 									</div>
+									<!-- 미리 보여주는 내용 중 창에 맞춰 글자 중 어디까지 보여줄지 정해야함. -->
 									<div class="col-12">
-										TECH<br>뉴맥북
+									<div style="color:orange">South Korea tightens <br>Coivid-19</div>Museums, nightclubs and karaoke bars have closed in and around
+									South Korea's capital, Seoul...
 									</div>
 
 								</div>
@@ -129,10 +169,10 @@ Coded by www.creative-tim.com
 							<div class="col-6 pl-2">
 								<div class="row">
 									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/Neymar.jpg"></button>
 									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
+									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>Are we witnessing the arrival of a "new" Neymar?
+									We are used to seeing the Brazil forward do impressice things...
 									</div>
 
 								</div>
@@ -166,31 +206,6 @@ Coded by www.creative-tim.com
 			</footer>
 		</div>
 	</div>
-	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -224,9 +239,7 @@ Coded by www.creative-tim.com
 
 			}
 
-		});
-		
-		
+		})
 	</script>
 </body>
 

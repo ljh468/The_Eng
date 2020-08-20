@@ -15,5 +15,9 @@ public interface IUserService {
 	UserDTO authNumCheck(UserDTO uDTO);
 
 	int insertAuthNum(UserDTO uDTO);
+
+	UserDTO Userinquire(UserDTO uDTO);
+
+	int deleteUser(UserDTO uDTO);
 	
 }

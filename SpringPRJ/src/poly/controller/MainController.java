@@ -42,30 +42,22 @@ public class MainController {
 	@Resource(name = "MailService")
 	IMailService MailService;
 
-	@RequestMapping(value = "index")
-	public String Index(HttpSession session,ModelMap model) {
-		String user_id = (String)session.getAttribute("user_id");
-		if(user_id == null) {
-			return "/The/TheLogin";
-		}
-		
-		model.addAttribute("user_id", user_id);
-		return "/index";
-	}
-
-	@RequestMapping(value = "The/TheLogin")
-	public String TheLogin() {
-		log.info("TheLogin 시작");
-		log.info("TheLogin 종료");
-		return "/The/TheLogin";
-	}
 	
+	
+	// 템플릿
 	@RequestMapping(value = "template")
 	public String template() {
 		return "/template";
 	}
 	
 	// 로그인 proc
+	@RequestMapping(value = "The/TheLogin")
+	public String TheLogin(HttpSession session) {
+		log.info("TheLogin 시작");
+		session.invalidate();
+		log.info("TheLogin 종료");
+		return "/The/TheLogin";
+	}
 	@RequestMapping(value = "The/TheLoginProc")
 	public String TheLoginProc(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
@@ -96,7 +88,7 @@ public class MainController {
 			session.setAttribute("user_name", tDTO.getUser_email());
 		}
 
-		url = "/index.do";
+		url = "/Today/TodayMain.do";
 
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
@@ -246,7 +238,7 @@ public class MainController {
 	
 	// 이메일 중복확인
 	@ResponseBody
-	@RequestMapping(value="/The/emailCheck", method = RequestMethod.POST)
+	@RequestMapping(value="The/emailCheck", method = RequestMethod.POST)
 	public int emailCheck(HttpServletRequest request) throws Exception{
 		log.info("emailCheck 시작");
 		
@@ -276,7 +268,7 @@ public class MainController {
     	return buffer.toString();
     }
  	
- 	@RequestMapping(value = "/The/TheEmailCertify")
+ 	@RequestMapping(value = "The/TheEmailCertify")
 	public String EmailCertify(HttpSession session) {
 
 		log.info("/The/TheEmailCertify 시작");	
@@ -288,7 +280,7 @@ public class MainController {
  
  	// 이메일 인증
  	@ResponseBody
-	@RequestMapping(value="/The/TheEmailCertifyProc", method = RequestMethod.POST)
+	@RequestMapping(value="The/TheEmailCertifyProc", method = RequestMethod.POST)
 	public int TheEmailCertify(HttpServletRequest request, HttpSession session) throws Exception{
 		log.info("/The/TheEmailCertify 시작");
         
@@ -335,7 +327,7 @@ public class MainController {
 	}
  	
  	@ResponseBody
-    @RequestMapping(value = "/The/authNumCheck", method = RequestMethod.POST)
+    @RequestMapping(value = "The/authNumCheck", method = RequestMethod.POST)
     public int authNumCheck(HttpServletRequest request) throws Exception {
     	log.info("/myOrder/authNumCheck 시작");
     	
@@ -369,7 +361,284 @@ public class MainController {
     	return result;
     }
  	
- 
+	@RequestMapping(value = "Word/wordCard")
+	public String wordCard() {
+
+		log.info("wordCard 시작");
+
+		log.info("wordCard 종료");
+
+		return "/Word/wordCard";
+	}
+	
+	@RequestMapping(value = "Word/wordOption")
+	public String wordOption() {
+
+		log.info("wordOption 시작");
+
+		log.info("wordOption 종료");
+
+		return "/Word/wordOption";
+	}
+	
+	@RequestMapping(value = "Word/wordStudy")
+	public String wordStudy() {
+
+		log.info("wordStudy 시작");
+
+		log.info("wordStudy 종료");
+
+		return "/Word/wordStudy";
+	}
+	
+	@RequestMapping(value = "Word/wordResult")
+	public String wordResult() {
+
+		log.info("wordResult 시작");
+
+		log.info("wordResult 종료");
+
+		return "/Word/wordResult";
+	}
+	
+	// 설정 창
+	@RequestMapping(value = "Setting/setting")
+	public String setting() {
+
+		log.info("/Setting/setting 시작");
+
+		log.info("/Setting/setting 종료");
+
+		return "/Setting/setting";
+	}
+ 	
+ 	@RequestMapping(value = "/Setting/TheMypageCheck")
+	public String TheMypageCheck() {
+
+		log.info("/The/Setting/TheMypageCheck 시작");
+
+		log.info("/The/Setting/TheMypageCheck 종료");
+
+		return "/Setting/TheMypageCheck";
+	}
+ 	
+ 	@ResponseBody
+ 	@RequestMapping(value = "/Setting/TheMypageCheckProc", method = RequestMethod.POST)
+	public int TheMypageCheckProc(HttpServletRequest request, HttpSession session) {
+
+		log.info("/The/TheMypageCheckProc 시작");
+		int result = 0;
+		log.info("String 변수저장 시작");
+		String user_pwd = request.getParameter("pwd");
+		String user_id = (String) session.getAttribute("user_id");
+		log.info("String 변수저장 종료");
+		log.info("user_pwd : " + user_pwd);
+		log.info("user_id : " + user_id);
+		
+		UserDTO uDTO = new UserDTO();
+		log.info("uDTO.set 시작");
+		uDTO.setUser_pwd(user_pwd);
+		uDTO.setUser_id(user_id);
+		log.info("uDTO.set 종료");
+		
+		log.info("userService.Userinquire 시작");
+		UserDTO res = userService.Userinquire(uDTO);
+		log.info("userService.Userinquire 종료");
+		log.info("res : " + res);
+		
+		if(res != null) {
+			result = 1;
+		} else {
+			result = 0;
+		}
+		
+		log.info("result :" + result);
+		log.info("/Setting/TheMypageCheckProc 종료");
+
+		return result;
+	}
+ 	
+ 	@RequestMapping(value = "/Setting/TheMypage")
+	public String TheMypage() {
+
+		log.info("/The/TheMypage 시작");
+
+		log.info("/The/TheMypage 종료");
+
+		return "/Setting/TheMypage";
+	}
+ 	
+ 	@RequestMapping(value = "/Setting/TheReViewTutorial")
+	public String TheReViewTutorial() {
+
+		log.info("/The/Setting/TheReViewTutorial 시작");
+
+		log.info("/The/Setting/TheReViewTutorial 종료");
+
+		return "/Setting/TheReViewTutorial";
+	}
+ 	
+ 	@RequestMapping(value = "/Setting/TheAppIntroduction")
+	public String TheAppIntroduction() {
+
+		log.info("/The/Setting/TheAppIntroduction 시작");
+
+		log.info("/The/Setting/TheAppIntroduction 종료");
+
+		return "/Setting/TheAppIntroduction";
+	}
+ 	
+ 	@RequestMapping(value = "/Mypage/TheInterestSetting")
+	public String TheInterestSetting() {
+
+		log.info("/The/Setting/Mypage/TheInterestSetting 시작");
+
+		log.info("/The/Setting/Mypage/TheInterestSetting 종료");
+
+		return "/Mypage/TheInterestSetting";
+	}
+ 	
+ 	@RequestMapping(value = "/Mypage/TheUserCorrection")
+	public String TheUserCorrection() {
+
+		log.info("/Mypage/TheUserCorrection 시작");
+
+		log.info("/The/Setting/Mypage/TheUserCorrection 종료");
+
+		return "/Mypage/TheUserCorrection";
+	}
+ 	
+ 	@RequestMapping(value = "/Mypage/ThePassWordChange")
+	public String ThePassWordChange() {
+
+		log.info("/The/Setting/Mypage/ThePassWordChange 시작");
+
+		log.info("/The/Setting/Mypage/ThePassWordChange 종료");
+
+		return "/Mypage/ThePassWordChange";
+	}
+ 	
+	@RequestMapping(value = "/Mypage/TheUserDelete")
+	public String TheUserDelete() {
+
+		log.info("/The/Setting/Mypage/TheUserDelete 시작");
+
+		log.info("/The/Setting/Mypage/TheUserDelete 종료");
+
+		return "/Mypage/TheUserDelete";
+	}
+ 	
+ 	@ResponseBody
+ 	@RequestMapping(value = "/Mypage/TheUserDeleteCheck", method = RequestMethod.POST)
+	public int TheUserDeleteCheck(HttpServletRequest request, HttpSession session) {
+
+		log.info("/Mypage/TheUserDeleteCheck 시작");
+		
+		int result = 0;
+		log.info("String 변수저장 시작");
+		String DeleteCheck = request.getParameter("DeleteCheck");
+		log.info("String 변수저장 종료");
+		log.info("DeleteCheck : " + DeleteCheck);
+		
+		if(DeleteCheck.equals("탈퇴를 확인합니다.")) {
+			result = 1;
+		} else {
+			result = 0;
+		}
+		
+		log.info("result :" + result);
+		log.info("/Mypage/TheUserDeleteCheck 종료");
+
+		return result;
+	}
+ 	
+ 	@RequestMapping(value = "/Mypage/TheUserDeleteProc")
+	public String TheUserDeleteProc(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+
+		log.info("/The/TheUserDeleteProc 시작");
+		String user_id = (String) session.getAttribute("user_id");
+
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_id(user_id);
+
+		int res = userService.deleteUser(uDTO);
+		log.info("uDTO null? : " + (uDTO == null));
+
+		String msg = "";
+		String url = "";
+		if(res>0) {
+			msg = "회원 탈퇴를 성공했습니다. 이용해 주셔서 감사합니다.";
+		} else {
+			msg = "회원 탈퇴를 실패했습니다. 고객센터에 문의해주세요.";
+		}
+
+		url = "/index.do";
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		session.invalidate();
+		
+		log.info("The/TheUserDeleteProc 종료");
+
+		return "/redirect";
+	}
+
+	// 오늘의학습
+ 	
+ 	@RequestMapping(value = "Today/TodayMain")
+	public String TodayMain(HttpSession session,ModelMap model) {
+		String user_id = (String)session.getAttribute("user_id");
+		if(user_id == null) {
+			return "/The/TheLogin";
+		}
+		
+		model.addAttribute("user_id", user_id);
+		return "/Today/TodayMain";
+	}
+ 	
+ 	@RequestMapping(value="Today/TodayNews")
+	public String TodayNews() {
+		
+		log.info("TodaySentence 시작");
+		log.info("TodaySentence 종료 ");
+		
+		return "/Today/TodayNews";
+	}
+ 	
+	@RequestMapping(value="Today/TodaySentence")
+	public String TodaySentence() {
+		
+		log.info("TodaySentence 시작");
+		log.info("TodaySentence 종료 ");
+		
+		return "/Today/TodaySentence";
+	}
+	@RequestMapping(value="Today/TodayExam")
+	public String TodayExam() {
+		
+		log.info("TodayExam 시작");
+		log.info("TodayExam 종료");
+		
+		return "/Today/TodayExam";
+	}
+	@RequestMapping(value="Today/TodayRecord")
+	public String TodayRecord() {
+		
+		log.info("TodayRecord 시작");
+		log.info("TodayRecord 종료");
+		
+		return "/Today/TodayRecord";
+	}
+	@RequestMapping(value="Today/TodayResult")
+	public String TodayResult() {
+		
+		log.info("TodayResult 시작");
+		log.info("TodayResult 종료");
+		
+		return "/Today/TodayResult";
+	}
+	
 
  	
 }

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -49,7 +47,7 @@ Coded by www.creative-tim.com
 	<div class="wrapper ">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
-			<!-- navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent -->
+			<!-- Navbar -->
 			<nav
 				class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
 				<div class="container-fluid">
@@ -61,87 +59,116 @@ Coded by www.creative-tim.com
 									class="navbar-toggler-bar bar3"></span>
 							</button>
 						</div>
-						<a class="navbar-brand" href="javascript:;">Today Highlight
-							English</a>
+						<a class="navbar-brand" href="javascript:;">Today Highlight English</a>
 					</div>
-					<div class="navbar-collapse justify-content-end collapse" id="navigation" style="">
-            
-            
-          </div>
-          </div>
-          </nav>
-          
+					<div class="collapse navbar-collapse justify-content-end"
+						id="navigation">
+						<form>
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control"
+									placeholder="Search...">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<i class="nc-icon nc-zoom-split"></i>
+									</div>
+								</div>
+							</div>
+						</form>
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link btn-magnify"
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
+									
+										<span class="d-lg-none d-md-block">Stats</span>
+									
+							</a></li>
+							<li class="nav-item btn-rotate dropdown"><a
+								class="nav-link dropdown-toggle" href="http://example.com"
+								id="navbarDropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> <i
+									class="nc-icon nc-bell-55"></i>
+									
+										<span class="d-lg-none d-md-block">Some Actions</span>
+									
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="#">Action</a> <a
+										class="dropdown-item" href="#">Another action</a> <a
+										class="dropdown-item" href="#">Something else here</a>
+								</div></li>
+							<li class="nav-item"><a class="nav-link btn-rotate"
+								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
+							
+										<span class="d-lg-none d-md-block">Account</span>
+									
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 			<!-- End Navbar -->
+			<!-- 뉴스 기사 삽입. -->
 			<div class="content">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center">The New York Times</h4>
+						<h4 class="mt-0 mb-0 text-center"><b>The New York Times</b></h4>
 					</div>
 					<hr>
+					<!-- result창은 가운데 정렬 -->
 					<div class="card-body">
-						<h5 class="card-text">여기에 뉴스제목</h5>
-						<div class="card-text">여기에 뉴스 내용을 넣는다.</div>
+					<div style="text-align:center;">
+						
+						<h6 style="color:orange">Today Result</h6>
+						
+						
+						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
+						
+						
+						
+						<br>
+						<h6 class="ml-5 mr-5" style="color:orange;">Recorded Voice</h6>
+						
+						<!-- 이곳엔 발음강세에 대한 그래프가 들어갈 예정. -->
+						<img src="/resources/assets/img/mike.jpg">
+						<br><br>
+						
+						<!-- 점수창. -->
+						<hr>
+						<h6 style="color:orange; font-size:20px">발음의 명확성</h6>
+						<div style="font-size:18px; color:blue; font-weight:bold">80</div><br>
+						
+						<h6 style="color:orange; font-size:20px">강세의 유사성</h6>
+						<div style="font-size:18px; color:blue; font-weight:bold">90</div><br>
+						
+						<h6 style="color:orange; font-size:20px">강세의 명확성</h6>
+						<div style="font-size:18px; color:blue; font-weight:bold">50</div><br>
+						
+						<h6 style="color:orange; font-size:20px">총 등급</h6>
+						<div style="font-size:18px; color:blue; font-weight:bold">50</div><br>
+						
+						
+						
+						
+						<!-- 뉴스 기사 끝. -->
+						
 					</div>
+					
+					
 				</div>
-				<div class="card">
-					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
-					</div>
-					<hr>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-6 col-lg-6 pr-2 pb-3">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
-
-							</div>
-							<div class="col-6 pl-2 pb-3">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-6 pr-2">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
-								</div>
-							</div>
-							<div class="col-6 pl-2">
-								<div class="row">
-									<div class="col-12">
-										<img src="/resources/assets/img/mike.jpg">
-									</div>
-									<div class="col-12">
-										TECH<br>뉴맥북
-									</div>
-
+			<!-- 제출하여 답이 맞거나 틀림을 잠깐 보여준 후 다음 페이지로 이동.(구현예정) -->
+			<!-- 다음으로 넘어가는 버튼 -->
+			<input style="float:right;"  class="btn btn-warning btn-block btn-lg" type="button" 
+			value="Main"  onclick="location='/Today/TodayMain.do'">
+			
+			
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-			</div>
+		
+		
+			<!-- --------------------------------------------------------------------------- -->
+			<!-- footer -->
 			<footer class="footer footer-black  footer-white ">
 				<div class="container-fluid">
 					<div class="row">
@@ -164,33 +191,7 @@ Coded by www.creative-tim.com
 					</div>
 				</div>
 			</footer>
-		</div>
-	</div>
-	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -224,9 +225,7 @@ Coded by www.creative-tim.com
 
 			}
 
-		});
-		
-		
+		})
 	</script>
 </body>
 

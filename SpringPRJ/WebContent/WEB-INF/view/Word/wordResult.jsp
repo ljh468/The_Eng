@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -54,54 +53,56 @@ Coded by www.creative-tim.com
             </div>
             <a class="navbar-brand" href="javascript:;">Today Highlight English</a>
           </div>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form>
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="nc-icon nc-zoom-split"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link btn-magnify" href="javascript:;">
-                  <i class="nc-icon nc-layout-11"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-bell-55"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="javascript:;">
-                  <i class="nc-icon nc-settings-gear-65"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
           </div>
-        </div>
       </nav>
       <!-- End Navbar -->
+      
+      
       <div class="content">
+      <div class="card">
+      	<div class="card-header">
+      		<h2 class="text-center mb-0">총 단어 <% %> 개</h2>
+      	</div>
+      	<hr>
+      	<div class="card-body">
+      		<div class="row">
+      			<div class="col-6">
+      				<i class="nc-icon nc-satisfied text-success pl-3" style="font-size: 40px"></i>
+      			</div>
+      			
+      			<div class="col-6">
+      				<h3 class="text-center"> <% %> 개</h3>
+      			</div>
+      		</div>
+      		
+      		<br>
+      		
+      		<div class="row">
+      			<div class="col-6">
+      				<i class="nc-icon nc-simple-remove text-danger pl-3" style="font-size: 40px"></i>
+      			</div>
+      			
+      			<div class="col-6">
+      				<h3 class="text-center"> <% %> 개</h3>
+      			</div>
+      		</div>
+      		
+      		<br>
+      		
+			<div class="row">
+				<div class="ml-auto mr-auto">
+					<button class="btn btn-primary btn-round">
+					<i class="nc-icon nc-refresh-69 mr-3"></i>
+					틀린 단어 학습하기
+					</button>
+				</div>
+			</div>      		
+      	</div>
       </div>
+      
+      </div>
+      
+      
       <footer class="footer footer-black  footer-white ">
         <div class="container-fluid">
           <div class="row">
@@ -156,6 +157,7 @@ Coded by www.creative-tim.com
     	
     })
 	
+ 
   </script>
 </body>
 

@@ -18,4 +18,8 @@ public interface IUserMapper {
 
 	UserDTO authNumCheck(UserDTO uDTO);
 
+	UserDTO Userinquire(UserDTO uDTO);
+
+	int deleteUser(UserDTO uDTO);
+
 }

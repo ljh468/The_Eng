@@ -23,54 +23,30 @@
         </a>
         </div>
       </div>
-      <div class="sidebar-wrapper">
+     <div class="sidebar-wrapper">
         <ul class="nav" >
-          <li>
-            <a href="#"  >
+          <li id="index">
+            <a href="/Today/TodayMain.do" >
               <i class="nc-icon nc-air-baloon"></i>
-              <p>메인</p>
+              <p>오늘의 학습</p>
             </a>
           </li>
-          <li >
-            <a href="#">
-              <i class="nc-icosn nc-diamond"></i>
-              <p>Icons</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="nc-icon nc-pin-3"></i>
-              <p>Maps</p>
+          <li id="wordCard">
+            <a href="/Word/wordCard.do">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>단어장</p>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="nc-icon nc-bell-55"></i>
-              <p>Notifications</p>
+              <i class="nc-icon nc-atom"></i>
+              <p>복습하기</p>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="nc-icon nc-single-02"></i>
-              <p>User Profile</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="nc-icon nc-tile-56"></i>
-              <p>Table List</p>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="nc-icon nc-caps-small"></i>
-              <p>Typography</p>
-            </a>
-          </li>
-          <li class="#">
-            <a href="./upgrade.html">
-              <i class="nc-icon nc-spaceship"></i>
-              <p>Upgrade to PRO</p>
+            <a href="/Setting/setting.do">
+              <i class="nc-icon nc-settings-gear-65"></i>
+              <p>설정</p>
             </a>
           </li>
         </ul>
@@ -81,12 +57,11 @@
    
     <!-- 선택 메뉴창을 클릭했을때 active클래스 추가 삭제-->
     <script>
-    $(function(){
-     var sBtn = $("ul > li");    //  ul > li 이를 sBtn으로 칭한다. (클릭이벤트는 li에 적용 된다.)
-     sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
-      sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
-      $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
-     })
-    })
+    
+    $('li').on('click', function() {
+    	$('li').removeClass('active');
+    	$(this).addClass('active');
+        
+   });
    </script>
 

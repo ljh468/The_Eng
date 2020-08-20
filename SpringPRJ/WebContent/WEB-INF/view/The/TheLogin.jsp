@@ -58,13 +58,13 @@ text-align: center;
 
 					<div class="wrap-input100 validate-input" data-validate="ID is required">
 					
-						<input class="input100" type="text" name="id" placeholder="ID" style="height: 60px;">
+						<input class="input100" type="text" name="id" placeholder="ID" style="height: 60px; required">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>
 					
 					<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pwd" placeholder="Password" style="height: 60px;">
+						<input class="input100" type="password" name="pwd" placeholder="Password" style="height: 60px; required">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
 					</div>

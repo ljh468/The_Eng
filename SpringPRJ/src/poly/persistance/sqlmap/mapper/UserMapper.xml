@@ -73,5 +73,18 @@
 	WHERE
 	USER_AUTHNUM = #{user_authNum}
 	</select>
+	<select parameterType="UserDTO" resultType="UserDTO" id="Userinquire">
+	SELECT
+	USER_ID,USER_PWD
+	FROM
+	USERINFO
+	WHERE
+	USER_PWD = #{user_pwd} and USER_ID = #{user_id} </select>
 	
+	<delete parameterType="userDTO" id="deleteUser">
+	DELETE FROM
+	USERINFO
+	WHERE
+	USER_ID = #{user_id}
+	</delete>
 </mapper>

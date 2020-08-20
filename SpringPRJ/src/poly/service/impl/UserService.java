@@ -46,5 +46,16 @@ public class UserService implements IUserService{
 
 		return userMapper.authNumCheck(uDTO);
 	}
+
+	@Override
+	public UserDTO Userinquire(UserDTO uDTO) {
+		return userMapper.Userinquire(uDTO);
+	}
+
+	@Override
+	public int deleteUser(UserDTO uDTO) {
+		
+		return userMapper.deleteUser(uDTO);
+	}
 	
 }
