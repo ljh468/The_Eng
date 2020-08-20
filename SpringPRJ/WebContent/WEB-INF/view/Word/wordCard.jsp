@@ -29,6 +29,8 @@
 	rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/resources/assets/demo/demo.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 </head>
 
 <body class="">
@@ -57,7 +59,7 @@
 				<a href="/Word/wordOption.do">
 					<div class="card">
 						<div class="row">
-							<div class="col-4 mt-2 mb-2" style="border-right: solid red;">
+							<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
 								<p class="text-center">
 									<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
 								<p>
@@ -77,7 +79,7 @@
 				<br> <a href="/Word/wordOption.do">
 					<div class="card">
 						<div class="row">
-							<div class="col-4 mt-2 mb-2" style="border-right: solid red;">
+							<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
 								<p class="text-center">
 									<i class="nc-icon nc-simple-remove mt-3"
 										style="font-size: 80px;"></i>
@@ -98,7 +100,7 @@
 				<br> <a href="/Word/wordOption.do">
 					<div class="card">
 						<div class="row">
-							<div class="col-4 mt-3 mb-2" style="border-right: solid red;">
+							<div class="col-4 mt-3 mb-2" style="border-right: solid orange;">
 								<p class="text-center">
 									<i class="nc-icon nc-bookmark-2 mt-3" style="font-size: 80px;"></i>
 								<p>

@@ -368,7 +368,7 @@ public class MainController {
 
 		log.info("wordCard 종료");
 
-		return "/Word/wordCard";
+		return "/Word/wordCard.do";
 	}
 	
 	@RequestMapping(value = "Word/wordOption")
@@ -540,7 +540,7 @@ public class MainController {
 		log.info("String 변수저장 종료");
 		log.info("DeleteCheck : " + DeleteCheck);
 		
-		if(DeleteCheck.equals("탈퇴를 확인합니다.")) {
+		if(DeleteCheck.equals("Account_withdrawal")) {
 			result = 1;
 		} else {
 			result = 0;
