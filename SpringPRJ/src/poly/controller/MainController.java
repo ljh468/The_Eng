@@ -572,7 +572,7 @@ public class MainController {
 			msg = "회원 탈퇴를 실패했습니다. 고객센터에 문의해주세요.";
 		}
 
-		url = "/index.do";
+		url = "/The/Login.do";
 
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
