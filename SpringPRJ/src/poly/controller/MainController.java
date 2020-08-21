@@ -368,7 +368,7 @@ public class MainController {
 
 		log.info("wordCard 종료");
 
-		return "/Word/wordCard.do";
+		return "/Word/wordCard";
 	}
 	
 	@RequestMapping(value = "Word/wordOption")
