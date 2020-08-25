@@ -12,10 +12,10 @@
 
 <form action="/Setting/TheMypage.do" onsubmit="return check()">
 
-	<input type="text" id="pwdCheck"> <br>
+	<input type="password" id="pwdCheck"> <br>
 	<span id="msg">비밀번호를 입력해주세요.</span> <br>
 	<button type="submit">확인</button> <br>
-	<button type="button" onclick="location.href='/The/setting.do'" >취소</button> <br>
+	<button type="button" onclick="location.href='/The/setting.do'" >뒤로</button> <br>
 
 
 </form>

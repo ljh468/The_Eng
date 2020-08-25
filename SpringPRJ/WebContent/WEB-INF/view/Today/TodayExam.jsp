@@ -132,32 +132,11 @@ Coded by www.creative-tim.com
 						wireless network and it's going to be fast.</p>
 						
 						<!-- textbox의 value값에 문제로 낼 단어의 앞 두글자를 힌트로 준다.  -->
-						
-						<!-- 답이 틀리면 textbox에 정답을 표시하며, 초록색, 빨간색으로 보여준다. -->
-						<!--  The G stands for 3generation as in next <b>generation</b> wireless network
-						and it's going to be fast. About 10 times faster than 4G network on your phone
-						right now. Today it takes about six minutes to download a 3D movies with 4G.
-						With 5G, it will be 30 seconds. but 5G is about more than just super fast downloads
-						and fewer dropped calls, really about connecting the 4 Internet of things. All those... -->
-						
-						
-						
-						<!-- 뉴스 기사 끝. -->
-						<!-- 
-						<h6 class="m-3"style="color:orange">Answer</h6> -->
-					
-						<!-- 1. Submit하면 결과 창으로 문제를 전송.
-							 2. Submit하면 바로 결과를 보여주고 이동. -->
-						
-						<!-- <input style="display : block;margin : 0 auto;width:50%;height:40px;"
-						id="ExamAnswer" type="textbox" placeholder="이곳에 작성해 주세요.">
-					 	답을 적지 않으면 이동 불가. -->
-					
 					</div>
 				</div>
-			<!-- -------------------------------------------------------------------------------- -->
+					
 			<!-- 제출하여 답이 맞거나 틀림을 잠깐 보여준 후 다음 페이지로 이동.(구현예정) -->
-			<input style="float:right;"  class="btn btn-primary btn-block btn-lg" type="button" 
+			<input style="float:right;"  class="btn btn-success btn-block btn-lg" type="button" 
 			value="Submit">
 			<!-- 다음으로 넘어가는 버튼 -->
 			<input style="float:right;"  class="btn btn-warning btn-block btn-lg" type="button" 
@@ -169,31 +148,6 @@ Coded by www.creative-tim.com
 						</div>
 			
 			
-		
-			<!-- --------------------------------------------------------------------------- -->
-			<!-- footer -->
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
-				</div>
-			</footer>
 		
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>

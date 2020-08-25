@@ -19,5 +19,13 @@ public interface IUserService {
 	UserDTO Userinquire(UserDTO uDTO);
 
 	int deleteUser(UserDTO uDTO);
+
+	UserDTO getUserCorrection(UserDTO uDTO);
+
+	int setUserCorrection(UserDTO uDTO);
+
+	int pwdChange(UserDTO uDTO);
+
+	int updateInterest(UserDTO uDTO);
 	
 }

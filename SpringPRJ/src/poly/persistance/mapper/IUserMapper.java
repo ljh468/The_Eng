@@ -22,4 +22,12 @@ public interface IUserMapper {
 
 	int deleteUser(UserDTO uDTO);
 
+	UserDTO getUserCorrection(UserDTO uDTO);
+
+	int pwdChange(UserDTO uDTO);
+
+	int updateInterest(UserDTO uDTO);
+
+	int setUserCorrection(UserDTO uDTO);
+
 }

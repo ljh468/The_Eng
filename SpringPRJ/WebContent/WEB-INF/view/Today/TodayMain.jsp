@@ -107,7 +107,9 @@ Coded by www.creative-tim.com
 					</div>
 				</div>
 			</nav>
-			<!-- End Navbar -->
+			<!-- End Navbar------------------------------------------------------------------ -->
+			
+			
 			<div class="content">
 				<div class="card">
 					<div class="card-header">
@@ -115,26 +117,120 @@ Coded by www.creative-tim.com
 					</div>
 					<hr>
 					<div class="card-body">
-						<h5 class="card-text" style="font-size:18px; color:orange;">Pros and Cons of 5G Technology</h5>
-						<div class="card-text">Self-driving cars, smart cities, fully connected homes, 
+						<a href="/Today/TodayNews.do" style="color:orange; font-size:15px">
+						<h5 class="card-text">Pros and Cons of 5G Technology</h5></a><br>
+						<div class="card-text" style="font-size:15px;">Self-driving cars, smart cities, fully connected homes, 
 						This is the future and it will 2 be powered by 5G.</div>
 					</div>
 				</div>
-				
-				
+			
+			<div class="content">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
+						<h4 class="mt-0 mb-1 text-center">추천 뉴스</h4>
 					</div>
-					<hr>
+						<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+						
+						  <ol class="carousel-indicators">
+						    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+						    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+						    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+						  </ol>
+						  
+						  <div class="carousel-inner">
+						    <div class="carousel-item active">
+						    <button type="button" onclick="location='/Today/TodayNews.do'">
+						      <img src="/resources/images/NewsLogo/BBC_Logo.jpg" style="border:0; outline:0;" class="d-block w-100 h-75" alt="#">
+						     </button>
+						      <div class="carousel-caption d-none d-md-block">
+						        <h5>First slide label</h5>
+						        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						      </div>
+						    </div>
+						    
+						    <div class="carousel-item">
+						    <button type="button" onclick="location='/Today/TodayNews.do'">
+						      <img src="/resources/images/NewsLogo/TheNewyorkTimes_Logo.png" class="d-block w-100" alt="...">
+						     </button>
+						      <div class="carousel-caption d-none d-md-block">
+						        <h5>Second slide label</h5>
+						        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+						      </div>
+						    </div>
+						    <div class="carousel-item">
+						    <button type="button" onclick="location='/Today/TodayNews.do'">
+						      <img src="/resources/images/NewsLogo/CNN_Logo.jpg" class="d-block w-100 h-75" alt="...">
+						    </button>
+						      <div class="carousel-caption d-none d-md-block">
+						        <h5>Third slide label</h5>
+						        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+						      </div>
+						    </div>
+						    
+						  </div>
+					  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					    <span class="sr-only">Previous</span>
+					  </a>
+					  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					    <span class="sr-only">Next</span>
+					  </a>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body">
+				</div>
+				<div class="card border-secondary mb-3" style="max-width: 100%;">
+				  <div class="card-header">The Korea Herald</div>
+				  <div class="card-body text-secondary">
+				  <a href="/Today/TodayNews.do" style="color:orange">
+				    <h5 class="card-title">KAI to supply 2 more Charmsuri impresses with...</h5></a>
+				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+				  </div>
+				</div>
+				<div class="card border-secondary mb-3" style="max-width: 100%;">
+				  <div class="card-header">BBC</div>
+				  <div class="card-body text-secondary">
+				  <a href="/Today/TodayNews.do" style="color:orange">
+				    <h5 class="card-title">A new Neymar? PSG forward's </h5></a>
+				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+				  </div>
+				</div>
+				<div class="card border-secondary mb-3" style="max-width: 100%;">
+				  <div class="card-header">The Newyork Times</div>
+				  <div class="card-body text-secondary">
+				  <a href="/Today/TodayNews.do" style="color:orange">
+				    <h5 class="card-title">South Korea tightens </h5></a>
+				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+				  </div>
+				</div>
+				<div class="card border-secondary mb-3" style="max-width: 100%;">
+				  <div class="card-header">CNN</div>
+				  <div class="card-body text-secondary">
+				  <a href="/Today/TodayNews.do" style="color:orange">
+				    <h5 class="card-title">Danger card title</h5></a>
+				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
+				  </div>
+				</div>
+			</div>
+				<!-- 
+				<div class="card">
+				<div class="card-header">
+					<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
+				</div>
+				<hr>
 					<div class="card-body">
 						<div class="row">
 							<div class="col-6 col-lg-6 pr-2 pb-3">
 								<div class="row">
 									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/HeraldLogo.jpg"></button>
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
+										<img src="/resources/images/HeraldLogo.jpg"></button>
 									</div>
-									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>Are we witnessing the arrival of a "new" Neymar?
+									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>
+									Are we witnessing the arrival of a "new" Neymar?
 									We are used to seeing the Brazil forward do impressice things...
 
 								</div>
@@ -143,24 +239,29 @@ Coded by www.creative-tim.com
 							<div class="col-6 pl-2 pb-3">
 								<div class="row">
 									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/TheKorea.jpg" ></button>
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
+										<img src="/resources/images/TheKorea.jpg" ></button>
 									</div> 
-									<div style="color:orange">KAI to supply 2 more Charmsuri<br>impresses with...</div>Are we witnessing the arrival of a "new" Neymar?
+									<div style="color:orange">KAI to supply 2 more Charmsuri<br>impresses with...</div>
+									Are we witnessing the arrival of a "new" Neymar?
 									We are used to seeing the Brazil forward do impressice things...
 									</div>
 
 								</div>
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="col-6 pr-2">
 								<div class="row">
 									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/graph.jpg"></button>
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
+										<img src="/resources/images/graph.jpg"></button>
 									</div>
-									<!-- 미리 보여주는 내용 중 창에 맞춰 글자 중 어디까지 보여줄지 정해야함. -->
+									미리 보여주는 내용 중 창에 맞춰 글자 중 어디까지 보여줄지 정해야함.
 									<div class="col-12">
-									<div style="color:orange">South Korea tightens <br>Coivid-19</div>Museums, nightclubs and karaoke bars have closed in and around
+									<div style="color:orange">South Korea tightens <br>Coivid-19</div>
+									Museums, nightclubs and karaoke bars have closed in and around
 									South Korea's capital, Seoul...
 									</div>
 
@@ -169,43 +270,20 @@ Coded by www.creative-tim.com
 							<div class="col-6 pl-2">
 								<div class="row">
 									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'"><img src="/resources/images/Neymar.jpg"></button>
+										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
+										<img src="/resources/images/Neymar.jpg"></button>
 									</div>
-									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>Are we witnessing the arrival of a "new" Neymar?
+									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>
+									Are we witnessing the arrival of a "new" Neymar?
 									We are used to seeing the Brazil forward do impressice things...
 									</div>
-
+ -->
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-			</div>
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+	
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>

@@ -9,9 +9,9 @@ import poly.persistance.mapper.IUserMapper;
 import poly.service.IUserService;
 
 @Service("UserService")
-public class UserService implements IUserService{
-	
-	@Resource(name="UserMapper")
+public class UserService implements IUserService {
+
+	@Resource(name = "UserMapper")
 	private IUserMapper userMapper;
 
 	@Override
@@ -23,7 +23,6 @@ public class UserService implements IUserService{
 	public int UserSignUp(UserDTO tDTO) {
 		return userMapper.UserSignUp(tDTO);
 	}
-
 
 	@Override
 	public UserDTO idCheck(String userId) {
@@ -54,8 +53,32 @@ public class UserService implements IUserService{
 
 	@Override
 	public int deleteUser(UserDTO uDTO) {
-		
+
 		return userMapper.deleteUser(uDTO);
 	}
-	
+
+	@Override
+	public int setUserCorrection(UserDTO uDTO) {
+
+		return userMapper.setUserCorrection(uDTO);
+	}
+
+	@Override
+	public UserDTO getUserCorrection(UserDTO uDTO) {
+
+		return userMapper.getUserCorrection(uDTO);
+	}
+
+	@Override
+	public int pwdChange(UserDTO uDTO) {
+
+		return userMapper.pwdChange(uDTO);
+	}
+
+	@Override
+	public int updateInterest(UserDTO uDTO) {
+
+		return userMapper.updateInterest(uDTO);
+
+	}
 }
