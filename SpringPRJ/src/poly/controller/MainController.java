@@ -283,7 +283,7 @@ public class MainController {
 
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_email(email);
-		uDTO.setUser_authNum(authNum);
+		uDTO.setUser_authNum(authNum);r
 		log.info("setUser_authNum : " + uDTO.getUser_authNum());
 		log.info("setUser_email : " + uDTO.getUser_email());
 
