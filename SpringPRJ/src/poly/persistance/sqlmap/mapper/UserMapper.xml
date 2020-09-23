@@ -15,10 +15,18 @@
 		USER_ID = #{user_id} AND USER_PWD = #{user_pwd}
 	</select>
 	
+	<select id="test" resultType="String">
+	SELECT 
+		user_name
+	FROM 
+		new_table
+	WHERE 
+		user_no = 123
+	</select>
+	
 	<insert id="UserSignUp" parameterType="UserDTO" >
 	INSERT INTO 
 		USERINFO(
-		USER_NO,
 		USER_ID,
 		USER_PWD,
 		USER_EMAIL,
@@ -27,7 +35,6 @@
 		USER_INTEREST
 		
 		)VALUES(
-		USER_SEQ.NEXTVAL,
 		#{user_id},
 		#{user_pwd},
 		#{user_email},

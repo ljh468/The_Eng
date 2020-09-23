@@ -88,7 +88,7 @@ $('#complete').click(function() {
 	if( authCheck == 'Y') {
 		alert("회원 가입이 완료되었습니다. 가입하신 아이디/비밀번호로 로그인 해주세요.");
 		return true;
-	} else  ( authCheck == 'N'){
+	} else if( authCheck == 'N'){
 		alert("인증 번호가 다릅니다. 인증 번호를 확인해주세요.")
 		return false;
 	}

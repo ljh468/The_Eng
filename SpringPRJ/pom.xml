@@ -8,11 +8,10 @@
 	<packaging>war</packaging>
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>4.3.7.RELEASE</org.springframework-version>
+		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>2.11.0</log4j.version>
-
 	</properties>
 
 	<!-- 오라클에서 메이븐 저장소에 제공을 하고 있지 않기 때문에, 메이븐 사설 저장소 사용함 -->
@@ -25,6 +24,23 @@
 	</repositories>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.12.1</version>
+		</dependency>
+		<!-- MongoDB 연동을 위한 Driver 파일 다운로드 -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.11.1</version>
+		</dependency>
+		<!-- MongoDB와 스프링의 연동을 위해 추가 -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.9.11.RELEASE</version>
+		</dependency>
 		<!--mail -->
 		<dependency>
 		<groupId>javax.mail</groupId>
@@ -139,6 +155,35 @@
 			<version>8.0.19</version>
 		</dependency>
 
+		<!-- NLP -->
+		<dependency>
+		    <groupId>edu.stanford.nlp</groupId>
+		    <artifactId>stanford-corenlp</artifactId>
+		    <version>4.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>edu.stanford.nlp</groupId>
+		    <artifactId>stanford-corenlp</artifactId>
+		    <version>4.0.0</version>
+		    <classifier>models</classifier>
+		</dependency>
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20190722</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.11.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.10.2</version>
+		</dependency>
 		<!-- 오라클 DBCP 관리를 위한 c3p0 -->
 		<dependency>
 			<groupId>c3p0</groupId>

@@ -30,4 +30,6 @@ public interface IUserMapper {
 
 	int setUserCorrection(UserDTO uDTO);
 
+	String test();
+
 }
