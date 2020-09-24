@@ -81,4 +81,9 @@ public class UserService implements IUserService {
 		return userMapper.updateInterest(uDTO);
 
 	}
+
+	@Override
+	public String test() {
+		return userMapper.test();
+	}
 }

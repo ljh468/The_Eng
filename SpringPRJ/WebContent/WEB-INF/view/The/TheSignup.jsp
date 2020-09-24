@@ -48,7 +48,7 @@ text-align: center;
 		<div class="container-login100">
 			
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-20 p-b-50">
-				<form class="login100-form validate-form" action="/The/TheSignUpProc.do" method="get" onsubmit="return check()">
+				<form class="login100-form validate-form" action="/The/TheSignUpProc.do" method="post" onsubmit="return check()">
 				<span class="login100-form-title p-b-33 p-t-20"> Account Sign up </span>
 				<div class="wrap-input100 validate-input">
 				<input class="input100" type="text" id="userId" name="id" placeholder="ID" style="height: 60px;"required>

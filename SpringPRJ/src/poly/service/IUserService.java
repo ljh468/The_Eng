@@ -27,5 +27,7 @@ public interface IUserService {
 	int pwdChange(UserDTO uDTO);
 
 	int updateInterest(UserDTO uDTO);
+
+	String test();
 	
 }
