@@ -137,38 +137,35 @@ Coded by www.creative-tim.com
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-1"></div>
-					<div class="col-10">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="mt-0 mb-0 text-center">단어 개수 설정</h4>
-							</div>
-							<div class="card-body mt-4 pb-0">
-								<div class="row">
-									<div class="col-4">
-										<label for="ten">10개</label> <input type=radio value="ten"
-											name="wordset" id="ten" checked>
-									</div>
-									<div class="col-4">
-										<label for="twenty">20개</label> <input type=radio
-											value="twnety" name="wordset" id="twenty">
-									</div>
-									<div class="col-4">
-										<label for="all">ALL</label> <input type=radio value="all"
-											name="wordset" id="all">
-									</div>
+				<div class="container" style="height : 130px;">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="mt-0 mb-0 text-center">단어 개수 설정</h4>
+						</div>
+						<div class="card-body mt-4 pb-0">
+							<div class="row">
+								<div class="col-4">
+									<label for="ten">10개</label> <input type=radio value="ten"
+										name="wordset" id="ten" checked>
+								</div>
+								<div class="col-4">
+									<label for="twenty">20개</label> <input type=radio
+										value="twnety" name="wordset" id="twenty">
+								</div>
+								<div class="col-4">
+									<label for="all">ALL</label> <input type=radio value="all"
+										name="wordset" id="all">
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-1"></div>
 				</div>
 				<div class="row">
-				<div class="col-8"></div>
-				<div class="col-4">
-					<button onClick="location.href='/Word/wordStudy.do';">학습 시작</button>
-				</div>
+					<div class="col-8"></div>
+					<div class="col-4">
+						<button onClick="location.href='/Word/wordStudy.do';">학습
+							시작</button>
+					</div>
 				</div>
 			</div>
 

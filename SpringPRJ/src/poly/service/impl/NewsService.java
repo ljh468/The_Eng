@@ -3,6 +3,7 @@ package poly.service.impl;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import poly.dto.NewsDTO;
@@ -44,7 +45,7 @@ public class NewsService implements INewsService {
 	}
 
 	@Override
-	// @Scheduled(cron="0 0 7 ? * *")
+	@Scheduled(cron="0 0 7 ? * *")
 	public void scheduleCrawl() throws Exception{
 		int res = 0;
 
