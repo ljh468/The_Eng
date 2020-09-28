@@ -172,6 +172,7 @@
 		    <artifactId>json</artifactId>
 		    <version>20190722</version>
 		</dependency>
+<<<<<<< HEAD
 		
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -179,6 +180,8 @@
 			<version>3.11.1</version>
 		</dependency>
 		
+=======
+>>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
@@ -201,6 +204,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
 		</dependency>
 	</dependencies>
 

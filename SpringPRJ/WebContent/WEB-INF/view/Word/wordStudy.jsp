@@ -77,10 +77,9 @@ Coded by www.creative-tim.com
 }
 
 .star {
-	
 	visibility: hidden;
 	font-size: 30px;
-	height:50px;
+	height: 50px;
 	cursor: pointer;
 	color: rgb(245, 230, 66);
 }
@@ -142,47 +141,48 @@ Coded by www.creative-tim.com
 
 
 			<div class="content">
-
 				<div class="container mb-3 ">
-					<div class="card" >
-					<div class="card-header pt-0">
-					<input class="star mr-3 mt-1 float-right" id="star" type="checkbox">
-					</div>
-					<div onclick="flip(event)">
-						<div class="front">
-						
-							<h3 class="text-center" style="position:fixed; top:40%; margin: auto;">뜻asfafafaaafasdfasdfasdfadsfasfds</h3>
-							<p class="text-center" style="position:fixed; bottom: 0;">클릭해서 확인하세요</p>
+					<div class="card" onclick="flip(event)">
+						<div class="card-header pt-0">
+							<input class="star mr-3 mt-1 float-right" id="star"
+								type="checkbox">
 						</div>
-						<div class="back">
-						
-							<h3 class="text-center" style="margin-top: 180px;">단어</h3>
-							<p class="text-center" style="margin-top: 100px;"></p>
+						<div onclick="flip(event)">
+							<div class="front">
+								<h3 class="text-center" style="margin-top: 150px;">도전</h3>
+								<p class="text-center" style="margin-top: 100px;">클릭해서 확인하세요</p>
+							</div>
+							<div class="back">
+								<h3 class="text-center" style="margin-top: 150px;">challenge</h3>
+								<p class="text-center" style="margin-top: 100px;"></p>
+							</div>
 						</div>
-					</div>
 					</div>
 				</div>
+				<div class="container" style="height: 200px;">
+					<div class="card" style="height: 100px;">
+						<div class="row">
+							<div class="col-6 mt-4">
+								<a href="#"><h1 class="text-success text-center">
+										<i class="nc-icon nc-satisfied"></i>
+									</h1></a>
+							</div>
 
-				<div class="card" style="height: 100px;">
+							<div class="col-6 mt-4">
+								<a href="#"><h1 class="text-danger text-center">
+										<i class="nc-icon nc-simple-remove"></i>
+									</h1></a>
+							</div>
+						</div>
+					</div>
+
+
 					<div class="row">
-						<div class="col-6 mt-4">
-							<a href="#"><h1 class="text-success text-center">
-									<i class="nc-icon nc-satisfied"></i>
-								</h1></a>
+						<div class="col-8"></div>
+						<div class="col-4">
+							<button onClick="location.href='/Word/wordResult.do';">학습
+								결과</button>
 						</div>
-
-						<div class="col-6 mt-4">
-							<a href="#"><h1 class="text-danger text-center">
-									<i class="nc-icon nc-simple-remove"></i>
-								</h1></a>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-8"></div>
-					<div class="col-4">
-						<button onClick="location.href='/Word/wordResult.do';">학습 결과</button>
 					</div>
 				</div>
 			</div>

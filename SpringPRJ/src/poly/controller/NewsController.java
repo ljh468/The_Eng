@@ -12,7 +12,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.stanford.nlp.pipeline.CoreSentence;
+<<<<<<< HEAD
 import poly.dto.NewsDTO;
+=======
+import poly.dto.MongoNewsDTO;
+import poly.dto.NewsDTO;
+import poly.persistance.mongo.IMongoTestMapper;
+>>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 import poly.service.INewsService;
 import poly.util.NLPUtil;
 import poly.util.WebCrawler;
@@ -25,6 +31,12 @@ public class NewsController {
 	@Resource(name = "NewsService") 
 	private INewsService newsService;
 	
+<<<<<<< HEAD
+=======
+	@Resource(name = "MongoTestMapper")
+	private IMongoTestMapper mongoTestMapper;
+	
+>>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 	// 수동으로 웹크롤링 및 저장
 	@RequestMapping(value = "/saveNews")
 	public String saveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model)
@@ -112,6 +124,7 @@ public class NewsController {
 		nDTO = newsService.getNewsInfoFromDB(nDTO);
 		
 		Iterator<CoreSentence> it = NLPUtil.sentence(nDTO.getNews_contents());
+<<<<<<< HEAD
 		
 		while(it.hasNext()) {
 			
@@ -124,6 +137,22 @@ public class NewsController {
 			
 		}
 		
+=======
+		MongoNewsDTO mnDTO = new MongoNewsDTO(it);
+		mongoTestMapper.insert(mnDTO);
+		
+//		while(it.hasNext()) {
+//			
+//			CoreSentence sent = it.next();
+//			
+//			log.info(sent.text());
+//			log.info(sent.tokens().get(0).originalText());
+//			log.info(sent.tokens().get(0).index());
+//			log.info(sent.lemmas());
+//			
+//		}
+//		
+>>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 		log.info(this.getClass().getName() + ".getNewsInfoFromDB End!");
 		
 		return "/viewNews";

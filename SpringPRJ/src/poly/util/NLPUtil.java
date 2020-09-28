@@ -56,9 +56,15 @@ public class NLPUtil {
 			CoreSentence sent = it.next();
 			System.out.println(sent.text());
 			// 단어 토큰(어절별로 나눈 리스트)
+<<<<<<< HEAD
 			// 오리지날 텍스트 = 원래 단어
 			System.out.println(sent.tokens().get(0).originalText());
 			// 
+=======
+			
+			System.out.println(sent.tokens().get(0).originalText());
+			// 오리지날 텍스트 = 원래 단어 
+>>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 			System.out.println(sent.tokens().get(0).index());
 			// 단어 원형
 			System.out.println(sent.lemmas());
