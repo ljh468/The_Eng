@@ -15,6 +15,7 @@ import poly.dto.UserDTO;
 import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.IUserService;
+import poly.util.CmmUtil;
 import poly.util.EncryptUtil;
 
 @Controller
@@ -299,42 +300,48 @@ public class MypageContorller {
 		   }
 
 		   @RequestMapping(value = "/Mypage/interestSettingProc")
-		   public String interestSettingProc(HttpSession session, HttpServletRequest request, Model model) {
+			public String interestSettingProc(HttpSession session, HttpServletRequest request, Model model) {
 
-		      log.info("/Mypage/passWordChangeProc 시작");
+				log.info("/Mypage/interestSettingProc 시작");
+				
+				String user_id =(String) session.getAttribute("user_id");
+				String[] user_interest = request.getParameterValues("interest");
+				log.info("user_id :" + user_id);
+				log.info("user_interest :" + user_interest);
+				
+				String interests = "";
+				
+				if(user_interest != null) {
+					interests = String.join(",", user_interest);
+					log.info("interest : " + interests);
+				} else {
+					CmmUtil.nvl(interests);
+				}
+				
+				UserDTO uDTO = new UserDTO();
+				log.info("uDTO.set 시작");
+				uDTO.setUser_id(user_id);
+				uDTO.setUser_interest(interests);
+				log.info("uDTO.set 종료");
+				
+				int res = userService.updateInterest(uDTO);
+				
+				String msg;
+				String url = "/Setting/TheMypage.do";
 
-		      String user_id = (String) session.getAttribute("user_id");
-		      String[] user_interest = request.getParameterValues("interest");
-		      log.info("user_id :" + user_id);
-		      log.info("user_pwd :" + user_interest);
+				if (res > 0) {
+					msg = "관심분야 수정에 성공했습니다.";
+				} else {
+					msg = "관심분야 수정에 실패했습니다. 고객센터에 문의해주세요.";
+				}
 
-		      String interests = String.join(",", user_interest);
-		      log.info("interest : " + interests);
+				log.info("model.addAttribute 시작");
+				model.addAttribute("msg", msg);
+				model.addAttribute("url", url);
+				log.info("model.addAttribute 종료");
 
-		      UserDTO uDTO = new UserDTO();
-		      log.info("uDTO.set 시작");
-		      uDTO.setUser_id(user_id);
-		      uDTO.setUser_interest(interests);
-		      log.info("uDTO.set 종료");
+				log.info("/Mypage/interestSettingProc 종료");
 
-		      int res = userService.updateInterest(uDTO);
-
-		      String msg;
-		      String url = "/Setting/TheMypage.do";
-
-		      if (res > 0) {
-		         msg = "관심분야 수정에 성공했습니다.";
-		      } else {
-		         msg = "관심분야 수정에 실패했습니다. 고객센터에 문의해주세요.";
-		      }
-
-		      log.info("model.addAttribute 시작");
-		      model.addAttribute("msg", msg);
-		      model.addAttribute("url", url);
-		      log.info("model.addAttribute 종료");
-
-		      log.info("/Mypage/passWordChangeProc 종료");
-
-		      return "/redirect";
-	}
+				return "/redirect";
+		}
 }

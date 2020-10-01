@@ -61,69 +61,6 @@ form {
 		<div class="container-login100">
 
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-20 p-b-50">
-<<<<<<< HEAD
-				<form class="login100-form validate-form" action="/The/TheSignUpProc.do" method="post" onsubmit="return check()">
-				<span class="login100-form-title p-b-33 p-t-20"> Account Sign up </span>
-				<div class="wrap-input100 validate-input">
-				<input class="input100" type="text" id="userId" name="id" placeholder="ID" style="height: 60px;"required>
-				<span class="focus-input100-1"></span>
-				<span class="focus-input100-2"></span>
-				</div>
-				<span class="msg">사용하실 아이디를 입력하세요</span><br>
-				
-				<div class="wrap-input100 validate-input">
-				<input type="password" name="pwd" id="password_1" class="pw input100 m-b-5" placeholder="8~15자 영문,숫자,특수문자" style="height: 60px;" required>
-				<span class="focus-input100-1"></span>
-				<span class="focus-input100-2"></span>
-				<br>
-				</div>
-				<div class="wrap-input100 validate-input">
-				<input type="password" id="password_2" class="pw input100 m-b-5" placeholder="비밀번호 확인" style="height: 60px;" required>
-				<span class="focus-input100-1"></span>
-				<span class="focus-input100-2"></span>
-				<br>
-				</div>
-				<span id="alert-success" style="display: none; color: #00f;">비밀번호가 일치합니다.</span>
-				<span id="alert-danger" style="display: none; color:#f00; ">비밀번호가 일치하지 않습니다.</span>
-				<br>
-				<div class="wrap-input100 validate-input">
-				<input class="input100" type="email" id="userEmail" name="email" placeholder="email" style="height: 60px;" required>
-				<span class="focus-input100-1"></span>
-				<span class="focus-input100-2"></span>
-				<span class="msg2">사용하실 이메일을 입력하세요</span>
-				</div>
-				<br>
-				<div style="border:1px">Age</div>
-				<select  class="wrap-input100 m-b-5" name="age" style=" height: 27px;">
-				<option value="10">10대</option>
-				<option value="20" selected>20대</option>
-				<option value="30">30대</option>
-				<option value="40">40대</option>
-				<option value="50">50대</option>
-				<option value="60">60대</option>
-				</select><br> 
-				
-				<div>Gender</div>
-				<div class="wrap-input100 m-b-5" style="height: 30px;">
-				<input id="male" type="radio" name="gender" value="m" checked>
-				<label for="male">male</label>&nbsp;&nbsp;&nbsp;
-				<input id="female" type="radio" name="gender" value="w">
-				<label for="female">female</label><br>
-				</div>
-				
-				<div>Interest</div>
-				<div class="wrap-input100 p-b-90">
-				<input type="checkbox" name="interest" id="interest1" value="toeic">
-				<label for="interest1">토익</label><br> 
-				<input type="checkbox" name="interest" id="interest2" value="academic">
-				<label for="interest2">학술/논문</label><br>
-				<input type="checkbox" name="interest" id="interest3" value="business">
-				<label for="interest3">비즈니스</label><br>
-				</div>
-			<br>
-			<button id="btn" type="submit" class="alert-success login100-form-btn" style="height: 40px;">Sign Up</button>
-		</form>
-=======
 				<form class="login100-form validate-form"
 					action="/The/TheSignUpProc.do" method="post"
 					onsubmit="return check()">
@@ -196,7 +133,6 @@ form {
 						class="alert-success login100-form-btn" style="height: 40px;">Sign
 						Up</button>
 				</form>
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 
 			</div>
 		</div>

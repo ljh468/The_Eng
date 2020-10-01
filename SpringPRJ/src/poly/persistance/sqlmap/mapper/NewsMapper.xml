@@ -23,12 +23,8 @@
 	<select id="getNewsInfoFromDB" resultType="NewsDTO">
 	SELECT * 
 	FROM 
-		(SELECT * FROM THE.NEWS_INFO WHERE NEWS_NAME='yonhap')c
-<<<<<<< HEAD
-	ORDER BY NEWS_INSERTDATE
-=======
+		(SELECT * FROM THE.NEWS_INFO WHERE NEWS_NAME=#{news_name})c
 	ORDER BY NEWS_INSERTDATE DESC
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 	limit 1;
 	</select>
 </mapper>

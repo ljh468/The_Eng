@@ -3,10 +3,7 @@ package poly.service.impl;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-<<<<<<< HEAD
-=======
 import org.springframework.scheduling.annotation.Scheduled;
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 import org.springframework.stereotype.Service;
 
 import poly.dto.NewsDTO;
@@ -48,11 +45,7 @@ public class NewsService implements INewsService {
 	}
 
 	@Override
-<<<<<<< HEAD
-	// @Scheduled(cron="0 0 7 ? * *")
-=======
 	@Scheduled(cron="0 0 7 ? * *")
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 	public void scheduleCrawl() throws Exception{
 		int res = 0;
 
@@ -70,7 +63,7 @@ public class NewsService implements INewsService {
 		log.info(this.getClass().getName() + "crawlHerald() end");
 		
 		log.info(this.getClass().getName() + "crawlbbc() start");
-		String[] crawlRes1 = WebCrawler.crawlbbc();
+		String[] crawlRes1 = WebCrawler.crawluk();
 		String title1 = crawlRes1[0];
 		String inputText1 = crawlRes1[1];
 		String newsUrl1 = crawlRes1[2];

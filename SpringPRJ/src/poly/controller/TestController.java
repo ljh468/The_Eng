@@ -1,13 +1,10 @@
 package poly.controller;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,16 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-<<<<<<< HEAD
-import poly.service.IMailService;
-import poly.service.INewsService;
-import poly.service.IUserService;
-import poly.util.NLPUtil;
-
-@Controller
-public class TestController {
-	
-=======
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -38,7 +25,6 @@ import poly.service.IUserService;
 @Controller
 public class TestController {
 
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 	@Resource(name = "UserService")
 	IUserService userService;
 
@@ -48,40 +34,6 @@ public class TestController {
 	@Resource(name = "NewsService")
 	INewsService newsService;
 
-<<<<<<< HEAD
-	@RequestMapping(value = "test", produces = "application/json; charset=UTF8")
-	@ResponseBody
-	public String test(HttpServletRequest request, Model model, HttpSession session) {
-		NLPUtil.test();
-		String res = userService.test();
-		return res;
-	}
-	
-	// 템플릿
-		@RequestMapping(value = "template")
-		public String template() {
-			return "/template";
-		}
-		
-	// ajax test
-		@RequestMapping(value = "/hello/text")
-		public String Hello() {
-
-			return "/hello";
-		}
-
-		@ResponseBody
-		@RequestMapping(value = "/hello/hello")
-		public boolean Hello(HttpServletRequest request) {
-			String value = request.getParameter("id");
-
-			if (value.equals("헬로")) {
-				return true;
-			}
-
-			return false;
-		}
-=======
 	@Resource(name = "MongoTestMapper")
 	IMongoTestMapper mongoTestMapper;
 
@@ -178,5 +130,4 @@ public class TestController {
 
 		return false;
 	}
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 }

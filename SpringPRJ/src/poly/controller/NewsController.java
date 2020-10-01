@@ -12,13 +12,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.stanford.nlp.pipeline.CoreSentence;
-<<<<<<< HEAD
-import poly.dto.NewsDTO;
-=======
 import poly.dto.MongoNewsDTO;
 import poly.dto.NewsDTO;
 import poly.persistance.mongo.IMongoTestMapper;
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 import poly.service.INewsService;
 import poly.util.NLPUtil;
 import poly.util.WebCrawler;
@@ -31,12 +27,9 @@ public class NewsController {
 	@Resource(name = "NewsService") 
 	private INewsService newsService;
 	
-<<<<<<< HEAD
-=======
 	@Resource(name = "MongoTestMapper")
 	private IMongoTestMapper mongoTestMapper;
 	
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
 	// 수동으로 웹크롤링 및 저장
 	@RequestMapping(value = "/saveNews")
 	public String saveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model)
@@ -58,15 +51,15 @@ public class NewsController {
 		log.info(this.getClass().getName() + "crawlHerald() end");
 		crawlRes = null;
 		
-		// bbc 뉴스 크롤링
-		log.info(this.getClass().getName() + "crawlbbc() start");
-		String[] crawlRes1 = WebCrawler.crawlbbc();
+		// UK news 뉴스 크롤링
+		log.info(this.getClass().getName() + "crawluk() start");
+		String[] crawlRes1 = WebCrawler.crawluk();
 		String title1 = crawlRes1[0];
 		String inputText1 = crawlRes1[1];
 		String newsUrl1 = crawlRes1[2];
-		String newsname1 = "bbc";
-		log.info("Bbc_title : " + title);
-		log.info("Bbc_newsUrl : " + newsUrl);
+		String newsname1 = "uk";
+		log.info("Bbc_title1 : " + title1);
+		log.info("Bbc_newsUrl1 : " + newsUrl1);
 		
 		res += newsService.SaveNews(title1, inputText1, newsUrl1, newsname1);
 		log.info(this.getClass().getName() + "crawlbbc() end");
@@ -79,8 +72,8 @@ public class NewsController {
 		String inputText2 = crawlRes2[1];
 		String newsUrl2 = crawlRes2[2];
 		String newsname2 = "times";
-		log.info("times_title : " + title);
-		log.info("times_newsUrl : " + newsUrl);
+		log.info("times_title2 : " + title2);
+		log.info("times_newsUrl2 : " + newsUrl2);
 		
 		res += newsService.SaveNews(title2, inputText2, newsUrl2, newsname2);
 		log.info(this.getClass().getName() + "crawltimes() end");
@@ -93,8 +86,8 @@ public class NewsController {
 		String inputText3 = crawlRes3[1];
 		String newsUrl3 = crawlRes3[2];
 		String newsname3 = "yonhap";
-		log.info("yonhap_title : " + title);
-		log.info("yonhap_newsUrl : " + newsUrl);
+		log.info("yonhap_title3 : " + title3);
+		log.info("yonhap_newsUrl3 : " + newsUrl3);
 		
 		res += newsService.SaveNews(title3, inputText3, newsUrl3, newsname3);
 		log.info(this.getClass().getName() + "crawlyonhap()) end");
@@ -115,44 +108,28 @@ public class NewsController {
 		
 		log.info(this.getClass().getName() + ".getNewsInfoFromDB Start!");
 		
-		String news_name = "yonhap";
+		String news_name = "herald";
 		
 		NewsDTO nDTO = new NewsDTO();
-		
-		nDTO.setNews_no(news_name);
+		nDTO.setNews_name(news_name);
 		
 		nDTO = newsService.getNewsInfoFromDB(nDTO);
 		
 		Iterator<CoreSentence> it = NLPUtil.sentence(nDTO.getNews_contents());
-<<<<<<< HEAD
-		
+		MongoNewsDTO mnDTO = new MongoNewsDTO(it);
+		mongoTestMapper.insert(mnDTO);
 		while(it.hasNext()) {
 			
 			CoreSentence sent = it.next();
 			
-			log.info(sent.text());
-			log.info(sent.tokens().get(0).originalText());
-			log.info(sent.tokens().get(0).index());
-			log.info(sent.lemmas());
+			log.info(sent.text()); // 문장
+			log.info(sent.tokens().get(0).originalText()); // 문장 어절
+			log.info(sent.tokens().get(0).index()); // 인덱스
+			log.info(sent.lemmas()); // 문장 어절 동사원형
 			
 		}
 		
-=======
-		MongoNewsDTO mnDTO = new MongoNewsDTO(it);
-		mongoTestMapper.insert(mnDTO);
-		
-//		while(it.hasNext()) {
-//			
-//			CoreSentence sent = it.next();
-//			
-//			log.info(sent.text());
-//			log.info(sent.tokens().get(0).originalText());
-//			log.info(sent.tokens().get(0).index());
-//			log.info(sent.lemmas());
-//			
-//		}
-//		
->>>>>>> 0412320d6ce4091245e2ee8708b77cacfd546164
+		NewDTO
 		log.info(this.getClass().getName() + ".getNewsInfoFromDB End!");
 		
 		return "/viewNews";
