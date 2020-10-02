@@ -6,16 +6,19 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import poly.dto.NewsDTO;
+import poly.dto.MongoNewsDTO;
+import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.IUserService;
 
 @Controller
 public class TodayController {
+
 	private Logger log = Logger.getLogger(this.getClass());
 
 	@Resource(name = "UserService")
@@ -26,65 +29,161 @@ public class TodayController {
 
 	@Resource(name = "NewsService")
 	INewsService newsService;
-	
-	
-		// 오늘의학습
-		@RequestMapping(value = "Today/TodayMain")
-		public String TodayMain(HttpSession session, ModelMap model) {
-			String user_id = (String) session.getAttribute("user_id");
-			if (user_id == null) {
-				return "/The/TheLogin";
-			}
 
-			model.addAttribute("user_id", user_id);
-			return "/Today/TodayMain";
+	@Resource(name = "MongoTestMapper")
+	IMongoTestMapper mongoTestMapper;
+
+	// 오늘의학습
+	@RequestMapping(value = "Today/TodayMain")
+	public String TodayMain(HttpSession session, ModelMap model) {
+		String user_id = (String) session.getAttribute("user_id");
+		if (user_id == null) {
+			return "/The/TheLogin";
 		}
 
-		@RequestMapping(value = "Today/TodayNews")
-		public String TodayNews() {
+		model.addAttribute("user_id", user_id);
+		return "/Today/TodayMain";
+	}
 
-			log.info("TodaySentence 시작");
+	@RequestMapping(value = "Today/TodayMainNews")
+	public String TodayHeraldNews(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+
+		String news_name = request.getParameter("news_name");
+
+		log.info("TodaySentence 시작");
+		log.info("heraldQuiz start!");
+		// name이 gildong인 데이터를 query변수에 대입
+
+		if (news_name.equals("herald")) {
+
+			MongoNewsDTO rDTO = mongoTestMapper.getHeraldNews();
+
+			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
+			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
+			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
+			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
+			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
+			log.info("rDTO.getTokens : " + rDTO.getTokens());
+			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
+			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
+
+			log.info("heraldQuiz end!");
+
+			model.addAttribute("news_name", "The Korea Herald");
+			model.addAttribute("news_title", rDTO.getNews_title());
+			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
+			model.addAttribute("insertdate", rDTO.getInsertDate());
+
 			log.info("TodaySentence 종료 ");
 
-			return "/Today/TodayNews";
-		}
+			return "Today/TodayMainNews";
+		} else if (news_name.equals("reuters")) {
 
-		@RequestMapping(value = "Today/TodaySentence")
-		public String TodaySentence() {
+			MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
 
-			log.info("TodaySentence 시작");
+			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
+			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
+			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
+			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
+			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
+			log.info("rDTO.getTokens : " + rDTO.getTokens());
+			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
+			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
+
+			log.info("heraldQuiz end!");
+
+			model.addAttribute("news_name", "Reuters News");
+			model.addAttribute("news_title", rDTO.getNews_title());
+			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
+			model.addAttribute("insertdate", rDTO.getInsertDate());
+
 			log.info("TodaySentence 종료 ");
 
-			return "/Today/TodaySentence";
-		}
+			return "Today/TodayMainNews";
+		} else if (news_name.equals("times")) {
+			log.info("timesQuiz start!");
+			MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
 
-		@RequestMapping(value = "Today/TodayExam")
-		public String TodayExam() {
+			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
+			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
+			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
+			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
+			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
+			log.info("rDTO.getTokens : " + rDTO.getTokens());
+			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
+			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
 
-			log.info("TodayExam 시작");
-			log.info("TodayExam 종료");
+			log.info("timesQuiz end!");
 
-			return "/Today/TodayExam";
-		}
+			model.addAttribute("news_name", "The Korea Times");
+			model.addAttribute("news_title", rDTO.getNews_title());
+			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
+			model.addAttribute("insertdate", rDTO.getInsertDate());
 
-		@RequestMapping(value = "Today/TodayRecord")
-		public String TodayRecord() {
+			log.info("TodaySentence 종료 ");
 
-			log.info("TodayRecord 시작");
-			log.info("TodayRecord 종료");
+			return "Today/TodayMainNews";
+		} else if (news_name.equals("yonhap")) {
+			log.info("yonhapQuiz start!");
+			MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
 
-			return "/Today/TodayRecord";
-		}
+			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
+			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
+			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
+			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
+			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
+			log.info("rDTO.getTokens : " + rDTO.getTokens());
+			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
+			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
 
-		@RequestMapping(value = "Today/TodayResult")
-		public String TodayResult() {
+			log.info("yonhapQuiz end!");
 
-			log.info("TodayResult 시작");
-			log.info("TodayResult 종료");
+			model.addAttribute("news_name", "Yonhap News Agency");
+			model.addAttribute("news_title", rDTO.getNews_title());
+			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
+			model.addAttribute("insertdate", rDTO.getInsertDate());
 
-			return "/Today/TodayResult";
-		}
+			log.info("TodaySentence 종료 ");
 
-		
-		
+			return "Today/TodayMainNews";
+		} else
+			return null;
+	}
+
+	@RequestMapping(value = "Today/TodaySentence")
+	public String TodaySentence() {
+
+		log.info("TodaySentence 시작");
+		log.info("TodaySentence 종료 ");
+
+		return "/Today/TodaySentence";
+	}
+
+	@RequestMapping(value = "Today/TodayExam")
+	public String TodayExam() {
+
+		log.info("TodayExam 시작");
+		log.info("TodayExam 종료");
+
+		return "/Today/TodayExam";
+	}
+
+	@RequestMapping(value = "Today/TodayRecord")
+	public String TodayRecord() {
+
+		log.info("TodayRecord 시작");
+		log.info("TodayRecord 종료");
+
+		return "/Today/TodayRecord";
+	}
+
+	@RequestMapping(value = "Today/TodayResult")
+	public String TodayResult() {
+
+		log.info("TodayResult 시작");
+		log.info("TodayResult 종료");
+
+		return "/Today/TodayResult";
+	}
+
 }

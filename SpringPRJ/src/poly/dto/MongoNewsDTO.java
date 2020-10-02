@@ -5,8 +5,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreSentence;
+import static poly.util.CmmUtil.nvl;
 
 public class MongoNewsDTO {
 
@@ -21,11 +25,27 @@ public class MongoNewsDTO {
 	
 	public MongoNewsDTO() {
 		this.insertDate = new Date();
+		this.news_url = new String();
+		this.news_name = new String();
+		this.news_title = new String();		
 		this.original_sentences = new ArrayList<>();
 		this.lemmas = new ArrayList<>();
 		this.tokens = new ArrayList<>();
 		this.translation = new ArrayList<>();
 	}
+	
+	@SuppressWarnings("unchecked")
+	   public MongoNewsDTO(DBObject firstNews) {
+			
+		  this.insertDate = (Date) firstNews.get("insertDate");
+		  this.news_url = nvl((String) firstNews.get("news_url"));
+	      this.news_title = nvl((String) firstNews.get("news_title"));
+	      this.news_name = nvl((String) firstNews.get("news_name"));
+	      this.original_sentences = (List<String>) firstNews.get("original_sentences"); 
+	      this.tokens = (List<List<String>>) firstNews.get("tokens");
+	      this.lemmas = (List<List<String>>) firstNews.get("lemmas");
+	      this.translation = (List<String>) firstNews.get("translation");
+	   }
 	
 	public MongoNewsDTO(Iterator<CoreSentence> it) {
 		this();
@@ -51,7 +71,9 @@ public class MongoNewsDTO {
 			
 		}
 	}
-
+	
+	
+	
 	public Date getInsertDate() {
 		return insertDate;
 	}

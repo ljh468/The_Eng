@@ -12,8 +12,7 @@ public class NewsDTO {
 	private String news_insertdate; // 등록한 날짜
 	private String news_url; // 웹크롤링한 뉴스 url
 	private String news_name; // 데이터를 수집한 뉴스신문사
-	
-	
+
 
 	public String getNews_no() {
 		return news_no;
@@ -62,6 +61,8 @@ public class NewsDTO {
 	public void setNews_name(String news_name) {
 		this.news_name = news_name;
 	}
+
+	
 
 	
 

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+
+	String title = (String)request.getAttribute("news_title");
+	
+%>
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -119,7 +125,7 @@ Coded by www.creative-tim.com
 						<h6 class="m-3" style="color:orange">Today news</h6>
 						
 						<div class="m-3">
-						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
+						<h3 class="card-text"><b><%=title %></b></h3>
 						<div class="write-name">
 						<h6 style="color:grey">Writer's name</h6>
 						</div>

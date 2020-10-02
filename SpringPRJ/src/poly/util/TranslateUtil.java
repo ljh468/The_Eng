@@ -5,41 +5,56 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import poly.dto.NewsDTO;
+
+
+
 public class TranslateUtil {
-	
-	
-	try
-	{	
-		String apikey = "90ca526dfb732b87fc0d04f830e4b867"; // REST API 키
-		String text = URLEncoder.encode("hello", "UTF-8"); // 번역될 문장
-		String postParam = "src_lang=en&target_lang=kr$query="+text;
-		String apiURL = "https://kapi.kakao.com/v2/translation/translate?"+postParam;
+	public static void main(String[] args) throws Exception {
 		
-		URL url = new URL(apiURL);
-		HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		
+		System.out.println(kakaotrans("my name is lee jae hoon"));
+
+	}
+	
+	public static String kakaotrans(String sentence) throws Exception {
+
+		String apikey = "90ca526dfb732b87fc0d04f830e4b867"; // REST API 키
+
+		String postParams = "src_lang=en&target_lang=kr&query=";
+		String apiURL = "https://dapi.kakao.com/v2/translation/translate?" + postParams;
+
+		
+		String sent = URLEncoder.encode(sentence, "UTF-8");
+		String queryURL = apiURL + sent;
+		URL url = new URL(queryURL);
+
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		String userCredentials = apikey;
-		String basicAuth = "KakaoAK" + userCredentials;
+		String basicAuth = "KakaoAK " + userCredentials;
 		con.setRequestProperty("Authorization", basicAuth);
 		con.setRequestMethod("GET");
-		con.setRequestProperty("Content-Type", "app;lication/x-www-form-urlencoded");
+		con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		con.setRequestProperty("charset", "utf-8");
-		
 		con.setUseCaches(false);
 		con.setDoInput(true);
 		con.setDoOutput(true);
 		int responseCode = con.getResponseCode();
-		System.out.println("responseCode : " + responseCode);
+		System.out.println("response code : " + responseCode);
+
 		BufferedReader br;
-		if(responseCode==200) {
+		if (responseCode == 200) {
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		} else {
+			br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 		}
-		else { // 에러발생
-			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		}
+
 		String inputLine;
 		StringBuffer res = new StringBuffer();
 		while ((inputLine = br.readLine()) != null) {
@@ -51,9 +66,6 @@ public class TranslateUtil {
 		String translated = ((JSONArray) json.getJSONArray("translated_text").get(0)).getString(0);
 
 		return translated;
-	}catch (Exception e)
-	{
-		System.out.println("translate 오류발생!!");
-		System.out.println(e);
+
 	}
 }

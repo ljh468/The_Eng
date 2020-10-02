@@ -23,8 +23,8 @@
 	<select id="getNewsInfoFromDB" resultType="NewsDTO">
 	SELECT * 
 	FROM 
-		THE.NEWS_INFO
+		(SELECT * FROM THE.NEWS_INFO WHERE NEWS_NAME=#{news_name})c
 	ORDER BY NEWS_INSERTDATE DESC
-	limit 4;
+	limit 1;
 	</select>
 </mapper>

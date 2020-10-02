@@ -1,11 +1,14 @@
 package poly.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import poly.dto.MongoNewsDTO;
 import poly.dto.NewsDTO;
 import poly.persistance.mapper.INewsMapper;
 import poly.service.INewsService;
@@ -63,7 +66,7 @@ public class NewsService implements INewsService {
 		log.info(this.getClass().getName() + "crawlHerald() end");
 		
 		log.info(this.getClass().getName() + "crawlbbc() start");
-		String[] crawlRes1 = WebCrawler.crawluk();
+		String[] crawlRes1 = WebCrawler.crawlreuters();
 		String title1 = crawlRes1[0];
 		String inputText1 = crawlRes1[1];
 		String newsUrl1 = crawlRes1[2];
@@ -98,10 +101,11 @@ public class NewsService implements INewsService {
 	
 	// DB에서 데이터 가져오기
 	@Override
-	public NewsDTO getNewsInfoFromDB(NewsDTO nDTO) {
+	public List<NewsDTO> getNewsInfoFromDB() {
 
-		return newsMapper.getNewsInfoFromDB(nDTO);
+		return newsMapper.getNewsInfoFromDB();
 	}
-
+	
+	
 	
 }

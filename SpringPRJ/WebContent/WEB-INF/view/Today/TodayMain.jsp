@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="poly.dto.News_NameDTO"%>
+
+<%
+	News_NameDTO nmDTO = new News_NameDTO();
+%>
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -77,19 +82,17 @@ Coded by www.creative-tim.com
 						</form>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a class="nav-link btn-magnify"
-								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
-									
-										<span class="d-lg-none d-md-block">Stats</span>
-									
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i> <span
+									class="d-lg-none d-md-block">Stats</span>
+
 							</a></li>
 							<li class="nav-item btn-rotate dropdown"><a
 								class="nav-link dropdown-toggle" href="http://example.com"
 								id="navbarDropdownMenuLink" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <i
-									class="nc-icon nc-bell-55"></i>
-									
-										<span class="d-lg-none d-md-block">Some Actions</span>
-									
+									class="nc-icon nc-bell-55"></i> <span
+									class="d-lg-none d-md-block">Some Actions</span>
+
 							</a>
 								<div class="dropdown-menu dropdown-menu-right"
 									aria-labelledby="navbarDropdownMenuLink">
@@ -100,16 +103,16 @@ Coded by www.creative-tim.com
 							<li class="nav-item"><a class="nav-link btn-rotate"
 								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
 
-										<span class="d-lg-none d-md-block">Account</span>
-									
+									<span class="d-lg-none d-md-block">Account</span>
+
 							</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 			<!-- End Navbar------------------------------------------------------------------ -->
-			
-			
+
+
 			<div class="content">
 				<div class="card">
 					<div class="card-header">
@@ -117,105 +120,142 @@ Coded by www.creative-tim.com
 					</div>
 					<hr>
 					<div class="card-body">
-						<a href="/Today/TodayNews.do" style="color:orange; font-size:15px">
-						<h5 class="card-text">Pros and Cons of 5G Technology</h5></a><br>
-						<div class="card-text" style="font-size:15px;">Self-driving cars, smart cities, fully connected homes, 
-						This is the future and it will 2 be powered by 5G.</div>
+						<a href="/Today/TodayNews.do"
+							style="color: orange; font-size: 15px">
+							<h5 class="card-text">Pros and Cons of 5G Technology</h5>
+						</a><br>
+						<div class="card-text" style="font-size: 15px;">Self-driving
+							cars, smart cities, fully connected homes, This is the future and
+							it will 2 be powered by 5G.</div>
 					</div>
 				</div>
-			
-			<div class="content">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="mt-0 mb-1 text-center">추천 뉴스</h4>
-					</div>
-						<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-						
-						  <ol class="carousel-indicators">
-						    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-						    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-						    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-						  </ol>
-						  
-						  <div class="carousel-inner">
-						    <div class="carousel-item active">
-						    <button type="button" onclick="location='/Today/TodayNews.do'">
-						      <img src="/resources/images/NewsLogo/BBC_Logo.jpg" style="border:0; outline:0;" class="d-block w-100 h-75" alt="#">
-						     </button>
-						      <div class="carousel-caption d-none d-md-block">
-						        <h5>First slide label</h5>
-						        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-						      </div>
-						    </div>
-						    
-						    <div class="carousel-item">
-						    <button type="button" onclick="location='/Today/TodayNews.do'">
-						      <img src="/resources/images/NewsLogo/TheNewyorkTimes_Logo.png" class="d-block w-100" alt="...">
-						     </button>
-						      <div class="carousel-caption d-none d-md-block">
-						        <h5>Second slide label</h5>
-						        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						      </div>
-						    </div>
-						    <div class="carousel-item">
-						    <button type="button" onclick="location='/Today/TodayNews.do'">
-						      <img src="/resources/images/NewsLogo/CNN_Logo.jpg" class="d-block w-100 h-75" alt="...">
-						    </button>
-						      <div class="carousel-caption d-none d-md-block">
-						        <h5>Third slide label</h5>
-						        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-						      </div>
-						    </div>
-						    
-						  </div>
-					  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					    <span class="sr-only">Previous</span>
-					  </a>
-					  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-					    <span class="sr-only">Next</span>
-					  </a>
-					</div>
-				</div>
-			</div>
 
-			<div class="card-body">
+				<div class="content">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="mt-0 mb-1 text-center">추천 뉴스</h4>
+						</div>
+						<div id="carouselExampleCaptions" class="carousel slide"
+							data-ride="carousel">
+
+							<ol class="carousel-indicators">
+								<li data-target="#carouselExampleCaptions" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+								<li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+							</ol>
+
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+								<form action="/Today/TodayMainNews.do">
+									<input type="hidden" name= "news_name" value="herald">
+									<button type="submit">
+
+										<img src="/resources/images/NewsLogo/BBC_Logo.jpg"
+											style="border: 0; outline: 0;" class="d-block w-100 h-75"
+											alt="#">
+									</button>
+								</form>	
+									<div class="carousel-caption d-none d-md-block">
+										<h5>First slide label</h5>
+										<p>Nulla vitae elit libero, a pharetra augue mollis
+											interdum.</p>
+									</div>
+								</div>
+								<div class="carousel-item">
+								
+								<form action="/Today/TodayMainNews.do">
+									<input type="hidden" name= "news_name" value="reuters">
+									<button type="submit">
+										<img src="/resources/images/NewsLogo/TheNewyorkTimes_Logo.png"
+											class="d-block w-100" alt="...">
+									</button>
+								</form>
+								
+								
+									<div class="carousel-caption d-none d-md-block">
+										<h5>Second slide label</h5>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing
+											elit.</p>
+									</div>
+								</div>
+								<div class="carousel-item">
+								
+								<form action="/Today/TodayMainNews.do">
+									<input type="hidden" name= "news_name" value="times">
+									<button type="submit">
+
+										<img src="/resources/images/NewsLogo/CNN_Logo.jpg"
+											class="d-block w-100 h-75" alt="...">
+											
+									</button>
+								</form>	
+								
+									<div class="carousel-caption d-none d-md-block">
+										<h5>Third slide label</h5>
+										<p>Praesent commodo cursus magna, vel scelerisque nisl
+											consectetur.</p>
+									</div>
+								</div>
+
+							</div>
+							<a class="carousel-control-prev" href="#carouselExampleCaptions"
+								role="button" data-slide="prev"> <span
+								class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+								class="sr-only">Previous</span>
+							</a> <a class="carousel-control-next" href="#carouselExampleCaptions"
+								role="button" data-slide="next"> <span
+								class="carousel-control-next-icon" aria-hidden="true"></span> <span
+								class="sr-only">Next</span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body"></div>
+				<div class="card border-secondary mb-3" style="max-width: 100%;">
+					<div class="card-header">The Korea Herald</div>
+					<div class="card-body text-secondary">
+						<a href="/Today/TodayNews.do" style="color: orange">
+							<h5 class="card-title">KAI to supply 2 more Charmsuri
+								impresses with...</h5>
+						</a>
+						<p class="card-text">Quick sample text to create the card
+							title and make up the body of the card's content.</p>
+					</div>
 				</div>
 				<div class="card border-secondary mb-3" style="max-width: 100%;">
-				  <div class="card-header">The Korea Herald</div>
-				  <div class="card-body text-secondary">
-				  <a href="/Today/TodayNews.do" style="color:orange">
-				    <h5 class="card-title">KAI to supply 2 more Charmsuri impresses with...</h5></a>
-				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
-				  </div>
+					<div class="card-header">BBC</div>
+					<div class="card-body text-secondary">
+						<a href="/Today/TodayNews.do" style="color: orange">
+							<h5 class="card-title">A new Neymar? PSG forward's</h5>
+						</a>
+						<p class="card-text">Quick sample text to create the card
+							title and make up the body of the card's content.</p>
+					</div>
 				</div>
 				<div class="card border-secondary mb-3" style="max-width: 100%;">
-				  <div class="card-header">BBC</div>
-				  <div class="card-body text-secondary">
-				  <a href="/Today/TodayNews.do" style="color:orange">
-				    <h5 class="card-title">A new Neymar? PSG forward's </h5></a>
-				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
-				  </div>
+					<div class="card-header">The Newyork Times</div>
+					<div class="card-body text-secondary">
+						<a href="/Today/TodayNews.do" style="color: orange">
+							<h5 class="card-title">South Korea tightens</h5>
+						</a>
+						<p class="card-text">Quick sample text to create the card
+							title and make up the body of the card's content.</p>
+					</div>
 				</div>
 				<div class="card border-secondary mb-3" style="max-width: 100%;">
-				  <div class="card-header">The Newyork Times</div>
-				  <div class="card-body text-secondary">
-				  <a href="/Today/TodayNews.do" style="color:orange">
-				    <h5 class="card-title">South Korea tightens </h5></a>
-				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
-				  </div>
-				</div>
-				<div class="card border-secondary mb-3" style="max-width: 100%;">
-				  <div class="card-header">CNN</div>
-				  <div class="card-body text-secondary">
-				  <a href="/Today/TodayNews.do" style="color:orange">
-				    <h5 class="card-title">Danger card title</h5></a>
-				    <p class="card-text">Quick sample text to create the card title and make up the body of the card's content.</p>
-				  </div>
+					<div class="card-header">CNN</div>
+					<div class="card-body text-secondary">
+						<a href="/Today/TodayNews.do" style="color: orange">
+							<h5 class="card-title">Danger card title</h5>
+						</a>
+						<p class="card-text">Quick sample text to create the card
+							title and make up the body of the card's content.</p>
+					</div>
 				</div>
 			</div>
-				<!-- 
+			<!-- 
 				<div class="card">
 				<div class="card-header">
 					<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
@@ -278,12 +318,12 @@ Coded by www.creative-tim.com
 									We are used to seeing the Brazil forward do impressice things...
 									</div>
  -->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -317,6 +357,11 @@ Coded by www.creative-tim.com
 
 			}
 
+		})
+
+		$("#harald").on('click', function() {
+		<% String herald = "herald";%>
+			
 		})
 	</script>
 </body>

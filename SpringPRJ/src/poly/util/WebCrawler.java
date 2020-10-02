@@ -72,11 +72,11 @@ public class WebCrawler {
 	/**
 	 *  uk영어 웹크롤링
 	 */
-	public static String[] crawluk() throws IOException {
+	public static String[] crawlreuters() throws IOException {
 		
 
 		// uk뉴스 사이트 (https:// 는 보안때문에 불가)
-		String url = "https://www.theuknews.com";
+		String url = "http://www.reuters.com";
 
 		// JSOUP 라이브러리를 통해 사이트에 접속되면, 그 사이트 전체의 HTML 소스를 저장할 변수
 		Document doc = null;
@@ -88,7 +88,7 @@ public class WebCrawler {
 
 		// 웹 페이지 전체 소스 중 일부 태그를 선택하기 위해 사용
 		// 메인페이지의 url을 가져오기 위함
-		Element element_urlGet = doc.select(".banner-section a").first();
+		Element element_urlGet = doc.select("#topStoryNuclear a").first();
 
 		// element_urlGet 소스에 href를 가져옴
 		String href = element_urlGet.attr("href");
@@ -100,7 +100,7 @@ public class WebCrawler {
 		doc = Jsoup.connect(url).get();
 
 		// 뉴스의 제목
-		Element element_title = doc.select(".banner-section h2").first();
+		Element element_title = doc.select(".ArticlePage-article-header-23J2O h1").first();
 		String news_title = CmmUtil.nvl(element_title.text().trim().toString());
 		System.out.println(news_title);
 		// <div class="view_tit_byline_l"><a
@@ -116,7 +116,7 @@ public class WebCrawler {
 //		// split으로 앞의 불필요한 문자들을 삭제 후 삽입할 것.
 
 		// <div class="view_con_t"> 뉴스의 내용
-		Elements element_contents = doc.select("div.banner-text p");
+		Elements element_contents = doc.select("div.ArticleBodyWrapper p");
 		String news_contents = CmmUtil.nvl(element_contents.next().text().trim().toString());
 		System.out.println(news_contents);
 		

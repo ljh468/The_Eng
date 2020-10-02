@@ -1,6 +1,7 @@
 package poly.controller;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ public class NewsController {
 	
 	@Resource(name = "MongoTestMapper")
 	private IMongoTestMapper mongoTestMapper;
+
 	
 	// 수동으로 웹크롤링 및 저장
 	@RequestMapping(value = "/saveNews")
@@ -51,18 +53,18 @@ public class NewsController {
 		log.info(this.getClass().getName() + "crawlHerald() end");
 		crawlRes = null;
 		
-		// UK news 뉴스 크롤링
-		log.info(this.getClass().getName() + "crawluk() start");
-		String[] crawlRes1 = WebCrawler.crawluk();
+		// 로이터 news 뉴스 크롤링
+		log.info(this.getClass().getName() + "crawlreuter() start");
+		String[] crawlRes1 = WebCrawler.crawlreuters();
 		String title1 = crawlRes1[0];
 		String inputText1 = crawlRes1[1];
 		String newsUrl1 = crawlRes1[2];
-		String newsname1 = "uk";
+		String newsname1 = "reuters";
 		log.info("Bbc_title1 : " + title1);
 		log.info("Bbc_newsUrl1 : " + newsUrl1);
 		
 		res += newsService.SaveNews(title1, inputText1, newsUrl1, newsname1);
-		log.info(this.getClass().getName() + "crawlbbc() end");
+		log.info(this.getClass().getName() + "crawlreuter() end");
 		crawlRes1 = null;
 		
 		// times 뉴스 크롤링
@@ -102,37 +104,29 @@ public class NewsController {
 
 	}
 	
-	@RequestMapping(value="/viewNews")
-	public String getNewsInfoFromDB(HttpServletRequest request, HttpServletResponse response, ModelMap model) 
+	@RequestMapping(value="/mongoSaveNews")
+	public String mongoSaveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model) 
 	throws Exception {
 		
-		log.info(this.getClass().getName() + ".getNewsInfoFromDB Start!");
+		log.info(this.getClass().getName() + ".mongoSaveNews Start!");
+		List<NewsDTO> rList = newsService.getNewsInfoFromDB();
 		
-		String news_name = "herald";
-		
-		NewsDTO nDTO = new NewsDTO();
-		nDTO.setNews_name(news_name);
-		
-		nDTO = newsService.getNewsInfoFromDB(nDTO);
+		for(NewsDTO nDTO : rList) {
 		
 		Iterator<CoreSentence> it = NLPUtil.sentence(nDTO.getNews_contents());
 		MongoNewsDTO mnDTO = new MongoNewsDTO(it);
-		mongoTestMapper.insert(mnDTO);
-		while(it.hasNext()) {
-			
-			CoreSentence sent = it.next();
-			
-			log.info(sent.text()); // 문장
-			log.info(sent.tokens().get(0).originalText()); // 문장 어절
-			log.info(sent.tokens().get(0).index()); // 인덱스
-			log.info(sent.lemmas()); // 문장 어절 동사원형
-			
-		}
 		
-		NewDTO
+		mnDTO.setNews_url(nDTO.getNews_url());
+		mnDTO.setNews_name(nDTO.getNews_name());
+		mnDTO.setNews_title(nDTO.getNews_title());
+		mongoTestMapper.insert(mnDTO);
+		}
+		rList = null;
+		
+		
 		log.info(this.getClass().getName() + ".getNewsInfoFromDB End!");
 		
-		return "/viewNews";
+		return "/mongoSaveNews";
 		
 	}
 	
