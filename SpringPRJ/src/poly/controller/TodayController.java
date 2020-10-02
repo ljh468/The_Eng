@@ -45,7 +45,7 @@ public class TodayController {
 		return "/Today/TodayMain";
 	}
 
-	@RequestMapping(value = "Today/TodayMainNews")
+	@RequestMapping(value = "Today/TodayNews")
 	public String TodayHeraldNews(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
 		String news_name = request.getParameter("news_name");
@@ -76,7 +76,7 @@ public class TodayController {
 
 			log.info("TodaySentence 종료 ");
 
-			return "Today/TodayMainNews";
+			return "Today/TodayNews";
 		} else if (news_name.equals("reuters")) {
 
 			MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
@@ -99,7 +99,7 @@ public class TodayController {
 
 			log.info("TodaySentence 종료 ");
 
-			return "Today/TodayMainNews";
+			return "Today/TodayNews";
 		} else if (news_name.equals("times")) {
 			log.info("timesQuiz start!");
 			MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
@@ -121,8 +121,8 @@ public class TodayController {
 			model.addAttribute("insertdate", rDTO.getInsertDate());
 
 			log.info("TodaySentence 종료 ");
-
-			return "Today/TodayMainNews";
+			return "Today/TodayNews";
+			
 		} else if (news_name.equals("yonhap")) {
 			log.info("yonhapQuiz start!");
 			MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
@@ -145,7 +145,7 @@ public class TodayController {
 
 			log.info("TodaySentence 종료 ");
 
-			return "Today/TodayMainNews";
+			return "Today/TodayNews";
 		} else
 			return null;
 	}

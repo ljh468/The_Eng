@@ -73,13 +73,13 @@ public class QuizController {
 
 	}
 
-	// mongoDB에서 reuter뉴스중 가장 최근뉴스 가져오기
+	// mongoDB에서 로이터뉴스중 가장 최근뉴스 가져오기
 	@RequestMapping(value = "reutersQuiz")
 	public MongoNewsDTO reutersQuiz(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
 		log.info("reuterQuiz start!");
 		DBObject query = new BasicDBObject("news_name", "reuters");
-		// name이 gildong인 데이터를 query변수에 대입
+		// name이 길동인 데이터를 query변수에 대입
 		MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
 
 		log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());

@@ -147,7 +147,7 @@ Coded by www.creative-tim.com
 
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-								<form action="/Today/TodayMainNews.do">
+								<form action="/Today/TodayNews.do">
 									<input type="hidden" name= "news_name" value="herald">
 									<button type="submit">
 
@@ -164,7 +164,7 @@ Coded by www.creative-tim.com
 								</div>
 								<div class="carousel-item">
 								
-								<form action="/Today/TodayMainNews.do">
+								<form action="/Today/TodayNews.do">
 									<input type="hidden" name= "news_name" value="reuters">
 									<button type="submit">
 										<img src="/resources/images/NewsLogo/TheNewyorkTimes_Logo.png"
@@ -181,7 +181,7 @@ Coded by www.creative-tim.com
 								</div>
 								<div class="carousel-item">
 								
-								<form action="/Today/TodayMainNews.do">
+								<form action="/Today/TodayNews.do">
 									<input type="hidden" name= "news_name" value="times">
 									<button type="submit">
 
