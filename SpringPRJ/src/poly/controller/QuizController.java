@@ -1,25 +1,39 @@
 package poly.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 import poly.dto.MongoNewsDTO;
 import poly.persistance.mongo.IMongoTestMapper;
+import poly.service.INewsService;
+import poly.service.INewsWordService;
 
 @Controller
 public class QuizController {
 
 	@Resource(name = "MongoTestMapper")
 	private IMongoTestMapper mongoTestMapper;
+	
+	@Resource(name = "NewsService")
+	private INewsService newsService;
+	
+	@Resource(name = "NewsWordService")
+	private INewsWordService newsWordService;
 
 	private Logger log = Logger.getLogger(this.getClass());
 
@@ -55,7 +69,7 @@ public class QuizController {
 
 		log.info("timesQuiz start!");
 		DBObject query = new BasicDBObject("news_name", "times");
-		// name이 gildong인 데이터를 query변수에 대입
+		// name이 길동인 데이터를 query변수에 대입
 		MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
 
 		log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
@@ -120,4 +134,17 @@ public class QuizController {
 		// mongoTestMapper의 selectWithCondition에 query파라미터를 return
 
 	}
+	// test
+		@RequestMapping(value = "extractWords")
+		@ResponseBody
+		public List<Map<String, Object>> extractWords(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+				throws Exception {
+			log.info(this.getClass().getName() + ".extractWords start");
+
+			MongoNewsDTO pDTO = mongoTestMapper.getHeraldNews();
+			List<Map<String, Object>> rList = newsWordService.extractWords(pDTO);
+			
+			log.info(this.getClass().getName() + ".extractWords end");
+			return rList;
+		}
 }

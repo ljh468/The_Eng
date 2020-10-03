@@ -18,5 +18,6 @@ public interface INewsService {
 	void scheduleCrawl() throws Exception;
 
 
+
 	
 }

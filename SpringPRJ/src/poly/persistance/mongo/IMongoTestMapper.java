@@ -27,6 +27,8 @@ public interface IMongoTestMapper {
 
 	public MongoNewsDTO getYonhapNews() throws Exception;
 
+	
+
 
 
 }

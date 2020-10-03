@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import poly.dto.MongoNewsDTO;
 import poly.dto.NewsDTO;
 import poly.persistance.mapper.INewsMapper;
+import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.INewsService;
 import poly.util.WebCrawler;
 
@@ -19,6 +20,9 @@ public class NewsService implements INewsService {
 
 	@Resource(name = "NewsMapper")
 	private INewsMapper newsMapper;
+	
+	@Resource(name = "MongoTestMapper")
+	private IMongoTestMapper mongTestMapper;
 
 	// 로그파일 출력개체
 	private Logger log = Logger.getLogger(this.getClass());
@@ -105,6 +109,8 @@ public class NewsService implements INewsService {
 
 		return newsMapper.getNewsInfoFromDB();
 	}
+
+
 	
 	
 	
