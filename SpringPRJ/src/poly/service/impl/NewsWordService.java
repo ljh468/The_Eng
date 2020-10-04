@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -29,6 +30,22 @@ public class NewsWordService implements INewsWordService {
 
 	Logger log = Logger.getLogger(this.getClass());
 	
+	/** 단어 데이터 초반에 불러오기
+	 *
+	 */
+	@Override
+	@PostConstruct
+	public void loadWordPool() throws Exception {
+		
+		log.info(this.getClass().getName() + ".loadWordPool start");
+		
+		WORD_POOL = mongoNewsMapper.getWordPool();
+		
+		log.info(this.getClass().getName() + ".loadWordPool end");
+		
+	}
+	
+	
 	/** @return : [{lemma : (String)"단어원형", pool : (List of String)"속한 풀", sntncIdx : (Integer)"문장 인덱스", wordIdx : (Integer)"단어 인덱스"}]
 	 *
 	 */
@@ -41,6 +58,7 @@ public class NewsWordService implements INewsWordService {
 		Map<String, Object> pMap = null;
 		
 		int sntncIdx = 0;
+		
 		// 각 단어의 동사원형으로 for each
 		for(List<String> lemmasBySentence : pDTO.getLemmas()) {
 			int wordIdx = 0;
@@ -52,6 +70,7 @@ public class NewsWordService implements INewsWordService {
 					pMap.put("pool", WORD_POOL.get(lemma.toLowerCase()));
 					pMap.put("sntncIdx", sntncIdx);
 					pMap.put("wordIdx", wordIdx);
+					pMap.put("sentences", pDTO.getOriginal_sentences());
 					rList.add(pMap);
 					pMap = null;
 				}

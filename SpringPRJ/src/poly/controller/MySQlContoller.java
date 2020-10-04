@@ -20,18 +20,16 @@ import poly.service.INewsService;
 import poly.util.NLPUtil;
 import poly.util.WebCrawler;
 
-
 @Controller
 public class MySQlContoller {
 	private Logger log = Logger.getLogger(this.getClass());
-	
-	@Resource(name = "NewsService") 
+
+	@Resource(name = "NewsService")
 	private INewsService newsService;
-	
+
 	@Resource(name = "MongoTestMapper")
 	private IMongoTestMapper mongoTestMapper;
 
-	
 	// 수동으로 웹크롤링 및 MySQl에 저장
 	@RequestMapping(value = "/MySQLsaveNews")
 	public String MySQLsaveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model)
@@ -48,11 +46,10 @@ public class MySQlContoller {
 		String newsname = "herald";
 		log.info("Herald_title : " + title);
 		log.info("Herald_newsUrl : " + newsUrl);
-		
 		int res = newsService.MySQLsaveNews(title, inputText, newsUrl, newsname);
 		log.info(this.getClass().getName() + "crawlHerald() end");
 		crawlRes = null;
-		
+
 		// 로이터 news 뉴스 크롤링
 		log.info(this.getClass().getName() + "crawlreuter() start");
 		String[] crawlRes1 = WebCrawler.crawlreuters();
@@ -62,11 +59,11 @@ public class MySQlContoller {
 		String newsname1 = "reuters";
 		log.info("Bbc_title1 : " + title1);
 		log.info("Bbc_newsUrl1 : " + newsUrl1);
-		
+
 		res += newsService.MySQLsaveNews(title1, inputText1, newsUrl1, newsname1);
 		log.info(this.getClass().getName() + "crawlreuter() end");
 		crawlRes1 = null;
-		
+
 		// times 뉴스 크롤링
 		log.info(this.getClass().getName() + "crawltimes() start");
 		String[] crawlRes2 = WebCrawler.crawltimes();
@@ -76,11 +73,11 @@ public class MySQlContoller {
 		String newsname2 = "times";
 		log.info("times_title2 : " + title2);
 		log.info("times_newsUrl2 : " + newsUrl2);
-		
+
 		res += newsService.MySQLsaveNews(title2, inputText2, newsUrl2, newsname2);
 		log.info(this.getClass().getName() + "crawltimes() end");
 		crawlRes2 = null;
-		
+
 		// yonhap 뉴스 크롤링
 		log.info(this.getClass().getName() + "crawlyonhap() start");
 		String[] crawlRes3 = WebCrawler.crawlyonhap();
@@ -90,11 +87,11 @@ public class MySQlContoller {
 		String newsname3 = "yonhap";
 		log.info("yonhap_title3 : " + title3);
 		log.info("yonhap_newsUrl3 : " + newsUrl3);
-		
+
 		res += newsService.MySQLsaveNews(title3, inputText3, newsUrl3, newsname3);
 		log.info(this.getClass().getName() + "crawlyonhap()) end");
 		crawlRes3 = null;
-		
+
 		// 뉴스 저장 결과 넣어주기
 		model.addAttribute("res", String.valueOf(res));
 
@@ -103,31 +100,31 @@ public class MySQlContoller {
 		return "/news/NewsForWEB";
 
 	}
+
 	// mySQL에서 데이터 가져와서 자연어처리하여 mongo에 저장
-	@RequestMapping(value="/mongoSaveNews")
-	public String mongoSaveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model) 
-	throws Exception {
-		
+	@RequestMapping(value = "/mongoSaveNews")
+	public String mongoSaveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model)
+			throws Exception {
+
 		log.info(this.getClass().getName() + ".mongoSaveNews Start!");
 		List<NewsDTO> rList = newsService.getNewsInfoFromDB();
-		
-		for(NewsDTO nDTO : rList) {
-		
-		Iterator<CoreSentence> it = NLPUtil.sentence(nDTO.getNews_contents());
-		MongoNewsDTO mnDTO = new MongoNewsDTO(it);
-		
-		mnDTO.setNews_url(nDTO.getNews_url());
-		mnDTO.setNews_name(nDTO.getNews_name());
-		mnDTO.setNews_title(nDTO.getNews_title());
-		mongoTestMapper.insert(mnDTO);
+
+		for (NewsDTO nDTO : rList) {
+
+			Iterator<CoreSentence> it = NLPUtil.sentence(nDTO.getNews_contents());
+			MongoNewsDTO mnDTO = new MongoNewsDTO(it);
+
+			mnDTO.setNews_url(nDTO.getNews_url());
+			mnDTO.setNews_name(nDTO.getNews_name());
+			mnDTO.setNews_title(nDTO.getNews_title());
+			mongoTestMapper.insert(mnDTO);
 		}
 		rList = null;
-		
-		
+
 		log.info(this.getClass().getName() + ".mongoSaveNews End!");
-		
+
 		return "/mongoSaveNews";
-		
+
 	}
-	
+
 }

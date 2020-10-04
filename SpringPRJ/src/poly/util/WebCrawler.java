@@ -70,7 +70,7 @@ public class WebCrawler {
 	}	
 	
 	/**
-	 *  uk영어 웹크롤링
+	 *  로이터 영어 웹크롤링
 	 */
 	public static String[] crawlreuters() throws IOException {
 		

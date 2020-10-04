@@ -10,5 +10,7 @@ public interface INewsWordService {
 
 	List<Map<String, Object>> extractWords(MongoNewsDTO pDTO) throws Exception;
 
+	void loadWordPool() throws Exception;
+
 	
 }

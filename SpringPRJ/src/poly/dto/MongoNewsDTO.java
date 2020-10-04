@@ -1,16 +1,16 @@
 package poly.dto;
 
+import static poly.util.CmmUtil.nvl;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.CoreSentence;
-import static poly.util.CmmUtil.nvl;
 
 public class MongoNewsDTO {
 
@@ -63,7 +63,7 @@ public class MongoNewsDTO {
 			
 			for (Iterator<CoreLabel> tokenIt = sent.tokens().iterator(); tokenIt.hasNext();) {
 				CoreLabel tempToken = tokenIt.next();
-				token.add(tempToken.originalText());   //문장의 쪼개진 단어별로 입력
+				token.add(tempToken.originalText().trim());   //문장의 쪼개진 단어별로 입력
 				lemma.add(tempToken.lemma());         //문장의 쪼개진 단어의 원형을 입력
 			}
 			this.tokens.add(token);            //tokens라는 리스트에 리스트를 입력(이중 리스트)

@@ -1,9 +1,6 @@
 package poly.controller;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import poly.dto.MongoNewsDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.IMailService;
 import poly.service.INewsService;
@@ -38,130 +36,30 @@ public class SaveNewsController {
 	
 	private Logger log = Logger.getLogger(getClass());
 	
-	/**  웹크롤링하고 바로 몽고 DB에 저장
-	 * @param request
-	 * @param model
-	 * @param session
-	 * @return
-	 * @throws Exception
-	 */
+	/** ##############################################################
+	 * 크롤링 바로 자연어 처리 -> mongoDB 저장
+	    ############################################################## */
+	
 	@RequestMapping(value = "insertNews", produces ="application/json; charset=UTF8")
-	@ResponseBody
 	@Scheduled(cron = "0 0 7 ? * *")
-	public List<Map<String, Object>> insertNews(HttpServletRequest request, Model model, HttpSession session) 
+	public String insertNews(HttpServletRequest request, Model model, HttpSession session) 
 			throws Exception{
 		
-		log.info("###START### : insertNews");
+		log.info("### START ### : insertNews");
 		
 		// MongoDB에 키값으로 넣기 위한 obj 
-		Map<String, Object> obj = new HashMap<>();
 				
 		// crawlingAll메서드의 rList를 pList에 대입 
-		List<Map<String, Object>> pList = newsService.crawlingAll();
-		
-		// 첫번째 값은 Map형의 herald 뉴스
-		Map<String, Object> pMap = pList.get(0);
-		
-		Iterator<String> keys = pMap.keySet().iterator();
-		
-		int i = 1;
-		while(keys.hasNext()) {
-			
-			obj.put("insertDate", pMap.get("insertDate"));
-			obj.put("news_url", pMap.get("newsUrl"));
-			obj.put("news_name", pMap.get("newsName"));
-			obj.put("news_title", pMap.get("newsTitle"));	
-			obj.put("originsentence", pMap.get("newsContents"));
-			obj.put("lemmas",pMap.get("newsLemmas"));
-			obj.put("tokens", pMap.get("newsTokens"));
-			obj.put("translation",pMap.get("translation"));
-			
-			
-			mongoTestMapper.insert(obj);
-			log.info("###START### : obj.put");
-			
-			if(i == 4) {
-				return null;
-			}
-			
-			pMap = pList.get(i);
-			
-			obj = null;
-			obj = new HashMap<>();
-			
-			i++;
-			
+		List<MongoNewsDTO> pList = newsService.crawlingAll(); // 영어뉴스 웹크롤링
+		int res=0;
+		for(MongoNewsDTO rDTO : pList) {
+		mongoTestMapper.insert(rDTO); // mongoDB에 저장
+		res++;
 		}
-			pMap = null;
-//		obj.put("newsName", pMap.get("newsName"));
-//		obj.put("newsTitle", pMap.get("newsTitle"));	
-//		obj.put("Lemma",pMap.get("newsLemmas"));
-//		obj.put("Token", pMap.get("newsTokens"));
-//		obj.put("OriginSentence", pMap.get("newsContents"));
-//		obj.put("newsUrl", pMap.get("newsUrl"));
-//		obj.put("InsertDate", pMap.get("insertDate"));
-//		
-//		mongoTestMapper.insert(obj);
-//		
-//		obj = null;
-//		obj = new HashMap<>();
-//		
-//		log.info("###END### : insert Herald");
-//		
-//		// 두번째 값은 Map형의 UK 뉴
-//		pMap = pList.get(1);
-//		
-//		obj.put("newsName", pMap.get("newsName"));
-//		obj.put("newsTitle", pMap.get("newsTitle"));	
-//		obj.put("Lemma", pMap.get("newsLemmas"));
-//		obj.put("Token", pMap.get("newsTokens"));
-//		obj.put("OriginSentence",pMap.get("newsContents"));
-//		obj.put("newsUrl", pMap.get("newsUrl"));
-//		obj.put("InsertDate", pMap.get("insertDate"));
-//		
-//		mongoTestMapper.insert(obj);
-//		
-//		obj = null;
-//		obj = new HashMap<>();
-//		
-//		log.info("###END### : insert UK");
-//		
-//		// 세번째 값은 Map - Times
-//		pMap = pList.get(2);
-//		
-//		obj.put("newsName", pMap.get("newsName"));
-//		obj.put("newsTitle", pMap.get("newsTitle"));	
-//		obj.put("Lemma",pMap.get("newsLemmas"));
-//		obj.put("Token", pMap.get("newsokens"));
-//		obj.put("OriginSentence",pMap.get("newsContents"));
-//		obj.put("newsUrl", pMap.get("newsUrl"));
-//		obj.put("InsertDate", pMap.get("insertDate"));
-//		
-//		mongoTestMapper.insert(obj);
-//		
-//		obj = null;
-//		obj = new HashMap<>();
-//		
-//		log.info("###END### : insert Times");
-//		
-//		// 네번째 값은 Map - Yonhap
-//		pMap = pList.get(3);
-//		
-//		obj.put("newsName", pMap.get("newsName"));
-//		obj.put("newsTitle", pMap.get("newsTitle"));	
-//		obj.put("Lemma",pMap.get("newsLemmas"));
-//		obj.put("Token", pMap.get("newsTokens"));
-//		obj.put("OriginSentence",pMap.get("newsContents"));
-//		obj.put("newsUrl", pMap.get("newsUrl"));
-//		obj.put("InsertDate", pMap.get("insertDate"));
-//		
-//		mongoTestMapper.insert(obj);
-//		
-//		obj = null;
-//		obj = new HashMap<>();
-//		
-//		log.info("###END### : insert Yonhap");
+		model.addAttribute("res", String.valueOf(res)); // 수집된 뉴스기사
+		log.info("### END ### : insertNews");
 		
-		return null;
+		
+		return "/news/NewsForWEB";
 	}
 }

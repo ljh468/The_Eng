@@ -4,7 +4,6 @@ import static poly.util.CmmUtil.nvl;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -15,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import poly.dto.NewsDTO;
 import poly.dto.UserDTO;
 import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.IUserService;
 import poly.util.EncryptUtil;
-import poly.util.NLPUtil;
 
 @Controller
 public class UserController {

@@ -140,11 +140,11 @@ public class QuizController {
 		public List<Map<String, Object>> extractWords(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
 				throws Exception {
 			log.info(this.getClass().getName() + ".extractWords start");
-
 			MongoNewsDTO pDTO = mongoTestMapper.getHeraldNews();
 			List<Map<String, Object>> rList = newsWordService.extractWords(pDTO);
 			
 			log.info(this.getClass().getName() + ".extractWords end");
+			
 			return rList;
 		}
 }

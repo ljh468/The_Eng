@@ -130,7 +130,7 @@ Coded by www.creative-tim.com
 						<h6 class="m-3" style="color:orange">Today news</h6>
 						
 						<div class="m-3">
-						<h3 class="card-text"><b><%=title %></b></h3>
+						<h4 class="card-text"><b><%=title %></b></h3>
 						<div class="write-name">
 						<h6 style="color:grey">Writer's name</h6>
 						</div>
@@ -138,7 +138,9 @@ Coded by www.creative-tim.com
 						<h6 style="color:grey"><%=date %></h6>
 						</div>
 						</div>
-						<p class="m-4" style="font-size:1.75em"><%=sentences %>
+						<p class="m-4" style="font-size:15px"><% for( String sent : sentences ) {%>
+									<%=sent %>
+								<% } %>
 						</p>
 					</div>
 				</div>

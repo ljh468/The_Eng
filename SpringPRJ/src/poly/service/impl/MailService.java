@@ -12,7 +12,6 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import poly.dto.UserDTO;
 import poly.service.IMailService;
