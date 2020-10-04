@@ -22,7 +22,7 @@ import poly.util.WebCrawler;
 
 
 @Controller
-public class NewsController {
+public class MySQlContoller {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name = "NewsService") 
@@ -32,9 +32,9 @@ public class NewsController {
 	private IMongoTestMapper mongoTestMapper;
 
 	
-	// 수동으로 웹크롤링 및 저장
-	@RequestMapping(value = "/saveNews")
-	public String saveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model)
+	// 수동으로 웹크롤링 및 MySQl에 저장
+	@RequestMapping(value = "/MySQLsaveNews")
+	public String MySQLsaveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model)
 			throws Exception {
 
 		log.info(this.getClass().getName() + "saveNews Start!");
@@ -49,7 +49,7 @@ public class NewsController {
 		log.info("Herald_title : " + title);
 		log.info("Herald_newsUrl : " + newsUrl);
 		
-		int res = newsService.SaveNews(title, inputText, newsUrl, newsname);
+		int res = newsService.MySQLsaveNews(title, inputText, newsUrl, newsname);
 		log.info(this.getClass().getName() + "crawlHerald() end");
 		crawlRes = null;
 		
@@ -63,7 +63,7 @@ public class NewsController {
 		log.info("Bbc_title1 : " + title1);
 		log.info("Bbc_newsUrl1 : " + newsUrl1);
 		
-		res += newsService.SaveNews(title1, inputText1, newsUrl1, newsname1);
+		res += newsService.MySQLsaveNews(title1, inputText1, newsUrl1, newsname1);
 		log.info(this.getClass().getName() + "crawlreuter() end");
 		crawlRes1 = null;
 		
@@ -77,7 +77,7 @@ public class NewsController {
 		log.info("times_title2 : " + title2);
 		log.info("times_newsUrl2 : " + newsUrl2);
 		
-		res += newsService.SaveNews(title2, inputText2, newsUrl2, newsname2);
+		res += newsService.MySQLsaveNews(title2, inputText2, newsUrl2, newsname2);
 		log.info(this.getClass().getName() + "crawltimes() end");
 		crawlRes2 = null;
 		
@@ -91,7 +91,7 @@ public class NewsController {
 		log.info("yonhap_title3 : " + title3);
 		log.info("yonhap_newsUrl3 : " + newsUrl3);
 		
-		res += newsService.SaveNews(title3, inputText3, newsUrl3, newsname3);
+		res += newsService.MySQLsaveNews(title3, inputText3, newsUrl3, newsname3);
 		log.info(this.getClass().getName() + "crawlyonhap()) end");
 		crawlRes3 = null;
 		
@@ -103,7 +103,7 @@ public class NewsController {
 		return "/news/NewsForWEB";
 
 	}
-	
+	// mySQL에서 데이터 가져와서 자연어처리하여 mongo에 저장
 	@RequestMapping(value="/mongoSaveNews")
 	public String mongoSaveNews(HttpServletRequest request, HttpServletResponse response, ModelMap model) 
 	throws Exception {
@@ -124,7 +124,7 @@ public class NewsController {
 		rList = null;
 		
 		
-		log.info(this.getClass().getName() + ".getNewsInfoFromDB End!");
+		log.info(this.getClass().getName() + ".mongoSaveNews End!");
 		
 		return "/mongoSaveNews";
 		

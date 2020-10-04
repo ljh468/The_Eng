@@ -13,7 +13,7 @@ public class NLPUtil {
 		
 		Properties props = new Properties();
 		
-		props.setProperty("annotators", "tokenize,ssplit,pos,lemma");
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma");
 		
 		props.setProperty("coref.algorithm", "neural");
 		
@@ -28,7 +28,7 @@ public class NLPUtil {
 		return it;
 	}
 
-	public static void test() {
+	public static void main(String[] args)  {
 		
 		// nlp설정(거의 건드릴 필요 없음)
 		// tokenize 어절 끈어서

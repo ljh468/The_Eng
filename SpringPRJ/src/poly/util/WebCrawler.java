@@ -88,7 +88,7 @@ public class WebCrawler {
 
 		// 웹 페이지 전체 소스 중 일부 태그를 선택하기 위해 사용
 		// 메인페이지의 url을 가져오기 위함
-		Element element_urlGet = doc.select("#topStoryNuclear a").first();
+		Element element_urlGet = doc.select("#topStory a").first();
 
 		// element_urlGet 소스에 href를 가져옴
 		String href = element_urlGet.attr("href");

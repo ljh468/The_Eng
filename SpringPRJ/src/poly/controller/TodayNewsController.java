@@ -17,7 +17,7 @@ import poly.service.INewsService;
 import poly.service.IUserService;
 
 @Controller
-public class TodayController {
+public class TodayNewsController {
 
 	private Logger log = Logger.getLogger(this.getClass());
 

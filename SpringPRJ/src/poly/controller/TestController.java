@@ -2,6 +2,7 @@ package poly.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +38,9 @@ public class TestController {
 
 	@Resource(name = "MongoTestMapper")
 	IMongoTestMapper mongoTestMapper;
-
+	
+	private Logger log = Logger.getLogger(this.getClass());
+	
 	@RequestMapping(value = "mongoSelect", produces = "application/json; charset=UTF8")
 	@ResponseBody
 	public List<Map<String, Object>> select(HttpServletRequest request, Model model, HttpSession session)
@@ -72,7 +76,7 @@ public class TestController {
 	}
 	@RequestMapping(value = "mongoInsertNews", produces = "application/json; charset=UTF8")
 	@ResponseBody
-	public List<Map<String, Object>> insertNews(HttpServletRequest request, Model model, HttpSession session)
+	public List<Map<String, Object>> insertNewstest(HttpServletRequest request, Model model, HttpSession session)
 			throws Exception {
 		Map<String, Object> obj = new HashMap<>();
 		obj.put("title", "trump dies");
@@ -130,4 +134,6 @@ public class TestController {
 
 		return false;
 	}
+	
+	
 }
