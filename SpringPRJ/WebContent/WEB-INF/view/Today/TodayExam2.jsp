@@ -1,15 +1,7 @@
-<%@page import="poly.util.TranslateUtil"%>
 <%@page import="poly.dto.WordQuizDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%
-	
-	List<WordQuizDTO> quizList =(List<WordQuizDTO>)request.getAttribute("quizList"); 
-	out.print("jsp : " + quizList.get(0).getTranslation());
-%>
-
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -134,8 +126,13 @@ Coded by www.creative-tim.com
 							<h6 style="color:grey">2020, Dec 11</h6>
 						</div>
 						
-						<p class="m-4" style="font-size:1.5em"><%=quizList.get(0).getSentence() %></p>
-						<span><%=TranslateUtil.kakaotrans(quizList.get(0).getTranslation()) %></span>
+						<p class="m-4" style="font-size:1.5em">
+						Self-driving cars, smart cities, fully 
+						connected homes, robots. This is the future and it will 2be powered
+						by 5G. The G stands for 3generation as in next 
+						<input style="width:200px;"type="textbox" value=" ge">
+						wireless network and it's going to be fast.</p>
+						
 						<!-- textbox의 value값에 문제로 낼 단어의 앞 두글자를 힌트로 준다.  -->
 					</div>
 				</div>

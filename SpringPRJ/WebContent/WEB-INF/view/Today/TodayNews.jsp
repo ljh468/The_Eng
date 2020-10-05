@@ -138,10 +138,11 @@ Coded by www.creative-tim.com
 						<h6 style="color:grey"><%=date %></h6>
 						</div>
 						</div>
-						<p class="m-4" style="font-size:15px"><% for( String sent : sentences ) {%>
+						<% for( String sent : sentences ) {%>
+						<p class="m-4" style="font-size:15px">
 									<%=sent %>
+									</p>
 								<% } %>
-						</p>
 					</div>
 				</div>
 			<!-- 뉴스 기사 끝. -->

@@ -70,7 +70,6 @@ public class NewsWordService implements INewsWordService {
 					pMap.put("pool", WORD_POOL.get(lemma.toLowerCase()));
 					pMap.put("sntncIdx", sntncIdx);
 					pMap.put("wordIdx", wordIdx);
-					pMap.put("sentences", pDTO.getOriginal_sentences());
 					rList.add(pMap);
 					pMap = null;
 				}

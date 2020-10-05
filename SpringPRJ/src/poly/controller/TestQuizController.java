@@ -1,5 +1,8 @@
 package poly.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,19 +22,21 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 import poly.dto.MongoNewsDTO;
+import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.INewsService;
 import poly.service.INewsWordService;
+import poly.util.CmmUtil;
 
 @Controller
-public class QuizController {
+public class TestQuizController {
 
 	@Resource(name = "MongoTestMapper")
 	private IMongoTestMapper mongoTestMapper;
-	
+
 	@Resource(name = "NewsService")
 	private INewsService newsService;
-	
+
 	@Resource(name = "NewsWordService")
 	private INewsWordService newsWordService;
 
@@ -56,7 +61,7 @@ public class QuizController {
 		log.info("rDTO.getTranslation : " + rDTO.getTranslation());
 
 		log.info("heraldQuiz end!");
-		
+
 		model.addAttribute("news_title", rDTO.getNews_title());
 		log.info("model : " + model.addAttribute("news_title", rDTO.getNews_title()));
 		return rDTO;
@@ -134,17 +139,95 @@ public class QuizController {
 		// mongoTestMapper의 selectWithCondition에 query파라미터를 return
 
 	}
+
 	// test
-		@RequestMapping(value = "extractWords")
-		@ResponseBody
-		public List<Map<String, Object>> extractWords(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
-				throws Exception {
-			log.info(this.getClass().getName() + ".extractWords start");
-			MongoNewsDTO pDTO = mongoTestMapper.getHeraldNews();
-			List<Map<String, Object>> rList = newsWordService.extractWords(pDTO);
+	@RequestMapping(value = "extractWords")
+	public String extractWords(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+
+		// 뉴스 가져오기
+		MongoNewsDTO pDTO = mongoTestMapper.getHeraldNews();
+
+		// 단어 추출 -
+		// [{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
+		List<Map<String, Object>> rList = newsWordService.extractWords(pDTO);
+
+		Map<String, Object> pMap = new HashMap<String, Object>();
+		Iterator<Map<String, Object>> it = rList.iterator();
+		Integer a = new Integer(0);
+		Integer[] b = new Integer[pDTO.getOriginal_sentences().size() - 2];
+
+		List<WordQuizDTO> quizList = new ArrayList<>();
+
+		int k = 0;
+		while (it.hasNext()) {
+
+			pMap = (Map<String, Object>) it.next();
+			WordQuizDTO quizDTO = new WordQuizDTO();
+			int wordIdx = (Integer) pMap.get("wordIdx");
+			int sntncIdx = (Integer) pMap.get("sntncIdx");
+			String lemma = (String) pMap.get("lemma");
+			String word = (String) pMap.get("word");
+			quizDTO.setLemma(lemma);
+			quizDTO.setAnswer(word);
+			String originalSent = pDTO.getOriginal_sentences().get(sntncIdx);
+			quizDTO.setOriginalSentence(originalSent);
+			quizDTO.setTranslation(originalSent);
 			
-			log.info(this.getClass().getName() + ".extractWords end");
+			// 정답을 공백처리
+			quizDTO.setSentence(
+					originalSent.replace(word, "<input type='text' value='" + word.substring(0, 2) + "' id='answer'>"));
+			quizDTO.setAnswerSentence(
+					originalSent.replace(word, "<span style='font-weight:bold;'>" + word + "</span>"));
+
+			quizList.add(quizDTO);
 			
-			return rList;
 		}
+		
+//			// MAP의 KEY값을 이용하여 VALUE값 가져오기
+//			log.info("rMap - sntIdx: " + pMap.get("sntncIdx"));
+//			a = (Integer) pMap.get("sntncIdx");
+//			b[k] = a;
+//			k++;
+//
+//		}
+//		for (int i = 0; i < b.length; i++) {
+//			System.out.println(b[i]);
+//
+//		}
+//		// 최빈값 찾기
+//
+//		int mode = 0;
+//		int[] index = new int[100];
+//		int max = Integer.MIN_VALUE;
+//		int i = 0;
+//
+//		for (i = 0; i < b.length; i++) {
+//			index[b[i]]++;
+//			log.info("index: " + index[b[i]]);
+//		}
+//		for (i = 0; i < index.length; i++) {
+//			if (max < index[i]) {
+//				max = index[i];
+//				mode = i;
+//			}
+//		}
+//		System.out.println("최빈값 : " + mode);
+//
+//		List<String> result = new ArrayList<String>();
+//		result = pDTO.getOriginal_sentences();
+//
+//		String ss = (String) pMap.get("word");
+//
+//		log.info(ss);
+
+//		result.get(mode).replace(, "");
+
+		model.addAttribute("quizList", quizList);
+		log.info(quizList);
+		return "/Today/TodayExam";
+
+	}
+
 }
+
