@@ -32,8 +32,11 @@ public class TodayNewsController {
 
 	@Resource(name = "MongoTestMapper")
 	IMongoTestMapper mongoTestMapper;
-
-	// 오늘의학습
+	/**
+	 * ########################################## 
+	 * 오늘의학습 메인페이지
+	 * ##########################################
+	 */
 	@RequestMapping(value = "Today/TodayMain")
 	public String TodayMain(HttpSession session, ModelMap model) {
 		String user_id = (String) session.getAttribute("user_id");
@@ -44,18 +47,23 @@ public class TodayNewsController {
 		model.addAttribute("user_id", user_id);
 		return "/Today/TodayMain";
 	}
-
+	
+	/**
+	 * ########################################## 
+	 * 오늘의뉴스 (뉴스의 원문 추출)
+	 * ##########################################
+	 */
 	@RequestMapping(value = "Today/TodayNews")
 	public String TodayHeraldNews(HttpServletRequest request, Model model, HttpSession session) throws Exception {
-
+		// Today main에서 news_name을 받아와 각뉴스에 맞는 자료 추출
 		String news_name = request.getParameter("news_name");
 
 		log.info("TodaySentence 시작");
 		log.info("heraldQuiz start!");
-		// name이 gildong인 데이터를 query변수에 대입
-
+		
+		// 코리아헤럴드 뉴스 추출
 		if (news_name.equals("herald")) {
-
+				log.info("heraldGET Start!");
 			MongoNewsDTO rDTO = mongoTestMapper.getHeraldNews();
 
 			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
@@ -67,89 +75,60 @@ public class TodayNewsController {
 			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
 			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
 
-			log.info("heraldQuiz end!");
-
+				log.info("heraldGET End!");
+			
 			model.addAttribute("news_name", "The Korea Herald");
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
 
-			log.info("TodaySentence 종료 ");
 
 			return "Today/TodayNews";
-		} else if (news_name.equals("reuters")) {
-
+		} 	// 로이터 뉴스 추출
+			else if (news_name.equals("reuters")) {
+				log.info("reutersGET Start!");	
 			MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
-
-			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
-			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
-			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
-			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
-			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
-			log.info("rDTO.getTokens : " + rDTO.getTokens());
-			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
-			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
-
-			log.info("heraldQuiz end!");
+				log.info("reutersGET End!");
 
 			model.addAttribute("news_name", "Reuters News");
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
 
-			log.info("TodaySentence 종료 ");
-
 			return "Today/TodayNews";
-		} else if (news_name.equals("times")) {
-			log.info("timesQuiz start!");
+		} 	// 코리아타임즈 뉴스 추출
+			else if (news_name.equals("times")) {
+				log.info("timesGET Start!");
 			MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
-
-			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
-			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
-			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
-			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
-			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
-			log.info("rDTO.getTokens : " + rDTO.getTokens());
-			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
-			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
-
-			log.info("timesQuiz end!");
+				log.info("timesGET End!");
 
 			model.addAttribute("news_name", "The Korea Times");
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
 
-			log.info("TodaySentence 종료 ");
 			return "Today/TodayNews";
 			
-		} else if (news_name.equals("yonhap")) {
-			log.info("yonhapQuiz start!");
+		} 	// 연합 뉴스 추출
+			else if (news_name.equals("yonhap")) {
+				log.info("yonhapGET Start!");
 			MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
-
-			log.info("rDTO.getInsertDate : " + rDTO.getInsertDate());
-			log.info("rDTO.getNews_url : " + rDTO.getNews_url());
-			log.info("rDTO.getNews_name : " + rDTO.getNews_name());
-			log.info("rDTO.getNews_title : " + rDTO.getNews_title());
-			log.info("rDTO.getOriginal_sentences : " + rDTO.getOriginal_sentences());
-			log.info("rDTO.getTokens : " + rDTO.getTokens());
-			log.info("rDTO.getLemmas : " + rDTO.getLemmas());
-			log.info("rDTO.getTranslation : " + rDTO.getTranslation());
-
-			log.info("yonhapQuiz end!");
+				log.info("yonhapGET End!");
 
 			model.addAttribute("news_name", "Yonhap News Agency");
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
 
-			log.info("TodaySentence 종료 ");
-
 			return "Today/TodayNews";
 		} else
 			return null;
 	}
-
+	/**
+	 * ########################################## 
+	 * 오늘의문장 ( 뉴스의 주요문장 추출 )
+	 * ##########################################
+	 */
 	@RequestMapping(value = "Today/TodaySentence")
 	public String TodaySentence() {
 
@@ -158,7 +137,11 @@ public class TodayNewsController {
 
 		return "/Today/TodaySentence";
 	}
-
+	/**
+	 * ########################################## 
+	 * 오늘의퀴즈 ( 뉴스의 주요문장 퀴즈 추출 )
+	 * ##########################################
+	 */
 	@RequestMapping(value = "Today/TodayExam")
 	public String TodayExam() {
 
@@ -167,7 +150,11 @@ public class TodayNewsController {
 
 		return "/Today/TodayExam";
 	}
-
+	/**
+	 * ########################################## 
+	 * 오늘의 영어문장 강세 측정
+	 * ##########################################
+	 */
 	@RequestMapping(value = "Today/TodayRecord")
 	public String TodayRecord() {
 
@@ -176,7 +163,11 @@ public class TodayNewsController {
 
 		return "/Today/TodayRecord";
 	}
-
+	/**
+	 * ########################################## 
+	 * 발음 및 강세 분석 (결과화면)
+	 * ##########################################
+	 */
 	@RequestMapping(value = "Today/TodayResult")
 	public String TodayResult() {
 

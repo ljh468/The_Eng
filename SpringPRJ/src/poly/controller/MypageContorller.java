@@ -57,7 +57,7 @@ public class MypageContorller {
 
 			return "/Mypage/TheUserCorrection";
 		}
-
+		// 회원정보 수정 Do
 		@RequestMapping(value = "/Mypage/TheUserCorrectionDo")
 		public String TheUserCorrectionDo(HttpSession session, Model model) {
 
@@ -76,11 +76,12 @@ public class MypageContorller {
 
 			return "/Mypage/TheUserCorrectionDo";
 		}
-
-		@RequestMapping(value = "/Mypage/correectionProc")
+		
+		// 회원정보 수정 proc
+		@RequestMapping(value = "/Mypage/correctionProc")
 		public String correectionProc(HttpSession session, HttpServletRequest request, Model model) {
 
-			log.info("/Mypage/correectionProc 시작");
+			log.info("/Mypage/correctionProc 시작");
 
 			String user_id = (String) session.getAttribute("user_id");
 			String user_gender = request.getParameter("gender");
@@ -108,7 +109,7 @@ public class MypageContorller {
 			model.addAttribute("url", url);
 			log.info("model.addAttribute 종료");
 
-			log.info("/Mypage/correectionProc 종료");
+			log.info("/Mypage/correctionProc 종료");
 
 			return "/redirect";
 		}

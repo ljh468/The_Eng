@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/Mypage/correectionProc.do">
+	<form action="/Mypage/correctionProc.do">
 		Email: <span>이메일은 수정이 불가능합니다.</span> <br>
 		Gender: <input id="male" type="radio" name="gender" value="m" <%=CmmUtil.checked("m", res.getUser_gender()) %>> <label for="male">male</label> 
 				<input id="female" type="radio" name="gender" value="w" <%=CmmUtil.checked("w", res.getUser_gender()) %>> <label for="female">female</label><br>

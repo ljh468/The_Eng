@@ -29,7 +29,7 @@ import poly.persistance.mongo.IMongoNewsMapper;
 
 		Logger log = Logger.getLogger(this.getClass());
 		
-		// mongo wordPool에서 word, pool 뽑아오기
+		// mongoDB의  wordPool에서 word, pool 뽑아오기
 		@SuppressWarnings("unchecked")
 		@Override
 		public Map<String, List<String>> getWordPool() throws Exception {

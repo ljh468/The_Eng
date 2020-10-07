@@ -8,7 +8,4 @@ public interface IMongoNewsMapper {
 	Map<String, List<String>> getWordPool() throws Exception;
 	
 
-
-	
-
 }

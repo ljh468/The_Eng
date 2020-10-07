@@ -6,8 +6,9 @@
 	
 <%
 	
-	List<WordQuizDTO> quizList =(List<WordQuizDTO>)request.getAttribute("quizList"); 
-	out.print("jsp : " + quizList.get(0).getTranslation());
+	List<WordQuizDTO> quizList =(List<WordQuizDTO>)request.getAttribute("quizList");
+
+	
 %>
 
 <!--
@@ -134,8 +135,8 @@ Coded by www.creative-tim.com
 							<h6 style="color:grey">2020, Dec 11</h6>
 						</div>
 						
-						<p class="m-4" style="font-size:1.5em"><%=quizList.get(0).getSentence() %></p>
-						<span><%=TranslateUtil.kakaotrans(quizList.get(0).getTranslation()) %></span>
+						<p class="m-4" style="font-size:1.5em"><%=quizList.get(0).getQuiz_sent() %></p>
+						<span><%=quizList.get(0).getQuiz_sent()%></span>
 						<!-- textbox의 value값에 문제로 낼 단어의 앞 두글자를 힌트로 준다.  -->
 					</div>
 				</div>

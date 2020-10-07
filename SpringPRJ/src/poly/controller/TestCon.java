@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -26,10 +25,9 @@ import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.INewsService;
 import poly.service.INewsWordService;
-import poly.util.CmmUtil;
 
 @Controller
-public class TestQuizController {
+public class TestCon {
 
 	@Resource(name = "MongoTestMapper")
 	private IMongoTestMapper mongoTestMapper;
@@ -141,50 +139,52 @@ public class TestQuizController {
 	}
 
 	// test
-	@RequestMapping(value = "extractWords")
-	public String extractWords(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			ModelMap model) throws Exception {
+		@RequestMapping(value = "extractWords")
+		public String extractWords(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+				ModelMap model) throws Exception {
 
-		// 뉴스 가져오기
-		MongoNewsDTO pDTO = mongoTestMapper.getHeraldNews();
+			// 뉴스 가져오기
+			MongoNewsDTO pDTO = mongoTestMapper.getHeraldNews();
 
-		// 단어 추출 -
-		// [{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
-		List<Map<String, Object>> rList = newsWordService.extractWords(pDTO);
+			// 단어 추출 -
+			// [{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
+			List<Map<String, Object>> rList = newsWordService.extractWords(pDTO);
 
-		Map<String, Object> pMap = new HashMap<String, Object>();
-		Iterator<Map<String, Object>> it = rList.iterator();
-		Integer a = new Integer(0);
-		Integer[] b = new Integer[pDTO.getOriginal_sentences().size() - 2];
-
-		List<WordQuizDTO> quizList = new ArrayList<>();
-
-		int k = 0;
-		while (it.hasNext()) {
-
-			pMap = (Map<String, Object>) it.next();
+			Map<String, Object> pMap = new HashMap<String, Object>();
+			
+			List<WordQuizDTO> quizList = new ArrayList<WordQuizDTO>();
+			Iterator<Map<String, Object>> it = rList.iterator();
+			List<String> wordList = new ArrayList<String>();
+			List<String> sentList = new ArrayList<String>();
 			WordQuizDTO quizDTO = new WordQuizDTO();
-			int wordIdx = (Integer) pMap.get("wordIdx");
-			int sntncIdx = (Integer) pMap.get("sntncIdx");
-			String lemma = (String) pMap.get("lemma");
-			String word = (String) pMap.get("word");
-			quizDTO.setLemma(lemma);
-			quizDTO.setAnswer(word);
-			String originalSent = pDTO.getOriginal_sentences().get(sntncIdx);
-			quizDTO.setOriginalSentence(originalSent);
-			quizDTO.setTranslation(originalSent);
 			
-			// 정답을 공백처리
-			quizDTO.setSentence(
-					originalSent.replace(word, "<input type='text' value='" + word.substring(0, 2) + "' id='answer'>"));
-			quizDTO.setAnswerSentence(
-					originalSent.replace(word, "<span style='font-weight:bold;'>" + word + "</span>"));
+			
+		
+			while (it.hasNext()) {
 
-			quizList.add(quizDTO);
-			
+				pMap = (Map<String, Object>) it.next();
+				int wordIdx = (Integer) pMap.get("wordIdx");
+				int sntncIdx = (Integer) pMap.get("sntncIdx");
+				log.info("sntncIdx : " + sntncIdx);
+				String word = (String) pMap.get("word");
+				String sent = (String) pDTO.getOriginal_sentences().get(sntncIdx);
+				
+				quizDTO.setUrl(pDTO.getNews_url());
+				wordList.add(word);
+				quizDTO.setWord(wordList);
+				sentList.add(sent);
+				quizDTO.setOriginal_sent(sentList);
+			}	
+			log.info("wordList : "+ wordList);
+			log.info("pDTO : " +pDTO);
+			mongoTestMapper.insert(quizDTO);
+			return null;
+
 		}
 		
-//			// MAP의 KEY값을 이용하여 VALUE값 가져오기
+//		Integer a = new Integer(0);
+//		Integer[] b = new Integer[pDTO.getOriginal_sentences().size() - 2];	
+		// MAP의 KEY값을 이용하여 VALUE값 가져오기
 //			log.info("rMap - sntIdx: " + pMap.get("sntncIdx"));
 //			a = (Integer) pMap.get("sntncIdx");
 //			b[k] = a;
@@ -223,11 +223,10 @@ public class TestQuizController {
 
 //		result.get(mode).replace(, "");
 
-		model.addAttribute("quizList", quizList);
-		log.info(quizList);
-		return "/Today/TodayExam";
+//		model.addAttribute("quizList", quizList);
+//		return "/Today/TodayExam";
 
 	}
 
-}
+
 

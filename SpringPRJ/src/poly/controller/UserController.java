@@ -142,7 +142,8 @@ public class UserController {
 		log.info("user_email : " + user_email);
 		log.info("user_gender : " + user_gender);
 		
-		// 매우중요!! - 콤마로 조인
+		// 관심분야를 DB에 저장하기 위해 ,로 String Join
+		// 매우중요!! - 콤마로 조인 
 		String interests = String.join(",", user_interest);
 		log.info("interest : " + interests);
 		

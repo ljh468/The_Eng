@@ -24,7 +24,7 @@ import poly.service.INewsService;
 import poly.service.IUserService;
 
 @Controller
-public class TestController {
+public class Test_2_Con {
 
 	@Resource(name = "UserService")
 	IUserService userService;
@@ -61,6 +61,7 @@ public class TestController {
 	@ResponseBody
 	public List<Map<String, Object>> insert(HttpServletRequest request, Model model, HttpSession session)
 			throws Exception {
+		log.info("mongo insert start!!");
 		Map<String, Object> obj = new HashMap<>();
 		obj.put("name", "chang0");
 		// name key에 chang0을 put

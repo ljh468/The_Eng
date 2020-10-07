@@ -83,7 +83,7 @@ public class SetController {
 
 			return "/Setting/TheMypageCheck";
 		}
-
+		// 마이페이지 비밀번호 확인 proc
 		@ResponseBody
 	 	@RequestMapping(value = "/Setting/TheMypageCheckProc", method = RequestMethod.POST)
 		public int TheMypageCheckProc(HttpServletRequest request, HttpSession session) throws Exception {

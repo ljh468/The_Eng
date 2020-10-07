@@ -15,6 +15,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 import poly.dto.MongoNewsDTO;
+import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 
 @Component("MongoTestMapper")
@@ -29,16 +30,58 @@ public class MongoTestMapper implements IMongoTestMapper {
 
 	Logger log = Logger.getLogger(this.getClass());
 
+	// 몽고 DB의 news컬렉션에 insert
 	@Override
-	public boolean createCollection(String colNm) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public void insert(Object obj) throws Exception {
+		mongodb.insert(obj, "news");
+	}
+
+	// 몽고 DB의 quizBank컬렉션에 insert
+	@Override
+	public void insertQuiz(Object obj) throws Exception {
+		mongodb.insert(obj, "quizBank");
+	}
+
+	/**
+	 * ############################################## mongoDB에서 뉴스별 가장 최신뉴스 가져오기
+	 * ##############################################
+	 */
+	@Override
+	public MongoNewsDTO getHeraldNews() throws Exception {
+
+		log.info(getClass().getName() + "getHeraldMapper start");
+		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "herald"))
+				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
+		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
+		return rDTO;
 	}
 
 	@Override
-	public void insertWords() throws Exception {
-		// TODO Auto-generated method stub
+	public MongoNewsDTO getTimesNews() throws Exception {
 
+		log.info(getClass().getName() + "getTimesMapper start");
+		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "times"))
+				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
+		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
+		return rDTO;
+	}
+
+	@Override
+	public MongoNewsDTO getReutersNews() {
+		log.info(getClass().getName() + "getReuterMapper start");
+		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "reuters"))
+				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
+		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
+		return rDTO;
+	}
+
+	@Override
+	public MongoNewsDTO getYonhapNews() {
+		log.info(getClass().getName() + "getYonhapMapper start");
+		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "yonhap"))
+				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
+		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
+		return rDTO;
 	}
 
 	@Override
@@ -88,48 +131,5 @@ public class MongoTestMapper implements IMongoTestMapper {
 		}
 
 		return rList;
-	}
-
-	@Override
-	public void insert(Object obj) throws Exception {
-		mongodb.insert(obj, "news");
-	}
-
-	@Override
-	public MongoNewsDTO getHeraldNews() throws Exception {
-
-		log.info(getClass().getName() + "getHeraldMapper start");
-		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "herald"))
-				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
-		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
-		return rDTO;
-	}
-
-	@Override
-	public MongoNewsDTO getTimesNews() throws Exception {
-
-		log.info(getClass().getName() + "getTimesMapper start");
-		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "times"))
-				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
-		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
-		return rDTO;
-	}
-
-	@Override
-	public MongoNewsDTO getReutersNews() {
-		log.info(getClass().getName() + "getReuterMapper start");
-		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "reuters"))
-				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
-		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
-		return rDTO;
-	}
-
-	@Override
-	public MongoNewsDTO getYonhapNews() {
-		log.info(getClass().getName() + "getYonhapMapper start");
-		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "yonhap"))
-				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
-		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
-		return rDTO;
 	}
 }
