@@ -64,11 +64,13 @@ public class SaveNewsController {
 
 		for (MongoNewsDTO rDTO : pList) {
 
-			// ###############################
-			// 퀴즈생성 START!!
-			// ###############################
-			// rList 형태, 단어추출
-			// 추출된 단어형태:[{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
+			/**
+			 * ###############################
+			 * 퀴즈생성 START!!
+			 * ###############################
+			 *  rList 형태, 단어추출
+			 * 추출된 단어형태:[{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
+			**/
 			List<Map<String, Object>> rList = newsWordService.extractWords(rDTO);
 			log.info("### START ### : insertQuiz");
 			Map<String, Object> pMap = new HashMap<String, Object>(); // Map형태로 이루어진 rList를 나누기위한 객체생성
