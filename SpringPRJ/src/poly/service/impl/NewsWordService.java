@@ -64,6 +64,7 @@ public class NewsWordService implements INewsWordService {
 			int wordIdx = 0;
 			for(String lemma : lemmasBySentence) {
 				if(WORD_POOL.containsKey(lemma.toLowerCase())) {
+					WORD_POOL.remove(lemma.toLowerCase());           // 중복 단어 제거
 					pMap = new HashMap<String, Object>();
 					pMap.put("lemma", lemma);
 					pMap.put("word", pDTO.getTokens().get(sntncIdx).get(wordIdx));

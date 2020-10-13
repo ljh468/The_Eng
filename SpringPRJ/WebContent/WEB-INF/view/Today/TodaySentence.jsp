@@ -1,5 +1,21 @@
+<%@page import="poly.util.TranslateUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+
+	String url = (String)request.getAttribute("url");
+	String original_sent = (String)request.getAttribute("original_sent");
+	String quiz_sent = (String)request.getAttribute("quiz_sent");
+	String answer_sent = (String)request.getAttribute("answer_sent");
+	String word = (String)request.getAttribute("word");
+	
+	out.print("url : " + url);
+	out.print("original_sent : " + original_sent);
+	out.print("quiz_sent : " + quiz_sent);
+	out.print("answer_sent : " + answer_sent);
+	
+%>
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -126,14 +142,8 @@ Coded by www.creative-tim.com
 						</div>
 						
 						<p class="m-4" style="font-size:1.5em">
-						Self-driving cars, smart cities, fully 
-						connected homes, robots. This is the future and it will 2be powered
-						by 5G.
-						<!--  The G stands for 3generation as in next <b>generation</b> wireless network
-						and it's going to be fast. About 10 times faster than 4G network on your phone
-						right now. Today it takes about six minutes to download a 3D movies with 4G.
-						With 5G, it will be 30 seconds. but 5G is about more than just super fast downloads
-						and fewer dropped calls, really about connecting the 4 Internet of things. All those... -->
+						<%=original_sent %>
+						
 						</p>
 						
 						<hr>
@@ -141,7 +151,7 @@ Coded by www.creative-tim.com
 
 						<h6 class="m-3" style="color:orange">Korean</h6>
 						
-						<p class="m-4" style="font-size:1.5em">자율 주행차, 스마트 시티, 완전히 연결된 주택, 로봇, 이것이 미래이며 5G로 구동될 것입니다. 
+						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(original_sent) %>
 						</p>
 					</div>
 				</div>
@@ -154,38 +164,11 @@ Coded by www.creative-tim.com
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-
-			</div>
+				
 			
 		
 			<!-- --------------------------------------------------------------------------- -->
-			<!-- footer -->
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+			
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>

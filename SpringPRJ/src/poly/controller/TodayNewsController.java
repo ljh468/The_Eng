@@ -10,7 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
 import poly.dto.MongoNewsDTO;
+import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.IMailService;
 import poly.service.INewsService;
@@ -81,6 +85,7 @@ public class TodayNewsController {
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
+			model.addAttribute("news_url", rDTO.getNews_url());
 
 
 			return "Today/TodayNews";
@@ -94,7 +99,8 @@ public class TodayNewsController {
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
-
+			model.addAttribute("news_url", rDTO.getNews_url());
+			
 			return "Today/TodayNews";
 		} 	// 코리아타임즈 뉴스 추출
 			else if (news_name.equals("times")) {
@@ -106,7 +112,8 @@ public class TodayNewsController {
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
-
+			model.addAttribute("news_url", rDTO.getNews_url());
+			
 			return "Today/TodayNews";
 			
 		} 	// 연합 뉴스 추출
@@ -119,7 +126,8 @@ public class TodayNewsController {
 			model.addAttribute("news_title", rDTO.getNews_title());
 			model.addAttribute("original_sentences", rDTO.getOriginal_sentences());
 			model.addAttribute("insertdate", rDTO.getInsertDate());
-
+			model.addAttribute("news_url", rDTO.getNews_url());
+			
 			return "Today/TodayNews";
 		} else
 			return null;
@@ -128,14 +136,34 @@ public class TodayNewsController {
 	 * ########################################## 
 	 * 오늘의문장 ( 뉴스의 주요문장 추출 )
 	 * ##########################################
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "Today/TodaySentence")
-	public String TodaySentence() {
-
+	public String TodaySentence(HttpServletRequest request, ModelMap model) throws Exception {
 		log.info("TodaySentence 시작");
+		String news_url = request.getParameter("news_url");
+		DBObject query = new BasicDBObject("url", news_url);
+		log.info("query : " + query);
+		
+		WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
+		
+		log.info("url : "+ rDTO.getUrl());
+		log.info("original_sent : "+ rDTO.getOriginal_sent().get(0));
+		log.info("quiz_sent : "+ rDTO.getQuiz_sent().get(0));
+		log.info("answer_sent : "+ rDTO.getAnswersentence().get(0));
+		log.info("word : "+ rDTO.getWord().get(0));
+		
+		
+		model.addAttribute("url", news_url);
+		model.addAttribute("original_sent", rDTO.getOriginal_sent().get(0));
+		model.addAttribute("quiz_sent : "+ rDTO.getQuiz_sent().get(0));
+		model.addAttribute("answer_sent : "+ rDTO.getAnswersentence().get(0));
+		model.addAttribute("word : "+ rDTO.getWord().get(0));
+		
+		
 		log.info("TodaySentence 종료 ");
 
-		return "/Today/TodaySentence";
+		return "Today/TodaySentence";
 	}
 	/**
 	 * ########################################## 

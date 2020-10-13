@@ -83,6 +83,15 @@ public class MongoTestMapper implements IMongoTestMapper {
 		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
 		return rDTO;
 	}
+	// url로 퀴즈 가져오기
+	@Override
+	public WordQuizDTO getQuiz(DBObject query) throws Exception{
+		log.info(getClass().getName() +"getQuiz start");
+		DBObject quiz = mongodb.getCollection("quizBank").find(query).next();
+		
+		WordQuizDTO rDTO = new WordQuizDTO(quiz);
+		return rDTO;
+	}
 
 	@Override
 	public List<Map<String, Object>> test() throws Exception {
@@ -122,10 +131,10 @@ public class MongoTestMapper implements IMongoTestMapper {
 			DBObject obj = res.next();
 			// obj에 res를 대입
 			Map<String, Object> rMap = new HashMap<>();
-			rMap.put("name", (String) obj.get("name"));
+			rMap.put("url", (String) obj.get("news_url"));
 			// 키 name에 name데이터를 put
-			rMap.put("age", (Integer) obj.get("age"));
-			rMap.put("sentence", (List<String>) obj.get("sentence"));
+			rMap.put("news_name", (String) obj.get("news_name"));
+			rMap.put("sentence", (List<String>) obj.get("original_sentences"));
 
 			rList.add(rMap);
 		}

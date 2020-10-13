@@ -1,6 +1,9 @@
 package poly.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.mongodb.DBObject;
 
 public class WordQuizDTO {
 
@@ -10,11 +13,29 @@ public class WordQuizDTO {
 	private List<String> word;
 	private List<String> answersentence;
 	
-	private int idx;
+	private List<Integer> idx;
 	private int correctCounter;
 	private int totalQs;
 	private int answeredQCount;
 	
+	public WordQuizDTO() {
+		this.url = new String();
+		this.original_sent = new ArrayList<>();
+		this.quiz_sent = new ArrayList<>();
+		this.word = new ArrayList<>();		
+		this.answersentence = new ArrayList<>();
+	}
+	
+	@SuppressWarnings("unchecked")
+	   public WordQuizDTO(DBObject quiz) {
+		
+		this.url = (String) ( quiz).get("url");
+		this.original_sent = (List <String>) ( quiz).get("original_sent");
+		this.quiz_sent = (List <String>) ( quiz).get("quiz_sent");
+		this.word = (List <String>) ( quiz).get("word");
+		this.answersentence = (List <String>) ( quiz).get("answersentence");
+		  
+	   }
 	
 	public String getUrl() {
 		return url;
@@ -40,12 +61,15 @@ public class WordQuizDTO {
 	public void setWord(List<String> word) {
 		this.word = word;
 	}
-	public int getIdx() {
+	
+	public List<Integer> getIdx() {
 		return idx;
 	}
-	public void setIdx(int idx) {
+
+	public void setIdx(List<Integer> idx) {
 		this.idx = idx;
 	}
+
 	public int getCorrectCounter() {
 		return correctCounter;
 	}

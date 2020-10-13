@@ -34,7 +34,7 @@ public class TestCon {
 
 	@Resource(name = "NewsService")
 	private INewsService newsService;
-
+	
 	@Resource(name = "NewsWordService")
 	private INewsWordService newsWordService;
 

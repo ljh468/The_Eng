@@ -81,9 +81,10 @@ public class SaveNewsController {
 			List<String> sentList = new ArrayList<String>();
 			List<String> answersentList = new ArrayList<String>();
 			List<String> quizList = new ArrayList<String>();
+			List<Integer> idx = new ArrayList<Integer>();
 			//////////////////////////////////////////////////////
 			WordQuizDTO quizDTO = new WordQuizDTO();
-
+			int index = 0;
 			while (it.hasNext()) {
 
 				pMap = (Map<String, Object>) it.next();
@@ -104,21 +105,30 @@ public class SaveNewsController {
 				quizDTO.setAnswersentence(answersentList); // 정답이 포함된 문장 list를 DTO에 담기
 				quizList.add(quizSent); // 퀴즈로 생성된 문장 list를 DTO에 담기
 				quizDTO.setQuiz_sent(quizList);
+				
+				
+				idx.add(index);
+				quizDTO.setIdx(idx);
+				index += 1;
+				
+				
 			}
 			mongoTestMapper.insertQuiz(quizDTO);
+			quizDTO=null;
 			log.info("### END ### : insertQuiz");
 		// ###############################
 		// 퀴즈생성 END!!
 		// ###############################
 			
-		// 웹크롤링한 영어뉴스 4가지 mongoDB에 저장	
-		mongoTestMapper.insert(rDTO); 
+		// 웹크롤링한 영어뉴스 4가지 mongoDB에 저장	Eclipse Theme
+		mongoTestMapper.insert(rDTO);
+		rDTO =null;
 		res++;
 	}
 
 	model.addAttribute("res",String.valueOf(res)); // 수집된 뉴스기사
 	log.info("### END ### : insertNews");
-
+	
 	return"/news/NewsForWEB";
 
 	}
