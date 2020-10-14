@@ -67,47 +67,7 @@ Coded by www.creative-tim.com
 						<a class="navbar-brand" href="javascript:;">Today Highlight
 							English</a>
 					</div>
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navigation">
-						<form>
-							<div class="input-group no-border">
-								<input type="text" value="" class="form-control"
-									placeholder="Search...">
-								<div class="input-group-append">
-									<div class="input-group-text">
-										<i class="nc-icon nc-zoom-split"></i>
-									</div>
-								</div>
-							</div>
-						</form>
-						<ul class="navbar-nav">
-							<li class="nav-item"><a class="nav-link btn-magnify"
-								href="javascript:;"> <i class="nc-icon nc-layout-11"></i> <span
-									class="d-lg-none d-md-block">Stats</span>
-
-							</a></li>
-							<li class="nav-item btn-rotate dropdown"><a
-								class="nav-link dropdown-toggle" href="http://example.com"
-								id="navbarDropdownMenuLink" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <i
-									class="nc-icon nc-bell-55"></i> <span
-									class="d-lg-none d-md-block">Some Actions</span>
-
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a> <a
-										class="dropdown-item" href="#">Something else here</a>
-								</div></li>
-							<li class="nav-item"><a class="nav-link btn-rotate"
-								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
-
-									<span class="d-lg-none d-md-block">Account</span>
-
-							</a></li>
-						</ul>
-					</div>
+					
 				</div>
 			</nav>
 			<!-- End Navbar------------------------------------------------------------------ -->
@@ -254,71 +214,7 @@ Coded by www.creative-tim.com
 							title and make up the body of the card's content.</p>
 					</div>
 				</div>
-			</div>
-			<!-- 
-				<div class="card">
-				<div class="card-header">
-					<h4 class="mt-0 mb-0 text-center">추천 뉴스</h4>
-				</div>
-				<hr>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-6 col-lg-6 pr-2 pb-3">
-								<div class="row">
-									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
-										<img src="/resources/images/HeraldLogo.jpg"></button>
-									</div>
-									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>
-									Are we witnessing the arrival of a "new" Neymar?
-									We are used to seeing the Brazil forward do impressice things...
-
-								</div>
-
-							</div>
-							<div class="col-6 pl-2 pb-3">
-								<div class="row">
-									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
-										<img src="/resources/images/TheKorea.jpg" ></button>
-									</div> 
-									<div style="color:orange">KAI to supply 2 more Charmsuri<br>impresses with...</div>
-									Are we witnessing the arrival of a "new" Neymar?
-									We are used to seeing the Brazil forward do impressice things...
-									</div>
-
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col-6 pr-2">
-								<div class="row">
-									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
-										<img src="/resources/images/graph.jpg"></button>
-									</div>
-									미리 보여주는 내용 중 창에 맞춰 글자 중 어디까지 보여줄지 정해야함.
-									<div class="col-12">
-									<div style="color:orange">South Korea tightens <br>Coivid-19</div>
-									Museums, nightclubs and karaoke bars have closed in and around
-									South Korea's capital, Seoul...
-									</div>
-
-								</div>
-							</div>
-							<div class="col-6 pl-2">
-								<div class="row">
-									<div class="col-12">
-										<button type="button" style="border:0; outline:0;" onclick="location='/Today/TodayNews.do'">
-										<img src="/resources/images/Neymar.jpg"></button>
-									</div>
-									<div style="color:orange">A new Neymar? PSG forward's <br>impresses with...</div>
-									Are we witnessing the arrival of a "new" Neymar?
-									We are used to seeing the Brazil forward do impressice things...
-									</div>
- -->
-		</div>
+			
 	</div>
 	</div>
 	</div>
