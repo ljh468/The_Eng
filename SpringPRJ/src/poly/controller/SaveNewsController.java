@@ -45,8 +45,10 @@ public class SaveNewsController {
 	private Logger log = Logger.getLogger(getClass());
 
 	/**
-	 * ############################################################## 크롤링 바로 자연어 처리
-	 * -> mongoDB 저장 ##############################################################
+	 * ############################################################## 
+	 * 크롤링 바로 자연어 처리
+	 * mongoDB 저장 
+	 * ##############################################################
 	 */
 
 	@RequestMapping(value = "insertNews", produces = "application/json; charset=UTF8")
