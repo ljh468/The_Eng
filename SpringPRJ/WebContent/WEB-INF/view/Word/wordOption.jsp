@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+
+	List<String> rList = request.getAttribute(")
+
+%>
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -39,9 +45,7 @@ Coded by www.creative-tim.com
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
-
+<link rel="stylesheet" href="/resources/scss/Button.css">
 <style>
 .container {
 	height: 400px;
@@ -79,7 +83,7 @@ Coded by www.creative-tim.com
 
 </head>
 
-<body class="">
+<body class="" style="background-color: #F3F4EF">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
@@ -137,7 +141,7 @@ Coded by www.creative-tim.com
 						</div>
 					</div>
 				</div>
-				<div class="container" style="height : 130px;">
+				<div class="container" style="height: 130px;">
 					<div class="card">
 						<div class="card-header">
 							<h4 class="mt-0 mb-0 text-center">단어 개수 설정</h4>
@@ -160,38 +164,16 @@ Coded by www.creative-tim.com
 						</div>
 					</div>
 				</div>
+				<br><br>
 				<div class="row">
-					<div class="col-8"></div>
-					<div class="col-4">
-						<button onClick="location.href='/Word/wordStudy.do';">학습
-							시작</button>
-					</div>
+					<div class="col-3"></div>
+					<div class="col-6">
+						<button style="width: 100%" class="next "
+							onclick="location='/Word/wordStudy.do'">학습 시작</button>
+					</div>	
+					<div class="col-3"></div>
 				</div>
 			</div>
-
-
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
-				</div>
-			</footer>
 		</div>
 	</div>
 	<!--   Core JS Files   -->

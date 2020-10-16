@@ -1,19 +1,17 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
+<%
 
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+	String answer_sent = (String)request.getAttribute("answer_sent");
+	String news_url = (String) request.getAttribute("news_url");
+	String news_name = (String)request.getAttribute("news_name");
+	String news_title = (String)request.getAttribute("news_title");
+	String insertdate = (String)request.getAttribute("insertdate");
+	String original_sent = (String)request.getAttribute("original_sent");
+	String word = (String)request.getAttribute("word");
+	
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,8 +37,7 @@ Coded by www.creative-tim.com
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
+<link rel="stylesheet" href="/resources/scss/Button.css">
 </head>
 
 <body class="">
@@ -48,71 +45,13 @@ Coded by www.creative-tim.com
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
 			<!-- Navbar -->
-			<nav
-				class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-				<div class="container-fluid">
-					<div class="navbar-wrapper">
-						<div class="navbar-toggle">
-							<button type="button" class="navbar-toggler" id="navbar-toggler">
-								<span class="navbar-toggler-bar bar1"></span> <span
-									class="navbar-toggler-bar bar2"></span> <span
-									class="navbar-toggler-bar bar3"></span>
-							</button>
-						</div>
-						<a class="navbar-brand" href="javascript:;">Today Highlight
-							English</a>
-					</div>
-					<div class="collapse navbar-collapse justify-content-end"
-						id="navigation">
-						<form>
-							<div class="input-group no-border">
-								<input type="text" value="" class="form-control"
-									placeholder="Search...">
-								<div class="input-group-append">
-									<div class="input-group-text">
-										<i class="nc-icon nc-zoom-split"></i>
-									</div>
-								</div>
-							</div>
-						</form>
-						<ul class="navbar-nav">
-							<li class="nav-item"><a class="nav-link btn-magnify"
-								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
-									
-										<span class="d-lg-none d-md-block">Stats</span>
-									
-							</a></li>
-							<li class="nav-item btn-rotate dropdown"><a
-								class="nav-link dropdown-toggle" href="http://example.com"
-								id="navbarDropdownMenuLink" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false"> <i
-									class="nc-icon nc-bell-55"></i>
-									
-										<span class="d-lg-none d-md-block">Some Actions</span>
-									
-							</a>
-								<div class="dropdown-menu dropdown-menu-right"
-									aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" href="#">Action</a> <a
-										class="dropdown-item" href="#">Another action</a> <a
-										class="dropdown-item" href="#">Something else here</a>
-								</div></li>
-							<li class="nav-item"><a class="nav-link btn-rotate"
-								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
-									
-										<span class="d-lg-none d-md-block">Account</span>
-									
-							</a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
+			
 			<!-- End Navbar -->
 			<!-- 뉴스 기사 삽입. -->
-			<div class="content">
+			<div class="content" style="margin-top: 30px;">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center"><b>The New York Times</b></h4>
+						<h4 class="mt-0 mb-0 text-center"><b><%=news_name %></b></h4>
 					</div>
 					<hr>
 					<div class="card-body">
@@ -120,22 +59,11 @@ Coded by www.creative-tim.com
 						<h6 style="color:orange">Today Record</h6>
 						<br>
 						<!-- 자동으로 바뀌어야 하는 구역 -->
-						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
-						<h6>Writer's name</h6>
-						<h6 style="color:grey">2020, Dec 11</h6>
+						<h3 class="card-text"><b><%=news_title %></b></h3>
+						<h6 style="color:grey"><%=insertdate %></h6>
 						</div>
 						
-						<p class="m-4" style="font-size:1.5em">
-						Self-driving cars, smart cities, fully 
-						connected homes, robots. This is the future and it will 2be powered
-						by 5G. The G stands for 3generation as in next generation wireless network
-						and it's going to be fast. 
-						<!--  The G stands for 3generation as in next <b>generation</b> wireless network
-						and it's going to be fast. About 10 times faster than 4G network on your phone
-						right now. Today it takes about six minutes to download a 3D movies with 4G.
-						With 5G, it will be 30 seconds. but 5G is about more than just super fast downloads
-						and fewer dropped calls, really about connecting the 4 Internet of things. All those... -->
-						</p>
+						<p class="m-4" style="font-size:1.5em"><%=answer_sent %></p>
 						
 						<hr>
 						<!-- 뉴스 기사 끝. -->
@@ -171,43 +99,20 @@ Coded by www.creative-tim.com
 						</div>
 					</div>
 				</div>
-			
-			<!-- 다음으로 넘어가는 버튼 만들기  -->
-			<div>
-			<input style="float:right" type="button" class="btn btn-warning btn-block btn-lg" value="Result" onclick="location='/Today/TodayResult.do'">
-			</div>
-								</div>
-							</div>
-						</div>
-					
-			
-		
-			<!-- --------------------------------------------------------------------------- -->
-			<!-- footer -->
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
+
+				<!-- 다음으로 넘어가는 버튼 만들기  -->
+				<div>
+					<button style="width: 100%" class="submit mb-0"
+					onclick="location='/Today/TodayResult.do'">결과</button>
 				</div>
-			</footer>
-		
-	
+			</div>
+		</div>
+	</div>
+
+
+
+
+
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -223,13 +128,7 @@ Coded by www.creative-tim.com
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {

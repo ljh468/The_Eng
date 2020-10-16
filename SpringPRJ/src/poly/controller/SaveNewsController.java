@@ -23,6 +23,7 @@ import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.INewsWordService;
 import poly.service.IUserService;
+import poly.util.TranslateUtil;
 
 @Controller
 public class SaveNewsController {
@@ -45,10 +46,8 @@ public class SaveNewsController {
 	private Logger log = Logger.getLogger(getClass());
 
 	/**
-	 * ############################################################## 
-	 * 크롤링 바로 자연어 처리
-	 * mongoDB 저장 
-	 * ##############################################################
+	 * ############################################################## 크롤링 바로 자연어 처리
+	 * -> mongoDB 저장 ##############################################################
 	 */
 
 	@RequestMapping(value = "insertNews", produces = "application/json; charset=UTF8")
@@ -66,13 +65,11 @@ public class SaveNewsController {
 
 		for (MongoNewsDTO rDTO : pList) {
 
-			/**
-			 * ###############################
-			 * 퀴즈생성 START!!
-			 * ###############################
-			 *  rList 형태, 단어추출
-			 * 추출된 단어형태:[{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
-			**/
+			// ###############################
+			// 퀴즈생성 START!!
+			// ###############################
+			// rList 형태, 단어추출
+			// 추출된 단어형태:[{"wordIdx":5,"pool":["Business"],"lemma":"digit","word":"digit","sntncIdx":0},
 			List<Map<String, Object>> rList = newsWordService.extractWords(rDTO);
 			log.info("### START ### : insertQuiz");
 			Map<String, Object> pMap = new HashMap<String, Object>(); // Map형태로 이루어진 rList를 나누기위한 객체생성
@@ -83,10 +80,10 @@ public class SaveNewsController {
 			List<String> sentList = new ArrayList<String>();
 			List<String> answersentList = new ArrayList<String>();
 			List<String> quizList = new ArrayList<String>();
-			List<Integer> idx = new ArrayList<Integer>();
+			List<String> usedNews = new ArrayList<String>();
+			List<String> transList = new ArrayList<String>();
 			//////////////////////////////////////////////////////
 			WordQuizDTO quizDTO = new WordQuizDTO();
-			int index = 0;
 			while (it.hasNext()) {
 
 				pMap = (Map<String, Object>) it.next();
@@ -107,30 +104,25 @@ public class SaveNewsController {
 				quizDTO.setAnswersentence(answersentList); // 정답이 포함된 문장 list를 DTO에 담기
 				quizList.add(quizSent); // 퀴즈로 생성된 문장 list를 DTO에 담기
 				quizDTO.setQuiz_sent(quizList);
+				transList.add(TranslateUtil.kakaotrans(sent)); // 문장 번역리스트
+				quizDTO.setTranslation(transList); // 번역 list를 DTO에 담기 				
 				
-				
-				idx.add(index);
-				quizDTO.setIdx(idx);
-				index += 1;
-				
-				
+					
 			}
 			mongoTestMapper.insertQuiz(quizDTO);
-			quizDTO=null;
 			log.info("### END ### : insertQuiz");
 		// ###############################
 		// 퀴즈생성 END!!
 		// ###############################
 			
-		// 웹크롤링한 영어뉴스 4가지 mongoDB에 저장	Eclipse Theme
-		mongoTestMapper.insert(rDTO);
-		rDTO =null;
+		// 웹크롤링한 영어뉴스 4가지 mongoDB에 저장	
+		mongoTestMapper.insert(rDTO); 
 		res++;
 	}
 
 	model.addAttribute("res",String.valueOf(res)); // 수집된 뉴스기사
 	log.info("### END ### : insertNews");
-	
+
 	return"/news/NewsForWEB";
 
 	}

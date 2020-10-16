@@ -1,30 +1,24 @@
+<%@page import="java.util.Date"%>
 <%@page import="poly.util.TranslateUtil"%>
 <%@page import="poly.dto.WordQuizDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
+
 <%
 	
-	List<WordQuizDTO> quizList =(List<WordQuizDTO>)request.getAttribute("quizList");
-
+	String news_url = (String) request.getAttribute("news_url");
+	String news_name = (String)request.getAttribute("news_name");
+	String insertdate = (String)request.getAttribute("insertdate");
+	String news_title = (String)request.getAttribute("news_title");
+	String original_sent = (String)request.getAttribute("original_sent");
+	String translation = (String)request.getAttribute("translation");
+	String quiz_sent = (String)request.getAttribute("quiz_sent");
+	String answer_sent = (String)request.getAttribute("answer_sent");
+	String word = (String)request.getAttribute("word");
 	
 %>
-
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +46,12 @@ Coded by www.creative-tim.com
 	rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/resources/assets/demo/demo.css" rel="stylesheet" />
+<link rel="stylesheet" href="/resources/scss/Button.css">
+<style>
+	#answer{
+		width:200px;
+	}
+</style>
 </head>
 
 <body class="">
@@ -59,45 +59,45 @@ Coded by www.creative-tim.com
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
 			<!-- Navbar -->
-			<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+			<nav
+				class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
 				<div class="container-fluid">
 					<div class="navbar-wrapper">
 						<div class="navbar-toggle">
 							<button type="button" class="navbar-toggler" id="navbar-toggler">
-								<span class="navbar-toggler-bar bar1"></span> 
-								<span class="navbar-toggler-bar bar2"></span> 
-								<span class="navbar-toggler-bar bar3"></span>
+								<span class="navbar-toggler-bar bar1"></span> <span
+									class="navbar-toggler-bar bar2"></span> <span
+									class="navbar-toggler-bar bar3"></span>
 							</button>
 						</div>
 						<a class="navbar-brand" href="javascript:;">Today Highlight
 							English</a>
-						</div>
+					</div>
 					<div class="collapse navbar-collapse justify-content-end"
 						id="navigation">
 						<form>
 							<div class="input-group no-border">
-								<input type="text" value="" class="form-control" placeholder="Search...">
+								<input type="text" value="" class="form-control"
+									placeholder="Search...">
 								<div class="input-group-append">
 									<div class="input-group-text">
-									<i class="nc-icon nc-zoom-split"></i>
+										<i class="nc-icon nc-zoom-split"></i>
 									</div>
 								</div>
 							</div>
 						</form>
 						<ul class="navbar-nav">
-							<li class="nav-item"><a class="nav-link btn-magnify" href="javascript:;">
-							<i class="nc-icon nc-layout-11"></i>
-									
-										<span class="d-lg-none d-md-block">Stats</span>
-									
+							<li class="nav-item"><a class="nav-link btn-magnify"
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i> <span
+									class="d-lg-none d-md-block">Stats</span>
+
 							</a></li>
 							<li class="nav-item btn-rotate dropdown"><a
 								class="nav-link dropdown-toggle" href="http://example.com"
 								id="navbarDropdownMenuLink" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <i
-									class="nc-icon nc-bell-55"></i>
-									
-										<span class="d-lg-none d-md-block">Some Actions</span>
+									class="nc-icon nc-bell-55"></i> <span
+									class="d-lg-none d-md-block">Some Actions</span>
 
 							</a>
 								<div class="dropdown-menu dropdown-menu-right"
@@ -106,12 +106,11 @@ Coded by www.creative-tim.com
 										class="dropdown-item" href="#">Another action</a> <a
 										class="dropdown-item" href="#">Something else here</a>
 								</div></li>
-								<li class="nav-item">
-								<a class="nav-link btn-rotate" href="javascript:;"> 
-								<i class="nc-icon nc-settings-gear-65"></i>
-									
-										<span class="d-lg-none d-md-block">Account</span>
-									
+							<li class="nav-item"><a class="nav-link btn-rotate"
+								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
+
+									<span class="d-lg-none d-md-block">Account</span>
+
 							</a></li>
 						</ul>
 					</div>
@@ -119,42 +118,54 @@ Coded by www.creative-tim.com
 			</nav>
 			<!-- End Navbar -->
 			<!-- 뉴스 기사 삽입. -->
-			<div class="content">
+			<div class="content" style="margin-top: 30px;">
 			
 				<div class="card">
 				
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center"><b>The New York Times</b></h4>
+						<h4 class="mt-0 mb-0 text-center"><b><%=news_name %></b></h4>
 					</div>
 						<hr>
 						<div class="card-body">
 							<h6 class="m-3" style="color:orange">Today Exam</h6>
 						<div class="m-3">
-							<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
-							<h6 style="color:grey">Writer's name</h6>
-							<h6 style="color:grey">2020, Dec 11</h6>
+							<h3 class="card-text"><b><%=news_title %></b></h3>
+							<h6 style="color:grey"><%=insertdate %></h6>
 						</div>
 						
-						<p class="m-4" style="font-size:1.5em"><%=quizList.get(0).getQuiz_sent() %></p>
-						<span><%=quizList.get(0).getQuiz_sent()%></span>
+						<p class="m-4" style="font-size:1.5em"><%=quiz_sent%></p>
+						<br>
+						<p>hint</p>
+						<p><%=word %></p>
+						<span id="word" style="display:none;"><%=word%></span>
+
 						<!-- textbox의 value값에 문제로 낼 단어의 앞 두글자를 힌트로 준다.  -->
 					</div>
 				</div>
-					
-			<!-- 제출하여 답이 맞거나 틀림을 잠깐 보여준 후 다음 페이지로 이동.(구현예정) -->
-			<input style="float:right;"  class="btn btn-success btn-block btn-lg" type="button" 
-			value="Submit">
-			<!-- 다음으로 넘어가는 버튼 -->
-			<input style="float:right;"  class="btn btn-warning btn-block btn-lg" type="button" 
-			value="Next"  onclick="location='/Today/TodayRecord.do'">
-			
-			
-								</div>
-							</div>
-						</div>
-			
-			
-		
+
+				<div class="row">
+				<div class="col-6">
+				<button style="width: 100%" class="submit mb-3" id="submit">submit</button>
+				</div>
+				<div class="col-6">
+				<!-- 다음으로 넘어가는 버튼 -->
+					<form action="/Today/TodayRecord.do" method="post">
+						<input type="hidden" value="<%=news_url %>" name="news_url">
+						<input type="hidden" value="<%=news_name %>" name="news_name">
+						<input type="hidden" value="<%=insertdate %>" name=insertdate>
+						<input type="hidden" value="<%=news_title %>" name="news_title">
+						<button style="width: 100%" class="next mb-5"
+						onclick="location='/Today/TodayRecord.do'">Next</button>
+					</form>
+				</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -170,13 +181,7 @@ Coded by www.creative-tim.com
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
@@ -189,6 +194,27 @@ Coded by www.creative-tim.com
 			}
 
 		})
+		
+		$("#submit").click(function() {
+			var answer = {
+				answer : $("#answer").val(), word : $("#word").text()
+			};
+			console.log(word);
+			$.ajax({
+				url : "answerCheck.do",
+				type : "post",
+				data : answer,
+				success : function(data) {
+	
+					if (data == 1) {
+						$("#answer").css("border-color", "#00AECD");
+						
+					} else if (data == 0) {
+						$("#answer").css("border-color", "#FF1111");
+					}
+				}
+			}); // ajax 끝
+		});
 	</script>
 </body>
 

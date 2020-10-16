@@ -51,11 +51,69 @@ public class Test_2_Con {
 	@ResponseBody
 	public List<Map<String, Object>> selectWithCondition(HttpServletRequest request, Model model, HttpSession session)
 			throws Exception {
-		DBObject query = new BasicDBObject("news_name", "herald");
+		DBObject query = new BasicDBObject("name", "gildong");
 		// name이 gildong인 데이터를 query변수에 대입
 		return mongoTestMapper.selectWithCondition(query);
 		// mongoTestMapper의 selectWithCondition에 query파라미터를 return
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "mongoInsert", produces = "application/json; charset=UTF8")
 	@ResponseBody

@@ -57,6 +57,15 @@ public class MongoTestMapper implements IMongoTestMapper {
 	}
 
 	@Override
+	public MongoNewsDTO getReutersNews() {
+		log.info(getClass().getName() + "getReuterMapper start");
+		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "reuters"))
+				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
+		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
+		return rDTO;
+	}
+	
+	@Override
 	public MongoNewsDTO getTimesNews() throws Exception {
 
 		log.info(getClass().getName() + "getTimesMapper start");
@@ -65,16 +74,6 @@ public class MongoTestMapper implements IMongoTestMapper {
 		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
 		return rDTO;
 	}
-
-	@Override
-	public MongoNewsDTO getReutersNews() {
-		log.info(getClass().getName() + "getReuterMapper start");
-		DBObject firstNews = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "reuters"))
-				.sort(new BasicDBObject("insertDate", -1)).limit(1).next();
-		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
-		return rDTO;
-	}
-
 	@Override
 	public MongoNewsDTO getYonhapNews() {
 		log.info(getClass().getName() + "getYonhapMapper start");
@@ -83,6 +82,7 @@ public class MongoTestMapper implements IMongoTestMapper {
 		MongoNewsDTO rDTO = new MongoNewsDTO(firstNews);
 		return rDTO;
 	}
+	
 	// url로 퀴즈 가져오기
 	@Override
 	public WordQuizDTO getQuiz(DBObject query) throws Exception{

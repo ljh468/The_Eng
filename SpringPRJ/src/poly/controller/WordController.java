@@ -1,11 +1,23 @@
 package poly.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mysql.cj.Session;
+
+import poly.dto.MongoNewsDTO;
+import poly.dto.WordQuizDTO;
+import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.IUserService;
@@ -23,25 +35,60 @@ public class WordController {
 	@Resource(name = "NewsService")
 	INewsService newsService;
 	
+	@Resource(name = "MongoTestMapper")
+	IMongoTestMapper mongoTestMapper;
+	
 	@RequestMapping(value = "Word/wordCard")
-	public String wordCard() {
+	public String wordCard(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
 
 		log.info("wordCard 시작");
-
+		
 		log.info("wordCard 종료");
 
 		return "/Word/wordCard";
 	}
-
 	@RequestMapping(value = "Word/wordOption")
-	public String wordOption() {
+	public String wordOption(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
 
 		log.info("wordOption 시작");
+			
+			String news_name = request.getParameter("news_name");
+			String news_url = null;
+			news_name = "herald";
+			if(news_name.equals("herald")) {
+				MongoNewsDTO hDTO = mongoTestMapper.getHeraldNews();
+				news_url = hDTO.getNews_url();
+			}else if(news_name.equals("reuters")) {
+				MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
+				news_url = rDTO.getNews_url();
+			}else if(news_name.equals("times")) {
+				MongoNewsDTO tDTO = mongoTestMapper.getTimesNews();
+				news_url = tDTO.getNews_url();
+			}else if(news_name.equals("yonhap")) {
+				MongoNewsDTO yDTO = mongoTestMapper.getYonhapNews();
+				news_url = yDTO.getNews_url();
+			}
+		
+			DBObject query = new BasicDBObject("url", news_url);
+			log.info("query : " + query);
 
+			// 생성된 QuizBank컬렌션에서 url로 조회하여 데이터를 가져옴
+			WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
+			
+			List<String> rList = rDTO.getWord();
+			log.info("rList : " + rDTO.getWord());
+			
+			model.addAttribute(rList);
+			
+			for(String wordList : rList) {
+				System.out.println(wordList);
+			}
 		log.info("wordOption 종료");
 
 		return "/Word/wordOption";
 	}
+
+	
 
 	@RequestMapping(value = "Word/wordStudy")
 	public String wordStudy() {

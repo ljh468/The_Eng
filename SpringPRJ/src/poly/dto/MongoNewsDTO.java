@@ -47,9 +47,6 @@ public class MongoNewsDTO {
 	      this.translation = (List<String>) firstNews.get("translation");
 	   }
 	
-	
-	
-	
 	public MongoNewsDTO(Iterator<CoreSentence> it) {
 		this();
 		while(it.hasNext()) {

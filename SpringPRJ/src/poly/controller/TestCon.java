@@ -34,7 +34,7 @@ public class TestCon {
 
 	@Resource(name = "NewsService")
 	private INewsService newsService;
-	
+
 	@Resource(name = "NewsWordService")
 	private INewsWordService newsWordService;
 
@@ -177,7 +177,11 @@ public class TestCon {
 			}	
 			log.info("wordList : "+ wordList);
 			log.info("pDTO : " +pDTO);
+			
+			quizList.add(quizDTO);
 			mongoTestMapper.insert(quizDTO);
+			
+			
 			return null;
 
 		}

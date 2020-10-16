@@ -1,19 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,8 +25,6 @@ Coded by www.creative-tim.com
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -59,7 +43,8 @@ Coded by www.creative-tim.com
 									class="navbar-toggler-bar bar3"></span>
 							</button>
 						</div>
-						<a class="navbar-brand" href="javascript:;">Today Highlight English</a>
+						<a class="navbar-brand" href="javascript:;">Today Highlight
+							English</a>
 					</div>
 					<div class="collapse navbar-collapse justify-content-end"
 						id="navigation">
@@ -76,19 +61,17 @@ Coded by www.creative-tim.com
 						</form>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a class="nav-link btn-magnify"
-								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
-									
-										<span class="d-lg-none d-md-block">Stats</span>
-									
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i> <span
+									class="d-lg-none d-md-block">Stats</span>
+
 							</a></li>
 							<li class="nav-item btn-rotate dropdown"><a
 								class="nav-link dropdown-toggle" href="http://example.com"
 								id="navbarDropdownMenuLink" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <i
-									class="nc-icon nc-bell-55"></i>
-									
-										<span class="d-lg-none d-md-block">Some Actions</span>
-									
+									class="nc-icon nc-bell-55"></i> <span
+									class="d-lg-none d-md-block">Some Actions</span>
+
 							</a>
 								<div class="dropdown-menu dropdown-menu-right"
 									aria-labelledby="navbarDropdownMenuLink">
@@ -98,9 +81,9 @@ Coded by www.creative-tim.com
 								</div></li>
 							<li class="nav-item"><a class="nav-link btn-rotate"
 								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
-							
-										<span class="d-lg-none d-md-block">Account</span>
-									
+
+									<span class="d-lg-none d-md-block">Account</span>
+
 							</a></li>
 						</ul>
 					</div>
@@ -111,86 +94,67 @@ Coded by www.creative-tim.com
 			<div class="content">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center"><b>The New York Times</b></h4>
+						<h4 class="mt-0 mb-0 text-center">
+							<b>TODAY RESULT</b>
+						</h4>
 					</div>
 					<hr>
 					<!-- result창은 가운데 정렬 -->
 					<div class="card-body">
-					<div style="text-align:center;">
-						
-						<h6 style="color:orange">Today Result</h6>
-						
-						
-						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
-						
-						
-						
-						<br>
-						<h6 class="ml-5 mr-5" style="color:orange;">Recorded Voice</h6>
-						
-						<!-- 이곳엔 발음강세에 대한 그래프가 들어갈 예정. -->
-						<img src="/resources/assets/img/mike.jpg">
-						<br><br>
-						
-						<!-- 점수창. -->
-						<hr>
-						<h6 style="color:orange; font-size:20px">발음의 명확성</h6>
-						<div style="font-size:18px; color:blue; font-weight:bold">80</div><br>
-						
-						<h6 style="color:orange; font-size:20px">강세의 유사성</h6>
-						<div style="font-size:18px; color:blue; font-weight:bold">90</div><br>
-						
-						<h6 style="color:orange; font-size:20px">강세의 명확성</h6>
-						<div style="font-size:18px; color:blue; font-weight:bold">50</div><br>
-						
-						<h6 style="color:orange; font-size:20px">총 등급</h6>
-						<div style="font-size:18px; color:blue; font-weight:bold">50</div><br>
-						
-						
-						
-						
-						<!-- 뉴스 기사 끝. -->
-						
-					</div>
-					
-					
-				</div>
-			<!-- 제출하여 답이 맞거나 틀림을 잠깐 보여준 후 다음 페이지로 이동.(구현예정) -->
-			<!-- 다음으로 넘어가는 버튼 -->
-			<input style="float:right;"  class="btn btn-warning btn-block btn-lg" type="button" 
-			value="Main"  onclick="location='/Today/TodayMain.do'">
-			
-			
+						<div style="text-align: center;">
+
+							<h6 style="color: orange">Accent analysis</h6>
+
+							<img src="/resources/images/graph.png"> <br>
+							<hr>
+
+							<!-- 점수창. -->
+							<h6 class="ml-5 mr-5" style="color: orange;">My Grade</h6>
+							<hr>
+							<div class="row">
+								<div class="col-4">
+									<h6 style="color: orange; font-size: 15px">발음의 명확성</h6>
+									<div style="font-size: 18px; color: gray; font-weight: bold"> 80 </div>
+									<div style="font-size: 18px; color: darkturquoise; font-weight: bold">So so</div>
 								</div>
+
+								<div class="col-4">
+									<h6 style="color: orange; font-size: 15px">강세의 유사성</h6>
+									<div style="font-size: 18px; color: gray; font-weight: bold"> 90 </div>
+									<div style="font-size: 18px; color: darkviolet; font-weight: bold"> Great</div>
+									<br>
+								</div>
+
+								<div class="col-4">
+									<h6 style="color: orange; font-size: 15px">강세의 명확성</h6>
+									<div style="font-size: 18px; color: gray; font-weight: bold"> 60 </div>
+									<div style="font-size: 18px; color: red; font-weight: bold">bad</div>
+								</div>
+
 							</div>
+							<img src="/resources/images/grade.png"> <br>
+
+
+
+							<!-- 뉴스 기사 끝. -->
+
 						</div>
+
+
 					</div>
-		
-		
-			<!-- --------------------------------------------------------------------------- -->
-			<!-- footer -->
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
+					<!-- 제출하여 답이 맞거나 틀림을 잠깐 보여준 후 다음 페이지로 이동.(구현예정) -->
+					<!-- 다음으로 넘어가는 버튼 -->
+					<input style="float: right;"
+						class="btn btn-warning btn-block btn-lg" type="button"
+						value="Main" onclick="location='/Today/TodayMain.do'">
+
+
 				</div>
-			</footer>
+			</div>
+		</div>
+	</div>
+
+
 
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
@@ -207,14 +171,7 @@ Coded by www.creative-tim.com
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
-
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
 				$(this).removeClass("toggled");

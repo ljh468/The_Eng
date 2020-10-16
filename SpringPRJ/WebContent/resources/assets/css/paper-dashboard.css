@@ -482,7 +482,7 @@ Copyright (c) 2015 Daniel Eden
   .btn-success.btn-simple {
     color: #6bd098;
     border-color: #6bd098; }
-    .btn-success.btn-simple:hover, .btn-success.btn-simple:focus, .btn-success.btn-simple: {
+    .btn-success.btn-simple:hover, .btn-success.btn-simple:focus, .btn-success.btn-simple {
       background-color: transparent;
       color: #44c47d;
       border-color: #44c47d;

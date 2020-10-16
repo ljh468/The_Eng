@@ -1,35 +1,25 @@
+<%@page import="poly.dto.MongoNewsDTO"%>
 <%@page import="poly.util.TranslateUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
 <%
 
-	String url = (String)request.getAttribute("url");
+	String news_url = (String) request.getAttribute("news_url");
+	String news_name = (String)request.getAttribute("news_name");
+	String insertdate = (String)request.getAttribute("insertdate");
+	String news_title = (String)request.getAttribute("news_title");
 	String original_sent = (String)request.getAttribute("original_sent");
-	String quiz_sent = (String)request.getAttribute("quiz_sent");
-	String answer_sent = (String)request.getAttribute("answer_sent");
-	String word = (String)request.getAttribute("word");
+	String translation = (String)request.getAttribute("translation");
+	Object quiz_sent = (Object)request.getAttribute("quiz_sent");
+	Object answer_sent = (Object)request.getAttribute("answer_sent");
+	Object word = request.getAttribute("word");
 	
-	out.print("url : " + url);
-	out.print("original_sent : " + original_sent);
-	out.print("quiz_sent : " + quiz_sent);
-	out.print("answer_sent : " + answer_sent);
 	
+
 %>
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,8 +45,7 @@ Coded by www.creative-tim.com
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
+<link rel="stylesheet" href="/resources/scss/Button.css">
 </head>
 
 <body class="">
@@ -93,19 +82,17 @@ Coded by www.creative-tim.com
 						</form>
 						<ul class="navbar-nav">
 							<li class="nav-item"><a class="nav-link btn-magnify"
-								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
-									<p>
-										<span class="d-lg-none d-md-block">Stats</span>
-									</p>
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i> <span
+									class="d-lg-none d-md-block">Stats</span>
+
 							</a></li>
 							<li class="nav-item btn-rotate dropdown"><a
 								class="nav-link dropdown-toggle" href="http://example.com"
 								id="navbarDropdownMenuLink" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> <i
-									class="nc-icon nc-bell-55"></i>
-									<p>
-										<span class="d-lg-none d-md-block">Some Actions</span>
-									</p>
+									class="nc-icon nc-bell-55"></i> <span
+									class="d-lg-none d-md-block">Some Actions</span>
+
 							</a>
 								<div class="dropdown-menu dropdown-menu-right"
 									aria-labelledby="navbarDropdownMenuLink">
@@ -115,20 +102,21 @@ Coded by www.creative-tim.com
 								</div></li>
 							<li class="nav-item"><a class="nav-link btn-rotate"
 								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
-									<p>
-										<span class="d-lg-none d-md-block">Account</span>
-									</p>
+
+									<span class="d-lg-none d-md-block">Account</span>
+
 							</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 			<!-- End Navbar -->
+
 			<!-- 뉴스 기사 삽입. -->
-			<div class="content">
+			<div class="content" style="margin-top: 30px;">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center"><b>The New York Times</b></h4>
+						<h4 class="mt-0 mb-0 text-center"><b><%=news_name %></b></h4>
 					</div>
 					<hr>
 					<div class="card-body">
@@ -136,39 +124,46 @@ Coded by www.creative-tim.com
 						<h6 class="m-3" style="color:orange">Today Sentence</h6>
 						
 						<div class="m-3">
-						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
-						<h6 style="color:grey">Writer's name</h6>
-						<h6 style="color:grey">2020, Dec 11</h6>
+						<h3 class="card-text"><b><%=news_title %></b></h3>
+						<h6 style="color:grey"><%=insertdate %></h6>
 						</div>
 						
-						<p class="m-4" style="font-size:1.5em">
-						<%=original_sent %>
-						
-						</p>
+						<p class="m-4" style="font-size:1.5em"><%=original_sent %></p>
 						
 						<hr>
 						
 
-						<h6 class="m-3" style="color:orange">Korean</h6>
+						<h6 class="m-3" style="color:orange">Title 번역</h6>
+						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(news_title) %></p>
 						
-						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(original_sent) %>
-						</p>
+						<h6 class="m-3" style="color:orange">Sentence 번역</h6>
+						<p class="m-4" style="font-size:1.5em"><%=translation %></p>
+					
 					</div>
 				</div>
-				
-			<!-- 뉴스 기사 끝. -->
-			<!-- 다음으로 넘어가는 버튼 만들기  -->
-			<div>
-			<input style="float:right;" class="btn btn-warning btn-block btn-lg" type="button" value="Next" onclick="location='/Today/TodayExam.do'">
+
+				<!-- 뉴스 기사 끝. -->
+				<!-- 다음으로 넘어가는 버튼 만들기  -->
+
+				<div>
+					<form action="/Today/TodayExam.do" method="post">
+					<input type="hidden" value="<%=news_url %>" name="news_url">
+					<input type="hidden" value="<%=news_name %>" name="news_name">
+					<input type="hidden" value="<%=insertdate %>" name="insertdate">					
+					<input type="hidden" value="<%=news_title %>" name="news_title">
+				    <input type="hidden" value="<%=original_sent %>" name="original_sent">
+				    <input type="hidden" value="<%=translation %>" name="translation">
+				    <input type="hidden" value="<%=quiz_sent %>" name="quiz_sent">		    
+				    <input type="hidden" value="<%=answer_sent %>" name="answer_sent">
+				    <input type="hidden" value="<%=word %>" name="word">
+
+						<button style="width: 100%" class="next mb-5" type="submit">Next</button>
+					</form>
+				</div>
 			</div>
-								</div>
-							</div>
-						</div>
-				
-			
-		
-			<!-- --------------------------------------------------------------------------- -->
-			
+		</div>
+	</div>
+
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -184,13 +179,7 @@ Coded by www.creative-tim.com
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {

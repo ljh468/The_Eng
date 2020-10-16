@@ -39,9 +39,7 @@ Coded by www.creative-tim.com
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
-
+<link rel="stylesheet" href="/resources/scss/Button.css">
 <style>
 .container {
 	height: 400px;
@@ -149,11 +147,11 @@ Coded by www.creative-tim.com
 						</div>
 						<div onclick="flip(event)">
 							<div class="front">
-								<h3 class="text-center" style="margin-top: 150px;">도전</h3>
+								<h3 class="text-center" style="margin-top: 140px;">도전</h3>
 								<p class="text-center" style="margin-top: 100px;">클릭해서 확인하세요</p>
 							</div>
 							<div class="back">
-								<h3 class="text-center" style="margin-top: 150px;">challenge</h3>
+								<h3 class="text-center" style="margin-top: 135px;">challenge</h3>
 								<p class="text-center" style="margin-top: 100px;"></p>
 							</div>
 						</div>
@@ -175,76 +173,53 @@ Coded by www.creative-tim.com
 							</div>
 						</div>
 					</div>
-
-
+					<br>
 					<div class="row">
-						<div class="col-8"></div>
-						<div class="col-4">
-							<button onClick="location.href='/Word/wordResult.do';">학습
-								결과</button>
+						<div class="col-3"></div>
+						<div class="col-6">
+							<button style="width: 100%" class="submit"
+								onclick="location='/Word/wordResult.do'">학습 결과</button>
 						</div>
+						<div class="col-3"></div>
 					</div>
+
+
 				</div>
 			</div>
+			<!--   Core JS Files   -->
+			<script src="/resources/assets/js/core/jquery.min.js"></script>
+			<script src="/resources/assets/js/core/popper.min.js"></script>
+			<script src="/resources/assets/js/core/bootstrap.min.js"></script>
+			<script
+				src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+			<!--  Google Maps Plugin    -->
+			<script
+				src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+			<!-- Chart JS -->
+			<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
+			<!--  Notifications Plugin    -->
+			<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
+			<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+			<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
+				type="text/javascript"></script>
+			<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+			<script src="/resources/assets/demo/demo.js"></script>
+			<script>
+				$(document).ready(function() {
+					// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+					demo.initChartsPages();
+				});
 
-
-			<footer class="footer footer-black  footer-white ">
-				<div class="container-fluid">
-					<div class="row">
-						<nav class="footer-nav">
-							<ul>
-								<li><a href="https://www.creative-tim.com" target="_blank">Creative
-										Tim</a></li>
-								<li><a href="https://www.creative-tim.com/blog"
-									target="_blank">Blog</a></li>
-								<li><a href="https://www.creative-tim.com/license"
-									target="_blank">Licenses</a></li>
-							</ul>
-						</nav>
-						<div class="credits ml-auto">
-							<span class="copyright"> © <script>
-								document.write(new Date().getFullYear())
-							</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-							</span>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-	<!--   Core JS Files   -->
-	<script src="/resources/assets/js/core/jquery.min.js"></script>
-	<script src="/resources/assets/js/core/popper.min.js"></script>
-	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
-	<script
-		src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-	<!-- Chart JS -->
-	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
-	<!--  Notifications Plugin    -->
-	<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
-	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
-		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
-	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
-
-		$("#navbar-toggler").on('click', function() {
-			if ($(this).hasClass("toggled")) {
-				$(this).removeClass("toggled");
-				$("html").first().removeClass("nav-open");
-			} else {
-				$(this).addClass("toggled");
-				$("html").first().addClass("nav-open");
-			}
-		})
-	</script>
+				$("#navbar-toggler").on('click', function() {
+					if ($(this).hasClass("toggled")) {
+						$(this).removeClass("toggled");
+						$("html").first().removeClass("nav-open");
+					} else {
+						$(this).addClass("toggled");
+						$("html").first().addClass("nav-open");
+					}
+				})
+			</script>
 </body>
 
 </html>

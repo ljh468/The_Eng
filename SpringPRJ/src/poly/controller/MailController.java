@@ -102,6 +102,7 @@ public class MailController {
 				result = 0;
 			}
 			log.info("setUser_email : " + uDTO.getUser_email());
+
 			log.info("insertAuthNum 시작");
 			int res2 = userService.insertAuthNum(uDTO);
 			log.info("insertAuthNum 종료");

@@ -12,6 +12,7 @@ public class WordQuizDTO {
 	private List<String> quiz_sent;
 	private List<String> word;
 	private List<String> answersentence;
+	private List<String> translation;  // 문장번역
 	
 	private List<Integer> idx;
 	private int correctCounter;
@@ -29,11 +30,12 @@ public class WordQuizDTO {
 	@SuppressWarnings("unchecked")
 	   public WordQuizDTO(DBObject quiz) {
 		
-		this.url = (String) ( quiz).get("url");
-		this.original_sent = (List <String>) ( quiz).get("original_sent");
-		this.quiz_sent = (List <String>) ( quiz).get("quiz_sent");
-		this.word = (List <String>) ( quiz).get("word");
-		this.answersentence = (List <String>) ( quiz).get("answersentence");
+		this.url = (String) (quiz).get("url");
+		this.original_sent = (List <String>) (quiz).get("original_sent");
+		this.quiz_sent = (List <String>) (quiz).get("quiz_sent");
+		this.word = (List <String>) (quiz).get("word");
+		this.answersentence = (List <String>) (quiz).get("answersentence");
+		this.translation = (List <String>) (quiz).get("translation");
 		  
 	   }
 	
@@ -95,4 +97,12 @@ public class WordQuizDTO {
 		this.answersentence = answersentence;
 	}
 
+	public List<String> getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(List<String> translation) {
+		this.translation = translation;
+	}
+	
 }

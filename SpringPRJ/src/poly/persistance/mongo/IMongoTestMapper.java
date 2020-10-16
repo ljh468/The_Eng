@@ -3,7 +3,6 @@ package poly.persistance.mongo;
 import java.util.List;
 import java.util.Map;
 
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 import poly.dto.MongoNewsDTO;
@@ -28,10 +27,6 @@ public interface IMongoTestMapper {
 	public void insertQuiz(Object obj) throws Exception;
 
 	public WordQuizDTO getQuiz(DBObject query) throws Exception;
-
-
-
-	
 
 
 
