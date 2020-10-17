@@ -1,5 +1,11 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	List<String> rList = (List<String>)request.getAttribute("rList");
+	out.print(rList.get(0));
+	
+%>
 <!--
 =========================================================
 * Paper Dashboard 2 - v2.0.1
@@ -147,11 +153,15 @@ Coded by www.creative-tim.com
 						</div>
 						<div onclick="flip(event)">
 							<div class="front">
-								<h3 class="text-center" style="margin-top: 140px;">도전</h3>
+								<h3 class="text-center" style="margin-top: 140px;">
+								도전
+								</h3>
 								<p class="text-center" style="margin-top: 100px;">클릭해서 확인하세요</p>
 							</div>
 							<div class="back">
-								<h3 class="text-center" style="margin-top: 135px;">challenge</h3>
+								<h3 class="text-center" style="margin-top: 135px;"><%=rList.get(0) %>
+								
+								</h3>
 								<p class="text-center" style="margin-top: 100px;"></p>
 							</div>
 						</div>

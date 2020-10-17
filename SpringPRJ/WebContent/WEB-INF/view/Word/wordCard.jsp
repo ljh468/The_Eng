@@ -68,7 +68,7 @@
 			<!-- End Navbar -->
 
 			<div class="content">
-				<a href="/Word/wordCardproc.do">
+				<a href="/Word/wordStudy.do">
 					<div class="card">
 						<div class="row">
 							<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
@@ -86,7 +86,7 @@
 							</div>
 						</div>
 					</div>
-				</a> <br> <a href="/Word/wordOption.do">
+				</a> <br> <a href="/Word/wordStudy.do">
 					<div class="card">
 						<div class="row">
 							<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
@@ -105,7 +105,7 @@
 							</div>
 						</div>
 					</div>
-				</a>  <br> <a href="/Word/wordOption.do">
+				</a>  <br> <a href="/Word/wordStudy.do">
 					<div class="card">
 						<div class="row">
 							<div class="col-4 mt-3 mb-2" style="border-right: solid orange;">
