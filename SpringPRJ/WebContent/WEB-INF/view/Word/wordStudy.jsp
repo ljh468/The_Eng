@@ -1,25 +1,11 @@
+<%@page import="poly.util.TranslateUtil"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
-	List<String> rList = (List<String>)request.getAttribute("rList");
-	out.print(rList.get(0));
-	
+	List<String> rList = (List<String>) request.getAttribute("rList");
 %>
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +34,7 @@ Coded by www.creative-tim.com
 <link rel="stylesheet" href="/resources/scss/Button.css">
 <style>
 .container {
-	height: 400px;
+	height: 500px;
 	perspective: 1000px;
 }
 
@@ -57,7 +43,7 @@ Coded by www.creative-tim.com
 	transform-style: preserve-3d;
 	cursor: pointer;
 	width: 100%;
-	height: 100%
+	height: 100%;
 }
 
 .front, .back {
@@ -68,7 +54,7 @@ Coded by www.creative-tim.com
 	align-items: center;
 	backface-visibility: hidden;
 	width: 100%;
-	height: auto;
+	height: 90%;
 }
 
 .front {
@@ -126,7 +112,17 @@ Coded by www.creative-tim.com
 
 			<!-- 카드 뒤집기 -->
 			<script>
-				function flip(event) {
+				
+				 function flip(event) {
+					var element = event.currentTarget.parentElement;
+					if (element.className === "card") {
+						$("#star").removeClass("float-right")
+						element.style.transform = "rotateY(180deg)";
+						element.style.background = "skyblue";
+					}
+				}; 
+				
+				/* function flip(event) {
 					var element = event.currentTarget.parentElement;
 					if (element.className === "card") {
 						if (element.style.transform == "rotateY(180deg)") {
@@ -139,97 +135,167 @@ Coded by www.creative-tim.com
 							element.style.background = "skyblue";
 						}
 					}
-				};
+				};  */
 			</script>
 
 
 
 			<div class="content">
 				<div class="container mb-3 ">
-					<div class="card" onclick="flip(event)">
+					<div class="card" id="card">
 						<div class="card-header pt-0">
 							<input class="star mr-3 mt-1 float-right" id="star"
 								type="checkbox">
 						</div>
 						<div onclick="flip(event)">
 							<div class="front">
-								<h3 class="text-center" style="margin-top: 140px;">
-								도전
+								<h3 class="text-center" style="margin-top: 130px;" id="en">
+									<%=rList.get(0)%>
 								</h3>
 								<p class="text-center" style="margin-top: 100px;">클릭해서 확인하세요</p>
 							</div>
 							<div class="back">
-								<h3 class="text-center" style="margin-top: 135px;"><%=rList.get(0) %>
-								
-								</h3>
-								<p class="text-center" style="margin-top: 100px;"></p>
+								<p class="text-center" style="margin-top: 10px;" id="sub-en"><%=rList.get(0)%></p>
+								<h3 class="text-center" style="margin-top: 80px;" id="ko">뜻</h3>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="container" style="height: 200px;">
-					<div class="card" style="height: 100px;">
-						<div class="row">
-							<div class="col-6 mt-4">
-								<a href="#"><h1 class="text-success text-center">
-										<i class="nc-icon nc-satisfied"></i>
-									</h1></a>
-							</div>
 
-							<div class="col-6 mt-4">
-								<a href="#"><h1 class="text-danger text-center">
-										<i class="nc-icon nc-simple-remove"></i>
-									</h1></a>
-							</div>
-						</div>
-					</div>
-					<br>
+				<div class="container" style="height: 100px;">
 					<div class="row">
-						<div class="col-3"></div>
 						<div class="col-6">
-							<button style="width: 100%" class="submit"
-								onclick="location='/Word/wordResult.do'">학습 결과</button>
+							<button style="width: 100%" id="O" class="submit text-center">
+								<i class="nc-icon nc-satisfied "
+									style="font-size: 60px; color: white;"></i>
+							</button>
 						</div>
-						<div class="col-3"></div>
+
+						<div class="col-6">
+							<button style="width: 100%" id="X" class="next">
+								<i class="nc-icon nc-simple-remove 	text-danger"
+									style="font-size: 60px;"></i>
+							</button>
+						</div>
 					</div>
-
-
 				</div>
-			</div>
-			<!--   Core JS Files   -->
-			<script src="/resources/assets/js/core/jquery.min.js"></script>
-			<script src="/resources/assets/js/core/popper.min.js"></script>
-			<script src="/resources/assets/js/core/bootstrap.min.js"></script>
-			<script
-				src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-			<!--  Google Maps Plugin    -->
-			<script
-				src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-			<!-- Chart JS -->
-			<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
-			<!--  Notifications Plugin    -->
-			<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
-			<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-			<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
-				type="text/javascript"></script>
-			<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-			<script src="/resources/assets/demo/demo.js"></script>
-			<script>
-				$(document).ready(function() {
-					// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-					demo.initChartsPages();
-				});
 
-				$("#navbar-toggler").on('click', function() {
-					if ($(this).hasClass("toggled")) {
-						$(this).removeClass("toggled");
-						$("html").first().removeClass("nav-open");
-					} else {
-						$(this).addClass("toggled");
-						$("html").first().addClass("nav-open");
-					}
-				})
-			</script>
+				<br>
+			
+
+
+			</div>
+		</div>
+		<!--   Core JS Files   -->
+		<script src="/resources/assets/js/core/jquery.min.js"></script>
+		<script src="/resources/assets/js/core/popper.min.js"></script>
+		<script
+			src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+		<!--  Google Maps Plugin    -->
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+		<!-- Chart JS -->
+		<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
+		<!--  Notifications Plugin    -->
+		<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
+		<script>
+		
+		
+		
+		var mylist = [];
+		var loop=0;
+
+		<%for (int i = 0; i < rList.size(); i++) {%>
+		  mylist[loop] =" <%=rList.get(i)%>";
+			loop++;
+		<%}%>
+		
+		
+			var O = 0;
+			var X = 0;
+			var no = 0;
+			var length = <%=rList.size()%>
+			$("#O").on('click', function() {
+				if (no < length - 1) {
+					no++;
+					O++;
+					document.getElementById("en").innerHTML = mylist[no];
+					document.getElementById("sub-en").innerHTML = mylist[no];
+					
+					$("#star").addClass("float-right")
+					document.getElementById("card").style.transform ="rotatey(0deg)";
+					document.getElementById("card").style.backgroundColor ="white";
+				
+				} else {
+					O++;
+					no++;
+					var form =document.createElement("form");
+				   	form.setAttribute("method","post");
+				   	form.setAttribute("action", "/Word/wordResult.do");
+				   	
+				   	var hiddenField = document.createElement("input");
+				   	hiddenField.setAttribute("type","hidden");
+				   	hiddenField.setAttribute("name", "O");
+				   	hiddenField.setAttribute("value", O);
+				   	form.appendChild(hiddenField);
+				   	
+				   	hiddenField = document.createElement("input");
+				   	hiddenField.setAttribute("type","hidden");
+				   	hiddenField.setAttribute("name", "X");
+				   	hiddenField.setAttribute("value", X);
+				   	form.appendChild(hiddenField);
+				   	
+				   	document.body.appendChild(form);
+				    form.submit();
+				}
+			})
+			
+			$("#X").on('click', function() {
+				if (no < length - 1) {
+					no++;
+					X++;
+					document.getElementById("en").innerHTML = mylist[no];
+					document.getElementById("sub-en").innerHTML = mylist[no];
+					
+					$("#star").addClass("float-right")
+					document.getElementById("card").style.transform ="rotatey(0deg)";
+					document.getElementById("card").style.backgroundColor ="white";
+				
+				} else {
+					no++;
+					X++;
+					var forms =document.createElement("form");
+				   	forms.setAttribute("method","post");
+				   	forms.setAttribute("action", "/Word/wordResult.do");
+				   	
+				   	var hiddenField = document.createElement("input");
+				   	hiddenField.setAttribute("type","hidden");
+				   	hiddenField.setAttribute("name", "O");
+				   	hiddenField.setAttribute("value", O);
+				   	forms.appendChild(hiddenField);
+				   	
+				   	hiddenField = document.createElement("input");
+				   	hiddenField.setAttribute("type","hidden");
+				   	hiddenField.setAttribute("name", "X");
+				   	hiddenField.setAttribute("value", X);
+				   	forms.appendChild(hiddenField);
+				   	
+				   	document.body.appendChild(forms);
+				    forms.submit();
+				    
+				}
+			})
+
+			$("#navbar-toggler").on('click', function() {
+				if ($(this).hasClass("toggled")) {
+					$(this).removeClass("toggled");
+					$("html").first().removeClass("nav-open");
+				} else {
+					$(this).addClass("toggled");
+					$("html").first().addClass("nav-open");
+				}
+			})
+		</script>
 </body>
 
 </html>

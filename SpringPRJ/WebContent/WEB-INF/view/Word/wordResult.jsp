@@ -1,19 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!--
-=========================================================
-* Paper Dashboard 2 - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-2
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+<%
+	String X = (String)request.getAttribute("Xs");
+	String O = (String)request.getAttribute("Os");
+	int all = Integer.parseInt(O) + Integer.parseInt(X);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,9 +65,9 @@ Coded by www.creative-tim.com
 					<div class="card-header">
 						<h2 class="text-center mb-0">
 							총 단어
-							<%
-							
-						%>1 개
+							<%=
+							all
+						%> 개
 						</h2>
 					</div>
 					<hr>
@@ -89,10 +80,7 @@ Coded by www.creative-tim.com
 
 							<div class="col-6">
 								<h3 class="text-center">
-									<%
-										
-									%>
-									1개
+									<%=O%>개
 								</h3>
 							</div>
 						</div>
@@ -107,10 +95,7 @@ Coded by www.creative-tim.com
 
 							<div class="col-6">
 								<h3 class="text-center">
-									<%
-										
-									%>
-									0개
+									<%=X%>개
 								</h3>
 							</div>
 						</div>

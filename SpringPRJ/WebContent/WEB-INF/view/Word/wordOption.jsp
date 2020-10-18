@@ -1,7 +1,8 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>		
-<% 
+	
+<%
 
 	List<String> rList = (List<String>)request.getAttribute("rList");
 
@@ -130,7 +131,7 @@ Coded by www.creative-tim.com
 				<div class="container mb-3">
 					<div class="card" onclick="flip(event)">
 						<div class="front">
-							<h3 class="text-center" style="margin-top: 180px;">뜻</h3>fhf
+							<h3 class="text-center" style="margin-top: 180px;">뜻</h3>
 							<p class="text-center" style="margin-top: 100px">단어로 바꾸시려면
 								클릭해주세요</p>
 						</div>

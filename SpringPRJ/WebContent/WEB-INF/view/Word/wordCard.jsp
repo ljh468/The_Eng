@@ -2,13 +2,10 @@
 	pageEncoding="UTF-8"%>
 
 <%
-
-	String heraldurl = (String)request.getAttribute("heraldurl");
-	String reutersurl = (String)request.getAttribute("reutersurl");
-	String timesurl = (String)request.getAttribute("timesurl");
-	String yonhapurl = (String)request.getAttribute("yonhapurl");
-
-
+	String heraldurl = (String) request.getAttribute("heraldurl");
+	String reutersurl = (String) request.getAttribute("reutersurl");
+	String timesurl = (String) request.getAttribute("timesurl");
+	String yonhapurl = (String) request.getAttribute("yonhapurl");
 %>
 
 <!DOCTYPE html>
@@ -68,62 +65,80 @@
 			<!-- End Navbar -->
 
 			<div class="content">
-				<a href="/Word/wordStudy.do">
-					<div class="card">
-						<div class="row">
-							<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
-								<p class="text-center">
-									<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
-								<p>
-							</div>
-							<div class="col-8">
-								<h3 class="mt-4 text-center">
-									ALL Word
-									</h1>
-									<h6 class="mb-4 text-center">
-										관심 분야 단어 및 학습 단어
-										</h4>
+				<form action="/Word/wordStudy.do" method="post">
+					<input type="hidden" value="herald" name="news_name">
+					<button type="submit" style="width:100%; display:contents;">
+						<div class="card">
+							<div class="row">
+								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
+									<p class="text-center">
+										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
+									<p>
+								</div>
+								<div class="col-8">
+									<h2 class="mt-4 text-center">Herald</h2>
+								</div>
 							</div>
 						</div>
-					</div>
-				</a> <br> <a href="/Word/wordStudy.do">
-					<div class="card">
-						<div class="row">
-							<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
-								<p class="text-center">
-									<i class="nc-icon nc-simple-remove mt-3"
-										style="font-size: 80px;"></i>
-								<p>
-							</div>
-							<div class="col-8">
-								<h3 class="mt-4 text-center">
-									Wrong Word
-									</h1>
-									<h6 class="mb-4 text-center">
-										틀렸던 단어
-										</h4>
-							</div>
-						</div>
-					</div>
-				</a>  <br> <a href="/Word/wordStudy.do">
-					<div class="card">
-						<div class="row">
-							<div class="col-4 mt-3 mb-2" style="border-right: solid orange;">
-								<p class="text-center">
-									<i class="nc-icon nc-bookmark-2 mt-3" style="font-size: 80px;"></i>
-								<p>
-							</div>
-							<div class="col-8">
-								<h3 class="mt-4 text-center">
-									Favorites
-									</h1>
-									<h6 class="mb-4 text-center">
-										즐겨찾기
-										</h4>
+					</button>
+				</form>
+				<br>
+				
+				<form action="/Word/wordStudy.do" method="post">
+					<input type="hidden" value="reuters" name="news_name">
+					<button type="submit" style="width:100%; display:contents;">
+						<div class="card">
+							<div class="row">
+								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
+									<p class="text-center">
+										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
+									<p>
+								</div>
+								<div class="col-8">
+									<h2 class="mt-4 text-center">Reuters</h2>
+								</div>
 							</div>
 						</div>
-					</div>
-				</a>
+					</button>
+				</form>
+				<br>
+				
+				<form action="/Word/wordStudy.do" method="post">
+					<input type="hidden" value="times" name="news_name">
+					<button type="submit" style="width:100%; display:contents;">
+						<div class="card">
+							<div class="row">
+								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
+									<p class="text-center">
+										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
+									<p>
+								</div>
+								<div class="col-8">
+									<h2 class="mt-4 text-center">The Korea Times</h2>
+								</div>
+							</div>
+						</div>
+					</button>
+				</form>
+				<br>
+				
+				<form action="/Word/wordStudy.do" method="post">
+					<input type="hidden" value="yonhap" name="news_name">
+					<button type="submit" style="width:100%; display:contents;">
+						<div class="card">
+							<div class="row">
+								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
+									<p class="text-center">
+										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
+									<p>
+								</div>
+								<div class="col-8">
+									<h2 class="mt-4 text-center">Yonhap News</h2>
+								</div>
+							</div>
+						</div>
+					</button>
+				</form>
 			</div>
 
 		</div>
@@ -143,13 +158,7 @@
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
