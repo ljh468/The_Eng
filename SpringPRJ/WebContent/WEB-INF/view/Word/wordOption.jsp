@@ -4,7 +4,7 @@
 <% 
 
 	List<String> rList = (List<String>)request.getAttribute("rList");
-	out.print("rList : "+ rList);
+
 %>
 <!--
 =========================================================
