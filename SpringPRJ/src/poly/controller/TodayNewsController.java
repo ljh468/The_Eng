@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -174,10 +175,10 @@ public class TodayNewsController {
 	public String TodaySentence(HttpServletRequest request, ModelMap model) throws Exception {
 
 		log.info("TodaySentence 시작");
-
+		
+		String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 		String news_name = CmmUtil.nvl(request.getParameter("news_name"));
 		String news_url = CmmUtil.nvl(request.getParameter("news_url")); // 뉴스의 url로 조회하기 위함
-		String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 		String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
 
 		DBObject query = new BasicDBObject("url", news_url);
@@ -196,13 +197,13 @@ public class TodayNewsController {
 		log.info("answer_sent : " + rDTO.getAnswersentence().get(0));
 		log.info("word : " + rDTO.getWord().get(0));
 		
+		model.addAttribute("news_title", news_title);
 		model.addAttribute("quiz_sent", rDTO.getQuiz_sent().get(0));
 		model.addAttribute("word", rDTO.getWord().get(0));
 		model.addAttribute("answer_sent", rDTO.getAnswersentence().get(0));
 		model.addAttribute("news_url", news_url);
 		model.addAttribute("news_name", news_name);
 		model.addAttribute("insertdate", insertdate);
-		model.addAttribute("news_title", news_title);
 		model.addAttribute("original_sent", rDTO.getOriginal_sent().get(0));
 		model.addAttribute("translation", rDTO.getTranslation().get(0));		
 
@@ -292,7 +293,7 @@ public class TodayNewsController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "Today/TodayRecord")
-	public String TodayRecord(HttpServletRequest request, ModelMap model) throws Exception {
+	public String TodayRecord(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
 
 		log.info("TodayRecord 시작");
 
@@ -300,6 +301,7 @@ public class TodayNewsController {
 		String news_url = CmmUtil.nvl(request.getParameter("news_url"));
 		String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 		String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
+		String user_id = CmmUtil.nvl((String) session.getAttribute("user_id"));
 		
 		
 		DBObject query = new BasicDBObject("url", news_url);

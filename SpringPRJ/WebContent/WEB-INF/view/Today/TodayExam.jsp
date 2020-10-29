@@ -88,10 +88,10 @@
 						<div class="card-body">
 							<h6 class="m-3" style="color:orange">Today Exam</h6>
 						<div class="m-3">
-							<h3 class="card-text"><b><%=news_title %></b></h3>
+							<h3 class="card-text"><b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+					                  .replace("& gt;", ">").replace("& #39;", "'") %></b></h3>
 							<h6 style="color:grey"><%=insertdate %></h6>
 						</div>
-						
 						<p class="m-4" style="font-size:1.5em"><%=quiz_sent%></p>
 						<br>
 						<p>hint</p>

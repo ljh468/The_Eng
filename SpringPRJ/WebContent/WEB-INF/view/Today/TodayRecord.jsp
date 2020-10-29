@@ -43,7 +43,22 @@ String word = (String) request.getAttribute("word");
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
 			<!-- Navbar -->
-
+			<nav
+				class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+				<div class="container-fluid">
+					<div class="navbar-wrapper">
+						<div class="navbar-toggle">
+							<button type="button" class="navbar-toggler" id="navbar-toggler">
+								<span class="navbar-toggler-bar bar1"></span> <span
+									class="navbar-toggler-bar bar2"></span> <span
+									class="navbar-toggler-bar bar3"></span>
+							</button>
+						</div>
+						<a class="navbar-brand" href="javascript:;">Today Highlight
+							English</a>
+					</div>
+				</div>
+			</nav>
 			<!-- End Navbar -->
 			<!-- 뉴스 기사 삽입. -->
 			<div class="content" style="margin-top: 30px;">
@@ -62,7 +77,8 @@ String word = (String) request.getAttribute("word");
 							<br>
 							<!-- 자동으로 바뀌어야 하는 구역 -->
 							<h3 class="card-text">
-								<b><%=news_title%></b>
+								<b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+				                  .replace("& gt;", ">").replace("& #39;", "'")%></b>
 							</h3>
 							<h6 style="color: grey"><%=insertdate%></h6>
 						</div>

@@ -2,11 +2,10 @@
 <%@page import="poly.util.TranslateUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR"%>
 	
 <%
-
+	request.setCharacterEncoding("UTF-8");
 	String news_url = (String) request.getAttribute("news_url");
 	String news_name = (String)request.getAttribute("news_name");
 	String insertdate = (String)request.getAttribute("insertdate");
@@ -71,7 +70,7 @@
 			</nav>
 			<!-- End Navbar -->
 
-			<!-- ë‰´ìŠ¤ ê¸°ì‚¬ ì‚½ìž…. -->
+			<!-- ´º½º ±â»ç »ðÀÔ. -->
 			
 			<div class="content">
 				<div class="card">
@@ -84,26 +83,27 @@
 						<h6 class="m-3" style="color:orange">Today Sentence</h6>
 						
 						<div class="m-3">
-						<h3 class="card-text"><b><%=news_title %></b></h3>
+						<h3 class="card-text"><b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+				                  .replace("& gt;", ">").replace("& #39;", "'") %></b></h3>
 						<h6 style="color:grey"><%=insertdate %></h6>
 						</div>
 						
 						<p class="m-4" style="font-size:1.5em"><%=original_sent %></p>
 						
-						<hr>
+						<hr> 
 						
 
-						<h6 class="m-3" style="color:orange">Title ë²ˆì—­</h6>
+						<h6 class="m-3" style="color:orange">Title ¹ø¿ª</h6>
 						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(news_title) %></p>
 						
-						<h6 class="m-3" style="color:orange">Sentence ë²ˆì—­</h6>
+						<h6 class="m-3" style="color:orange">Sentence ¹ø¿ª</h6>
 						<p class="m-4" style="font-size:1.5em"><%=translation %></p>
 					
 					</div>
 				</div>
 
-				<!-- ë‰´ìŠ¤ ê¸°ì‚¬ ë. -->
-				<!-- ë‹¤ìŒìœ¼ë¡œ ë„˜ì–´ê°€ëŠ” ë²„íŠ¼ ë§Œë“¤ê¸°  -->
+				<!-- ´º½º ±â»ç ³¡. -->
+				<!-- ´ÙÀ½À¸·Î ³Ñ¾î°¡´Â ¹öÆ° ¸¸µé±â  -->
 
 				<div>
 					<form action="/Today/TodayExam.do" method="post">
