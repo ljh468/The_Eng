@@ -44,6 +44,18 @@ public class NewsWordService implements INewsWordService {
 		
 	}
 	
+	@Override
+	public String getWordMeaning(String word) throws Exception {
+		
+		log.info(this.getClass().getName() + ".getWordMeaning start");
+		
+		String mean = mongoNewsMapper.getWordMeaning(word);
+		
+		log.info(this.getClass().getName() + ".getWordMeaning end");
+		return mean;
+		
+	}
+	
 	
 	/** @return : [{lemma : (String)"단어원형", pool : (List of String)"속한 풀", sntncIdx : (Integer)"문장 인덱스", wordIdx : (Integer)"단어 인덱스"}]
 	 *

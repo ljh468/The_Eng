@@ -7,7 +7,7 @@
 	
 
 <%
-	
+	int idx = (int) request.getAttribute("idx");
 	String news_url = (String) request.getAttribute("news_url");
 	String news_name = (String)request.getAttribute("news_name");
 	String insertdate = (String)request.getAttribute("insertdate");
@@ -48,9 +48,76 @@
 <link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 <link rel="stylesheet" href="/resources/scss/Button.css">
 <style>
-	#answer{
-		width:200px;
-	}
+	#answer {
+	width: 180px;
+	height: 30px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.bt-tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+.bt-tooltip:hover[data-title]:before, .bt-tooltip:hover[data-title]:after
+	{
+	visibility: visible;
+	pointer-events: auto
+}
+
+.bt-tooltip[data-title]:before, .bt-tooltip[data-title]:after {
+	pointer-events: none;
+	visibility: hidden;
+}
+
+.bt-tooltip[data-title]:before {
+	content: '';
+	position: absolute;
+	top: auto;
+	right: auto;
+	bottom: 100%;
+	left: 50%;
+	font-size: 1rem;
+	width: .71428571em;
+	height: .71428571em;
+	background: #fff;
+	-webkit-transform: rotate(45deg) translateX(-50%);
+	transform: rotate(45deg) translateX(-50%);
+	z-index: 2;
+	-webkit-box-shadow: 1px 1px 0 0 #bababc;
+	box-shadow: 1px 1px 0 0 #bababc;
+}
+
+.bt-tooltip[data-title]:after {
+	content: attr(data-title);
+	position: absolute;
+	top: auto;
+	right: auto;
+	left: 50%;
+	bottom: 100%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	margin-bottom: .5em;
+	text-transform: none;
+	text-align: left;
+	white-space: nowrap;
+	font-size: 1rem;
+	border: 1px solid #d4d4d5;
+	line-height: 1.4285em;
+	max-width: none;
+	background: #fff;
+	padding: .633em 1em;
+	font-weight: 400;
+	font-style: normal;
+	color: rgba(0, 0, 0, .87);
+	border-radius: .48571429rem;
+	-webkit-box-shadow: 0 2px 4px 0 rgba(34, 36, 38, .12), 0 2px 10px 0
+		rgba(34, 36, 38, .15);
+	box-shadow: 0 2px 4px 0 rgba(34, 36, 38, .12), 0 2px 10px 0
+		rgba(34, 36, 38, .15);
+	z-index: 1;
+}
 </style>
 </head>
 
@@ -89,13 +156,17 @@
 							<h6 class="m-3" style="color:orange">Today Exam</h6>
 						<div class="m-3">
 							<h3 class="card-text"><b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-					                  .replace("& gt;", ">").replace("& #39;", "'") %></b></h3>
+	                              .replace("& gt;", ">").replace("& #39;", "'") %></b></h3>
 							<h6 style="color:grey"><%=insertdate %></h6>
 						</div>
+						
 						<p class="m-4" style="font-size:1.5em"><%=quiz_sent%></p>
 						<br>
 						<p>hint</p>
 						<p><%=word %></p>
+						<div><a href="#" style="float:right;font-size:30px;" class="bt-tooltip"
+							data-title="<%=TranslateUtil.kakaotrans(word)%>"><i
+							class="nc-icon nc-bulb-63"></i></a></div>
 						<span id="word" style="display:none;"><%=word%></span>
 
 						<!-- textbox의 value값에 문제로 낼 단어의 앞 두글자를 힌트로 준다.  -->
@@ -109,13 +180,14 @@
 				<div class="col-6">
 				<!-- 다음으로 넘어가는 버튼 -->
 					<form action="/Today/TodayRecord.do" method="post">
-						<input type="hidden" value="<%=news_url %>" name="news_url">
-						<input type="hidden" value="<%=news_name %>" name="news_name">
-						<input type="hidden" value="<%=insertdate %>" name=insertdate>
-						<input type="hidden" value="<%=news_title %>" name="news_title">
-						<button style="width: 100%" class="next mb-5"
-						onclick="location='/Today/TodayRecord.do'">Next</button>
-					</form>
+							<input type="hidden" value="<%=news_url%>" name="news_url">
+							<input type="hidden" value="<%=news_name%>" name="news_name">
+							<input type="hidden" value="<%=insertdate%>" name=insertdate>
+							<input type="hidden" value="<%=news_title%>" name="news_title">
+							<input type="hidden" value="<%=idx%>" name="idx">
+							<button style="width: 100%" class="next mb-5"
+								onclick="location='/Today/TodayRecord.do'">Next</button>
+						</form>
 				</div>
 				</div>
 

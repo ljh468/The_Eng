@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="poly.dto.News_NameDTO"%>
 
-<%
+<%	
 	String heraldTitle = (String) request.getAttribute("heraldtitle");
 	String reutersTitle = (String) request.getAttribute("reuterstitle");
 	String timesTitle = (String) request.getAttribute("timestitle");
@@ -62,10 +62,10 @@
 
 			<div class="content">
 
-				<input type='hidden' id='heraldTitle' value="<%=heraldTitle%>" /> 
-				<input type='hidden' id='reutersTitle' value="<%=reutersTitle%>" /> 
-				<input type='hidden' id='timesTitle' value="<%=timesTitle%>" /> 
-				<input type='hidden' id='yonhapTitle' value="<%=yonhapTitle%>" />
+				<input type='hidden' id='heraldTitle' value="<%=heraldTitle%>" /> <input
+					type='hidden' id='reutersTitle' value="<%=reutersTitle%>" /> <input
+					type='hidden' id='timesTitle' value="<%=timesTitle%>" /> <input
+					type='hidden' id='yonhapTitle' value="<%=yonhapTitle%>" />
 				<div class="card">
 					<div class="card-header">
 						<h4 class="mt-0 mb-0" style="color:orange; font-size:15px">Trending</h4>

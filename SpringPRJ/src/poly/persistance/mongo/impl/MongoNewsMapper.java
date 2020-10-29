@@ -16,40 +16,56 @@ import com.mongodb.DBObject;
 import config.Mapper;
 import poly.persistance.mongo.IMongoNewsMapper;
 
-	@Mapper("MongoNewsMapper")
-	public class MongoNewsMapper implements IMongoNewsMapper {
-		@Autowired
-		private MongoTemplate mongodb;
-		// 생성자나 세터 등을 사용하여 의존성 주입을 하려고 할 때, 해당 빈을 찾아서 주입해주는 annotation.
-		
-		private static final String WORD_POOL = "wordPool";
+@Mapper("MongoNewsMapper")
+public class MongoNewsMapper implements IMongoNewsMapper {
+	@Autowired
+	private MongoTemplate mongodb;
+	// 생성자나 세터 등을 사용하여 의존성 주입을 하려고 할 때, 해당 빈을 찾아서 주입해주는 annotation.
+
+	private static final String WORD_POOL = "wordPool";
 //		private static final String WORD_USAGE = "wordUsage";
 //		private static final String REVIEW_WORDS = "reviewWords";
 //		private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 
-		Logger log = Logger.getLogger(this.getClass());
-		
-		// mongoDB의  wordPool에서 word, pool 뽑아오기
-		@SuppressWarnings("unchecked")
-		@Override
-		public Map<String, List<String>> getWordPool() throws Exception {
-			log.info(this.getClass().getName() + ".getWordPool start");
+	Logger log = Logger.getLogger(this.getClass());
 
-			DBObject query = new BasicDBObject("pool", new BasicDBObject("$in", Arrays.asList("TOEIC", "Academic", "Business")));
-			DBCursor cursor = mongodb.getCollection(WORD_POOL).find(query);
+	// mongoDB의 wordPool에서 word, pool 뽑아오기
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, List<String>> getWordPool() throws Exception {
+		log.info(this.getClass().getName() + ".getWordPool start");
 
-			Map<String, List<String>> rMap = new HashMap<>();
-			while (cursor.hasNext()) {
-				DBObject obj = cursor.next();
-				rMap.put((String) obj.get("word"), (List<String>) obj.get("pool"));
-			}
+		DBObject query = new BasicDBObject("pool",
+				new BasicDBObject("$in", Arrays.asList("TOEIC", "Academic", "Business")));
+		DBCursor cursor = mongodb.getCollection(WORD_POOL).find(query);
 
-			log.info(this.getClass().getName() + ".getWordPool end");
-			return rMap;
-		
+		Map<String, List<String>> rMap = new HashMap<>();
+		while (cursor.hasNext()) {
+			DBObject obj = cursor.next();
+			rMap.put((String) obj.get("word"), (List<String>) obj.get("pool"));
+		}
+
+		log.info(this.getClass().getName() + ".getWordPool end");
+		return rMap;
+
+	}
+
+	// mongoDB의 wordPool에서 word, meaning 뽑아오기
+	@Override
+	public String getWordMeaning(String word) throws Exception {
+		log.info(this.getClass().getName() + ".getWordMeaning start");
+		String mean = "";
+		DBObject query = new BasicDBObject("word", word);
+		DBCursor cursor = mongodb.getCollection(WORD_POOL).find(query);
+
+		while (cursor.hasNext()) {
+			DBObject obj = cursor.next();
+			mean = (String) obj.get("meaning");
+		}
+		log.info("Mapper.meaning : " + mean);
+		log.info(this.getClass().getName() + ".getWordMeaning end");
+		return mean;
+
+	}
+
 }
-
-	
-}
-
-

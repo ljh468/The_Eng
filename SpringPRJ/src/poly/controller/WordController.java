@@ -21,6 +21,7 @@ import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.IMailService;
 import poly.service.INewsService;
+import poly.service.INewsWordService;
 import poly.service.IUserService;
 
 @Controller
@@ -38,6 +39,9 @@ public class WordController {
 	
 	@Resource(name = "MongoTestMapper")
 	IMongoTestMapper mongoTestMapper;
+	
+	@Resource(name = "NewsWordService")
+	INewsWordService newsWordService;
 	
 	@RequestMapping(value = "Word/wordCard")
 	public String wordCard(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
@@ -108,8 +112,9 @@ public class WordController {
 		DBObject query = new BasicDBObject("url", news_url);
 		log.info("query : " + query);
 
-		// 생성된 QuizBank컬렌션에서 url로 조회하여 데이터를 가져옴
+		// 생성된 QuizBank컬렉션에서 url로 조회하여 데이터를 가져옴
 		WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
+		
 		
 		List<String> rList = rDTO.getWord();
 		log.info("rList : " + rDTO.getWord());
@@ -124,7 +129,16 @@ public class WordController {
 
 		return "/Word/wordStudy";
 	}
-
+	
+	// 어휘의 뜻을 가져오기위한 Mapping -> wordpool에서 meaning을 조회함
+	@RequestMapping(value = "Word/wordMeaning")
+	public String wordMeaning(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
+		String word ="supermarket";
+		String mean = newsWordService.getWordMeaning(word);
+		
+		return mean;
+	}
+	
 	@RequestMapping(value = "Word/wordResult")
 	public String wordResult(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
 		

@@ -1,10 +1,11 @@
+<%@page import="poly.util.WebCrawler"%>
 <%@page import="poly.util.TranslateUtil"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	List<String> rList = (List<String>) request.getAttribute("rList");
+	List<String> rList = (List<String>)request.getAttribute("rList");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,22 +67,6 @@
 	background-color: transparent;
 }
 
-.star {
-	visibility: hidden;
-	font-size: 30px;
-	height: 50px;
-	cursor: pointer;
-	color: rgb(245, 230, 66);
-}
-
-.star:before {
-	content: "\2605";
-	visibility: visible;
-}
-
-.star:checked:before {
-	content: "\2606";
-}
 </style>
 
 </head>
@@ -121,32 +106,11 @@
 						element.style.background = "skyblue";
 					}
 				}; 
-				
-				/* function flip(event) {
-					var element = event.currentTarget.parentElement;
-					if (element.className === "card") {
-						if (element.style.transform == "rotateY(180deg)") {
-							$("#star").addClass("float-right")
-							element.style.transform = "rotateY(0deg)";
-							element.style.background = "white";
-						} else {
-							$("#star").removeClass("float-right")
-							element.style.transform = "rotateY(180deg)";
-							element.style.background = "skyblue";
-						}
-					}
-				};  */
 			</script>
-
-
-
+				
 			<div class="content">
 				<div class="container mb-3 ">
 					<div class="card" id="card">
-						<div class="card-header pt-0">
-							<input class="star mr-3 mt-1 float-right" id="star"
-								type="checkbox">
-						</div>
 						<div onclick="flip(event)">
 							<div class="front">
 								<h3 class="text-center" style="margin-top: 130px;" id="en">
@@ -155,8 +119,8 @@
 								<p class="text-center" style="margin-top: 100px;">클릭해서 확인하세요</p>
 							</div>
 							<div class="back">
-								<p class="text-center" style="margin-top: 10px;" id="sub-en"><%=rList.get(0)%></p>
-								<h3 class="text-center" style="margin-top: 80px;" id="ko">뜻</h3>
+								<h3 class="text-center" style="margin-top: 40px;" id="ko"><%=TranslateUtil.kakaotrans(rList.get(0)) %></h3>
+								<p class="mr-5"  id="sub-en"><%=WebCrawler.getMeaning(rList.get(0)) %></p>
 							</div>
 						</div>
 					</div>
@@ -200,13 +164,15 @@
 		<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
 		<script>
 		
-		
-		
 		var mylist = [];
+		var myko = [];
+		var myen = [];
 		var loop=0;
-
+		//db내용 바뀌면 수정 ㄱ
 		<%for (int i = 0; i < rList.size(); i++) {%>
 		  mylist[loop] =" <%=rList.get(i)%>";
+		 <%--  myko[loop] = " <%=TranslateUtil.kakaotrans(rList.get(i))%>";
+		  myen[loop] = " <%=WebCrawler.getMeaning(rList.get(i))%>";  --%>
 			loop++;
 		<%}%>
 		
@@ -220,11 +186,8 @@
 					no++;
 					O++;
 					document.getElementById("en").innerHTML = mylist[no];
-					document.getElementById("sub-en").innerHTML = mylist[no];
-					
-					$("#star").addClass("float-right")
-					document.getElementById("card").style.transform ="rotatey(0deg)";
-					document.getElementById("card").style.backgroundColor ="white";
+					document.getElementById("sub-en").innerHTML = myen[no];
+					document.getElementById("ko").innerHTML = myko[no];
 				
 				} else {
 					O++;
@@ -255,12 +218,9 @@
 					no++;
 					X++;
 					document.getElementById("en").innerHTML = mylist[no];
-					document.getElementById("sub-en").innerHTML = mylist[no];
+					document.getElementById("sub-en").innerHTML = myen[no];
+					document.getElementById("ko").innerHTML = myko[no];
 					
-					$("#star").addClass("float-right")
-					document.getElementById("card").style.transform ="rotatey(0deg)";
-					document.getElementById("card").style.backgroundColor ="white";
-				
 				} else {
 					no++;
 					X++;

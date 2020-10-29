@@ -1,23 +1,23 @@
 <%@page import="java.util.Date"%>
 <%@page import="javax.xml.crypto.Data"%>
 <%@page import="java.util.List"%>
-<%@page import="java.net.URLEncoder"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <%	
+	int idx = (int) request.getAttribute("idx");
 	String news_url = (String) request.getAttribute("news_url");
 	String news_name = (String)request.getAttribute("news_name");
-	String news_title = (String)request.getAttribute("news_title");
+	String title = (String)request.getAttribute("news_title");
 	Date date = (Date)request.getAttribute("insertdate");
 	List<String> sentences = (List<String>)request.getAttribute("original_sentences");
-	
 	
 %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
 
 <link rel="apple-touch-icon" sizes="76x76"
 	href="/resources/assets/img/apple-icon.png">
@@ -61,6 +61,49 @@
 						<a class="navbar-brand" href="javascript:;">Today Highlight
 							English</a>
 					</div>
+					<div class="collapse navbar-collapse justify-content-end"
+						id="navigation">
+						<form>
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control"
+									placeholder="Search...">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<i class="nc-icon nc-zoom-split"></i>
+									</div>
+								</div>
+							</div>
+						</form>
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link btn-magnify"
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
+									<p>
+										<span class="d-lg-none d-md-block">Stats</span>
+									</p>
+							</a></li>
+							<li class="nav-item btn-rotate dropdown"><a
+								class="nav-link dropdown-toggle" href="http://example.com"
+								id="navbarDropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> <i
+									class="nc-icon nc-bell-55"></i>
+									<p>
+										<span class="d-lg-none d-md-block">Some Actions</span>
+									</p>
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="#">Action</a> <a
+										class="dropdown-item" href="#">Another action</a> <a
+										class="dropdown-item" href="#">Something else here</a>
+								</div></li>
+							<li class="nav-item"><a class="nav-link btn-rotate"
+								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
+									<p>
+										<span class="d-lg-none d-md-block">Account</span>
+									</p>
+							</a></li>
+						</ul>
+					</div>
 				</div>
 			</nav>
 			<!-- End Navbar -->
@@ -78,7 +121,7 @@
 
 						<div class="m-3">
 							<h4 class="card-text">
-								<b><%=news_title%></b>
+								<b><%=title%></b>
 								</h4>
 								<div class="write-date">
 									<h6 style="color: grey"><%=date%></h6>
@@ -98,14 +141,15 @@
 				<!-- 뉴스 기사 끝. -->
 				<!-- 다음으로 넘어가는 버튼 만들기  -->
 
-				<form action="/Today/TodaySentence.do" method="Post">
+				<form action="/Today/TodaySentence.do" method="post">
 					<button type="submit" style="width: 100%" class="next mb-5">Next</button>
+					<input type="hidden" value="<%=idx%>" name="idx">
 					<input type="hidden" value="<%=news_name%>" name="news_name">
-					<input type="hidden" value="<%=news_title%>" name="news_title">
 					<input type="hidden" value="<%=news_url%>" name="news_url">
+					<input type="hidden" value="<%=title%>" name="news_title">
 					<input type="hidden" value="<%=date%>" name="insertdate">
 				</form>
-			
+
 			</div>
 		</div>
 	</div>

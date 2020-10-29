@@ -12,5 +12,8 @@ public interface INewsWordService {
 
 	void loadWordPool() throws Exception;
 
+	String getWordMeaning(String word) throws Exception;
+
+
 	
 }

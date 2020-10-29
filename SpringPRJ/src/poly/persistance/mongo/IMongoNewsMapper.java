@@ -6,6 +6,11 @@ import java.util.Map;
 public interface IMongoNewsMapper {
 
 	Map<String, List<String>> getWordPool() throws Exception;
+
+	String getWordMeaning(String word) throws Exception;
+
+	
+
 	
 
 }

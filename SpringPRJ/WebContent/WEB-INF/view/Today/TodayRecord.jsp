@@ -1,14 +1,17 @@
+<%@page import="poly.dto.MongoNewsDTO"%>
+<%@page import="poly.util.TranslateUtil"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
 	String answer_sent = (String) request.getAttribute("answer_sent");
-String news_url = (String) request.getAttribute("news_url");
-String news_name = (String) request.getAttribute("news_name");
-String news_title = (String) request.getAttribute("news_title");
-String insertdate = (String) request.getAttribute("insertdate");
-String original_sent = (String) request.getAttribute("original_sent");
-String word = (String) request.getAttribute("word");
+	String news_url = (String) request.getAttribute("news_url");
+	String news_name = (String) request.getAttribute("news_name");
+	String news_title = (String) request.getAttribute("news_title");
+	String insertdate = (String) request.getAttribute("insertdate");
+	String original_sent = (String) request.getAttribute("original_sent");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,10 +38,65 @@ String word = (String) request.getAttribute("word");
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<link rel="stylesheet" href="/resources/scss/Button.css">
+	<link rel="stylesheet" href="/resources/scss/Button.css">
+
+<style>
+#mic {
+	background-image: url("\resources\images\mic_icon.png");
+	background-size: 15em 15em;
+}
+
+.ldBar-label {
+	display: none;
+}
+
+#analyzingCircle {
+	border: 0.5em solid #f3f3f3; /* Light grey */
+	border-top: 0.5em solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 15em;
+	height: 15em;
+	animation: spin 2s linear infinite;
+	visibility: hidden;
+}
+
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+100%
+{
+transform
+
+
+
+
+:
+
+
+
+rotate
+
+
+
+
+
+(360
+deg
+
+
+
+
+
+);
+}
+}
+</style>
+
 </head>
 
 <body class="">
+
 	<div class="wrapper ">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
@@ -61,14 +119,12 @@ String word = (String) request.getAttribute("word");
 			</nav>
 			<!-- End Navbar -->
 			<!-- 뉴스 기사 삽입. -->
-			<div class="content" style="margin-top: 30px;">
+			<div class="content">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="card-header mt-0 mb-0 text-center">
+						<h4 class="mt-0 mb-0 text-center">
 							<b><%=news_name%></b>
 						</h4>
-						<div id="waveform" hidden='hidden'></div>
-						<div id="waveform2" hidden='hidden'></div>
 					</div>
 					<hr>
 					<div class="card-body">
@@ -78,53 +134,127 @@ String word = (String) request.getAttribute("word");
 							<!-- 자동으로 바뀌어야 하는 구역 -->
 							<h3 class="card-text">
 								<b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-				                  .replace("& gt;", ">").replace("& #39;", "'")%></b>
+                              .replace("& gt;", ">").replace("& #39;", "'")%></b>
 							</h3>
+
 							<h6 style="color: grey"><%=insertdate%></h6>
 						</div>
-						<button type="button" id="listen" >
-						<p class="m-4" style="font-size: 1.5em"><%=answer_sent%></p>
+
+						<button type="button" id="listen">
+							<p class="m-4" style="font-size: 1em"><%=original_sent%></p>
 						</button>
+
 						<hr>
 						<!-- 뉴스 기사 끝. -->
 
-						<!-- 녹음  -->
 						<h6 class="m-3" style="color: orange">Voice Record</h6>
-						<div class="card-body p-0" id="timerBlock">
-							<br>
-							<div id="mic" style="width: 15em; height: 15em; margin: auto">
-								<div id="progressCircle"
-									style="width: 15em; height: 15em; color: white;"
-									data-stroke="red" data-preset="circle" class="label-center"
-									data-value="100" data-precision="0.01"></div>
-								<div id="analyzingCircle"></div>
+
+						<!--  버튼을 클릭했을 때 기능이 나오게 하기.  -->
+						<div class="row">
+							<div class="col-6" style="height: 240px;">
+								<br>
+								<div id="timerBlock">
+									<br>
+
+									<div id="mic" style="width: 15em; height: 15em; margin: auto;">
+										<div id="progressCircle"
+											style="width: 15em; height: 15em; color: white;"
+											data-stroke="red" data-preset="circle" class="label-center"
+											data-value="100" data-precision="0.01"></div>
+										<div id="analyzingCircle"></div>
+									</div>
+
+								</div>
 							</div>
-							<div class="text-center">
-								<h1 id="timer"></h1>
-								<button id="startInterview" class="mt-1 btn btn-danger">녹음
-									시작</button>
-								<button hidden='hidden' id="resetInterview"
-									class="btn btn-warning">다시 녹음</button>
-								<button style="display: none" id="stopInterview"
-									class="btn btn-danger">녹음 종료</button>
-								<button style="display: none" id="submitInterview"
-									class="btn btn-danger">제출</button>
+
+							<div class="col-6">
+
+								<div class="text-center">
+									<h1 id="timer"></h1>
+								</div>
+
 							</div>
 						</div>
+						<div>
+							<!-- Header footer section start -->
+							<section id="header-footer">
 
+								<div style="max-width: 50rem">
+									<div class="card">
+										<div class="card-header">
+
+											<div id="waveform" hidden='hidden'></div>
+											<div id="waveform2" hidden='hidden'></div>
+										</div>
+
+										<!-- 강세 분석 결과 표  -->
+										<div class="card-body" id="resultBlock" hidden="hidden">
+											<div class="row">
+												<div class="col-12 mt-1 mb-1">
+													<h4 class="card-title mb-0" style="font-size: 1.3rem">강세
+														분석 결과</h4>
+													<div id="chartdiv" style="width: 100%; height: 500px;"></div>
+													<div class="row text-left">
+														<div class="col-12 text-right">
+															<div class="btn-group btn-group-sm" role="group">
+																<button type="button" id="myVoice"
+																	style="background-color: rgba(117, 142, 255, 1); border: none"
+																	data-enabled="1" class="btn btn-info">내 목소리</button>
+																<button type="button" id="nativeVoice"
+																	style="background-color: rgba(255, 117, 117, 1); border: none"
+																	data-enabled="1" class="btn btn-danger">원어민
+																	목소리</button>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-6 offset-3">
+													<h4 class="card-title mb-0 text-center"
+														style="font-size: 1.3rem">강세 명료도 분석 결과</h4>
+													<div id="dynamicsScore" style="width: 100%; height: 300px;"></div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12 text-center">
+													<button id="resetInterview2" class="btn btn-warning">다시
+														녹음</button>
+												</div>
+											</div>
+										</div>
+										<!-- 강세분석결과표 끝 -->
+
+									</div>
+								</div>
+
+
+							</section>
+
+
+
+						</div>
 					</div>
 				</div>
 
-				<!-- 다음으로 넘어가는 버튼 만들기  -->
+				<!-- 카드 끝   -->
+
 				<div>
-					<button style="width: 100%" class="submit mb-0"
-						onclick="location='/Today/TodayResult.do'">결과</button>
+					<input style="float: right; width: 100%" type="button"
+						class="btn btn-warning btn-block btn-lg" value="Result"
+						onclick="location='/Today/TodayResult.do'">
 				</div>
+
 			</div>
 		</div>
 	</div>
 
 
+
+
+	<!-- --------------------------------------------------------------------------- -->
 
 
 
@@ -143,6 +273,17 @@ String word = (String) request.getAttribute("word");
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
+	<script type="text/javascript" src="/js/loading-bar.js"></script>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
+	<!-- amchart -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="https://unpkg.com/wavesurfer.js"></script>
 	<script>
 
 		$("#navbar-toggler").on('click', function() {
@@ -156,7 +297,9 @@ String word = (String) request.getAttribute("word");
 			}
 
 		})
+		
 	</script>
+
 	<script>
   var sentenceList;
   var sentenceIdx = 0;
@@ -206,6 +349,16 @@ String word = (String) request.getAttribute("word");
 			}
   	})
   })
+  
+  $("#next").on("click", function(){
+	  $("#sentence").html(sentenceList[++sentenceIdx].sentence);
+    	refresh();
+    });
+    
+    $("#prev").on("click", function(){
+    	$("#sentence").html(sentenceList[--sentenceIdx].sentence);
+    	refresh();
+    });
     
     function refresh(){
     	
@@ -214,7 +367,7 @@ String word = (String) request.getAttribute("word");
     	$("#startInterview").removeAttr("hidden");
     	$("#timer").attr("hidden", "hidden");
     	$("#stopInterview").css("display", "None");
-	    $("#mic").css("background-image", 'url("/resources/images/mic-icon.png")');
+	    $("#mic").css("background-image", 'url("/resources/img/mic_disabled.png")');
 	    $("#resetInterview").attr("hidden", "hidden");
 	    $("#submitInterview").css("display", "None");
 	    $("#analyzingCircle").css("visibility", "hidden");
@@ -312,7 +465,7 @@ String word = (String) request.getAttribute("word");
 			  var timer =  document.getElementById("timer");
 			  // Display the result in the element with id="demo"
 			 $("#navigator").attr("hidden", "hidden");
-			 timer.innerHTML = "녹음 시작까지 "+seconds+"초";
+			 timer.innerHTML = seconds+"초";
 			 
 			  // If the count down is finished, write some text 
 			  if (seconds <=0) {
@@ -412,6 +565,151 @@ String word = (String) request.getAttribute("word");
 			  }
 		  });
 	});
+	$("#submitInterview").click(function(){
+		$("#resetInterview").attr('hidden', 'hidden');
+		$("#submitInterview").hide();
+		$("#analyzingCircle").css("visibility", "visible");
+		var timer =  document.getElementById("timer");
+		timer.innerHTML = "분석중입니다...";
+		$.ajax({
+	          type: 'POST',
+	          url: 'analyzeAudio.do',
+	          data: globalAudioData,
+	          dataType: "JSON",
+	          success: function(json){
+	        	  $("#timerBlock").attr('hidden', 'hidden');
+	        	  $("#resultBlock").removeAttr("hidden");
+	        	  $("#resetInterview").removeAttr('hidden');
+	        	  resultJSON = json;
+	        	  
+	        		// Themes begin
+	        		am4core.useTheme(am4themes_animated);
+	        		// Themes end
+					
+	        		chart = am4core.create("chartdiv", am4charts.XYChart);
+					var data = [];
+					// add data
+					
+					// get example start time
+					var exampleStart = 0;
+					for(var i=0; i<json.example_x.length;i++){
+	        			if(json.example_y[i] * 1 > 0){
+	        				exampleStart = json.example_x[i] * 1;
+	        				break;
+	        			}
+	        		}
+					
+					// get answer start time
+					var answerStart = 0;
+					for(var i=0; i<json.answer_x.length;i++){
+	        			if(json.answer_y[i] * 1 > 0){
+	        				answerStart = json.answer_x[i] * 1;
+	        				break;
+	        			}
+	        		}
+					
+					startDiff = exampleStart - answerStart;
+					
+					
+					
+	        		for(var i=0; i<json.example_x.length;i++){
+	        			if(json.example_y[i] * 1 > 0){
+	        				data.push({"exampleTime":json.example_x[i] * 1, "examplePitch":json.example_y[i] * 1})
+	        			}
+	        			
+	        		}
+	        		
+	        		for(var i=0; i<json.answer_x.length;i++){
+	        			if(json.answer_y[i] * 1 > 0){
+	        				data.push({"answerTime":(json.answer_x[i]) * 1 + startDiff, "answerPitch":json.answer_y[i]*1})
+	        			}
+	        		}
+					
+					
+	        		chart.data = data;
+	
+	        		// Create axes
+	        		var xAxis = chart.xAxes.push(new am4charts.ValueAxis());
+					xAxis.min = 0;
+					xAxis.max = 1;
+					xAxis.strictMinMax = true;
+					
+	        		var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+	
+	        		// Create series
+	        		exampleSeries = chart.series.push(new am4charts.LineSeries());
+	        		exampleSeries.dataFields.valueX = "exampleTime";
+	        		exampleSeries.dataFields.valueY = "examplePitch";
+	        		exampleSeries.tooltipText = "{exampleTime}"
+	        		exampleSeries.strokeWidth = 2;
+	        		exampleSeries.stroke = am4core.color("rgba(255,117,117, 1)");
+	        		
+	        		exampleSeries.tooltip.pointerOrientation = "vertical";
+	        		
+	        		// Create series
+	        		answerSeries = chart.series.push(new am4charts.LineSeries());
+	        		answerSeries.dataFields.valueX = "answerTime";
+	        		answerSeries.dataFields.valueY = "answerPitch";
+	        		answerSeries.tooltipText = "{answerTime}"
+	        		answerSeries.strokeWidth = 2;
+	        		answerSeries.stroke = am4core.color("rgba(117, 142, 255, 1)");
+	        		
+	        		answerSeries.tooltip.pointerOrientation = "vertical";
+	
+	        		chart.cursor = new am4charts.XYCursor();
+	        		chart.cursor.xAxis = xAxis;
+	        		
+	        		chart.cursor.events.on("cursorpositionchanged", function(ev) {
+        			  var xAxis = ev.target.chart.xAxes.getIndex(0);
+        			  var yAxis = ev.target.chart.yAxes.getIndex(0);
+        			  cursorX = xAxis.positionToValue(xAxis.toAxisPosition(ev.target.xPosition));
+        			  cursorY = yAxis.positionToValue(yAxis.toAxisPosition(ev.target.yPosition));
+        			});
+	        		
+	        		// dynamics score
+	        		dynamicsChart = am4core.create("dynamicsScore", am4charts.GaugeChart);
+	        		dynamicsChart.innerRadius = -15;
+	        		var axis = dynamicsChart.xAxes.push(new am4charts.ValueAxis());
+	        		axis.min = 0;
+	        		axis.max = 100;
+	        		axis.strictMinMax = true;
+	        		var colorSet = new am4core.ColorSet();
+	        		var range0 = axis.axisRanges.create();
+	        		range0.value = 0;
+	        		range0.endValue = 50;
+	        		range0.axisFill.fillOpacity = 1;
+	        		range0.axisFill.fill = am4core.color("rgb(255, 79, 79)");
+	        		var range1 = axis.axisRanges.create();
+	        		range1.value = 50;
+	        		range1.endValue = 80;
+	        		range1.axisFill.fillOpacity = 1;
+	        		range1.axisFill.fill = am4core.color("rgb(245, 228, 0)");
+	        		var range2 = axis.axisRanges.create();
+	        		range2.value = 80;
+	        		range2.endValue = 100;
+	        		range2.axisFill.fillOpacity = 1;
+	        		range2.axisFill.fill = am4core.color("rgb(0, 219, 29)");
+	        		var hand = dynamicsChart.hands.push(new am4charts.ClockHand());
+	        		hand.value = json.dynamics_score * 1;
+	        		
+	        		
+	        		answerAudio.load('/audio/getAnswerAudio.do?file=' + json.answer_temp_file);
+	        		
+	        		chart.events.on("hit", function(e){
+	        			audio.stop();
+	        			answerAudio.stop();
+	        			audio.seekTo(cursorX);
+	        			answerAudio.seekTo(cursorX - startDiff);
+	        			audio.play();
+	        			answerAudio.play();
+	        		})
+	          }
+	          
+	      }).done(function(data) {
+	             console.log(data); 
+	             
+	      });
+	});
 	
 	function toggleMyVoice(){
 		var el = $("#myVoice");
@@ -459,6 +757,7 @@ String word = (String) request.getAttribute("word");
 		toggleMyVoice();
 	})
 </script>
+
 </body>
 
 </html>
