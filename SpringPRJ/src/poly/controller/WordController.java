@@ -118,23 +118,28 @@ public class WordController {
 		
 		List<String> rList = rDTO.getWord();
 		log.info("rList : " + rDTO.getWord());
+		for(String word : rList) {
+			System.out.println(word);
+		}
 		
-		model.addAttribute("rList", rList);
-		
-		for(String wordList : rList) {
-			System.out.println(wordList);
+		// 어휘의 뜻을 가져오기위해 Wordpool에서 조회함
+		// List형태로 가져옴
+		List<String> wList = newsWordService.getWordMeaning(rList);
+		for(String meaning : wList) {
+			System.out.println(meaning);
 		}
 		
 		log.info("wordStudy 종료");
-
+		model.addAttribute("wList", wList); // 단어의 뜻
+		model.addAttribute("rList", rList); // 단어
 		return "/Word/wordStudy";
 	}
 	
-	// 어휘의 뜻을 가져오기위한 Mapping -> wordpool에서 meaning을 조회함
-	@RequestMapping(value = "Word/wordMeaning")
-	public String wordMeaning(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
+	// 어휘의 뜻을 가져오기위한 Mapping -> wordpool에서 meaning을 조회 TEST
+	@RequestMapping(value = "Word/meaningtest")
+	public String meaningtest(HttpServletRequest request, ModelMap model, HttpSession session ) throws Exception {
 		String word ="supermarket";
-		String mean = newsWordService.getWordMeaning(word);
+		String mean = newsWordService.meaningtest(word);
 		
 		return mean;
 	}

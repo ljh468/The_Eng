@@ -35,12 +35,13 @@ public class MyRedisMapper implements IMyRedisMapper {
 		/*
 		 * 2 데이터가 존재하면 바로 반환
 		 */
+		
 		// 키가 존재하면 데이터 읽기 
 		if (redisDB.hasKey(redisKey)) {
 			String res = (String) redisDB.opsForValue().get(redisKey);
 			
 			log.info("res: " + res);
-		// 키가 업t으면 데이터 저장 
+		// 키가 없으면 데이터 저장 
 		} else {
 			redisDB.opsForValue().set(redisKey, saveData);
 			

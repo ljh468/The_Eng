@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import poly.dto.MongoNewsDTO;
 import poly.persistance.mongo.IMongoNewsMapper;
 import poly.persistance.mongo.IMongoTestMapper;
+import poly.persistance.redis.IRedisNewsWordMapper;
 import poly.service.INewsWordService;
 
 @Service("NewsWordService")
@@ -24,6 +25,9 @@ public class NewsWordService implements INewsWordService {
 
 	@Resource(name = "MongoNewsMapper")
 	IMongoNewsMapper mongoNewsMapper;
+	
+	@Resource(name = "RedisNewsWordMapper")
+	IRedisNewsWordMapper redisNewsWordMapper;
 
 	private Map<String, List<String>> WORD_POOL = new HashMap<>();
 
@@ -45,7 +49,7 @@ public class NewsWordService implements INewsWordService {
 	}
 	
 	@Override
-	public String getWordMeaning(String word) throws Exception {
+	public String meaningtest(String word) throws Exception {
 		
 		log.info(this.getClass().getName() + ".getWordMeaning start");
 		
@@ -56,6 +60,15 @@ public class NewsWordService implements INewsWordService {
 		
 	}
 	
+	@Override
+	public List<String> getWordMeaning(List<String> rList) {
+		log.info(this.getClass().getName() + ".Meaning start");
+		
+		List<String> wList = mongoNewsMapper.getWordMeaning(rList);
+		
+		log.info(this.getClass().getName() + ".Meaning end");
+		return wList;
+	}
 	
 	/** @return : [{lemma : (String)"단어원형", pool : (List of String)"속한 풀", sntncIdx : (Integer)"문장 인덱스", wordIdx : (Integer)"단어 인덱스"}]
 	 *
@@ -92,6 +105,11 @@ public class NewsWordService implements INewsWordService {
 		
 		log.info(this.getClass().getName() + ".extractWords end");
 		return rList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getTodaySentences() throws Exception {
+		return redisNewsWordMapper.getTodaySentences();
 	}
 
 }

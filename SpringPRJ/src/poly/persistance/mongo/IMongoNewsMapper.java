@@ -9,6 +9,8 @@ public interface IMongoNewsMapper {
 
 	String getWordMeaning(String word) throws Exception;
 
+	List<String> getWordMeaning(List<String> rList);
+
 	
 
 	

@@ -12,7 +12,11 @@ public interface INewsWordService {
 
 	void loadWordPool() throws Exception;
 
-	String getWordMeaning(String word) throws Exception;
+	String meaningtest(String word) throws Exception;
+
+	List<String> getWordMeaning(List<String> rList);
+
+	List<Map<String, Object>> getTodaySentences() throws Exception;
 
 
 	

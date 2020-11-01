@@ -14,7 +14,7 @@ public class WordQuizDTO {
 	private List<String> answersentence;
 	private List<String> translation;  // 문장번역
 	
-	private List<Integer> idx;
+	private int idx;
 	private int correctCounter;
 	private int totalQs;
 	private int answeredQCount;
@@ -63,12 +63,12 @@ public class WordQuizDTO {
 	public void setWord(List<String> word) {
 		this.word = word;
 	}
-	
-	public List<Integer> getIdx() {
+
+	public int getIdx() {
 		return idx;
 	}
 
-	public void setIdx(List<Integer> idx) {
+	public void setIdx(int idx) {
 		this.idx = idx;
 	}
 

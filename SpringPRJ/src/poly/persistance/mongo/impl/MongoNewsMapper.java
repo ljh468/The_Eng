@@ -1,5 +1,6 @@
 package poly.persistance.mongo.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -68,4 +69,24 @@ public class MongoNewsMapper implements IMongoNewsMapper {
 
 	}
 
+	@Override
+	public List<String> getWordMeaning(List<String> rList) {
+		log.info(this.getClass().getName() + ".MeanMapper start");
+		List<String> wList = new ArrayList<>();
+		
+		for(String word : rList) {
+		DBObject query = new BasicDBObject("word", word);
+		DBCursor cursor = mongodb.getCollection(WORD_POOL).find(query);
+		String mean ="";
+		
+		while (cursor.hasNext()) {
+			DBObject obj = cursor.next();
+			mean = (String) obj.get("meaning");
+			wList.add(mean);
+		}
+		}
+		log.info(this.getClass().getName() + ".MeanMapper end");
+		return wList;
+
+	}
 }

@@ -8,6 +8,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<java-version>1.8</java-version>
+		<!-- MongoDB에서 제공하는 스프링버전과 연동하기 위해 4.2.9버젼으로 다운그레이드 -->
 		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<slf4j.version>1.7.25</slf4j.version>
