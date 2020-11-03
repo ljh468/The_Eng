@@ -57,6 +57,16 @@ public class Test_2_Con {
 		// mongoTestMapper의 selectWithCondition에 query파라미터를 return
 	}
 	
+	@RequestMapping(value = "Today/TodayAudio")
+	public String setting() {
+
+		log.info("/Today/TodayAudio 시작");
+
+		log.info("/Today/TodayAudio 종료");
+
+		return "/Today/TodayAudio";
+	}
+	
 	
 	
 	

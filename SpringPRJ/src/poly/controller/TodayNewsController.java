@@ -1,13 +1,23 @@
 package poly.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mongodb.BasicDBObject;
@@ -18,11 +28,13 @@ import poly.dto.QuizInfoDTO;
 import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoQuizMapper;
 import poly.persistance.mongo.IMongoTestMapper;
+import poly.service.IAudioService;
 import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.INewsWordService;
 import poly.service.IUserService;
 import poly.util.CmmUtil;
+import poly.util.TTSUtil;
 
 @Controller
 public class TodayNewsController {
@@ -43,6 +55,9 @@ public class TodayNewsController {
 
    @Resource(name = "NewsWordService")
    private INewsWordService newsWordService;
+   
+   @Resource(name = "AudioService")
+   private IAudioService audioService;
 
    @Resource(name = "MongoQuizMapper")
    IMongoQuizMapper mongoQuizMapper;
@@ -86,9 +101,10 @@ public class TodayNewsController {
    public String TodayHeraldNews(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
       // Today main에서 news_name을 받아와 각뉴스에 맞는 자료 추출
       String news_name = request.getParameter("news_name");
+      log.info("news_name : " + news_name);
       String user_id = (String) session.getAttribute("user_id");
       log.info("TodaySentence 시작");
-      log.info("heraldQuiz start!");
+      log.info("Quiz start!");
 
       // 코리아헤럴드 뉴스 추출
       if (news_name.equals("herald")) {
@@ -167,7 +183,7 @@ public class TodayNewsController {
       } // 연합 뉴스 추출
       else if (news_name.equals("yonhap")) {
          log.info("yonhapGET Start!");
-         MongoNewsDTO rDTO = mongoTestMapper.getTimesNews();
+         MongoNewsDTO rDTO = mongoTestMapper.getYonhapNews();
          log.info("yonhapGET End!");
 
          log.info("getQuizInfo Start!");
@@ -207,7 +223,8 @@ public class TodayNewsController {
       String news_name = CmmUtil.nvl(request.getParameter("news_name"));
       String news_url = CmmUtil.nvl(request.getParameter("news_url")); // 뉴스의 url로 조회하기 위함
       String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
-      
+      log.info("news_url2 : "+ news_url);
+      log.info("news_name 2 : " + news_name);
       DBObject query = new BasicDBObject("url", news_url);
       log.info("query : " + query);
 
@@ -271,6 +288,8 @@ public class TodayNewsController {
       String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
       String news_title = CmmUtil.nvl(request.getParameter("news_title"));
       String idxstring = CmmUtil.nvl(request.getParameter("idx"));
+      
+      log.info("news_name 3 : " + news_name);
       int idx = Integer.valueOf(idxstring);
       ///////////////////////////////////////////////////////////////////////////////////////////////
       // TEST //getParameter로 받으면
@@ -347,6 +366,7 @@ public class TodayNewsController {
       String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
       String user_id = CmmUtil.nvl((String) session.getAttribute("user_id"));
 
+      log.info("news_name : 4 " + news_name);
       // 퀴즈를 풀면 UserQuizInfo의 quizindex를 올려주기위한 nextQuiz()
       mongoQuizMapper.nextQuiz(user_id, news_url);
 
@@ -377,5 +397,75 @@ public class TodayNewsController {
 
       return "/Today/TodayResult";
    }
+   
+   @RequestMapping(value = "Today/getTodaySentences")
+   @ResponseBody
+   public Map<String, Object> getTodaySentences(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+	   
+	   String news_url = request.getParameter("news_url");
+	   DBObject query = new BasicDBObject("url", news_url);
+	   WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
+	   List<Map<String, Object>> resp = new ArrayList<>();
+	   Set<String> sentSet = new HashSet<>();
+	  
+	   int i = 0;
+	   for(String sent : rDTO.getOriginal_sent()) {
+		   
+		   if(sentSet.add(sent)) {
+			   TTSUtil.saveTTS(i, sent, news_url);
+			   Map<String, Object> sentMap = new HashMap<>();
+			   sentMap.put("sentence", sent);
+			   sentMap.put("index", i);
+			   resp.add(sentMap);
+		   }
+		   i++;
+	   }
+	   Map<String, Object> rMap = new HashMap<>();
+	   rMap.put("res", resp);
+	   
+	   log.info("TodayResult 시작");
+	   log.info("TodayResult 종료");
 
+      return rMap;
+   }
+   
+   @RequestMapping(value = "audio/getTodaySentenceAudio", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public byte[] getTodaySentenceAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+			throws Exception {
+		log.info(this.getClass().getName() + ".getTodaySentenceAudio start");
+		String newsUrl = request.getParameter("newsUrl");
+		String idx = request.getParameter("idx");
+		byte[] res = audioService.getTodaySentenceAudio(newsUrl, idx);
+		log.info(this.getClass().getName() + ".getTodaySentenceAudio end");
+		return res;
+	}
+   
+	@RequestMapping(value = "Today/analyzeAudio", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> analyzeAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+			throws Exception {
+		log.info(this.getClass().getName() + ".analyzeAudio start");
+		String data = request.getParameter("data");
+		String newsUrl = request.getParameter("newsUrl");
+		String sentenceAudioIdx = request.getParameter("sentenceAudioIdx");
+		log.info("sentenceAudioIdx : " + sentenceAudioIdx);
+		Map<String, Object> rMap = audioService.analyzeAudio(data, newsUrl, sentenceAudioIdx);
+		log.info(this.getClass().getName() + ".analyzeAudio end");
+		
+		return rMap;
+	}
+	
+	@RequestMapping(value = "audio/getAnswerAudio", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public byte[] getAnswerAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+			throws Exception {
+		log.info(this.getClass().getName() + ".getAnswerAudio start");
+		String answer_temp_file = request.getParameter("file");
+		
+		log.info(this.getClass().getName() + ".getAnswerAudio end");
+		return audioService.getAnswerAudio(answer_temp_file);
+		//return audioService.getAnswerAudioFromOuter(answer_temp_file);
+		
+	}
 }

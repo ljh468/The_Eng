@@ -6,6 +6,9 @@
 
 <%
 	List<String> rList = (List<String>)request.getAttribute("rList");
+	List<String> wList = (List<String>)request.getAttribute("wList");
+	out.print(rList.size());
+	out.print(wList.size());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,7 +123,7 @@
 							</div>
 							<div class="back">
 								<h3 class="text-center" style="margin-top: 40px;" id="ko"><%=TranslateUtil.kakaotrans(rList.get(0)) %></h3>
-								<p class="mr-5"  id="sub-en"><%=WebCrawler.getMeaning(rList.get(0)) %></p>
+								<p class="mr-5"  id="sub-en"><%=wList.get(0) %></p>
 							</div>
 						</div>
 					</div>
@@ -170,9 +173,9 @@
 		var loop=0;
 		//db내용 바뀌면 수정 ㄱ
 		<%for (int i = 0; i < rList.size(); i++) {%>
-		  mylist[loop] =" <%=rList.get(i)%>";
-		 <%--  myko[loop] = " <%=TranslateUtil.kakaotrans(rList.get(i))%>";
-		  myen[loop] = " <%=WebCrawler.getMeaning(rList.get(i))%>";  --%>
+		  mylist[loop] ="<%=rList.get(i)%>";
+		  myko[loop] = "<%=TranslateUtil.kakaotrans(rList.get(i))%>";
+		  myen[loop] = "<%=wList.get(i)%>";
 			loop++;
 		<%}%>
 		
@@ -188,7 +191,9 @@
 					document.getElementById("en").innerHTML = mylist[no];
 					document.getElementById("sub-en").innerHTML = myen[no];
 					document.getElementById("ko").innerHTML = myko[no];
-				
+					
+					document.getElementById("card").style.transform ="rotatey(0deg)";
+		            document.getElementById("card").style.backgroundColor ="white";
 				} else {
 					O++;
 					no++;
@@ -221,6 +226,8 @@
 					document.getElementById("sub-en").innerHTML = myen[no];
 					document.getElementById("ko").innerHTML = myko[no];
 					
+					document.getElementById("card").style.transform ="rotatey(0deg)";
+		            document.getElementById("card").style.backgroundColor ="white";
 				} else {
 					no++;
 					X++;

@@ -5,10 +5,36 @@
 String reutersTitle = "";
 String timesTitle = "";
 String yonhapTitle = "";
+String heraldImg = (String)request.getAttribute("heraldImg");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+.slide:nth-child(1) .slide__inner {
+	background-image:
+	<%if(heraldImg!=null){%>
+		url("<%=heraldImg %>") !important;
+	<%}else{%>
+		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-2.jpg") !important;
+	<%}%>
+}
+
+.slide:nth-child(2) .slide__inner {
+	background-image:
+		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-3.jpg") !important;
+}
+
+.slide:nth-child(3) .slide__inner {
+	background-image:
+		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-4.jpg") !important;
+}
+
+.slide:nth-child(4) .slide__inner {
+	background-image:
+		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-5.jpg") !important;
+}
+</style>
 <link rel="stylesheet" href="/resources/scss/cardBob.css">
 <meta charset="UTF-8">
 <title>Document</title>

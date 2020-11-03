@@ -77,10 +77,10 @@ public class SaveNewsController {
 			
 			// String 타입의 변수를 리스트형태로 (이중배열)로넣기 위해 객체 생성
 			List<String> wordList = new ArrayList<String>();
+			List<String> lemmaList = new ArrayList<String>();
 			List<String> sentList = new ArrayList<String>();
 			List<String> answersentList = new ArrayList<String>();
 			List<String> quizList = new ArrayList<String>();
-			List<String> usedNews = new ArrayList<String>();
 			List<String> transList = new ArrayList<String>();
 			//////////////////////////////////////////////////////
 			WordQuizDTO quizDTO = new WordQuizDTO();
@@ -89,6 +89,7 @@ public class SaveNewsController {
 				pMap = (Map<String, Object>) it.next();
 				int sntncIdx = (Integer) pMap.get("sntncIdx");  // 주요단어가 들어간 문장인덱스
 				String word = (String) pMap.get("word"); // 문장에 포함된 주요단어 추출
+				String lemma = (String) pMap.get("lemma"); // 문장에 포함된 주요단어원형 추출
 				String sent = (String) rDTO.getOriginal_sentences().get(sntncIdx); // 주요문장
 				String quizSent = sent.replace(word,    // 단어를 빈칸으로만든 문장 
 						"<input type='text' value='" + word.substring(0, 2) + "' id= 'answer'>");
@@ -98,6 +99,8 @@ public class SaveNewsController {
 				quizDTO.setUrl(rDTO.getNews_url()); // 뉴스 url DTO에 담기
 				wordList.add(word);
 				quizDTO.setWord(wordList); // 단어 list를 DTO에 담기
+				lemmaList.add(lemma);
+				quizDTO.setLemma(lemmaList); // 원형 list를 DTO에 담기
 				sentList.add(sent);
 				quizDTO.setOriginal_sent(sentList); // 문장 list를 DTO에 담기
 				answersentList.add(answersent);

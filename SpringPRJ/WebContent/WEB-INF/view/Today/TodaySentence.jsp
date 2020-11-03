@@ -94,7 +94,8 @@
 						
 
 						<h6 class="m-3" style="color:orange">Title 번역</h6>
-						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(news_title) %></p>
+						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'")) %></p>
 						
 						<h6 class="m-3" style="color:orange">Sentence 번역</h6>
 						<p class="m-4" style="font-size:1.5em"><%=translation %></p>

@@ -11,6 +11,7 @@ public class WordQuizDTO {
 	private List<String> original_sent;
 	private List<String> quiz_sent;
 	private List<String> word;
+	private List<String> lemma;
 	private List<String> answersentence;
 	private List<String> translation;  // 문장번역
 	
@@ -24,6 +25,7 @@ public class WordQuizDTO {
 		this.original_sent = new ArrayList<>();
 		this.quiz_sent = new ArrayList<>();
 		this.word = new ArrayList<>();		
+		this.lemma = new ArrayList<>();		
 		this.answersentence = new ArrayList<>();
 	}
 	
@@ -34,6 +36,7 @@ public class WordQuizDTO {
 		this.original_sent = (List <String>) (quiz).get("original_sent");
 		this.quiz_sent = (List <String>) (quiz).get("quiz_sent");
 		this.word = (List <String>) (quiz).get("word");
+		this.lemma = (List <String>) (quiz).get("lemma");
 		this.answersentence = (List <String>) (quiz).get("answersentence");
 		this.translation = (List <String>) (quiz).get("translation");
 		  
@@ -104,5 +107,14 @@ public class WordQuizDTO {
 	public void setTranslation(List<String> translation) {
 		this.translation = translation;
 	}
+
+	public List<String> getLemma() {
+		return lemma;
+	}
+
+	public void setLemma(List<String> lemma) {
+		this.lemma = lemma;
+	}
+	
 	
 }

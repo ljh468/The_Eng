@@ -7,7 +7,6 @@
 	String reutersTitle = (String) request.getAttribute("reuterstitle");
 	String timesTitle = (String) request.getAttribute("timestitle");
 	String yonhapTitle = (String) request.getAttribute("yonhaptitle");
-	News_NameDTO nmDTO = new News_NameDTO();
 %>
 <!DOCTYPE html>
 <html lang="en">

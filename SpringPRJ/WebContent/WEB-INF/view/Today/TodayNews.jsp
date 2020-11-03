@@ -121,7 +121,8 @@
 
 						<div class="m-3">
 							<h4 class="card-text">
-								<b><%=title%></b>
+								<b><%=title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'")%></b>
 								</h4>
 								<div class="write-date">
 									<h6 style="color: grey"><%=date%></h6>

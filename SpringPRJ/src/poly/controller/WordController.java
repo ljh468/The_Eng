@@ -116,10 +116,10 @@ public class WordController {
 		WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
 		
 		
-		List<String> rList = rDTO.getWord();
-		log.info("rList : " + rDTO.getWord());
-		for(String word : rList) {
-			System.out.println(word);
+		List<String> rList = rDTO.getLemma();
+		log.info("rList : " + rDTO.getLemma());
+		for(String lemma : rList) {
+			System.out.println(lemma);
 		}
 		
 		// 어휘의 뜻을 가져오기위해 Wordpool에서 조회함

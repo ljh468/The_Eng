@@ -53,7 +53,35 @@ public class MongoNewsMapper implements IMongoNewsMapper {
 
 	// mongoDB의 wordPool에서 word, meaning 뽑아오기
 	@Override
-	public String getWordMeaning(String word) throws Exception {
+	public List<String> getWordMeaning(List<String> rList) {
+		log.info(this.getClass().getName() + ".MeanMapper start");
+		log.info("rList length : " + rList.size());
+		List<String> wList = new ArrayList<>();
+		
+		for(String word : rList) {
+			word = word.toLowerCase();
+			DBObject query = new BasicDBObject("word", word);
+			DBCursor cursor = mongodb.getCollection(WORD_POOL).find(query);
+			String mean ="";
+			
+			while (cursor.hasNext()) {
+				DBObject obj = cursor.next();
+				mean = (String) obj.get("meaning");
+				if(mean==null) {
+					mean = "no meaning";
+				}
+				log.info("meaning : " + mean);
+				wList.add(mean);
+			}
+		}
+		log.info(this.getClass().getName() + ".MeanMapper end");
+		return wList;
+
+	}
+	
+	// word 가져오기 test
+	@Override
+	public String meaningtest(String word) throws Exception {
 		log.info(this.getClass().getName() + ".getWordMeaning start");
 		String mean = "";
 		DBObject query = new BasicDBObject("word", word);
@@ -68,25 +96,4 @@ public class MongoNewsMapper implements IMongoNewsMapper {
 		return mean;
 
 	}
-
-	@Override
-	public List<String> getWordMeaning(List<String> rList) {
-		log.info(this.getClass().getName() + ".MeanMapper start");
-		List<String> wList = new ArrayList<>();
-		
-		for(String word : rList) {
-		DBObject query = new BasicDBObject("word", word);
-		DBCursor cursor = mongodb.getCollection(WORD_POOL).find(query);
-		String mean ="";
-		
-		while (cursor.hasNext()) {
-			DBObject obj = cursor.next();
-			mean = (String) obj.get("meaning");
-			wList.add(mean);
-		}
-		}
-		log.info(this.getClass().getName() + ".MeanMapper end");
-		return wList;
-
-	}
-}
+};

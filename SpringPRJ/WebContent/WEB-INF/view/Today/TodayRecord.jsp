@@ -2,8 +2,9 @@
 <%@page import="poly.util.TranslateUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Date"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 
 <%
 	String answer_sent = (String) request.getAttribute("answer_sent");
@@ -12,6 +13,7 @@
 	String news_title = (String) request.getAttribute("news_title");
 	String insertdate = (String) request.getAttribute("insertdate");
 	String original_sent = (String) request.getAttribute("original_sent");
+	String pageTitle = "읽기 연습";
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,61 +40,33 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-	<link rel="stylesheet" href="/resources/scss/Button.css">
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 
 <style>
-#mic {
-	background-image: url("\resources\images\mic_icon.png");
-	background-size: 15em 15em;
-}
-
-.ldBar-label {
-	display: none;
-}
-
-#analyzingCircle {
-	border: 0.5em solid #f3f3f3; /* Light grey */
-	border-top: 0.5em solid #3498db; /* Blue */
-	border-radius: 50%;
-	width: 15em;
-	height: 15em;
-	animation: spin 2s linear infinite;
-	visibility: hidden;
-}
-
-@
-keyframes spin { 0% {
-	transform: rotate(0deg);
-}
-100%
-{
-transform
-
-
-
-
-:
-
-
-
-rotate
-
-
-
-
-
-(360
-deg
-
-
-
-
-
-);
-}
-}
-</style>
-
+	#mic{
+		background-image:url("/resources/images/mic_disabled.png");
+		background-size:15em 15em;
+	}
+	.ldBar-label{
+		display:none;
+		}
+	#analyzingCircle {
+	  border: 0.5em solid #f3f3f3; /* Light grey */
+	  border-top: 0.5em solid #3498db; /* Blue */
+	  border-radius: 50%;
+	  width: 15em;
+	  height: 15em;
+	  animation: spin 2s linear infinite;
+ 	  visibility:hidden; 
+	}
+	
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}
+	</style>
+	
 </head>
 
 <body class="">
@@ -112,8 +86,51 @@ deg
 									class="navbar-toggler-bar bar3"></span>
 							</button>
 						</div>
-						<a class="navbar-brand" href="javascript:;">Today Highlight
-							English</a>
+						<a class="navbar-brand" href="javascript:;">
+						Today Highlight English</a>
+					</div>
+					<div class="collapse navbar-collapse justify-content-end"
+						id="navigation">
+						<form>
+							<div class="input-group no-border">
+								<input type="text" value="" class="form-control"
+									placeholder="Search...">
+								<div class="input-group-append">
+									<div class="input-group-text">
+										<i class="nc-icon nc-zoom-split"></i>
+									</div>
+								</div>
+							</div>
+						</form>
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link btn-magnify"
+								href="javascript:;"> <i class="nc-icon nc-layout-11"></i>
+									
+										<span class="d-lg-none d-md-block">Stats</span>
+									
+							</a></li>
+							<li class="nav-item btn-rotate dropdown"><a
+								class="nav-link dropdown-toggle" href="http://example.com"
+								id="navbarDropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false"> <i
+									class="nc-icon nc-bell-55"></i>
+									
+										<span class="d-lg-none d-md-block">Some Actions</span>
+									
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="#">Action</a> <a
+										class="dropdown-item" href="#">Another action</a> <a
+										class="dropdown-item" href="#">Something else here</a>
+								</div></li>
+							<li class="nav-item"><a class="nav-link btn-rotate"
+								href="javascript:;"> <i class="nc-icon nc-settings-gear-65"></i>
+									
+										<span class="d-lg-none d-md-block">Account</span>
+									
+							</a></li>
+						</ul>
 					</div>
 				</div>
 			</nav>
@@ -122,142 +139,139 @@ deg
 			<div class="content">
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center">
-							<b><%=news_name%></b>
-						</h4>
+						<h4 class="mt-0 mb-0 text-center"><b><%=news_name%>s</b></h4>
 					</div>
 					<hr>
 					<div class="card-body">
 						<div class="m-3">
-							<h6 style="color: orange">Today Record</h6>
-							<br>
-							<!-- 자동으로 바뀌어야 하는 구역 -->
-							<h3 class="card-text">
-								<b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-                              .replace("& gt;", ">").replace("& #39;", "'")%></b>
-							</h3>
+						<h6 style="color:orange">Today Record</h6>
+						<br>
+						<!-- 자동으로 바뀌어야 하는 구역 -->
+						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
 
-							<h6 style="color: grey"><%=insertdate%></h6>
+						<h6 style="color:grey">2020, Dec 11</h6>
 						</div>
-
-						<button type="button" id="listen">
-							<p class="m-4" style="font-size: 1em"><%=original_sent%></p>
-						</button>
-
+						
+						<p class="m-4" id='sentence' style="font-size:1.5em">
+						</p>
+						
+						<div class="row" id="navigator">		
+						<div class="col-12 mt-1 mb-1 text-center">
+							<button type="button" id="prev" disabled='disabled' class="btn btn-info btn-success ">&lt;</button>
+							
+							<button type="button" id="listen" class="btn btn-info btn-warning">Voice
+							<i style="font-size:2rem" class="la la-volume-up"></i></button>
+							
+							<button type="button" id="next" class="btn btn-info btn-success ">&gt;</button>
+						</div>
+						</div>
+									
+						
 						<hr>
 						<!-- 뉴스 기사 끝. -->
-
-						<h6 class="m-3" style="color: orange">Voice Record</h6>
-
+						
+						<h6 class="m-3" style="color:orange">Voice Record</h6>
+						
 						<!--  버튼을 클릭했을 때 기능이 나오게 하기.  -->
-						<div class="row">
-							<div class="col-6" style="height: 240px;">
-								<br>
-								<div id="timerBlock">
+						<div style="float:left; width:47%; height:240px; margin-left:10px; margin-right:10px">
+						<br>
+						<div id="timerBlock">
 									<br>
-
-									<div id="mic" style="width: 15em; height: 15em; margin: auto;">
-										<div id="progressCircle"
-											style="width: 15em; height: 15em; color: white;"
-											data-stroke="red" data-preset="circle" class="label-center"
-											data-value="100" data-precision="0.01"></div>
-										<div id="analyzingCircle"></div>
+									
+									<div id="mic" style="width:15em;height:15em;margin:auto;">
+											<div id="progressCircle" style="width:15em;height:15em;color:white;" data-stroke="red" 
+											data-preset="circle" class="label-center" data-value="100" data-precision="0.01"></div>
+											<div id="analyzingCircle"></div>
 									</div>
-
+										
 								</div>
-							</div>
-
-							<div class="col-6">
-
-								<div class="text-center">
-									<h1 id="timer"></h1>
-								</div>
-
-							</div>
+						</div>
+						
+						<div style="float:left; width:47%;">
+					
+						<div class="text-center">
+							<h1 id="timer"></h1>
+							<button id="startInterview"  style="height:105px"class="mt-1 btn btn-success btn-block btn-lg">녹음 시작</button>
+							<button hidden='hidden' id="resetInterview" style="height:105px" class="btn btn-success btn-block btn-lg">다시 녹음</button>
+							<button style="display:none;height:105px;" id="stopInterview" class="btn btn-success btn-block btn-lg">녹음 종료</button>
+							<button style="display:none;height:105px" id="submitInterview" class="btn btn-success btn-block btn-lg">제출</button>
+						</div>
+						
+						<input type="button" style="height:105px" onclick="location.href='/today/todayTranslate.do'" class="btn btn-success btn-block btn-lg" value="번역 연습하기">
 						</div>
 						<div>
-							<!-- Header footer section start -->
-							<section id="header-footer">
-
-								<div style="max-width: 50rem">
-									<div class="card">
-										<div class="card-header">
-
-											<div id="waveform" hidden='hidden'></div>
-											<div id="waveform2" hidden='hidden'></div>
+						<!-- Header footer section start -->
+				<section id="header-footer">
+					
+						<div style="max-width:50rem">
+							<div class="card">
+								<div class="card-header">
+									
+									<div id="waveform" hidden='hidden'></div>
+									<div id="waveform2" hidden='hidden'></div>
+								</div>
+								
+								<!-- 강세 분석 결과 표  -->
+								<div class="card-body" id="resultBlock" hidden="hidden">
+									<div class="row">
+										<div class="col-12 mt-1 mb-1">
+										<h4 class="card-title mb-0" style="font-size:1.3rem">강세 분석 결과</h4>
+										<div id="chartdiv" style="width:100%;height:500px;"></div>
+											<div class="row text-left">
+												<div class="col-12 text-right">
+												<div class="btn-group btn-group-sm" role="group">
+				                                <button type="button" id="myVoice" style="background-color: rgba(117, 142, 255, 1); border:none" data-enabled="1" class="btn btn-info">내 목소리</button>
+				                                <button type="button" id="nativeVoice" style="background-color: rgba(255,117,117, 1);border:none" data-enabled="1" class="btn btn-danger">원어민 목소리</button>
+				                            	</div>
+												</div>
+											</div>
+											
 										</div>
-
-										<!-- 강세 분석 결과 표  -->
-										<div class="card-body" id="resultBlock" hidden="hidden">
-											<div class="row">
-												<div class="col-12 mt-1 mb-1">
-													<h4 class="card-title mb-0" style="font-size: 1.3rem">강세
-														분석 결과</h4>
-													<div id="chartdiv" style="width: 100%; height: 500px;"></div>
-													<div class="row text-left">
-														<div class="col-12 text-right">
-															<div class="btn-group btn-group-sm" role="group">
-																<button type="button" id="myVoice"
-																	style="background-color: rgba(117, 142, 255, 1); border: none"
-																	data-enabled="1" class="btn btn-info">내 목소리</button>
-																<button type="button" id="nativeVoice"
-																	style="background-color: rgba(255, 117, 117, 1); border: none"
-																	data-enabled="1" class="btn btn-danger">원어민
-																	목소리</button>
-															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-6 offset-3">
-													<h4 class="card-title mb-0 text-center"
-														style="font-size: 1.3rem">강세 명료도 분석 결과</h4>
-													<div id="dynamicsScore" style="width: 100%; height: 300px;"></div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-12 text-center">
-													<button id="resetInterview2" class="btn btn-warning">다시
-														녹음</button>
-												</div>
-											</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-6 offset-3">
+											<h4 class="card-title mb-0 text-center" style="font-size:1.3rem">강세 명료도 분석 결과</h4>
+											<div id="dynamicsScore" style="width:100%;height:300px;"></div>
 										</div>
-										<!-- 강세분석결과표 끝 -->
-
+									</div>
+									<div class="row">
+									<div class="col-12 text-center">
+									<button id="resetInterview2" class="btn btn-warning">다시 녹음</button>
+									</div>
 									</div>
 								</div>
-
-
-							</section>
-
-
-
+								<!-- 강세분석결과표 끝 -->
+			
+							</div>
+						</div>
+						
+					
+				</section>
+						
+					
+						
 						</div>
 					</div>
 				</div>
+			
+			<!-- 카드 끝   -->
+			
+			<div>
+			<input style="float:right; width:100%" type="button" class="btn btn-warning btn-block btn-lg" value="Result" onclick="location='/Today/TodayResult.do'">
+			</div>
 
-				<!-- 카드 끝   -->
-
-				<div>
-					<input style="float: right; width: 100%" type="button"
-						class="btn btn-warning btn-block btn-lg" value="Result"
-						onclick="location='/Today/TodayResult.do'">
 				</div>
-
 			</div>
 		</div>
-	</div>
-
-
-
-
-	<!-- --------------------------------------------------------------------------- -->
-
-
-
+		
+					
+			
+		
+			<!-- --------------------------------------------------------------------------- -->
+			
+		
+	
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
@@ -273,18 +287,22 @@ deg
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="/resources/assets/demo/demo.js"></script>
 	<script type="text/javascript" src="/js/loading-bar.js"></script>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
-	<!-- amchart -->
-	<script src="https://www.amcharts.com/lib/4/core.js"></script>
-	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-	<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
+<!-- amchart -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://unpkg.com/wavesurfer.js"></script>
 	<script>
+		$(document).ready(function() {
+			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+			demo.initChartsPages();
+		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
@@ -299,7 +317,7 @@ deg
 		})
 		
 	</script>
-
+	
 	<script>
   var sentenceList;
   var sentenceIdx = 0;
@@ -332,20 +350,23 @@ deg
   var similarChart;
   
   $(document).ready(function(){
+	  
+	  var query = {news_url:"<%=news_url%>"}
   	$.ajax({
 			type : "POST",
 			url : "getTodaySentences.do",
+			data : query,
 			dataType : "JSON",
 			success : function(json) {
 				sentenceList = json.res;
-				$("#all").html(sentenceList.length);
+//				$("#all").html(sentenceList.length);
 				$("#sentence").html(sentenceList[0].sentence);
 				sentenceAudioIdx = sentenceList[0].index * 1;
-				audio.load('/audio/getTodaySentenceAudio.do?idx=0');
+				audio.load('/audio/getTodaySentenceAudio.do?idx=0&newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>');
 				audioIdx = 0;
 				sentenceAudioIdx = 0;
-				$("#current").html(sentenceIdx+1);
-				$("#no").html(sentenceIdx+1);
+//				$("#current").html(sentenceIdx+1);
+//				$("#no").html(sentenceIdx+1);
 			}
   	})
   })
@@ -405,7 +426,7 @@ deg
 			  waveColor:"blue",
 			  progressColor:"purple"
 		  });
-	  	audio.load('/audio/getTodaySentenceAudio.do?idx=' + sentenceAudioIdx);
+	  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=' + sentenceAudioIdx);
 	  	audio.on('ready', audio.play.bind(audio));
 	  	audioIdx = sentenceAudioIdx;
 	  }else{
@@ -415,7 +436,7 @@ deg
   })
   
   </script>
-	<script>
+  <script>
   window.onload = function(){
 	  navigator.mediaDevices.getUserMedia({ audio: true, video: false });
   }
@@ -441,7 +462,7 @@ deg
 				  waveColor:"blue",
 				  progressColor:"purple"
 			  });
-		  	audio.load('/audio/getTodaySentenceAudio.do?idx=' + sentenceAudioIdx);
+		  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=' + sentenceAudioIdx);
 		  	audioIdx = sentenceAudioIdx;
 		}
 		
@@ -507,8 +528,8 @@ deg
 				          console.log(base64data);
 					      globalAudioData.data = base64data;
 					      globalAudioData.sentenceAudioIdx = sentenceAudioIdx;
+					      globalAudioData.newsUrl = "<%=news_url %>";
 				       }
-				      
 				    });
 					
 				    
@@ -692,8 +713,9 @@ deg
 	        		var hand = dynamicsChart.hands.push(new am4charts.ClockHand());
 	        		hand.value = json.dynamics_score * 1;
 	        		
-	        		
-	        		answerAudio.load('/audio/getAnswerAudio.do?file=' + json.answer_temp_file);
+	        		split = json.answer_temp_file.split("\\")
+	        		tempfile = split[split.length-1];
+	        		answerAudio.load('/audio/getAnswerAudio.do?file=' + tempfile);
 	        		
 	        		chart.events.on("hit", function(e){
 	        			audio.stop();

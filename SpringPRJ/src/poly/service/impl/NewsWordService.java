@@ -26,8 +26,8 @@ public class NewsWordService implements INewsWordService {
 	@Resource(name = "MongoNewsMapper")
 	IMongoNewsMapper mongoNewsMapper;
 	
-	@Resource(name = "RedisNewsWordMapper")
-	IRedisNewsWordMapper redisNewsWordMapper;
+//	@Resource(name = "RedisNewsWordMapper")
+//	IRedisNewsWordMapper redisNewsWordMapper;
 
 	private Map<String, List<String>> WORD_POOL = new HashMap<>();
 
@@ -48,18 +48,7 @@ public class NewsWordService implements INewsWordService {
 		
 	}
 	
-	@Override
-	public String meaningtest(String word) throws Exception {
-		
-		log.info(this.getClass().getName() + ".getWordMeaning start");
-		
-		String mean = mongoNewsMapper.getWordMeaning(word);
-		
-		log.info(this.getClass().getName() + ".getWordMeaning end");
-		return mean;
-		
-	}
-	
+	////// wordpool에서 meanning 가져오기
 	@Override
 	public List<String> getWordMeaning(List<String> rList) {
 		log.info(this.getClass().getName() + ".Meaning start");
@@ -109,7 +98,21 @@ public class NewsWordService implements INewsWordService {
 
 	@Override
 	public List<Map<String, Object>> getTodaySentences() throws Exception {
-		return redisNewsWordMapper.getTodaySentences();
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// meaning 가져오기 test
+	@Override
+	public String meaningtest(String word) throws Exception {
+		
+		log.info(this.getClass().getName() + ".getWordMeaning start");
+		
+		String mean = mongoNewsMapper.meaningtest(word);
+		
+		log.info(this.getClass().getName() + ".getWordMeaning end");
+		return mean;
+		
 	}
 
 }

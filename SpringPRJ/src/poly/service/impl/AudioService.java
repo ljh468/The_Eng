@@ -1,7 +1,6 @@
 package poly.service.impl;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -9,11 +8,8 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -28,27 +24,24 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import poly.persistance.redis.IRedisNewsWordMapper;
 import poly.service.IAudioService;
-import poly.util.TTSUtil;
 
 @Service("AudioService")
 public class AudioService implements IAudioService{
 
 	Logger log = Logger.getLogger(this.getClass());
 	
-	@Resource(name = "RedisNewsWordMapper")
-	IRedisNewsWordMapper redisNewsWordMapper;
+	static final String TEMP_DIR = "C:\\Users\\lee\\AppData\\Local\\Temp\\";
 	
 	@Override
-	public byte[] getTodaySentenceAudio(String idx) throws Exception {
+	public byte[] getTodaySentenceAudio(String newsUrl, String idx) throws Exception {
 		
-		
-		String newsUrl = redisNewsWordMapper.getTodayNewsUrl();
+
 		
 		// fixed date to 200619 for development purpose
 		// String finalPath = TTSUtil.TTS_PATH + today + TTSUtil.SLASH + idx + ".ogg";
-		String finalPath = TTSUtil.TTS_PATH + newsUrl + TTSUtil.SLASH + idx + ".ogg";
+//		String finalPath = TTSUtil.TTS_PATH + newsUrl + TTSUtil.SLASH + idx + ".ogg";
+		String finalPath = "C:\\tts\\" + newsUrl + "\\" + idx + ".ogg";
 		
 		File f = new File(finalPath);
 		InputStream in = new FileInputStream(f);
@@ -56,7 +49,7 @@ public class AudioService implements IAudioService{
 	}
 
 	@Override
-	public Map<String, Object> analyzeAudio(String data, String sentenceAudioIdx) throws Exception {
+	public Map<String, Object> analyzeAudio(String data, String newsUrl, String sentenceAudioIdx) throws Exception {
 		String requestURL = "http://localhost:5000/score";
 		
 		HttpClient httpClient = new DefaultHttpClient();
@@ -72,6 +65,8 @@ public class AudioService implements IAudioService{
 		params.add(new BasicNameValuePair("date", sdf.format(c.getTime())));
 //		params.add(new BasicNameValuePair("date", "200619"));
 		params.add(new BasicNameValuePair("data", data));
+		newsUrl = newsUrl.replaceAll("[^A-Za-z0-9]", "");
+		params.add(new BasicNameValuePair("newsUrl", newsUrl));
 		params.add(new BasicNameValuePair("idx", sentenceAudioIdx));
 		httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 		
@@ -89,7 +84,21 @@ public class AudioService implements IAudioService{
 			}
 		}
 		
+		
+		
 		JSONObject res = new JSONObject(sb.toString());
+		String answerTempFile = (String)res.get("answer_temp_file");
+		answerTempFile = answerTempFile.replace(".ogg", "");
+		
+		// 확장자 없는 임시파일 지우기
+		File f = new File(answerTempFile);
+		f.delete();
+		
+//		확장자 없는 웨이브파일 지우기
+		f = new File(answerTempFile + ".wav");
+		f.delete();
+		
+		
 		
 		return res.toMap();
 	}
@@ -97,35 +106,12 @@ public class AudioService implements IAudioService{
 	@Override
 	public byte[] getAnswerAudio(String answer_temp_file) throws Exception {
 
-		File f = new File(answer_temp_file);
+		File f = new File(TEMP_DIR + answer_temp_file);
 		InputStream in = new FileInputStream(f);
 		byte[] res =IOUtils.toByteArray(in);
-		
+		f.delete();
 		return res;
 	}
 
-	@Override
-	public byte[] getAnswerAudioFromOuter(String answer_temp_file) throws Exception {
-		String requestURL = "http://localhost:8080/audio/getAnswerAudio.do";
-		
-		HttpClient httpClient = new DefaultHttpClient();
-		
-		HttpPost httpPost = new HttpPost(requestURL);
-		
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		
-		params.add(new BasicNameValuePair("file", answer_temp_file));
-		httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-		
-		HttpResponse response = httpClient.execute(httpPost);
-		HttpEntity resEntity = response.getEntity();
-		
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    resEntity.writeTo(baos);
-	    byte[] bytes = baos.toByteArray();
-	    
-	    return bytes;
-
-	}
 
 }

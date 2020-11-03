@@ -23,33 +23,31 @@
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
 	</repositories>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.google.cloud</groupId>
-				<artifactId>libraries-bom</artifactId>
-				<version>5.7.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<dependencies>
 	
-		<dependency>
-		    <groupId>com.google.cloud</groupId>
-		    <artifactId>google-cloud-texttospeech</artifactId>
-		  </dependency>
-				<dependency>
-		    <groupId>com.googlecode.soundlibs</groupId>
-		    <artifactId>vorbisspi</artifactId>
-		    <version>1.0.3-1</version>
-		</dependency>
+	<!-- 구글클라우드 연결 -->
+	<dependencyManagement>
+	<dependencies>
+	<dependency>
+	<groupId>com.google.cloud</groupId>
+	<artifactId>libraries-bom</artifactId>
+	<version>13.3.0</version>
+	<type>pom</type>
+	<scope>import</scope>
+	</dependency>
+	</dependencies>
+	</dependencyManagement>
 
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.12.1</version>
+	<!-- 구글클라우드 스피치 연결 -->
+	<dependencies>
+	<dependency>
+	<groupId>com.google.cloud</groupId>
+	<artifactId>google-cloud-texttospeech</artifactId>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.jsoup</groupId>
+		<artifactId>jsoup</artifactId>
+		<version>1.12.1</version>
 		</dependency>
 		<!-- MongoDB 연동을 위한 Driver 파일 다운로드 -->
 		<dependency>

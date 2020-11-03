@@ -27,18 +27,19 @@ public class TTSUtil {
 
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
 	public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
-	public static final String TTS_PATH = IS_WINDOWS ? "C:\\tts" : "/daily-english/tts/";
+	public static final String TTS_PATH = IS_WINDOWS ? "C:\\tts\\" : "/daily-english/tts/";
 	public static final String SLASH = IS_WINDOWS ? "\\" : "/";
 	public static final String FFMPEG_PATH = IS_WINDOWS ? "C:\\ffmpeg\\bin\\ffmpeg.exe" : "ffmpeg";
 	//모르겠음 이게 머임 ㅜㅜ ㅜㅜ ㅜ ㅜㅜ ㅜ ㅜ
 
 	public static void saveTTS(int index, String sentence, String newsUrl) throws IOException, UnsupportedAudioFileException {
+		newsUrl = newsUrl.replaceAll("[^A-Za-z0-9]", "");
 		File dir = new File(TTS_PATH + newsUrl + SLASH);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		
 		String finalDir = dir + SLASH + index;
+		
 		
 		File existCheck = new File(finalDir + ".wav");
 		if(existCheck.exists()) return;
