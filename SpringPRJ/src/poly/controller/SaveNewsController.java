@@ -62,9 +62,9 @@ public class SaveNewsController {
 		// crawlingAll메서드의 rList를 pList에 대입
 		List<MongoNewsDTO> pList = newsService.crawlingAll(); // 영어뉴스 웹크롤링
 		int res = 0;
-
+		int i = 1;
 		for (MongoNewsDTO rDTO : pList) {
-
+			
 			// ###############################
 			// 퀴즈생성 START!!
 			// ###############################
@@ -84,6 +84,11 @@ public class SaveNewsController {
 			List<String> transList = new ArrayList<String>();
 			//////////////////////////////////////////////////////
 			WordQuizDTO quizDTO = new WordQuizDTO();
+			String news_title = (String) rDTO.getNews_title();
+			String title_trans = (String) TranslateUtil.sparetrans(news_title);  //제목 번역 quizInfo에 저장
+			quizDTO.setNew_title(news_title);
+			quizDTO.setTitle_trans(title_trans);
+			
 			while (it.hasNext()) {
 
 				pMap = (Map<String, Object>) it.next();
@@ -91,6 +96,7 @@ public class SaveNewsController {
 				String word = (String) pMap.get("word"); // 문장에 포함된 주요단어 추출
 				String lemma = (String) pMap.get("lemma"); // 문장에 포함된 주요단어원형 추출
 				String sent = (String) rDTO.getOriginal_sentences().get(sntncIdx); // 주요문장
+				
 				String quizSent = sent.replace(word,    // 단어를 빈칸으로만든 문장 
 						"<input type='text' value='" + word.substring(0, 2) + "' id= 'answer'>");
 				String answersent = sent.replace(word,  // 정답단어가 굵게 표현된 문장
@@ -107,7 +113,23 @@ public class SaveNewsController {
 				quizDTO.setAnswersentence(answersentList); // 정답이 포함된 문장 list를 DTO에 담기
 				quizList.add(quizSent); // 퀴즈로 생성된 문장 list를 DTO에 담기
 				quizDTO.setQuiz_sent(quizList);
-				transList.add(TranslateUtil.kakaotrans(sent)); // 문장 번역리스트
+				if(i==1) {
+				log.info("if = i = 1");
+				transList.add(TranslateUtil.heraldtrans(sent)); // 문장 번역리스트
+				log.info("herald translate");
+				}else if(i==2) {
+					log.info("if = i = 2");
+				transList.add(TranslateUtil.reuterstrans(sent)); // 문장 번역리스트	
+				log.info("reuters trans");
+				}else if(i==3) {
+					log.info("if = i = 3");
+				transList.add(TranslateUtil.timestrans(sent)); // 문장 번역리스트
+				log.info("times trans");
+				}else {
+					log.info("if = i = 4");
+				transList.add(TranslateUtil.yonhaptrans(sent)); // 문장 번역리스트	
+				log.info("yonhap trans");
+				}
 				quizDTO.setTranslation(transList); // 번역 list를 DTO에 담기 				
 				
 					
@@ -121,6 +143,8 @@ public class SaveNewsController {
 		// 웹크롤링한 영어뉴스 4가지 mongoDB에 저장	
 		mongoTestMapper.insert(rDTO); 
 		res++;
+		i++;
+		log.info("i == " + i);
 	}
 
 	model.addAttribute("res",String.valueOf(res)); // 수집된 뉴스기사

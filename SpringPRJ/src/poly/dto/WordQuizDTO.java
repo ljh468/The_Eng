@@ -8,6 +8,8 @@ import com.mongodb.DBObject;
 public class WordQuizDTO {
 
 	private String url;
+	private String new_title;
+	private String title_trans;
 	private List<String> original_sent;
 	private List<String> quiz_sent;
 	private List<String> word;
@@ -22,6 +24,8 @@ public class WordQuizDTO {
 	
 	public WordQuizDTO() {
 		this.url = new String();
+		this.new_title = new String();
+		this.title_trans = new String();
 		this.original_sent = new ArrayList<>();
 		this.quiz_sent = new ArrayList<>();
 		this.word = new ArrayList<>();		
@@ -33,6 +37,8 @@ public class WordQuizDTO {
 	   public WordQuizDTO(DBObject quiz) {
 		
 		this.url = (String) (quiz).get("url");
+		this.new_title = (String) (quiz).get("new_title");
+		this.title_trans = (String) (quiz).get("title_trans");
 		this.original_sent = (List <String>) (quiz).get("original_sent");
 		this.quiz_sent = (List <String>) (quiz).get("quiz_sent");
 		this.word = (List <String>) (quiz).get("word");
@@ -115,6 +121,23 @@ public class WordQuizDTO {
 	public void setLemma(List<String> lemma) {
 		this.lemma = lemma;
 	}
+
+	public String getNew_title() {
+		return new_title;
+	}
+
+	public void setNew_title(String new_title) {
+		this.new_title = new_title;
+	}
+
+	public String getTitle_trans() {
+		return title_trans;
+	}
+
+	public void setTitle_trans(String title_trans) {
+		this.title_trans = title_trans;
+	}
+	
 	
 	
 }

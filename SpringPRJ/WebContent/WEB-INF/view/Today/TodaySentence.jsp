@@ -11,6 +11,7 @@
 	String news_name = (String)request.getAttribute("news_name");
 	String insertdate = (String)request.getAttribute("insertdate");
 	String news_title = (String)request.getAttribute("news_title");
+	String news_title_trans = (String)request.getAttribute("news_title_trans");
 	String original_sent = (String)request.getAttribute("original_sent");
 	String translation = (String)request.getAttribute("translation");
 	Object quiz_sent = (Object)request.getAttribute("quiz_sent");
@@ -94,8 +95,8 @@
 						
 
 						<h6 class="m-3" style="color:orange">Title 번역</h6>
-						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-	                              .replace("& gt;", ">").replace("& #39;", "'")) %></p>
+						<p class="m-4" style="font-size:1.5em"><%=news_title_trans.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'") %></p>
 						
 						<h6 class="m-3" style="color:orange">Sentence 번역</h6>
 						<p class="m-4" style="font-size:1.5em"><%=translation %></p>

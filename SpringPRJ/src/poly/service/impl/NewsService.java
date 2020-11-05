@@ -1,20 +1,39 @@
 package poly.service.impl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 import edu.stanford.nlp.pipeline.CoreSentence;
 import poly.dto.MongoNewsDTO;
 import poly.dto.NewsDTO;
+import poly.dto.WordQuizDTO;
 import poly.persistance.mapper.INewsMapper;
 import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.INewsService;
+import poly.util.CmmUtil;
 import poly.util.NLPUtil;
 import poly.util.WebCrawler;
 
@@ -25,7 +44,7 @@ public class NewsService implements INewsService {
 	private INewsMapper newsMapper;
 
 	@Resource(name = "MongoTestMapper")
-	private IMongoTestMapper mongTestMapper;
+	private IMongoTestMapper mongoTestMapper;
 
 	// 로그파일 출력개체
 	private Logger log = Logger.getLogger(this.getClass());
@@ -214,5 +233,64 @@ public class NewsService implements INewsService {
 		log.info(this.getClass().getName() + ".getNewsInfoFromWEB End!");
 		return res;
 	}
-
+	
+	///////////////////////////////////////
+	//     파이썬으로 보내서 번역 유사도 확인
+	@Override
+	public JSONObject scoreTranslate(HttpServletRequest request) throws Exception {
+		String requestURL = "http://localhost:5000/scoreTranslate";
+		log.info("url : " + request.getParameter("url"));
+		log.info("idx : " + request.getParameter("idx"));
+		log.info("userAnswer : " + request.getParameter("userAnswer"));
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		String url = CmmUtil.nvl((String)request.getParameter("url"));
+//		String idxst = CmmUtil.nvl(request.getParameter("idx"));
+//		int idx = Integer.parseInt(idxst);
+//		int idxi = Integer.valueOf(idxst);
+		
+		
+		
+		DBObject query = new BasicDBObject("url", url);
+		WordQuizDTO nDTO = mongoTestMapper.getQuiz(query);
+		
+		
+		log.info("idx : " + idx);
+		log.info("url : " + url);
+		log.info("Translation : " + nDTO.getTranslation());
+		log.info("getTitle_trans : " + nDTO.getTitle_trans());
+		log.info("getOriginal_sent : " + nDTO.getOriginal_sent());
+		
+		
+		String original = nDTO.getTranslation().get(idx);
+		log.info("userAnswer : " + request.getParameter("userAnswer"));
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		HttpPost httpPost = new HttpPost(requestURL);
+		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("userAnswer", request.getParameter("userAnswer")));
+		params.add(new BasicNameValuePair("original", original));
+		httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		
+		HttpResponse response = httpClient.execute(httpPost);
+		HttpEntity resEntity = response.getEntity();
+		System.out.println(response.getStatusLine());
+		StringBuffer sb = new StringBuffer();
+		if(resEntity != null) {
+			try(InputStream instream = resEntity.getContent()){
+				BufferedReader reader = new BufferedReader(new InputStreamReader(instream));
+		        String line = null;
+		        while ((line = reader.readLine()) != null) {
+		        	sb.append(line);
+		        }
+			}
+		}
+		log.info("sb : " + sb);
+		JSONObject res = new JSONObject();
+		res.put("original", original);
+		res.put("score", sb.toString());
+		log.info("score : " + sb.toString());
+		log.info("res : " + res);
+		return res;
+	}
 }

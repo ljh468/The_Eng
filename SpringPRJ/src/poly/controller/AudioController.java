@@ -1,104 +1,130 @@
-//package poly.controller;
-//
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//import javax.annotation.Resource;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.HttpSession;
-//
-//import org.apache.log4j.Logger;
-//import org.springframework.http.MediaType;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.ModelMap;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.ResponseBody;
-//
-//import poly.service.IAudioService;
-//import poly.service.INewsWordService;
-//import poly.util.SessionUtil;
-//
-//@Controller
-//public class AudioController {
-//
-//	Logger log = Logger.getLogger(this.getClass());
-//	
-//	@Resource(name = "NewsWordService")
-//	INewsWordService newsWordService;
-//	
-//	@Resource(name = "AudioService")
-//	IAudioService audioService;
-//	
-//	
-//	
-//	@RequestMapping(value = "today/todayAudio")
-//	public String todaySentence(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
-//			throws Exception {
-//		log.info(this.getClass().getName() + ".todayAudio start");
-//		ModelMap sessionModel = SessionUtil.verify(session, model);
-//		if(sessionModel != null) {
-//			model = sessionModel;
-//			return "/redirect";
-//		}
-//		String user_id = (String) session.getAttribute("user_id");
-//		
-//		log.info(this.getClass().getName() + ".todayAudio end");
-//		return "/today/todaySentence";
-//		}
-//	
-//	@RequestMapping(value = "today/getTodaySentences", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> getTodaySentences(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
-//			throws Exception {
-//		log.info(this.getClass().getName() + ".getTodaySentences start");
-//		
-//
-//		List<Map<String, Object>> sentenceList = newsWordService.getTodaySentences();
-//		
-//		Map<String, Object> rMap = new HashMap<String, Object>();
-//		rMap.put("res", sentenceList);
-//		
-//		log.info(this.getClass().getName() + ".getTodaySentences end");
-//		return rMap;
-//	}
-//	
-//	@RequestMapping(value = "today/analyzeAudio", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> analyzeAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
-//			throws Exception {
-//		log.info(this.getClass().getName() + ".analyzeAudio start");
-//		String data = request.getParameter("data");
-//		String sentenceAudioIdx = request.getParameter("sentenceAudioIdx");
-//		log.info("sentenceAudioIdx : " + sentenceAudioIdx);
-//		Map<String, Object> rMap = audioService.analyzeAudio(data, sentenceAudioIdx);
-//		log.info(this.getClass().getName() + ".analyzeAudio end");
-//		
-//		return rMap;
-//	}
-//	
-//	@RequestMapping(value = "audio/getTodaySentenceAudio", method = RequestMethod.GET, produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-//	@ResponseBody
-//	public byte[] getTodaySentenceAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
-//			throws Exception {
-//		log.info(this.getClass().getName() + ".getTodaySentenceAudio start");
-//		String idx = request.getParameter("idx");
-//		byte[] res = audioService.getTodaySentenceAudio(idx);
-//		log.info(this.getClass().getName() + ".getTodaySentenceAudio end");
-//		return res;
-//	}
-//	
-//	@RequestMapping(value = "audio/getAnswerAudio", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-//	@ResponseBody
-//	public byte[] getAnswerAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
-//			throws Exception {
-//		log.info(this.getClass().getName() + ".getAnswerAudio start");
-//		String answer_temp_file = request.getParameter("file");
-//		log.info(this.getClass().getName() + ".getAnswerAudio end");
-//		return audioService.getAnswerAudio(answer_temp_file);
-//		//return audioService.getAnswerAudioFromOuter(answer_temp_file);
-//		
-//	}
-//}
+package poly.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
+import poly.dto.WordQuizDTO;
+import poly.persistance.mongo.IMongoQuizMapper;
+import poly.persistance.mongo.IMongoTestMapper;
+import poly.service.IAudioService;
+import poly.service.INewsService;
+import poly.service.INewsWordService;
+import poly.util.TTSUtil;
+
+@Controller
+public class AudioController{
+	
+	private Logger log = Logger.getLogger(this.getClass());
+	
+	   @Resource(name = "NewsService")
+	   INewsService newsService;
+
+	   @Resource(name = "MongoTestMapper")
+	   IMongoTestMapper mongoTestMapper;
+
+	   @Resource(name = "NewsWordService")
+	   private INewsWordService newsWordService;
+	   
+	   @Resource(name = "AudioService")
+	   private IAudioService audioService;
+
+	   @Resource(name = "MongoQuizMapper")
+	   IMongoQuizMapper mongoQuizMapper;
+	
+	   
+	// 오늘의 문장을 받기위한 Mapping (중복안되는 문장) (원어민 듣기에 사용될 문장) (url로 검색)
+	@RequestMapping(value = "Today/getTodaySentences")
+	   @ResponseBody
+	   public Map<String, Object> getTodaySentences(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+		   
+		   String news_url = request.getParameter("news_url");
+		   DBObject query = new BasicDBObject("url", news_url);
+		   WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
+		   List<Map<String, Object>> resp = new ArrayList<>();
+		   Set<String> sentSet = new HashSet<>();
+		  
+		   int i = 0;
+		   for(String sent : rDTO.getOriginal_sent()) {
+			   
+			   if(sentSet.add(sent)) {
+				   TTSUtil.saveTTS(i, sent, news_url);
+				   Map<String, Object> sentMap = new HashMap<>();
+				   sentMap.put("sentence", sent);
+				   sentMap.put("index", i);
+				   resp.add(sentMap);
+			   }
+			   i++;
+		   }
+		   Map<String, Object> rMap = new HashMap<>();
+		   rMap.put("res", resp);
+		   
+		   log.info("TodayResult 시작");
+		   log.info("TodayResult 종료");
+
+	      return rMap;
+	   }
+	   
+		// 원어민 목소리 파일을 가져오기위한 Mapping
+	   @RequestMapping(value = "audio/getTodaySentenceAudio", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+		@ResponseBody
+		public byte[] getTodaySentenceAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+				throws Exception {
+			log.info(this.getClass().getName() + ".getTodaySentenceAudio start");
+			String newsUrl = request.getParameter("newsUrl");
+			String idx = request.getParameter("idx");
+			byte[] res = audioService.getTodaySentenceAudio(newsUrl, idx);
+			log.info(this.getClass().getName() + ".getTodaySentenceAudio end");
+			return res;
+		}
+	   
+	   // 분석으로 넘기기위한 Mapping
+		@RequestMapping(value = "Today/analyzeAudio", method = RequestMethod.POST)
+		@ResponseBody
+		public Map<String, Object> analyzeAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+				throws Exception {
+			log.info(this.getClass().getName() + ".analyzeAudio start");
+			String data = request.getParameter("data");
+			String newsUrl = request.getParameter("newsUrl");
+			String sentenceAudioIdx = request.getParameter("sentenceAudioIdx");
+			log.info("sentenceAudioIdx : " + sentenceAudioIdx);
+			Map<String, Object> rMap = audioService.analyzeAudio(data, newsUrl, sentenceAudioIdx);
+			log.info(this.getClass().getName() + ".analyzeAudio end");
+			
+			return rMap;
+		}
+		
+		// 원어민 목소리파일은 받기위한 Mapping
+		@RequestMapping(value = "audio/getAnswerAudio", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+		@ResponseBody
+		public byte[] getAnswerAudio(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model)
+				throws Exception {
+			log.info(this.getClass().getName() + ".getAnswerAudio start");
+			String answer_temp_file = request.getParameter("file");
+			
+			log.info(this.getClass().getName() + ".getAnswerAudio end");
+			return audioService.getAnswerAudio(answer_temp_file);
+			//return audioService.getAnswerAudioFromOuter(answer_temp_file);
+			
+		}
+
+}
