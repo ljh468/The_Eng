@@ -67,10 +67,12 @@ public class AudioController{
 		   for(String sent : rDTO.getOriginal_sent()) {
 			   
 			   if(sentSet.add(sent)) {
-				   TTSUtil.saveTTS(i, sent, news_url);
 				   Map<String, Object> sentMap = new HashMap<>();
 				   sentMap.put("sentence", sent);
 				   sentMap.put("index", i);
+				   
+				   log.info("sentence ############" + sent);
+				   log.info("index ############" + i);
 				   resp.add(sentMap);
 			   }
 			   i++;

@@ -11,6 +11,38 @@ import org.jsoup.select.Elements;
 
 public class WebCrawler {
 	
+	public static void main(String[] args) throws IOException {
+		// uk뉴스 사이트 (https:// 는 보안때문에 불가)
+				String url = "http://www.reuters.com/news/world";
+
+				// JSOUP 라이브러리를 통해 사이트에 접속되면, 그 사이트 전체의 HTML 소스를 저장할 변수
+				Document doc = null;
+
+				// 사이트 접속
+				doc = Jsoup.connect(url).get();
+
+				// 사이트에 접속하여 전체 기사 중 메인 기사를 찾아 들어가야 함.
+
+				// 웹 페이지 전체 소스 중 일부 태그를 선택하기 위해 사용
+				// 메인페이지의 url을 가져오기 위함
+				Element element_urlGet = doc.select(".story-content a").first();
+
+				// element_urlGet 소스에 href를 가져옴
+				String href = element_urlGet.attr("href");
+				
+				// 크롤링하는 값 앞에 기본 주소가 있어야 함.
+				url = "https://www.reuters.com/article/us-usa-election-kremlin/kremlin-says-lack-of-clarity-at-u-s-election-could-have-bad-impact-on-global-economy-idUSKBN27L10L";
+				System.out.println(url);
+				// 기사 링크로 들어가기
+				doc = Jsoup.connect(url).get();
+
+				// 뉴스의 제목
+				Element element_title = doc.select(".BackdropImage-image-a7Ah5").first();
+				String news_title = CmmUtil.nvl(element_title.text().trim().toString());
+				System.out.println(element_title);
+				
+				
+	}
 	// 코리아헤럴드
 	public static String[] crawlHerald() throws IOException {
 		// 코리아헤럴드 사이트 (https:// 는 보안때문에 불가)
@@ -138,7 +170,7 @@ public class WebCrawler {
 		// 사이트에 접속하여 전체 기사 중 메인 기사를 찾아 들어가야 함.
 		// 웹 페이지 전체 소스 중 일부 태그를 선택하기 위해 사용
 
-		Elements element_urlGet = doc.select("div.top1_headline a");
+		Elements element_urlGet = doc.select("div.top1_headline_v2 a");
 		
 		// element_urlGet 소스에 href를 가져옴
 		String newsUrl = (element_urlGet.attr("href")).toString();

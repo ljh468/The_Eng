@@ -7,6 +7,8 @@
     pageEncoding="UTF-8"%>
 
 <%
+	
+	String reIdx = (String) request.getAttribute("reIdx"); // 중복인덱스
 	String news_url = (String) request.getAttribute("news_url");
 	String news_name = (String) request.getAttribute("news_name");
 	String news_title = (String) request.getAttribute("news_title");

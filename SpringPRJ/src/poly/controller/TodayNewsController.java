@@ -1,6 +1,7 @@
 package poly.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -360,14 +361,34 @@ public class TodayNewsController {
 		String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 		String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
 		String user_id = CmmUtil.nvl((String) session.getAttribute("user_id"));
-
+		
+		
+		
 		log.info("news_name : 4 " + news_name);
 		// 퀴즈를 풀면 UserQuizInfo의 quizindex를 올려주기위한 nextQuiz()
 		mongoQuizMapper.nextQuiz(user_id, news_url);
 
 		DBObject query = new BasicDBObject("url", news_url);
 		WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
+         Set<String> sentSet = new HashSet<>();
+         Map<String, Object> sentMap = new HashMap<>();
+     
+         int i = 0;
+         for(String sent : rDTO.getOriginal_sent()) {
+         
+         if(sentSet.add(sent)) {
+            sentMap.put(sent, i);
+         }
+         i++;
+         }
+     
+         int index = (int) sentMap.get(rDTO.getOriginal_sent().get(idx)); 
+         String reIdx = String.valueOf(index);
+         log.info("reIdx: " + reIdx);
 
+		
+		
+		model.addAttribute("reIdx", reIdx);
 		model.addAttribute("original_sent", rDTO.getOriginal_sent().get(idx));
 		model.addAttribute("news_url", news_url);
 		model.addAttribute("news_name", news_name);

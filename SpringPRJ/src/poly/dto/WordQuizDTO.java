@@ -16,8 +16,8 @@ public class WordQuizDTO {
 	private List<String> lemma;
 	private List<String> answersentence;
 	private List<String> translation;  // 문장번역
+	private List<String> distinct_idx; // 중복을 제거한 문장 인덱스
 	
-	private int idx;
 	private int correctCounter;
 	private int totalQs;
 	private int answeredQCount;
@@ -31,6 +31,7 @@ public class WordQuizDTO {
 		this.word = new ArrayList<>();		
 		this.lemma = new ArrayList<>();		
 		this.answersentence = new ArrayList<>();
+		this.distinct_idx = new ArrayList<>();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -45,6 +46,7 @@ public class WordQuizDTO {
 		this.lemma = (List <String>) (quiz).get("lemma");
 		this.answersentence = (List <String>) (quiz).get("answersentence");
 		this.translation = (List <String>) (quiz).get("translation");
+		this.distinct_idx = (List <String>) (quiz).get("distinct_idx");
 		  
 	   }
 	
@@ -73,12 +75,12 @@ public class WordQuizDTO {
 		this.word = word;
 	}
 
-	public int getIdx() {
-		return idx;
+	public List<String> getDistinct_idx() {
+		return distinct_idx;
 	}
 
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setDistinct_idx(List<String> distinct_idx) {
+		this.distinct_idx = distinct_idx;
 	}
 
 	public int getCorrectCounter() {

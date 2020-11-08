@@ -31,7 +31,7 @@ public class AudioService implements IAudioService{
 
 	Logger log = Logger.getLogger(this.getClass());
 	
-	static final String TEMP_DIR = "C:\\Users\\lee\\AppData\\Local\\Temp\\";
+	static final String TEMP_DIR = "C:\\Users\\DATA8320-05\\AppData\\Local\\Temp\\";
 	
 	@Override
 	public byte[] getTodaySentenceAudio(String newsUrl, String idx) throws Exception {

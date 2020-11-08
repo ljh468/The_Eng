@@ -2,9 +2,11 @@ package poly.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
 import poly.dto.MongoNewsDTO;
 import poly.dto.WordQuizDTO;
 import poly.persistance.mongo.IMongoTestMapper;
@@ -23,6 +28,7 @@ import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.INewsWordService;
 import poly.service.IUserService;
+import poly.util.TTSUtil;
 import poly.util.TranslateUtil;
 
 @Controller
@@ -134,8 +140,30 @@ public class SaveNewsController {
 				
 					
 			}
-			mongoTestMapper.insertQuiz(quizDTO);
-			log.info("### END ### : insertQuiz");
+			
+			
+			
+			
+			// ###############################
+			// 문장 원어민 발음파일 생성 END!!
+			// ###############################
+			   String news_url = rDTO.getNews_url();
+		       Set<String> sentSet = new HashSet<>();
+		       List<String> distincts_idx = new ArrayList<String>();
+		        
+		         int k = 0;
+		         for(String sentence : quizDTO.getOriginal_sent()) {
+		            if(sentSet.add(sentence)) {
+		               TTSUtil.saveTTS(k, sentence, news_url);
+		               String str = Integer.toString(k);
+		               distincts_idx.add(str);
+		               quizDTO.setDistinct_idx(distincts_idx);
+		            }
+		            k++;
+		         }
+		         
+		mongoTestMapper.insertQuiz(quizDTO);
+		log.info("### END ### : insertQuiz");
 		// ###############################
 		// 퀴즈생성 END!!
 		// ###############################
