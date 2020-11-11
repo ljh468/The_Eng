@@ -3,9 +3,9 @@
 
 <%
 	String heraldurl = (String) request.getAttribute("heraldurl");
-	String reutersurl = (String) request.getAttribute("reutersurl");
-	String timesurl = (String) request.getAttribute("timesurl");
-	String yonhapurl = (String) request.getAttribute("yonhapurl");
+String reutersurl = (String) request.getAttribute("reutersurl");
+String timesurl = (String) request.getAttribute("timesurl");
+String yonhapurl = (String) request.getAttribute("yonhapurl");
 %>
 
 <!DOCTYPE html>
@@ -33,13 +33,65 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 <link rel="stylesheet" href="/resources/scss/Button.css">
+<style>
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+.grid2x2 {
+	min-height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+
+.grid2x2>div {
+	display: flex;
+	flex-basis: calc(50% - 40px);
+	justify-content: center;
+	flex-direction: column;
+}
+
+.grid2x2>div>div {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.box {
+	margin: 20px;
+	background-color: white;
+	max-width: 100%;
+	height: 400px; "
+	cursor: pointer;
+}
+
+@media ( max-width : 450px) {
+	.box {
+		margin: 20px;
+		background-color: white;
+		max-width: 100%;
+		height: 200px;
+		"
+	}
+}
+
+@media ( max-width :750px) {
+	.box {
+		margin: 20px;
+		background-color: white;
+		max-width: 100%;
+		height: 300px;
+	}
+}
+</style>
+
 </head>
 
 <body class="">
@@ -65,92 +117,47 @@
 			<!-- End Navbar -->
 
 			<div class="content">
-				<form action="/Word/wordStudy.do" method="post">
-					<input type="hidden" value="herald" name="news_name">
-					<button type="submit" style="width:100%; display:contents;">
-						<div class="card">
-							<div class="row">
-								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
-									<p class="text-center">
-										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
-									<p>
-								</div>
-								<div class="col-8">
-									<h2 class="mt-4 text-center">Herald</h2>
-								</div>
-							</div>
+				<div class="grid2x2">
+					<div class="box rounded shadow p-3 mb-3 bg-white" id="herald">
+						<div>
+							<img src="/resources/images/NewsLogo/HeraldLogo.png"
+								class="rounded" alt="KOREA HERALD">
 						</div>
-					</button>
-				</form>
-				<br>
-				
-				<form action="/Word/wordStudy.do" method="post">
-					<input type="hidden" value="reuters" name="news_name">
-					<button type="submit" style="width:100%; display:contents;">
-						<div class="card">
-							<div class="row">
-								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
-									<p class="text-center">
-										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
-									<p>
-								</div>
-								<div class="col-8">
-									<h2 class="mt-4 text-center">Reuters</h2>
-								</div>
-							</div>
-						</div>
-					</button>
-				</form>
-				<br>
-				
-				<form action="/Word/wordStudy.do" method="post">
-					<input type="hidden" value="times" name="news_name">
-					<button type="submit" style="width:100%; display:contents;">
-						<div class="card">
-							<div class="row">
-								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
-									<p class="text-center">
-										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
-									<p>
-								</div>
-								<div class="col-8">
-									<h2 class="mt-4 text-center">The Korea Times</h2>
-								</div>
-							</div>
-						</div>
-					</button>
-				</form>
-				<br>
-				
-				<form action="/Word/wordStudy.do" method="post">
-					<input type="hidden" value="yonhap" name="news_name">
-					<button type="submit" style="width:100%; display:contents;">
-						<div class="card">
-							<div class="row">
-								<div class="col-4 mt-2 mb-2" style="border-right: solid orange;">
-									<p class="text-center">
-										<i class="nc-icon nc-hat-3 mt-3" style="font-size: 80px;"></i>
-									<p>
-								</div>
-								<div class="col-8">
-									<h2 class="mt-4 text-center">Yonhap News</h2>
-								</div>
-							</div>
-						</div>
-					</button>
-				</form>
-			</div>
+					</div>
 
+					<div class="box rounded shadow p-3 mb-3 bg-white" id="reuters">
+						<div>
+							<img src="/resources/images/NewsLogo/ReutersLogo.png"
+								class="rounded" alt="REUTERS">
+						</div>
+					</div>
+
+					<div class="box rounded shadow p-3 mb-2 bg-white" id="times">
+						<div>
+							<img src="/resources/images/NewsLogo/TheKoreaTimesLogo.png"
+								class="rounded" alt="THE KOREA TIMES">
+						</div>
+					</div>
+
+
+					<div class="box rounded shadow p-3 mb-2 bg-white" id="yonhap">
+						<div>
+							<img src="/resources/images/NewsLogo/yonhapLogo.png"
+								class="rounded" alt="YONHAP">
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
+
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
 	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 	<script
 		src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
@@ -159,7 +166,24 @@
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
 	<script>
-
+	
+	(function showNotification() {
+	    color = 'warning';
+	
+	    $.notify({
+	      icon: "nc-icon nc-bell-55",
+	      message: "학습할 뉴스사를 선택해주세요"
+	
+	    }, {
+	      type: color,
+	      timer: 8000,
+	      placement: {
+	        from: 'top',
+	        align: 'center'
+	      }
+	    });
+	 })();	
+	
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
 				$(this).removeClass("toggled");
@@ -170,7 +194,67 @@
 
 			}
 
-		})
+		});
+
+		$("#herald").on('click', function() {
+			var forms = document.createElement("form");
+			forms.setAttribute("method", "post");
+			forms.setAttribute("action", "/Word/wordStudy.do");
+
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "news_name");
+			hiddenField.setAttribute("value", "herald");
+			forms.appendChild(hiddenField);
+
+			document.body.appendChild(forms);
+			forms.submit();
+		});
+
+		$("#reuters").on('click', function() {
+			var forms = document.createElement("form");
+			forms.setAttribute("method", "post");
+			forms.setAttribute("action", "/Word/wordStudy.do");
+
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "news_name");
+			hiddenField.setAttribute("value", "reuters");
+			forms.appendChild(hiddenField);
+
+			document.body.appendChild(forms);
+			forms.submit();
+		});
+
+		$("#times").on('click', function() {
+			var forms = document.createElement("form");
+			forms.setAttribute("method", "post");
+			forms.setAttribute("action", "/Word/wordStudy.do");
+
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "news_name");
+			hiddenField.setAttribute("value", "times");
+			forms.appendChild(hiddenField);
+
+			document.body.appendChild(forms);
+			forms.submit();
+		});
+
+		$("#yonhap").on('click', function() {
+			var forms = document.createElement("form");
+			forms.setAttribute("method", "post");
+			forms.setAttribute("action", "/Word/wordStudy.do");
+
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "news_name");
+			hiddenField.setAttribute("value", "yonhap");
+			forms.appendChild(hiddenField);
+
+			document.body.appendChild(forms);
+			forms.submit();
+		});
 	</script>
 
 </body>

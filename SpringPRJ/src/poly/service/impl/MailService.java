@@ -57,7 +57,7 @@ public class MailService implements IMailService{
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(Email));
 			
 			message.setSubject("인증코드 안내");
-			message.setText("인증코드는 " + uDTO.getUser_authNum() + " 입니다." + "\n만약 본인이 요청한 사실이 없는 경우 http://www.naver.com으로 신고 부탁드립니다.");
+			message.setText("인증코드는 " + uDTO.getUser_authNum() + " 입니다.");
 			
 			Transport.send(message);
 			

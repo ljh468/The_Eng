@@ -17,7 +17,5 @@ public interface INewsWordService {
 	List<String> getWordMeaning(List<String> rList);
 
 	List<Map<String, Object>> getTodaySentences() throws Exception;
-
-
 	
 }

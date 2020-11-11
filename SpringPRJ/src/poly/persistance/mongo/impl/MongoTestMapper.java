@@ -1,6 +1,8 @@
 package poly.persistance.mongo.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,6 +141,104 @@ public class MongoTestMapper implements IMongoTestMapper {
 			rList.add(rMap);
 		}
 
+		return rList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getPastHeraldNews() throws Exception {
+		
+		log.info(getClass().getName() + "getPastHeraldMapper start");
+		
+		DBCursor res = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "herald")).sort(new BasicDBObject("insertDate", -1)).limit(5);
+		
+		List<Map<String, Object>> rList = new ArrayList<>();
+		
+		while (res.hasNext()) {
+			DBObject obj = res.next();
+			Map<String, Object> rMap = new HashMap<>();
+			
+			rMap.put("url", (String) obj.get("news_url"));
+			rMap.put("news_title", (String) obj.get("news_title"));
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String date = transFormat.format((Date) obj.get("insertDate"));
+			rMap.put("date", date);
+			
+			rList.add(rMap);
+			rMap=null;
+		}
+		return rList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getPastReutersNews() throws Exception {
+		log.info(getClass().getName() + "getPastReutersMapper start");
+		
+		DBCursor res = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "reuters")).sort(new BasicDBObject("insertDate", -1)).limit(5);
+		
+		List<Map<String, Object>> rList = new ArrayList<>();
+		
+		while (res.hasNext()) {
+			DBObject obj = res.next();
+			Map<String, Object> rMap = new HashMap<>();
+			
+			rMap.put("url", (String) obj.get("news_url"));
+			rMap.put("news_title", (String) obj.get("news_title"));
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String date = transFormat.format((Date) obj.get("insertDate"));
+			rMap.put("date", date);
+			
+			rList.add(rMap);
+			rMap=null;
+		}
+		return rList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getPastTimesNews() throws Exception {
+		log.info(getClass().getName() + "getPastTimesMapper start");
+		
+		DBCursor res = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "times")).sort(new BasicDBObject("insertDate", -1)).limit(5);
+		
+		List<Map<String, Object>> rList = new ArrayList<>();
+		
+		while (res.hasNext()) {
+			DBObject obj = res.next();
+
+			Map<String, Object> rMap = new HashMap<>();
+			rMap.put("url", (String) obj.get("news_url"));
+			rMap.put("news_title", (String) obj.get("news_title"));
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String date = transFormat.format((Date) obj.get("insertDate"));
+			rMap.put("date", date);
+			
+			rList.add(rMap);
+			rMap=null;
+		}
+		return rList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getPastYonhapNews() throws Exception {
+		log.info(getClass().getName() + "getPastYonhapMapper start");
+		
+		DBCursor res = mongodb.getCollection(COL_NM).find(new BasicDBObject("news_name", "yonhap")).sort(new BasicDBObject("insertDate", -1)).limit(5);
+		
+		List<Map<String, Object>> rList = new ArrayList<>();
+		
+		while (res.hasNext()) {
+			DBObject obj = res.next();
+
+			Map<String, Object> rMap = new HashMap<>();
+			rMap.put("url", (String) obj.get("news_url"));
+			// 키 name에 name데이터를 put
+			rMap.put("news_title", (String) obj.get("news_title"));
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String date = transFormat.format((Date) obj.get("insertDate"));
+			rMap.put("date", date);
+			
+			rList.add(rMap);
+			rMap=null;
+		}
 		return rList;
 	}
 }

@@ -234,7 +234,7 @@ public class MypageContorller {
 				msg = "회원 탈퇴를 실패했습니다. 고객센터에 문의해주세요.";
 			}
 
-			url = "/The/Login.do";
+			url = "/The/TheLogin.do";
 
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);

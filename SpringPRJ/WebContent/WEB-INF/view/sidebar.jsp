@@ -38,7 +38,7 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/Restudy/NewsSelect.do">
               <i class="nc-icon nc-atom"></i>
               <p>복습하기</p>
             </a>

@@ -29,15 +29,14 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" href="/resources/scss/Button.css">
 </head>
 
-<body class="" style="background-color: #F3F4EF">
+<body class="">
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">
@@ -73,14 +72,11 @@
 						<div style="text-align: left; font-size: 18px;">
 							<form action="/Setting/TheMypage.do" onsubmit="return check()">
 
-								<input type="password" id="pwdCheck"> <br> <span
-									id="msg">비밀번호를 입력해주세요.</span> <br> <br> 
-									<input style="float: right;" class="btn btn-success btn-block btn-lg"
-									type="submit" value="확인">
-									<input style="float: right;" type="button"
-									onclick="/Setting/setting.do"
-									class="btn btn-warning btn-block btn-lg" value="뒤로">
-								<br>
+								<input type="password" id="pwdCheck"> <br> 
+								<span id="msg">비밀번호를 입력해주세요.</span>
+								<br> <br> 
+								<input class="btn btn-success btn-block btn-lg" type="submit" value="확인"> 
+								<input type="button" onclick="/Setting/setting.do" class="btn btn-warning btn-block btn-lg" value="뒤로"> <br>
 
 
 							</form>
@@ -88,8 +84,6 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 	</div>
 	<!--   Core JS Files   -->
@@ -98,18 +92,30 @@
 	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 	<script
 		src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
 	<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
-	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
-		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
+	
+		function showNotification() {
+		    color = 'danger';
+		
+		    $.notify({
+		      icon: "nc-icon nc-bell-55",
+		      message: "비밀번호를 확인해주세요"
+		
+		    }, {
+		      type: color,
+		      delay: 600,
+		      timer: 500,
+		      placement: {
+		        from: 'top',
+		        align: 'center'
+		      }
+		    });
+		 }
+		
 		var PasswordCheck = 'N'
 
 		$("#pwdCheck").keyup(function() {
@@ -140,16 +146,11 @@
 			if (PasswordCheck == 'Y') {
 				return true;
 			} else if (PasswordCheck == 'N') {
-				alert("비밀번호를 확인해 주세요.");
+				showNotification()
 				return false;
 			}
 
 		}
-
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
@@ -162,6 +163,8 @@
 			}
 
 		})
+		
+		
 	</script>
 
 </body>

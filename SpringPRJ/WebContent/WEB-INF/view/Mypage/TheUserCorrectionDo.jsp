@@ -34,8 +34,6 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
@@ -76,7 +74,7 @@
 					<div class="card-body">
 
 						<div style="text-align: left; font-size: 18px;">
-							<form action="/Mypage/correectionProc.do">
+							<form action="/Mypage/correctionProc.do">
 								Email: <span>이메일은 수정이 불가능합니다.</span> <br><br> Gender: <input
 									id="male" type="radio" name="gender" value="m"
 									<%=CmmUtil.checked("m", res.getUser_gender())%>> <label
@@ -121,8 +119,6 @@
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {

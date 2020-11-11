@@ -32,8 +32,6 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
@@ -72,20 +70,19 @@
 					<hr>
 					<div class="card-body">
 
-						<div style="text-align: left; font-size: 15px;">
+						<div style="text-align: right; font-size: 15px;">
 							<form action="/Mypage/passWordChangeProc.do"
 								onsubmit="return check()">
 
 								현재 비밀번호: <input type="password" id="current_Password" required>
-								<br> <span id="past">현재 비밀번호를 입력해주세요.</span> <br> 바꿀
-								비밀번호: <input type="password" id="newPassWord" name="pwd"
-									required> <br> <span class="new">바꾸실 비밀번호를
-									입력해주세요.</span> <br> 비밀번호 확인: <input type="password"
+								<br> <span id="past">현재 비밀번호를 입력해주세요.</span> <br> <br>
+								신규 비밀번호: <input type="password" id="newPassWord" name="pwd"
+									required> <br> <span class="new">신규 비밀번호를
+									입력해주세요.</span> <br> <br> 비밀번호 확인: <input type="password"
 									id="passWordCheck" required> <br> <span
-									class="renew">비밀번호 확인을 위해 한 번 더 입력해주세요.</span> <br> <input
-									style="float: right;" class="btn btn-success btn-block btn-lg"
-									type="submit" value="수정하기"> <input
-									style="float: right;" type="button"
+									class="renew">비밀번호 확인을 위해 한 번 더 입력해주세요.</span> <br> <br>
+								<input class="btn btn-success btn-block btn-lg" type="submit"
+									value="수정하기"> <input type="button"
 									onclick="location.href='/Setting/TheMypage.do'"
 									class="btn btn-warning btn-block btn-lg" value="뒤로">
 
@@ -109,11 +106,6 @@
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
 	<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
-	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
-		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script>
 	
 	var pastPwd = 'N';
@@ -153,7 +145,7 @@
 					$("#past").attr("style", "color:#00f");
 					pastPwd = 'Y';
 				} else if(data == 0) {
-					$("#past").text("현재 비밀번호와 다릅니다. 비밀번호를 확인해주세요.");
+					$("#past").text("현재 비밀번호와 다릅니다.");
 					$("#past").attr("style", "color:#f00");
 					pastPwd = 'N';
 				}
@@ -186,7 +178,7 @@
 									|| pw.length<8||pw.length>50) {
 
 								$(".new")
-										.text("영문+숫자+특수기호 8자리 이상으로 구성하여야 합니다.");
+										.text("영문+숫자+특수기호 8자리 이상");
 								$(".new").css("color", "#f00");
 							} else {
 
@@ -303,7 +295,7 @@
 					$(".renew").css("color", "#00f");
 					newPwd = 'Y';
 				} else {
-					$(".renew").text("비밀번호가 일치하지 않습니다. 비밀번호를 확인해주세요.");
+					$(".renew").text("비밀번호가 일치하지 않습니다.");
 					$(".renew").css("color", "#f00");
 					newPwd = 'N';
 				}
@@ -319,10 +311,6 @@
 			$("#gender").text("female");
 			break;
 		}
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {

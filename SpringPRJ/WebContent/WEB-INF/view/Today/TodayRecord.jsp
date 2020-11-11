@@ -4,7 +4,7 @@
 <%@page import="java.util.Date"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <%
 	
@@ -43,36 +43,41 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="/resources/assets/demo/demo.css" rel="stylesheet" />
-
+<link rel="stylesheet" href="/resources/scss/Button.css">
 <style>
-	#mic{
-		background-image:url("/resources/images/mic_disabled.png");
-		background-size:15em 15em;
-	}
-	.ldBar-label{
-		display:none;
-		}
-	#analyzingCircle {
-	  border: 0.5em solid #f3f3f3; /* Light grey */
-	  border-top: 0.5em solid #3498db; /* Blue */
-	  border-radius: 50%;
-	  width: 15em;
-	  height: 15em;
-	  animation: spin 2s linear infinite;
- 	  visibility:hidden; 
-	}
-	
-	@keyframes spin {
-	  0% { transform: rotate(0deg); }
-	  100% { transform: rotate(360deg); }
-	}
-	</style>
-	
+#sentence span{
+	color:#6bd098;
+}
+
+#mic {
+	background-image: url("/resources/images/mic_disabled.png");
+	background-size: 10em 10em;
+}
+
+.ldBar-label {
+	display: none;
+}
+
+#analyzingCircle {
+	border: 0.5em solid #f3f3f3; /* Light grey */
+     border-top: 0.5em solid #3498db; /* Blue */
+     border-radius: 50%;
+     width: 10em;
+     height: 10em;
+     animation: spin 2s linear infinite;
+     display: none;
+}
+
+   
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
+</style>
+
 </head>
 
-<body class="">
+<body>
 
 	<div class="wrapper ">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
@@ -89,165 +94,166 @@
 									class="navbar-toggler-bar bar3"></span>
 							</button>
 						</div>
-						<a class="navbar-brand" href="javascript:;">
-						Today Highlight English</a>
+						<a class="navbar-brand" href="javascript:;"> Today Highlight
+							English</a>
 					</div>
-					
 				</div>
 			</nav>
 			<!-- End Navbar -->
 			<!-- 뉴스 기사 삽입. -->
 			<div class="content">
-				<div class="card">
+				<div class="card" id="recordc">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center"><b><%=news_name%>s</b></h4>
+						<h4 class="mt-0 mb-0 text-center">
+							<b><%=news_name %></b>
+						</h4>
 					</div>
 					<hr>
 					<div class="card-body">
 						<div class="m-3">
-						<h6 style="color:orange">Today Record</h6>
-						<br>
-						<!-- 자동으로 바뀌어야 하는 구역 -->
-						<h3 class="card-text"><b>Pros and Cons of 5G Technology</b></h3>
+							<h6 style="color: orange">Today Sentence</h6>
+							<!-- 자동으로 바뀌어야 하는 구역 -->
+							<%-- <h4 class="card-text">
+								<b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'")%></b>
+							</h4> --%>
+						</div>
 
-						<h6 style="color:grey">2020, Dec 11</h6>
+						<p class="m-4" id='sentence' style="font-size: 1.3em"></p>
+
+						<div class="row" id="navigator">
+							<div class="col-12 mt-1 mb-1 text-center">
+
+								<button type="button" id="listen"
+									class="btn btn-info btn-warning">
+									Voice <i style="font-size: 2rem" class="la la-volume-up"></i>
+								</button>
+
+							</div>
 						</div>
-						
-						<p class="m-4" id='sentence' style="font-size:1.5em">
-						</p>
-						
-						<div class="row" id="navigator">		
-						<div class="col-12 mt-1 mb-1 text-center">
-							<button type="button" id="prev" disabled='disabled' class="btn btn-info btn-success ">&lt;</button>
-							
-							<button type="button" id="listen" class="btn btn-info btn-warning">Voice
-							<i style="font-size:2rem" class="la la-volume-up"></i></button>
-							
-							<button type="button" id="next" class="btn btn-info btn-success ">&gt;</button>
-						</div>
-						</div>
-									
-						
+
+
 						<hr>
 						<!-- 뉴스 기사 끝. -->
-						
-						<h6 class="m-3" style="color:orange">Voice Record</h6>
-						
+
+						<h6 class="m-3" style="color: orange">Voice Record</h6>
+
 						<!--  버튼을 클릭했을 때 기능이 나오게 하기.  -->
-						<div style="float:left; width:47%; height:240px; margin-left:10px; margin-right:10px">
-						<br>
-						<div id="timerBlock">
+						<div class="row mb-4">
+							<div class="col-6">
+								<div id="timerBlock">
 									<br>
-									
-									<div id="mic" style="width:15em;height:15em;margin:auto;">
-											<div id="progressCircle" style="width:15em;height:15em;color:white;" data-stroke="red" 
-											data-preset="circle" class="label-center" data-value="100" data-precision="0.01"></div>
-											<div id="analyzingCircle"></div>
+
+									<div id="mic" style="width: 10em; height: 10em; margin: auto;">
+										<div id="progressCircle"
+											style="width: 10em; height: 10em; color: white;"
+											data-stroke="red" data-preset="circle" class="label-center"
+											data-value="100" data-precision="0.01"></div>
+										<div id="analyzingCircle"></div>
 									</div>
-										
+
 								</div>
-						</div>
-						
-						<div style="float:left; width:47%;">
-					
-						<div class="text-center">
-							<h1 id="timer"></h1>
-							<button id="startInterview"  style="height:105px"class="mt-1 btn btn-success btn-block btn-lg">녹음 시작</button>
-							<button hidden='hidden' id="resetInterview" style="height:105px" class="btn btn-success btn-block btn-lg">다시 녹음</button>
-							<button style="display:none;height:105px;" id="stopInterview" class="btn btn-success btn-block btn-lg">녹음 종료</button>
-							<button style="display:none;height:105px" id="submitInterview" class="btn btn-success btn-block btn-lg">제출</button>
-						</div>
-						
-						<input type="button" style="height:105px" onclick="location.href='/today/todayTranslate.do'" class="btn btn-success btn-block btn-lg" value="번역 연습하기">
-						</div>
-						<div>
-						<!-- Header footer section start -->
-				<section id="header-footer">
-					
-						<div style="max-width:50rem">
-							<div class="card">
-								<div class="card-header">
-									
-									<div id="waveform" hidden='hidden'></div>
-									<div id="waveform2" hidden='hidden'></div>
+							</div>
+
+							<div class="col-6">
+								<div class="text-center mt-4">
+									<h5 class="text-center" id="timer"></h5>
+									<button style="width: 100%" class="submit mb-3" id="startInterview">녹음 시작</button>
+									<button style="display: none; width: 100%" class="submit mb-3" id="submitInterview">강세 평가</button>
+									<button hidden='hidden' style="width: 100%" class="submit mb-3" id="resetInterview">재녹음</button>
+									<button style="display: none; width: 100%" class="submit mb-3" id="stopInterview">녹음 종료</button>
 								</div>
-								
-								<!-- 강세 분석 결과 표  -->
-								<div class="card-body" id="resultBlock" hidden="hidden">
-									<div class="row">
-										<div class="col-12 mt-1 mb-1">
-										<h4 class="card-title mb-0" style="font-size:1.3rem">강세 분석 결과</h4>
-										<div id="chartdiv" style="width:100%;height:500px;"></div>
-											<div class="row text-left">
-												<div class="col-12 text-right">
-												<div class="btn-group btn-group-sm" role="group">
-				                                <button type="button" id="myVoice" style="background-color: rgba(117, 142, 255, 1); border:none" data-enabled="1" class="btn btn-info">내 목소리</button>
-				                                <button type="button" id="nativeVoice" style="background-color: rgba(255,117,117, 1);border:none" data-enabled="1" class="btn btn-danger">원어민 목소리</button>
-				                            	</div>
-												</div>
-											</div>
-											
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="col-6 offset-3">
-											<h4 class="card-title mb-0 text-center" style="font-size:1.3rem">강세 명료도 분석 결과</h4>
-											<div id="dynamicsScore" style="width:100%;height:300px;"></div>
-										</div>
-									</div>
-									<div class="row">
-									<div class="col-12 text-center">
-									<button id="resetInterview2" class="btn btn-warning">다시 녹음</button>
-									</div>
-									</div>
-								</div>
-								<!-- 강세분석결과표 끝 -->
-			
 							</div>
 						</div>
 						
-					
-				</section>
-						
-					
-						
-						</div>
 					</div>
 				</div>
-			
-			<!-- 카드 끝   -->
-			
-			<div>
-			<form action="/Today/TodayTranslate.do" method="post">
-					<input type="hidden" value="<%=sentidx%>" name="sentidx">
-					<input type="hidden" value="<%=news_name%>" name="news_name">
-					<input type="hidden" value="<%=news_url%>" name="news_url">
-					<input type="hidden" value="<%=news_title%>" name="news_title">
-					<input type="hidden" value="<%=original_sent%>" name="original_sent">
-					<input type="submit" style="float:right; width:100%"  class="btn btn-warning btn-block btn-lg" value="Next">
-				</form>
-			</div>
 
-				</div>
+				<!-- 카드 끝   -->
+
+				<!-- Header footer section start -->
+				<section id="header-footer">
+
+					<div style="max-width: 50rem; margin:auto;">
+						<div class="card" id="analysisc" hidden='hidden'>
+							<div class="card-header">
+								<h4 class="card-title text-center">강세 분석 결과</h4>
+								<div id="waveform" hidden='hidden'></div>
+								<div id="waveform2" hidden='hidden'></div>
+							</div>
+							<hr>
+							<!-- 강세 분석 결과 표  -->
+							<div class="card-body" id="resultBlock" hidden="hidden">
+								<div class="row">
+									<div class="col-12 mt-1 mb-1">
+
+										<div id="chartdiv" style="width: 100%; height: 400px;"></div>
+										<div class="row text-left">
+											<div class="col-12 text-right">
+												<div class="btn-group btn-group-sm" role="group">
+													<button type="button" id="myVoice"
+														style="background-color: rgba(117, 142, 255, 1); border: none"
+														data-enabled="1" class="btn btn-info">내 목소리</button>
+													<button type="button" id="nativeVoice"
+														style="background-color: rgba(255, 117, 117, 1); border: none"
+														data-enabled="1" class="btn btn-danger">원어민 목소리</button>
+														
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-1"></div>
+									<div class="col-10">
+										<h4 class="card-title mb-0 text-center"
+											style="font-size: 1.3rem">강세 명료도 분석 결과</h4>
+										<div id="dynamicsScore" style="width: 100%; height: 300px;"></div>
+									</div>
+									<div class="col-1"></div>
+								</div>
+									<div class="text-center">
+										<div>
+											<button id="resetInterview2" class="btn btn-warning">재녹음</button>
+											<form action="/Today/TodayTranslate.do" method="post" style="display:inline">
+												<input type="hidden" value="<%=news_url%>" name="news_url">
+												<input type="hidden" value="<%=insertdate%>" name="insertdate">
+												<input type="hidden" value="<%=news_name%>" name="news_name">
+												<input type="hidden" value="<%=sentidx%>" name="sentidx">
+												<input type="hidden" value="<%=news_title%>" name="news_title">
+												<input type="hidden" value="<%=original_sent%>" name="original_sent">
+												<button type="submit" class="btn btn-success">변역 연습</button>
+											</form>
+										</div>
+									</div>
+							</div>
+							<!-- 강세분석결과표 끝 -->
+
+						</div>
+					</div>
+
+
+				</section>
+
 			</div>
 		</div>
-		
-					
-			
-		
-			<!-- --------------------------------------------------------------------------- -->
-			
-		
-	
+	</div>
+
+
+
+
+	<!-- --------------------------------------------------------------------------- -->
+
+
+
 	<!--   Core JS Files   -->
 	<script src="/resources/assets/js/core/jquery.min.js"></script>
 	<script src="/resources/assets/js/core/popper.min.js"></script>
 	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 	<script
 		src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
@@ -255,22 +261,18 @@
 	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
 		type="text/javascript"></script>
-	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="/resources/assets/demo/demo.js"></script>
 	<script type="text/javascript" src="/js/loading-bar.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
-<!-- amchart -->
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-<script src="https://unpkg.com/wavesurfer.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.sound.js"></script>
+	<!-- amchart -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="https://unpkg.com/wavesurfer.js"></script>
 	<script>
-		$(document).ready(function() {
-			// Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-			demo.initChartsPages();
-		});
 
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
@@ -285,7 +287,7 @@
 		})
 		
 	</script>
-	
+
 	<script>
   var sentenceList;
   var sentenceIdx = 0;
@@ -319,7 +321,7 @@
   
   $(document).ready(function(){
 	  
-	  var query = {news_url:"<%=news_url%>"}
+	  var query = {news_url:"<%=news_url%>", idx : "<%=sentidxst %>"}
   	$.ajax({
 			type : "POST",
 			url : "getTodaySentences.do",
@@ -330,7 +332,7 @@
 //				$("#all").html(sentenceList.length);
 				$("#sentence").html(sentenceList[0].sentence);
 				sentenceAudioIdx = sentenceList[0].index * 1;
-				audio.load('/audio/getTodaySentenceAudio.do?idx=0&newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>');
+				audio.load('/audio/getTodaySentenceAudio.do?idx=<%=reIdx%>&newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>');
 				audioIdx = 0;
 				sentenceAudioIdx = 0;
 //				$("#current").html(sentenceIdx+1);
@@ -359,7 +361,7 @@
 	    $("#mic").css("background-image", 'url("/resources/img/mic_disabled.png")');
 	    $("#resetInterview").attr("hidden", "hidden");
 	    $("#submitInterview").css("display", "None");
-	    $("#analyzingCircle").css("visibility", "hidden");
+	    $("#analyzingCircle").css("display", "none");
 	    
     	$("#current").html(sentenceIdx+1);
     	$("#no").html(sentenceIdx+1);
@@ -404,7 +406,7 @@
   })
   
   </script>
-  <script>
+	<script>
   window.onload = function(){
 	  navigator.mediaDevices.getUserMedia({ audio: true, video: false });
   }
@@ -413,9 +415,14 @@
 	var globalAudioData = {};
 	
 	$("#resetInterview").on("click", function(){
+		$("#recordc").removeAttr("hidden");
+		$("#analysisc").attr("hidden", "hidden");
 		refresh();
+		
 	})
 	$("#resetInterview2").on("click", function(){
+		$("#recordc").removeAttr("hidden");
+		$("#analysisc").attr("hidden", "hidden");
 		refresh();
 	})
 	
@@ -433,7 +440,6 @@
 		  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=' + sentenceAudioIdx);
 		  	audioIdx = sentenceAudioIdx;
 		}
-		
 		$("#startInterview").attr("hidden", "hidden");
 		$("#timer").removeAttr("hidden");
 		//Countdown Timer
@@ -461,14 +467,13 @@
 			    clearInterval(x);
 			    audio.play();
 			    $("#resetInterview").removeAttr("hidden");
-			    $("#mic").css("background-image", 'url("/resources/img/mic.png")');
+			    $("#mic").css("background-image", 'url("/resources/images/mic_disabled.png")');
 			    $("#progressCircle").css("display", "inline");
 			    timer.style.color = "red";
 			    timer.innerHTML = Math.ceil(parseFloat(audio.getDuration()));
 			    
 			    var bar1 = new ldBar("#progressCircle");
 				var bar2 = document.getElementById('progressCircle').ldBar;
-				
 				
 				var constraints = {
 					    audio: true,
@@ -496,7 +501,7 @@
 				          console.log(base64data);
 					      globalAudioData.data = base64data;
 					      globalAudioData.sentenceAudioIdx = sentenceAudioIdx;
-					      globalAudioData.newsUrl = "<%=news_url %>";
+					      globalAudioData.newsUrl = "<%=news_url%>";
 				       }
 				    });
 					
@@ -542,7 +547,7 @@
 						    $("#navigator").removeAttr("hidden");
 						    $("#progressCircle").css("display", "none");
 						    timer.style.color = "black";
-						    timer.innerHTML = "제출 버튼을 누르시면 분석을 시작합니다";
+						    timer.innerHTML = "";
 						    bar1.set(0);
 						    $("#mic").css("background-image", 'url("/resources/img/mic_disabled.png")');
 						  }
@@ -557,9 +562,9 @@
 	$("#submitInterview").click(function(){
 		$("#resetInterview").attr('hidden', 'hidden');
 		$("#submitInterview").hide();
-		$("#analyzingCircle").css("visibility", "visible");
+		$("#analyzingCircle").css("display", "block");
 		var timer =  document.getElementById("timer");
-		timer.innerHTML = "분석중입니다...";
+		timer.innerHTML = "분석중...";
 		$.ajax({
 	          type: 'POST',
 	          url: 'analyzeAudio.do',
@@ -569,6 +574,9 @@
 	        	  $("#timerBlock").attr('hidden', 'hidden');
 	        	  $("#resultBlock").removeAttr("hidden");
 	        	  $("#resetInterview").removeAttr('hidden');
+	        	  $("#analysisc").removeAttr("hidden");
+	        	  $("#recordc").attr('hidden', 'hidden');
+	        	  
 	        	  resultJSON = json;
 	        	  
 	        		// Themes begin
@@ -749,5 +757,4 @@
 </script>
 
 </body>
-
 </html>

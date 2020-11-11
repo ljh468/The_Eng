@@ -18,7 +18,6 @@
 	Object answer_sent = (Object)request.getAttribute("answer_sent");
 	Object word = request.getAttribute("word");
 	
-	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,11 +94,12 @@
 						
 
 						<h6 class="m-3" style="color:orange">Title 번역</h6>
-						<p class="m-4" style="font-size:1.5em"><%=news_title_trans.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-	                              .replace("& gt;", ">").replace("& #39;", "'") %></p>
+						<p class="m-4" style="font-size:1.5em"><%=TranslateUtil.kakaotrans(news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'")) %></p>
 						
 						<h6 class="m-3" style="color:orange">Sentence 번역</h6>
-						<p class="m-4" style="font-size:1.5em"><%=translation %></p>
+						<p class="m-4" style="font-size:1.5em"><%=translation.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'") %></p>
 					
 					</div>
 				</div>
@@ -113,11 +113,6 @@
 					<input type="hidden" value="<%=news_name %>" name="news_name">
 					<input type="hidden" value="<%=insertdate %>" name="insertdate">					
 					<input type="hidden" value="<%=news_title %>" name="news_title">
-				    <input type="hidden" value="<%=original_sent %>" name="original_sent">
-				    <input type="hidden" value="<%=translation %>" name="translation">
-				    <input type="hidden" value="<%=quiz_sent %>" name="quiz_sent">		    
-				    <input type="hidden" value="<%=answer_sent %>" name="answer_sent">
-				    <input type="hidden" value="<%=word %>" name="word">
 				    <input type="hidden" value="<%=idx%>" name="idx">
 
 						<button style="width: 100%" class="next mb-5" type="submit">Next</button>
@@ -133,8 +128,6 @@
 	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 	<script
 		src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->

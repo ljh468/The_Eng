@@ -58,25 +58,25 @@ public class AudioController{
 	   public Map<String, Object> getTodaySentences(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
 		   
 		   String news_url = request.getParameter("news_url");
+		   String idx = request.getParameter("idx");
 		   DBObject query = new BasicDBObject("url", news_url);
 		   WordQuizDTO rDTO = mongoTestMapper.getQuiz(query);
 		   List<Map<String, Object>> resp = new ArrayList<>();
 		   Set<String> sentSet = new HashSet<>();
 		  
-		   int i = 0;
-		   for(String sent : rDTO.getOriginal_sent()) {
+		   int i = Integer.parseInt(idx);
 			   
-			   if(sentSet.add(sent)) {
-				   Map<String, Object> sentMap = new HashMap<>();
-				   sentMap.put("sentence", sent);
-				   sentMap.put("index", i);
-				   
-				   log.info("sentence ############" + sent);
-				   log.info("index ############" + i);
-				   resp.add(sentMap);
-			   }
-			   i++;
+		   String sent = rDTO.getAnswersentence().get(i);
+		   if(sentSet.add(sent)) {
+			   Map<String, Object> sentMap = new HashMap<>();
+			   sentMap.put("sentence", sent);
+			   sentMap.put("index", i);
+			   
+			   log.info("sentence ############" + sent);
+			   log.info("index ############" + i);
+			   resp.add(sentMap);
 		   }
+			   
 		   Map<String, Object> rMap = new HashMap<>();
 		   rMap.put("res", resp);
 		   
@@ -94,6 +94,7 @@ public class AudioController{
 			log.info(this.getClass().getName() + ".getTodaySentenceAudio start");
 			String newsUrl = request.getParameter("newsUrl");
 			String idx = request.getParameter("idx");
+			log.info("idx : " + idx);
 			byte[] res = audioService.getTodaySentenceAudio(newsUrl, idx);
 			log.info(this.getClass().getName() + ".getTodaySentenceAudio end");
 			return res;

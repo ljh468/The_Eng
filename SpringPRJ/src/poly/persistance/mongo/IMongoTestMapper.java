@@ -28,6 +28,15 @@ public interface IMongoTestMapper {
 
 	public WordQuizDTO getQuiz(DBObject query) throws Exception;
 
+	public List<Map<String, Object>> getPastHeraldNews()throws Exception;
+
+	public List<Map<String, Object>> getPastReutersNews()throws Exception;
+
+	public List<Map<String, Object>> getPastTimesNews()throws Exception;
+
+	public List<Map<String, Object>> getPastYonhapNews()throws Exception;
+
+
 
 
 }

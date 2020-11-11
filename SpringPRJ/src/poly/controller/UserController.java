@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import poly.dto.MongoNewsDTO;
 import poly.dto.UserDTO;
+import poly.persistance.mongo.IMongoTestMapper;
 import poly.service.IMailService;
 import poly.service.INewsService;
 import poly.service.IUserService;
@@ -33,9 +35,12 @@ public class UserController {
 
 	@Resource(name = "NewsService")
 	INewsService newsService;
-
+	
+	@Resource(name = "MongoTestMapper")
+	IMongoTestMapper mongoTestMapper;
+	
 	// 로그인
-	@RequestMapping(value = "The/TheLogin")
+	@RequestMapping(value = "/The/TheLogin")
 	public String TheLogin(HttpSession session) {
 		log.info("TheLogin 시작");
 		session.invalidate();
@@ -47,7 +52,7 @@ public class UserController {
 	@RequestMapping(value = "The/TheLoginProc")
 	public String TheLoginProc(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 
-		log.info("/The/TheLoginProc 시작");
+		log.info("/The/TheLoginProc start");
 		String id = nvl(request.getParameter("id"));
 		String pwd = nvl(request.getParameter("pwd"));
 
@@ -56,24 +61,44 @@ public class UserController {
 		
 		String HashEnc = EncryptUtil.enHashSHA256(pwd);
 
-		UserDTO tDTO = new UserDTO();
+		UserDTO uDTO = new UserDTO();
 
-		tDTO.setUser_id(id);
-		tDTO.setUser_pwd(HashEnc);
+		uDTO.setUser_id(id);
+		uDTO.setUser_pwd(HashEnc);
 
-		tDTO = userService.getUserInfo(tDTO);
-		log.info("uDTO null? : " + (tDTO == null));
+		uDTO = userService.getUserInfo(uDTO);
+		log.info("uDTO null? : " + (uDTO == null));
 
 		String msg = "";
 		String url = "";
-		if (tDTO == null) {
-			msg = "로그인 실패";
+		if (uDTO == null) {
+			msg = "아이디 비밀번호를 확인해주세요";
 		} else {
-			log.info("tDTO.User_id : " + tDTO.getUser_id());
-			log.info("tDTO.User_email : " + tDTO.getUser_email());
-			msg = "로그인 성공";
-			session.setAttribute("user_id", tDTO.getUser_id());
-			session.setAttribute("user_email", tDTO.getUser_email());
+			log.info("tDTO.User_id : " + uDTO.getUser_id());
+			log.info("tDTO.User_email : " + uDTO.getUser_email());
+			
+			MongoNewsDTO hDTO = mongoTestMapper.getHeraldNews();
+			String heraldtitle = hDTO.getNews_title();
+
+			MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
+			String reuterstitle = rDTO.getNews_title();
+
+			MongoNewsDTO tDTO = mongoTestMapper.getTimesNews();
+			String timestitle = tDTO.getNews_title();
+
+			MongoNewsDTO yDTO = mongoTestMapper.getYonhapNews();
+			String yonhaptitle = yDTO.getNews_title();
+
+			model.addAttribute("heraldtitle", heraldtitle);
+			model.addAttribute("reuterstitle", reuterstitle);
+			model.addAttribute("timestitle", timestitle);
+			model.addAttribute("yonhaptitle", yonhaptitle);
+			model.addAttribute("user_id", id);
+			
+			session.setAttribute("user_id", uDTO.getUser_id());
+			session.setAttribute("user_email", uDTO.getUser_email());
+			
+			return "/Today/TodayMain";
 		}
 
 		url = "/Today/TodayMain.do";
@@ -81,7 +106,7 @@ public class UserController {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 
-		log.info("The/TheLoginProc 종료");
+		log.info("The/TheLoginProc end");
 
 		return "/redirect";
 	}

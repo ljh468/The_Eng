@@ -35,9 +35,10 @@
 	href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" href="/resources/scss/Button.css">
 </head>
 
-<body class="" style="background-color: #F3F4EF">
+<body class="" >
 	<div class="wrapper">
 		<%@ include file="/WEB-INF/view/sidebar.jsp"%>
 		<div class="main-panel">

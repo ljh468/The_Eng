@@ -30,7 +30,6 @@ public class TTSUtil {
 	public static final String TTS_PATH = IS_WINDOWS ? "C:\\tts\\" : "/daily-english/tts/";
 	public static final String SLASH = IS_WINDOWS ? "\\" : "/";
 	public static final String FFMPEG_PATH = IS_WINDOWS ? "C:\\ffmpeg\\bin\\ffmpeg.exe" : "ffmpeg";
-	//모르겠음 이게 머임 ㅜㅜ ㅜㅜ ㅜ ㅜㅜ ㅜ ㅜ
 
 	public static void saveTTS(int index, String sentence, String newsUrl) throws IOException, UnsupportedAudioFileException {
 		newsUrl = newsUrl.replaceAll("[^A-Za-z0-9]", "");

@@ -7,16 +7,12 @@
 	
 
 <%
-	int idx = (int) request.getAttribute("idx");
 	String news_url = (String) request.getAttribute("news_url");
-	String news_name = (String)request.getAttribute("news_name");
-	String insertdate = (String)request.getAttribute("insertdate");
-	String news_title = (String)request.getAttribute("news_title");
-	String original_sent = (String)request.getAttribute("original_sent");
-	String translation = (String)request.getAttribute("translation");
-	String quiz_sent = (String)request.getAttribute("quiz_sent");
-	String answer_sent = (String)request.getAttribute("answer_sent");
-	String word = (String)request.getAttribute("word");
+	String date = (String)request.getAttribute("date");
+	String news_title = (String) request.getAttribute("news_title");
+	List<String> quiz_sent = (List<String>)request.getAttribute("quiz_sent");
+	List<String> word = (List<String>)request.getAttribute("word");
+	List<String> translation = (List<String>)request.getAttribute("translation");
 	
 %>
 <!DOCTYPE html>
@@ -47,9 +43,9 @@
 <link rel="stylesheet" href="/resources/scss/Button.css">
 <style>
 	#answer {
-	width: 180px;
-	height: 30px;
-	margin: 5px;
+	width: 130px;
+	height: 25px;
+	margin: 4px;
 }
 </style>
 </head>
@@ -82,46 +78,35 @@
 				<div class="card">
 				
 					<div class="card-header">
-						<h4 class="mt-0 mb-0 text-center"><b><%=news_name %></b></h4>
+						<h4 class="mt-0 mb-0 text-center"><b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
+	                              .replace("& gt;", ">").replace("& #39;", "'") %></b></h4>
 					</div>
 						<hr>
 						<div class="card-body">
 							<h6 class="m-3" style="color:orange">Today Exam</h6>
 						<div class="m-3">
-							<h3 class="card-text"><b><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-	                              .replace("& gt;", ">").replace("& #39;", "'") %></b></h3>
-							<h6 style="color:grey"><%=insertdate %></h6>
+							<h6 style="color:grey"><%=date %></h6>
 						</div>
 						
-						<p class="m-4" style="font-size:1.5em"><%=quiz_sent%></p>
+						<p class="m-2" id="quiz" style="font-size:1em"><%=quiz_sent.get(0)%></p>
 						<br>
-						<span id="word" style="display:none;"><%=word%></span>
-						
-						<div id="hint" style="float:right; font-size:30px; color:#51cbce;" onclick="showNotification()">
-						<i class="nc-icon nc-bulb-63"></i>
+						<h6 class="m-3" style="color:orange">Translation</h6>
+						<p class="m-2" id="trans" style="font-size:1em"><%=translation.get(0)%></p>
+						<br>
+							<div class="text-center" id="no">
+							1 / <%=quiz_sent.size()%>
+							</div>
 						</div>
-						
-						<!-- textbox의 value값에 문제로 낼 단어의 앞 두글자를 힌트로 준다.  -->
 					</div>
 				</div>
 
-				<div class="row">
-				<div class="col-6">
+				<div class="text-center">
 				<button style="width: 100%" class="submit mb-3" id="submit">submit</button>
+				<button style="width: 100%; display:none" class="submit mb-3" id="next">next</button>
+				<button style="width: 100%; display:none" class="next mb-3" id="home" onclick="location='/Today/TodayMain.do'">Home</button>
 				</div>
-				<div class="col-6">
-				<!-- 다음으로 넘어가는 버튼 -->
-					<form action="/Today/TodayRecord.do" method="post">
-							<input type="hidden" value="<%=news_url%>" name="news_url">
-							<input type="hidden" value="<%=news_name%>" name="news_name">
-							<input type="hidden" value="<%=insertdate%>" name=insertdate>
-							<input type="hidden" value="<%=news_title%>" name="news_title">
-							<input type="hidden" value="<%=idx%>" name="idx">
-							<button style="width: 100%" class="next mb-5" type="submit">Next</button>
-						</form>
-				</div>
-				</div>
-
+				
+				
 			</div>
 		</div>
 	</div>
@@ -138,27 +123,92 @@
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
 	<script src="/resources/assets/js/plugins/bootstrap-notify.js"></script>
-	<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="/resources/assets/js/paper-dashboard.min.js?v=2.0.1"
-		type="text/javascript"></script>
 	<script>
-		
-	function showNotification() {
-	    color = 'info';
+	
+	function showNotificationY() {
+	    color = 'success';
 	
 	    $.notify({
 	      icon: "nc-icon nc-bulb-63",
-	      message: "<%=TranslateUtil.kakaotrans(word)%>"
+	      message: "정답입니다."
 	
 	    }, {
 	      type: color,
-	      timer: 8000,
+	      delay: 400,
+	      timer: 1000,
 	      placement: {
 	        from: 'top',
 	        align: 'center'
 	      }
 	    });
 	 }
+	
+	function showNotificationN() {
+	    color = 'danger';
+	
+	    $.notify({
+	      icon: "nc-icon nc-bulb-63",
+	      message: "오답입니다."
+	
+	    }, {
+	      type: color,
+	      delay: 400,
+	      timer: 1000,
+	      placement: {
+	        from: 'top',
+	        align: 'center'
+	      }
+	    });
+	 }
+	
+	var ques = [];
+	var ques_ko = [];
+	var answer = [];
+	var loop=0;
+	var no =0;
+	//db내용 바뀌면 수정 ㄱ
+	<%for (int i = 0; i < quiz_sent.size(); i++) {%>
+			ques[loop] ="<%=quiz_sent.get(i).replaceAll("\\\"", "\\\\\"")%>";
+			ques_ko[loop] = "<%=translation.get(i).replaceAll("\\\"", "\\\\\"")%>";
+			answer[loop] = "<%=word.get(i)%>";
+			loop++
+	<%}%>
+	$("#submit").click(function() {
+		if(no<loop-1){
+			if($("#answer").val()==answer[no]){
+				$("#answer").css("border-color", "#00AECD");
+				$("#answer").css("border-width", "4px");
+				$("#answer").val(answer[no]);
+				
+				console.log($("#answer").val());
+				showNotificationY();
+			}else{
+				$("#answer").css("border-color", "#FF1111");
+				$("#answer").css("border-width", "4px");
+				$("#answer").val(answer[no]);
+				
+				console.log($("#answer").val());
+				showNotificationN();
+			}
+			$("#next").css("display", "inline");
+			$("#submit").css("display", "none");
+			no++;
+		}else{
+			$("#next").css("display", "none");
+			$("#submit").css("display", "none");
+			$("#home").css("display", "inline");
+		}
+	});
+	
+	$("#next").click(function(){
+		$("#quiz").html(ques[no]);
+		$("#trans").text(ques_ko[no]);
+		$("#no").text(no+1 +" / " + loop )
+		
+		$("#next").css("display", "none");
+		$("#submit").css("display", "inline");
+	});
+	
 		
 		$("#navbar-toggler").on('click', function() {
 			if ($(this).hasClass("toggled")) {
@@ -167,33 +217,10 @@
 			} else {
 				$(this).addClass("toggled");
 				$("html").first().addClass("nav-open");
-
 			}
-
 		})
 		
-		$("#submit").click(function() {
-			var answer = {
-				answer : $("#answer").val(), word : $("#word").text()
-			};
-			console.log(word);
-			$.ajax({
-				url : "answerCheck.do",
-				type : "post",
-				data : answer,
-				success : function(data) {
-	
-					if (data == 1) {
-						$("#answer").css("border-color", "#00AECD");
-						$("#answer").css("border-width", "4px");
-						
-					} else if (data == 0) {
-						$("#answer").css("border-color", "#FF1111");
-						$("#answer").css("border-width", "4px");
-					}
-				}
-			}); // ajax 끝
-		});
+		
 	</script>
 </body>
 

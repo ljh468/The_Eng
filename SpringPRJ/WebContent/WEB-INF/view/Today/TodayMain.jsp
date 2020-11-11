@@ -2,11 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="poly.dto.News_NameDTO"%>
 
-<%	
+<%
 	String heraldTitle = (String) request.getAttribute("heraldtitle");
-	String reutersTitle = (String) request.getAttribute("reuterstitle");
-	String timesTitle = (String) request.getAttribute("timestitle");
-	String yonhapTitle = (String) request.getAttribute("yonhaptitle");
+String reutersTitle = (String) request.getAttribute("reuterstitle");
+String timesTitle = (String) request.getAttribute("timestitle");
+String yonhapTitle = (String) request.getAttribute("yonhaptitle");
+News_NameDTO nmDTO = new News_NameDTO();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,8 +68,8 @@
 					type='hidden' id='yonhapTitle' value="<%=yonhapTitle%>" />
 				<div class="card">
 					<div class="card-header">
-						<h4 class="mt-0 mb-0" style="color:orange; font-size:15px">Trending</h4>
-						<span style="font-size:30px;"><b> Today News </b></span>
+						<h4 class="mt-0 mb-0" style="color: orange; font-size: 15px">Trending</h4>
+						<span style="font-size: 30px;"><b> Today News </b></span>
 					</div>
 					<hr>
 					<div class="card-body">
@@ -80,21 +81,23 @@
 
 
 			</div>
+		</div>
+	</div>
 
-			
-			<script>
-				$("#navbar-toggler").on('click', function() {
-					if ($(this).hasClass("toggled")) {
-						$(this).removeClass("toggled");
-						$("html").first().removeClass("nav-open");
-					} else {
-						$(this).addClass("toggled");
-						$("html").first().addClass("nav-open");
 
-					}
+	<script>
+		$("#navbar-toggler").on('click', function() {
+			if ($(this).hasClass("toggled")) {
+				$(this).removeClass("toggled");
+				$("html").first().removeClass("nav-open");
+			} else {
+				$(this).addClass("toggled");
+				$("html").first().addClass("nav-open");
 
-				})
-			</script>
+			}
+
+		})
+	</script>
 </body>
 
 </html>

@@ -5,16 +5,13 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String pageTitle = "번역 연습하기";
-	String news_url = (String) request.getAttribute("news_url");
-	String news_title = (String) request.getAttribute("news_title");
-	String original_sent = (String) request.getAttribute("original_sent");
-	String news_name = (String) request.getAttribute("news_name");
-	String sentidx = (String) request.getAttribute("sentidx");
-	List<String> pList = (List<String>) request.getAttribute("pList");
-	
-	
-	
+	String pageTitle = "Translate Practice";
+String news_url = (String) request.getAttribute("news_url");
+String news_title = (String) request.getAttribute("news_title");
+String original_sent = (String) request.getAttribute("original_sent");
+String news_name = (String) request.getAttribute("news_name");
+String sentidx = (String) request.getAttribute("sentidx");
+List<String> pList = (List<String>) request.getAttribute("pList");
 %>
 
 <!DOCTYPE html>
@@ -42,6 +39,7 @@
 <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 <link href="/resources/assets/css/paper-dashboard.css?v=2.0.1"
 	rel="stylesheet" />
+<link rel="stylesheet" href="/resources/scss/Button.css">
 </head>
 
 <body class="">
@@ -74,7 +72,7 @@
 				<div class="card">
 					<div class="card-header">
 						<h4 class="mt-0 mb-0 text-center">
-							<b>TODAY RESULT</b>
+							<b><%=pageTitle%></b>
 						</h4>
 					</div>
 					<hr>
@@ -82,25 +80,15 @@
 					<div class="card-body">
 						<div style="text-align: center;">
 
-							<h4 class="card-title text-center mb-0"
-								style="font-size: 1.5rem;">
-								<span style="font-size: 2rem"><%=pageTitle%></span>
-							</h4>
-							<hr>
-
 							<div class="card-text">
-								<h6 style="color: orange">Accent analysis</h6>
-								<h2 style="font-weight: 700"><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-	                              .replace("& gt;", ">").replace("& #39;", "'")%></h2>
-
-								<br>
+								<h6 style="color: orange">Today Sentence</h6>
+								<h3 style="font-weight: 700"><%=news_title.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<").replace("& gt;", ">").replace("& #39;", "'")%></h3>
 							</div>
 							<div class="card-text">
- 								
+
 								<hr>
 								<p>
-								 <%=original_sent.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<")
-			                              .replace("& gt;", ">").replace("& #39;", "'") %>
+									<%=original_sent.replace("& #40;", "(").replace("& #41;", ")").replace("& lt;", "<").replace("& gt;", ">").replace("& #39;", "'")%>
 								</p>
 
 								<fieldset class="form-group" data-idx="<%=sentidx%>">
@@ -120,35 +108,27 @@
 
 								</fieldset>
 								<br>
-								
+
 							</div>
 						</div>
 						<div class="card-footer">
-							<button type="button"
-								onclick="location.href='/Today/TodaySentence.do'"
-								class="btn btn-primary btn-icon float-right">다음문제 풀기
-								&gt;</button>
-							<button type="button"
-								onclick="location.href='/Today/TodayMain.do'"
-								class="btn btn-primary btn-icon float-left">&lt; 그만하기</button>
+							<div class="row">
+								<div class="col-6 m-auto">
+									<button style="width: 100%" class="next " 
+									onclick="location='/Today/TodayMain.do'">Home</button>
+								</div>
+							</div>
+							
 						</div>
 
 					</div>
 
 
 				</div>
-				<!-- 제출하여 답이 맞거나 틀림을 잠깐 보여준 후 다음 페이지로 이동.(구현예정) -->
-				<!-- 다음으로 넘어가는 버튼 -->
-				<input style="float: right;"
-					class="btn btn-warning btn-block btn-lg" type="button" value="Main"
-					onclick="location='/Today/TodayMain.do'">
-
 
 			</div>
 		</div>
 	</div>
-	</div>
-
 
 
 	<!--   Core JS Files   -->
@@ -157,8 +137,6 @@
 	<script src="/resources/assets/js/core/bootstrap.min.js"></script>
 	<script
 		src="/resources/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-	<!--  Google Maps Plugin    -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 	<!-- Chart JS -->
 	<script src="/resources/assets/js/plugins/chartjs.min.js"></script>
 	<!--  Notifications Plugin    -->
@@ -193,7 +171,7 @@
 				var answer = parent.querySelector(".answer");
 				var scoreTag = parent.querySelector(".score");
 				var idx = $(parent).attr("data-idx");
-				var url = '<%=news_url %>';
+				var url = '<%=news_url%>';
 				var query = {
 					userAnswer : userAnswer, idx : idx, url : url
 				};
@@ -231,7 +209,7 @@
 			var answer = parent.querySelector(".answer");
 			var scoreTag = parent.querySelector(".score");
 			var idx = $(this).attr("data-idx");
-			var url = '<%=news_url %>';
+			var url = '<%=news_url%>';
 			var query = {
 				userAnswer : userAnswer,
 				idx : idx,
@@ -244,7 +222,7 @@
 				data : query,
 				dataType : "JSON",
 				success : function(json) {
-					answer.innerHTML = "모범 답안) " + json.original;
+					answer.innerHTML = json.original;
 					progressBar.classList.add("hidden");
 					var score = parseFloat(json.score);
 					score *= 10000;

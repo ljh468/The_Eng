@@ -235,6 +235,7 @@ public class TodayNewsController {
 			log.info("original_sent : " + rDTO.getOriginal_sent().get(idx));
 			log.info("translation : " + rDTO.getTranslation().get(idx));
 			log.info("quiz_sent : " + rDTO.getQuiz_sent().get(idx));
+			log.info("quiz_sent.size : " + rDTO.getQuiz_sent().size());
 			log.info("answer_sent : " + rDTO.getAnswersentence().get(idx));
 			log.info("word : " + rDTO.getWord().get(idx));
 			log.info("idx : " + idx);
@@ -286,9 +287,9 @@ public class TodayNewsController {
 		String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
 		String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 		String idxstring = CmmUtil.nvl(request.getParameter("idx"));
-
-		log.info("news_name 3 : " + news_name);
 		int idx = Integer.valueOf(idxstring);
+		log.info("news_name 3 : " + news_name);
+		
 		///////////////////////////////////////////////////////////////////////////////////////////////
 		// TEST //getParameter로 받으면
 		String quiz = CmmUtil.nvl(request.getParameter("quiz_sent"));
@@ -388,13 +389,13 @@ public class TodayNewsController {
 
 		
 		
-		model.addAttribute("reIdx", reIdx);
+		model.addAttribute("reIdx", reIdx); // 중복제거한 index
 		model.addAttribute("original_sent", rDTO.getOriginal_sent().get(idx));
 		model.addAttribute("news_url", news_url);
 		model.addAttribute("news_name", news_name);
 		model.addAttribute("news_title", news_title);
 		model.addAttribute("insertdate", insertdate);
-		model.addAttribute("sentidx", idxstring);
+		model.addAttribute("sentidx", idxstring); // 중복 포함 문장 인덱스
 
 
 		log.info("TodayRecord 종료");
@@ -459,14 +460,5 @@ public class TodayNewsController {
 		return res.toMap();
 	}
 
-	// result 화면
-	@RequestMapping(value = "Today/TodayResult")
-	public String TodayResult() {
-
-		log.info("TodayResult 시작");
-		log.info("TodayResult 종료");
-
-		return "/Today/TodayResult";
-	}
 
 }
