@@ -40,13 +40,38 @@ public class UserController {
 	IMongoTestMapper mongoTestMapper;
 	
 	// 로그인
-	@RequestMapping(value = "/The/TheLogin")
-	public String TheLogin(HttpSession session) {
-		log.info("TheLogin 시작");
-		session.invalidate();
-		log.info("TheLogin 종료");
-		return "/The/TheLogin";
-	}
+	   @RequestMapping(value = "/The/TheLogin")
+	   public String TheLogin(HttpSession session, ModelMap model) throws Exception {
+	      log.info("TheLogin 시작");
+
+	      if(session.getAttribute("user_id") != null) {
+	         
+	      // 각 신문사의 최신뉴스의 타이틀을 보여주기위해 DB에서 조회
+	         MongoNewsDTO hDTO = mongoTestMapper.getHeraldNews();
+	         String heraldtitle = hDTO.getNews_title();
+	   
+	         MongoNewsDTO rDTO = mongoTestMapper.getReutersNews();
+	         String reuterstitle = rDTO.getNews_title();
+	   
+	         MongoNewsDTO tDTO = mongoTestMapper.getTimesNews();
+	         String timestitle = tDTO.getNews_title();
+	   
+	         MongoNewsDTO yDTO = mongoTestMapper.getYonhapNews();
+	         String yonhaptitle = yDTO.getNews_title();
+	   
+	         model.addAttribute("heraldtitle", heraldtitle);
+	         model.addAttribute("reuterstitle", reuterstitle);
+	         model.addAttribute("timestitle", timestitle);
+	         model.addAttribute("yonhaptitle", yonhaptitle);
+	         
+	         return "/Today/TodayMain";
+	      } else {
+	         session.invalidate();
+	      }
+	      
+	      log.info("TheLogin 종료");
+	      return "/The/TheLogin";
+	   }
 
 	// 로그인 proc
 	@RequestMapping(value = "The/TheLoginProc")

@@ -7,6 +7,7 @@
 <%
 	String pageTitle = "Translate Practice";
 String news_url = (String) request.getAttribute("news_url");
+String insertdate = (String) request.getAttribute("insertdate");
 String news_title = (String) request.getAttribute("news_title");
 String original_sent = (String) request.getAttribute("original_sent");
 String news_name = (String) request.getAttribute("news_name");
@@ -116,6 +117,16 @@ List<String> pList = (List<String>) request.getAttribute("pList");
 								<div class="col-6 m-auto">
 									<button style="width: 100%" class="next " 
 									onclick="location='/Today/TodayMain.do'">Home</button>
+								</div>
+								<div class="col-6 m-auto">
+									<form action="/Today/TodaySentence.do" method="post" style="display:inline">
+												<input type="hidden" value="<%=news_url%>" name="news_url">
+												<input type="hidden" value="<%=insertdate%>" name="news_url">
+												<input type="hidden" value="<%=news_name%>" name="news_name">
+												<input type="hidden" value="<%=sentidx%>" name="sentidx">
+												<input type="hidden" value="<%=news_title%>" name="news_title">
+												<button type="submit" style="width: 100%" class="next">문제 더 풀어보기</button>
+											</form>
 								</div>
 							</div>
 							

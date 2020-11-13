@@ -170,7 +170,7 @@ public class WebCrawler {
 		// 사이트에 접속하여 전체 기사 중 메인 기사를 찾아 들어가야 함.
 		// 웹 페이지 전체 소스 중 일부 태그를 선택하기 위해 사용
 
-		Elements element_urlGet = doc.select("div.top1_headline_v2 a");
+		Elements element_urlGet = doc.select("div.top1_headline a");
 		
 		// element_urlGet 소스에 href를 가져옴
 		String newsUrl = (element_urlGet.attr("href")).toString();

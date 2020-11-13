@@ -208,20 +208,26 @@ public class TodayNewsController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "Today/TodaySentence")
-	public String TodaySentence(HttpServletRequest request, ModelMap model) throws Exception {
+	public String TodaySentence(HttpServletRequest request,HttpSession session, ModelMap model) throws Exception {
 
 		try {
 			log.info("TodaySentence 시작");
-
-			String idxstring = request.getParameter("idx");
-			int idx = Integer.parseInt(idxstring);
-			log.info("idx : " + idx);
+			
+			
+			String user_id = (String) session.getAttribute("user_id");
+			if (user_id == null) {
+				return "/The/TheLogin";
+			}
+			
 			String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 			String news_name = CmmUtil.nvl(request.getParameter("news_name"));
 			String news_url = CmmUtil.nvl(request.getParameter("news_url")); // 뉴스의 url로 조회하기 위함
 			String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
-			log.info("news_url2 : " + news_url);
-			log.info("news_name 2 : " + news_name);
+			
+			QuizInfoDTO qDTO = mongoQuizMapper.getQuizInfo(user_id, news_url);
+			int idx = qDTO.getIdx();
+			log.info("idx : " + idx);
+			
 			DBObject query = new BasicDBObject("url", news_url);
 			log.info("query : " + query);
 
@@ -242,7 +248,7 @@ public class TodayNewsController {
 
 			model.addAttribute("idx", idx);
 			model.addAttribute("news_title", news_title);
-			model.addAttribute("news_title_trans", rDTO.getTitle_trans());
+			model.addAttribute("title_trans", rDTO.getTitle_trans());
 			model.addAttribute("quiz_sent", rDTO.getQuiz_sent().get(idx));
 			model.addAttribute("word", rDTO.getWord().get(idx));
 			model.addAttribute("answer_sent", rDTO.getAnswersentence().get(idx));
@@ -308,6 +314,7 @@ public class TodayNewsController {
 		model.addAttribute("news_name", news_name);
 		model.addAttribute("insertdate", insertdate);
 		model.addAttribute("news_title", news_title);
+		model.addAttribute("title_trans", rDTO.getTitle_trans());
 		model.addAttribute("original_sent", rDTO.getOriginal_sent().get(idx));
 		model.addAttribute("translation", rDTO.getTranslation().get(idx));
 		model.addAttribute("idx", idx);
@@ -412,6 +419,7 @@ public class TodayNewsController {
 	public String todayTranslate(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
 		String news_url = CmmUtil.nvl(request.getParameter("news_url"));
+		String insertdate = CmmUtil.nvl(request.getParameter("insertdate"));
 		String news_name = CmmUtil.nvl(request.getParameter("news_name"));
 		String news_title = CmmUtil.nvl(request.getParameter("news_title"));
 		String sentidx = CmmUtil.nvl(request.getParameter("sentidx"));
@@ -425,8 +433,6 @@ public class TodayNewsController {
 		
 		for(String origin : nDTO.getOriginal_sent()){
 			
-			
-					
 			if(pList.contains(origin)) {
 				pList.remove(origin);
 				
@@ -434,7 +440,7 @@ public class TodayNewsController {
 		}
 		
 		
-		model.addAttribute("pList", pList);
+		model.addAttribute("pList", pList); // 중복제거 문장 리스트
 		model.addAttribute("original_sent", original_sent);
 		model.addAttribute("news_url", news_url);
 		model.addAttribute("news_name", news_name);

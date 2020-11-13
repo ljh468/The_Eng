@@ -145,7 +145,7 @@ public class SaveNewsController {
 			
 			
 			// ###############################
-			// 문장 원어민 발음파일 생성 END!!
+			// 문장 원어민 발음파일 생성 Start!!
 			// ###############################
 			   String news_url = rDTO.getNews_url();
 		       Set<String> sentSet = new HashSet<>();
@@ -163,11 +163,16 @@ public class SaveNewsController {
 		         }
 		         
 		mongoTestMapper.insertQuiz(quizDTO);
+			// ###############################
+			// 문장 원어민 발음파일 생성 Start!!
+			// ###############################
 		log.info("### END ### : insertQuiz");
 		// ###############################
 		// 퀴즈생성 END!!
 		// ###############################
 			
+		
+		
 		// 웹크롤링한 영어뉴스 4가지 mongoDB에 저장	
 		mongoTestMapper.insert(rDTO); 
 		res++;
