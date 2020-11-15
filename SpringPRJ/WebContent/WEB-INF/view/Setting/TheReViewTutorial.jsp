@@ -70,12 +70,8 @@
 					</div>
 					<hr>
 					<div class="card-body">
-
-						<video controls autoplay muted width="100%" >
-							<source src="/resources/videos/Practice.mp4" type="video/mp4">
-						</video>
-						
-					</div>
+                  <iframe src="https://www.youtube.com/embed/AHgy0Hmijiw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+               </div>
 				</div>
 			</div>
 

@@ -44,6 +44,14 @@
 		
 		)
 	</insert>
+	<select id="getUserAuth" resultType="UserDTO" parameterType="UserDTO">
+	SELECT
+		USER_AUTHNUM
+	FROM
+		USERINFO
+	WHERE
+		USER_ID = #{user_id}
+	</select>
 	
 	<select id="idCheck" resultType="UserDTO" parameterType="UserDTO" >
 	SELECT

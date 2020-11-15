@@ -40,7 +40,7 @@ public class UserController {
 	IMongoTestMapper mongoTestMapper;
 	
 	// 로그인
-	   @RequestMapping(value = "/The/TheLogin")
+	 @RequestMapping(value = "/The/TheLogin")
 	   public String TheLogin(HttpSession session, ModelMap model) throws Exception {
 	      log.info("TheLogin 시작");
 
@@ -80,7 +80,7 @@ public class UserController {
 		log.info("/The/TheLoginProc start");
 		String id = nvl(request.getParameter("id"));
 		String pwd = nvl(request.getParameter("pwd"));
-
+		
 		log.info("id :" + id);
 		log.info("pwd :" + pwd);
 		
@@ -98,7 +98,8 @@ public class UserController {
 		String url = "";
 		if (uDTO == null) {
 			msg = "아이디 비밀번호를 확인해주세요";
-		} else {
+		}else {
+			
 			log.info("tDTO.User_id : " + uDTO.getUser_id());
 			log.info("tDTO.User_email : " + uDTO.getUser_email());
 			
@@ -142,20 +143,11 @@ public class UserController {
 
 		log.info("/The/TheLogout 시작");
 
-		String msg = "";
-		String url = "";
-
-		msg = "로그아웃 성공";
-
-		url = "/The/TheLogin.do";
 		session.invalidate();
-
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
 
 		log.info("/The/TheLogout 종료");
 
-		return "/redirect";
+		return "/The/TheLogin";
 	}
 
 	// 회원가입

@@ -66,7 +66,14 @@ public class MailController {
 		public String EmailCertify(HttpSession session) {
 
 			log.info("/The/TheEmailCertify 시작");
-
+			
+			   String user_id = (String) session.getAttribute("user_id");
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			      
 			log.info("/The/TheEmailCertify 종료");
 
 			return "/The/TheEmailCertify";
@@ -124,7 +131,7 @@ public class MailController {
 		@RequestMapping(value = "The/authNumCheck", method = RequestMethod.POST)
 		public int authNumCheck(HttpServletRequest request) throws Exception {
 			log.info("/myOrder/authNumCheck 시작");
-
+			
 			int result = 0;
 			log.info("request.getParameter 시작");
 			String auth = request.getParameter("auth");

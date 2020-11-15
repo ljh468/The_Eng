@@ -107,7 +107,7 @@
 					<input type="hidden" value="<%=title%>" name="news_title">
 					<input type="hidden" value="<%=date%>" name="insertdate">
 				</form>
-
+				<div id="go-bottom" style="position:fixed; bottom:80%; right:3px;"><button type="button" style="opacity: 0.8;" class="btn btn-info btn-warning" >skip</button></div>
 			</div>
 		</div>
 	</div>
@@ -134,7 +134,9 @@
 			}
 
 		})
-		
+		$("#go-bottom").click(function(){
+			$('html, body').scrollTop( $(document).height() );
+		});
 	</script>
 </body>
 

@@ -26,10 +26,9 @@ import com.google.protobuf.ByteString;
 public class TTSUtil {
 
 	public static final SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-	public static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().startsWith("windows");
-	public static final String TTS_PATH = IS_WINDOWS ? "C:\\tts\\" : "/daily-english/tts/";
-	public static final String SLASH = IS_WINDOWS ? "\\" : "/";
-	public static final String FFMPEG_PATH = IS_WINDOWS ? "C:\\ffmpeg\\bin\\ffmpeg.exe" : "ffmpeg";
+	public static final String TTS_PATH = "/THE/tts/";
+	public static final String SLASH = "/";
+	public static final String FFMPEG_PATH = "ffmpeg";
 
 	public static void saveTTS(int index, String sentence, String newsUrl) throws IOException, UnsupportedAudioFileException {
 		newsUrl = newsUrl.replaceAll("[^A-Za-z0-9]", "");

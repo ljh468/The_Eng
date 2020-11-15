@@ -58,6 +58,13 @@ public class WordController {
 
 		log.info("wordStudy 시작");
 		
+		   String user_id = (String) session.getAttribute("user_id");
+		      if (user_id == null) {
+		    	  
+		         return "/The/TheLogin";
+		         
+		      }
+		
 		String news_name = request.getParameter("news_name");
 		String news_url = null;
 		

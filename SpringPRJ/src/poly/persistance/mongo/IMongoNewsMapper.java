@@ -11,6 +11,8 @@ public interface IMongoNewsMapper {
 
 	String meaningtest(String word) throws Exception;
 
+	int getLevel(String word) throws Exception;
+
 	
 
 	

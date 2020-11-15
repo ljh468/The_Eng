@@ -32,4 +32,6 @@ public interface IUserMapper {
 
 	String test();
 
+	UserDTO getUserAuth(UserDTO uDTO);
+
 }

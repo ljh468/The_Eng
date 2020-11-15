@@ -176,7 +176,8 @@ html, body {
 	
 	    }, {
 	      type: color,
-	      timer: 8000,
+	      delay: 1000,
+	      timer: 1000,
 	      placement: {
 	        from: 'top',
 	        align: 'center'

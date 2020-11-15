@@ -110,6 +110,7 @@ public class AudioController{
 			String newsUrl = request.getParameter("newsUrl");
 			String sentenceAudioIdx = request.getParameter("sentenceAudioIdx");
 			log.info("sentenceAudioIdx : " + sentenceAudioIdx);
+			log.info("newsUrl : " + newsUrl);
 			Map<String, Object> rMap = audioService.analyzeAudio(data, newsUrl, sentenceAudioIdx);
 			log.info(this.getClass().getName() + ".analyzeAudio end");
 			

@@ -24,6 +24,7 @@ public class MongoNewsMapper implements IMongoNewsMapper {
 	// 생성자나 세터 등을 사용하여 의존성 주입을 하려고 할 때, 해당 빈을 찾아서 주입해주는 annotation.
 
 	private static final String WORD_POOL = "wordPool";
+	private static final String WORD_CNT = "wordCnt";
 //		private static final String WORD_USAGE = "wordUsage";
 //		private static final String REVIEW_WORDS = "reviewWords";
 //		private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
@@ -96,4 +97,27 @@ public class MongoNewsMapper implements IMongoNewsMapper {
 		return mean;
 
 	}
+	
+	@Override
+	public int getLevel(String word) throws Exception {
+		log.info(this.getClass().getName() + ".getLevel start");
+		
+		int level = 0;
+		
+		try {
+			DBObject query = new BasicDBObject("word", word);
+			DBCursor cursor = mongodb.getCollection(WORD_CNT).find(query);
+	
+			while (cursor.hasNext()) {
+				DBObject obj = cursor.next();
+				level = (int) obj.get("level");
+			}
+			log.info("MongoNewsMapper.getLevel : " + level);
+		} catch(Exception e) {
+			return level;
+		}
+		log.info(this.getClass().getName() + ".getLevel end");
+		return level;
+	}
+	
 };

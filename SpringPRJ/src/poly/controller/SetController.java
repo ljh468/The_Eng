@@ -42,10 +42,17 @@ public class SetController {
 
 		// 튜토리얼 다시보기
 		@RequestMapping(value = "/Setting/TheReViewTutorial")
-		public String TheReViewTutorial() {
+		public String TheReViewTutorial(HttpSession session) {
 
 			log.info("/The/Setting/TheReViewTutorial 시작");
-
+			
+			   String user_id = (String) session.getAttribute("user_id");
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			
 			log.info("/The/Setting/TheReViewTutorial 종료");
 
 			return "/Setting/TheReViewTutorial";
@@ -53,10 +60,17 @@ public class SetController {
 
 		// 앱 소개
 		@RequestMapping(value = "/Setting/TheAppIntroduction")
-		public String TheAppIntroduction() {
+		public String TheAppIntroduction(HttpSession session) {
 
 			log.info("/The/Setting/TheAppIntroduction 시작");
-
+			
+			   String user_id = (String) session.getAttribute("user_id");
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			
 			log.info("/The/Setting/TheAppIntroduction 종료");
 
 			return "/Setting/TheAppIntroduction";
@@ -64,10 +78,17 @@ public class SetController {
 
 		// 마이페이지
 		@RequestMapping(value = "/Setting/TheMypage")
-		public String TheMypage() {
+		public String TheMypage(HttpSession session) {
 
 			log.info("/The/TheMypage 시작");
-
+			
+			   String user_id = (String) session.getAttribute("user_id");
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			
 			log.info("/The/TheMypage 종료");
 
 			return "/Setting/TheMypage";

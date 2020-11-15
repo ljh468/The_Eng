@@ -7,11 +7,11 @@
 <%
 	String pageTitle = "Translate Practice";
 String news_url = (String) request.getAttribute("news_url");
-String insertdate = (String) request.getAttribute("insertdate");
 String news_title = (String) request.getAttribute("news_title");
 String original_sent = (String) request.getAttribute("original_sent");
 String news_name = (String) request.getAttribute("news_name");
 String sentidx = (String) request.getAttribute("sentidx");
+String insertdate = (String) request.getAttribute("insertdate");
 List<String> pList = (List<String>) request.getAttribute("pList");
 %>
 
@@ -113,24 +113,24 @@ List<String> pList = (List<String>) request.getAttribute("pList");
 							</div>
 						</div>
 						<div class="card-footer">
-							<div class="row">
-								<div class="col-6 m-auto">
-									<button style="width: 100%" class="next " 
-									onclick="location='/Today/TodayMain.do'">Home</button>
-								</div>
-								<div class="col-6 m-auto">
-									<form action="/Today/TodaySentence.do" method="post" style="display:inline">
-												<input type="hidden" value="<%=news_url%>" name="news_url">
-												<input type="hidden" value="<%=insertdate%>" name="news_url">
-												<input type="hidden" value="<%=news_name%>" name="news_name">
-												<input type="hidden" value="<%=sentidx%>" name="sentidx">
-												<input type="hidden" value="<%=news_title%>" name="news_title">
-												<button type="submit" style="width: 100%" class="next">문제 더 풀어보기</button>
-											</form>
-								</div>
-							</div>
-							
-						</div>
+                     <div class="row">
+                        <div class="col-6 m-auto">
+                           <button style="width: 100%" class="next " 
+                           onclick="location='/Today/TodayMain.do'">Home</button>
+                        </div>
+                        <div class="col-6 m-auto">
+                           <form action="/Today/TodaySentence.do" method="post" style="display:inline">
+                                    <input type="hidden" value="<%=news_url%>" name="news_url">
+                                    <input type="hidden" value="<%=insertdate%>" name="news_url">
+                                    <input type="hidden" value="<%=news_name%>" name="news_name">
+                                    <input type="hidden" value="<%=sentidx%>" name="sentidx">
+                                    <input type="hidden" value="<%=news_title%>" name="news_title">
+                                    <button type="submit" style="width: 100%" class="next">다른 문제</button>
+                                 </form>
+                        </div>
+                     </div>
+                     
+                  </div>
 
 					</div>
 
@@ -170,7 +170,7 @@ List<String> pList = (List<String>) request.getAttribute("pList");
 
 		var timer;
 
-		$('textarea').on('input', function() {
+		$('textarea').on('keyup', function() {
 
 			el = this;
 
@@ -178,7 +178,7 @@ List<String> pList = (List<String>) request.getAttribute("pList");
 			timer = setTimeout(function() {
 				parent = el.parentElement;
 				var progressBar = parent.querySelector(".progress");
-				var userAnswer = parent.querySelector("textarea").value;
+				var userAnswer  = parent.querySelector("textarea").value;
 				var answer = parent.querySelector(".answer");
 				var scoreTag = parent.querySelector(".score");
 				var idx = $(parent).attr("data-idx");

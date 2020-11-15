@@ -31,7 +31,7 @@ public class AudioService implements IAudioService{
 
 	Logger log = Logger.getLogger(this.getClass());
 	
-	static final String TEMP_DIR = "C:\\Users\\lee\\AppData\\Local\\Temp\\";
+	static final String TEMP_DIR = "/";
 	
 	@Override
 	public byte[] getTodaySentenceAudio(String newsUrl, String idx) throws Exception {
@@ -41,7 +41,7 @@ public class AudioService implements IAudioService{
 		// fixed date to 200619 for development purpose
 		// String finalPath = TTSUtil.TTS_PATH + today + TTSUtil.SLASH + idx + ".ogg";
 //		String finalPath = TTSUtil.TTS_PATH + newsUrl + TTSUtil.SLASH + idx + ".ogg";
-		String finalPath = "C:\\tts\\" + newsUrl + "\\" + idx + ".ogg";
+		String finalPath = "/THE/tts/" + newsUrl + "/" + idx + ".ogg";
 		
 		File f = new File(finalPath);
 		InputStream in = new FileInputStream(f);
@@ -97,8 +97,6 @@ public class AudioService implements IAudioService{
 //		확장자 없는 웨이브파일 지우기
 		f = new File(answerTempFile + ".wav");
 		f.delete();
-		
-		
 		
 		return res.toMap();
 	}

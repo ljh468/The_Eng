@@ -86,4 +86,12 @@ public class UserService implements IUserService {
 	public String test() {
 		return userMapper.test();
 	}
+
+	@Override
+	public UserDTO getUserAuth(UserDTO uDTO) {
+		
+		return userMapper.getUserAuth(uDTO);
+	}
+
+	
 }

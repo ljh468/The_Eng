@@ -38,7 +38,15 @@ public class MypageContorller {
 			log.info("/Mypage/TheUserCorrection 시작");
 
 			String user_id = (String) session.getAttribute("user_id");
-
+			
+			user_id = (String) session.getAttribute("user_id");
+				if (user_id == null) {
+			    	  
+					return "/The/TheLogin";
+			         
+			    }
+			
+			
 			UserDTO uDTO = new UserDTO();
 
 			uDTO.setUser_id(user_id);
@@ -64,7 +72,13 @@ public class MypageContorller {
 			log.info("/Mypage/TheUserCorrectionDo 시작");
 
 			String user_id = (String) session.getAttribute("user_id");
-
+			
+				if (user_id == null) {
+			    	  
+					return "/The/TheLogin";
+			         
+				}
+			
 			UserDTO uDTO = new UserDTO();
 
 			uDTO.setUser_id(user_id);
@@ -86,7 +100,13 @@ public class MypageContorller {
 			String user_id = (String) session.getAttribute("user_id");
 			String user_gender = request.getParameter("gender");
 			String user_age = request.getParameter("age");
-
+			
+				if (user_id == null) {
+			    	  
+					return "/The/TheLogin";
+			         
+			    }
+			
 			UserDTO uDTO = new UserDTO();
 
 			uDTO.setUser_id(user_id);
@@ -116,10 +136,17 @@ public class MypageContorller {
 		
 		// 비밀번호 변경
 		@RequestMapping(value = "/Mypage/ThePassWordChange")
-		public String ThePassWordChange() {
+		public String ThePassWordChange(HttpSession session) {
 
 			log.info("/Mypage/ThePassWordChange 시작");
-
+			
+			   String user_id = (String) session.getAttribute("user_id");
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			      
 			log.info("/Mypage/ThePassWordChange 종료");
 
 			return "/Mypage/ThePassWordChange";
@@ -134,6 +161,12 @@ public class MypageContorller {
 			String user_pwd = request.getParameter("pwd");
 			log.info("user_id :" + user_id);
 			log.info("user_pwd :" + user_pwd);
+			
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
 			
 			String HashEnc = EncryptUtil.enHashSHA256(user_pwd);
 
@@ -205,10 +238,17 @@ public class MypageContorller {
 
 		// 회원 탈퇴
 		@RequestMapping(value = "/Mypage/TheUserDelete")
-		public String TheUserDelete() {
+		public String TheUserDelete(HttpSession session) {
 
 			log.info("/Mypage/TheUserDelete 시작");
-
+			
+			   String user_id = (String) session.getAttribute("user_id");
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			      
 			log.info("/Mypage/TheUserDelete 종료");
 
 			return "/Mypage/TheUserDelete";
@@ -219,7 +259,13 @@ public class MypageContorller {
 
 			log.info("/The/TheUserDeleteProc 시작");
 			String user_id = (String) session.getAttribute("user_id");
-
+			
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+			
 			UserDTO uDTO = new UserDTO();
 			uDTO.setUser_id(user_id);
 
@@ -279,7 +325,13 @@ public class MypageContorller {
 		      log.info("/The/Setting/Mypage/TheInterestSetting 시작");
 
 		      String user_id = (String) session.getAttribute("user_id");
-
+		      
+			      if (user_id == null) {
+			    	  
+			         return "/The/TheLogin";
+			         
+			      }
+		      
 		      UserDTO uDTO = new UserDTO();
 
 		      uDTO.setUser_id(user_id);
@@ -309,6 +361,12 @@ public class MypageContorller {
 				String[] user_interest = request.getParameterValues("interest");
 				log.info("user_id :" + user_id);
 				log.info("user_interest :" + user_interest);
+				
+				      if (user_id == null) {
+				    	  
+				         return "/The/TheLogin";
+				         
+				      }
 				
 				String interests = "";
 				

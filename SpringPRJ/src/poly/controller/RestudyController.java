@@ -108,6 +108,13 @@ public class RestudyController {
 		
 		log.info(this.getClass().getName() + ".reExam Start!");
 		
+		   String user_id = (String) session.getAttribute("user_id");
+		      if (user_id == null) {
+		    	  
+		         return "/The/TheLogin";
+		         
+		      }
+		      
 		String news_url = CmmUtil.nvl(request.getParameter("news_url"));
 		String date = CmmUtil.nvl(request.getParameter("date"));
 		String news_title = CmmUtil.nvl(request.getParameter("news_title"));

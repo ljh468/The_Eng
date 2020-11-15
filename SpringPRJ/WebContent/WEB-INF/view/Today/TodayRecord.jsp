@@ -217,6 +217,7 @@
 									<div class="text-center">
 										<div>
 											<button id="resetInterview2" class="btn btn-warning">재녹음</button>
+											
 											<form action="/Today/TodayTranslate.do" method="post" style="display:inline">
 												<input type="hidden" value="<%=news_url%>" name="news_url">
 												<input type="hidden" value="<%=insertdate%>" name="insertdate">
@@ -224,6 +225,7 @@
 												<input type="hidden" value="<%=sentidx%>" name="sentidx">
 												<input type="hidden" value="<%=news_title%>" name="news_title">
 												<input type="hidden" value="<%=original_sent%>" name="original_sent">
+												<input type="hidden" value="<%=reIdx%>" name="reIdx">
 												<button type="submit" class="btn btn-success">변역 연습</button>
 											</form>
 										</div>
@@ -396,7 +398,7 @@
 			  waveColor:"blue",
 			  progressColor:"purple"
 		  });
-	  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=' + sentenceAudioIdx);
+	  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=<%=reIdx%>');
 	  	audio.on('ready', audio.play.bind(audio));
 	  	audioIdx = sentenceAudioIdx;
 	  }else{
@@ -437,7 +439,7 @@
 				  waveColor:"blue",
 				  progressColor:"purple"
 			  });
-		  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=' + sentenceAudioIdx);
+		  	audio.load('/audio/getTodaySentenceAudio.do?newsUrl=<%=news_url.replaceAll("[^A-Za-z0-9]", "")%>&idx=<%=reIdx%>');
 		  	audioIdx = sentenceAudioIdx;
 		}
 		$("#startInterview").attr("hidden", "hidden");
@@ -500,7 +502,7 @@
 				          base64data = reader.result;                
 				          console.log(base64data);
 					      globalAudioData.data = base64data;
-					      globalAudioData.sentenceAudioIdx = sentenceAudioIdx;
+					      globalAudioData.sentenceAudioIdx = <%=reIdx%>;
 					      globalAudioData.newsUrl = "<%=news_url%>";
 				       }
 				    });

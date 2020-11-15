@@ -29,5 +29,7 @@ public interface IUserService {
 	int updateInterest(UserDTO uDTO);
 
 	String test();
-	
+
+	UserDTO getUserAuth(UserDTO uDTO);
+
 }
