@@ -14,6 +14,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-뉴스 수집 <%=res %>개의 정보가 수집되었습니다.
+뉴스 수집 <%=res %>개의 정보가 수집완료
 </body>
 </html>
