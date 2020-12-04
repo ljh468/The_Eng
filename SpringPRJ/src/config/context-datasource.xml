@@ -8,10 +8,10 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
         destroy-method="close">
 	    <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-	    <!-- 랩실--> 
-	    <property name="jdbcUrl" value="jdbc:mysql://13.125.51.76:3306/THE?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;allowMultiQueries=true&amp;serverTimezone=Asia/Seoul" />
-	    <property name="user" value="hanium" /> <!-- 오라클 계정 : 아이디 -->
-	    <property name="password" value="Data20!@" /> <!-- 오라클 계정 : 비밀번호 -->
+	    <!-- ?�실--> 
+	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/THE?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;allowMultiQueries=true&amp;serverTimezone=Asia/Seoul" />
+	    <property name="user" value="hanium" /> <!-- ?�라??계정 : ?�이??-->
+	    <property name="password" value="Data20!@" /> <!-- ?�라??계정 : 비�?번호 -->
 	    <property name="initialPoolSize" value="5" />
 	    <property name="maxPoolSize" value="30" />
 	    <property name="minPoolSize" value="5" />
