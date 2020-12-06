@@ -31,7 +31,7 @@ public class AudioService implements IAudioService{
 
 	Logger log = Logger.getLogger(this.getClass());
 	
-	static final String TEMP_DIR = "C:\\User\\lee\\AppDate\\Local\\Temp\\";
+	static final String TEMP_DIR = "C:\\Users\\lee\\AppData\\Local\\Temp\\";
 	// 리눅스 서버용
 	// static final String TEMP_DIR = "/";
 	
@@ -43,7 +43,7 @@ public class AudioService implements IAudioService{
 		// fixed date to 200619 for development purpose
 		// String finalPath = TTSUtil.TTS_PATH + today + TTSUtil.SLASH + idx + ".ogg";
 //		String finalPath = TTSUtil.TTS_PATH + newsUrl + TTSUtil.SLASH + idx + ".ogg";
-		String finalPath = "/THE/tts/" + newsUrl + "/" + idx + ".ogg";
+		String finalPath = "/tts/" + newsUrl + "/" + idx + ".ogg";
 		
 		File f = new File(finalPath);
 		InputStream in = new FileInputStream(f);

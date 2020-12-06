@@ -92,6 +92,7 @@ public class SaveNewsController {
 			WordQuizDTO quizDTO = new WordQuizDTO();
 			String news_title = (String) rDTO.getNews_title();
 			String title_trans = (String) TranslateUtil.sparetrans(news_title);  //제목 번역 quizInfo에 저장
+			// heraldtrans
 			quizDTO.setNew_title(news_title);
 			quizDTO.setTitle_trans(title_trans);
 			

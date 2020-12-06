@@ -16,23 +16,23 @@ String heraldImg = (String)request.getAttribute("heraldImg");
 	<%if(heraldImg!=null){%>
 		url("<%=heraldImg %>") !important;
 	<%}else{%>
-		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-2.jpg") !important;
+		url("http://res.heraldm.com/content/image/2020/12/03/20201203000750_0.jpg") !important;
 	<%}%>
 }
 
 .slide:nth-child(2) .slide__inner {
 	background-image:
-		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-3.jpg") !important;
+		url("https://im-media.voltron.voanews.com/Drupal/01live-166/styles/892x501/s3/2019-04/8A77E9A0-6A9D-4C81-9775-1C82A7099CC1.jpg?itok=Tut3BOS5") !important;
 }
 
 .slide:nth-child(3) .slide__inner {
 	background-image:
-		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-4.jpg") !important;
+		url("https://peopleciety.com/wp-content/uploads/2017/02/LG-LOGO-01.jpg") !important;
 }
 
 .slide:nth-child(4) .slide__inner {
 	background-image:
-		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/onepgscr-5.jpg") !important;
+		url("https://cdn.i-scmp.com/sites/default/files/d8/images/methode/2020/12/02/d6cdc6fe-345b-11eb-8d89-a7d6b31c4b8a_1320x770_140810.jpg") !important;
 }
 </style>
 <link rel="stylesheet" href="/resources/scss/cardBob.css">

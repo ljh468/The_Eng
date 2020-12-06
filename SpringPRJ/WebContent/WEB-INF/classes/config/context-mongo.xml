@@ -8,10 +8,10 @@
 		http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	
-    <!-- oracle Connection Pool -->
-    <mongo:mongo-client host="13.125.51.76" port="27017" credentials="admin:epdlxj20!@@admin" id="mongo">
+    <!-- mongo Connection Pool -->
+    <mongo:mongo-client host="localhost" port="27017" credentials="admin:epdlxj20@admin" id="mongo">
     </mongo:mongo-client>
-    <mongo:db-factory dbname="haniumDB" mongo-ref="mongo" id="mongoDbFactory"/>
+    <mongo:db-factory dbname="local" mongo-ref="mongo" id="mongoDbFactory"/>
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
     	<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"></constructor-arg>
     	<constructor-arg name="mongoConverter" ref="mappingMongoConverter" />

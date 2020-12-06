@@ -74,12 +74,12 @@ public class TodayNewsController {
 	   log.info("TodayMain 시작");
 	   
 	   String user_id = (String) session.getAttribute("user_id");
-      if (user_id == null) {
-    	  
-         return "/The/TheLogin";
-         
-      }
-		
+      
+	   if (user_id == null) {
+	    	  
+	         return "/The/TheLogin";
+	         
+	      }
       // 각 신문사의 최신뉴스의 타이틀을 보여주기위해 DB에서 조회
       MongoNewsDTO hDTO = mongoTestMapper.getHeraldNews();
       String heraldtitle = hDTO.getNews_title();
