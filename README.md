@@ -1,7 +1,7 @@
 # THE(TodayHighlighEnglish)
 
-# SpringPRJ -> src -> poly 에 들어가시면 서버코드
-# SpringPRJ -> WebContent -> WEB-INF -> view 에 들어가면 jps코드 확인 가능합니다. 
+##  SpringPRJ -> src -> poly 에 들어가시면 서버코드
+##  SpringPRJ -> WebContent -> WEB-INF -> view 에 들어가면 jps코드 확인 가능합니다. 
 빅데이터분석을 활용한 English learning App(자연어처리, 강세분석)
 
 시연 영상 : [![](https://i.ytimg.com/vi/byTrpJJPjNo/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBcRHXMkvEdoZIWLXNBhRXRNf5KzA)](https://www.youtube.com/watch?v=byTrpJJPjNo&t "demo")
