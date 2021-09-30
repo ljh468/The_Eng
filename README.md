@@ -26,5 +26,15 @@
 3. 강세 분석 및 평가
         - 영어 강세 교정기술은 Python Parselmouth 음정 분석 알고리즘을 활용하여 사용자의 영어 발음 및 강세를 음절 단위로 분석 및 평가하여 교정 방향을 제시함
 
+News article 
+- Extract useful words and expressions from the latest English news articles collected from various English news websites (Korea Herald, etc.) through web crawling using the Java Jsoup library and provide them to users every day.
+
+Customized service
+- It analyzes the user's learning data (learning goals, incorrect answers, etc.) and provides user-customized English words and expression learning materials.
+- Natural language processing uses Stanford CoreNLP to naturally process in circular form in English sentences and store it in MongoDB (sentence -> token -> verb type)
+
+accent analysis and evaluation 
+- The accent English correction technology uses the Python Parsmelmouth pitch analysis algorithm to analyze and evaluate the user's English pronunciation and strength in syllable units and suggest correction directions.
+
 ### 프로젝트 기간
         - 2020-05-01 ~ 2020-11-10  
